@@ -1,0 +1,46 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true,
+    "node_modules": true,
+    "package-lock.json": true,
+    ".eslintrc.json": true,
+    "next-env.d.ts": true,
+    "README.md": true,
+    "tsconfig.json": true,
+    ".gitignore": true,
+    ".vscode": true,
+    ".next": true,
+    "next.config.js": true
+  },
+  "hide-files.files": [
+    "node_modules",
+    "package-lock.json",
+    ".eslintrc.json",
+    "next-env.d.ts",
+    "README.md",
+    "tsconfig.json",
+    ".gitignore",
+    ".vscode",
+    ".next",
+    "next.config.js"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "spellright.language": ["en-US-10-1."],
+  "spellright.documentTypes": [
+    "markdown",
+    "latex",
+    "plaintext",
+    "typescriptreact"
+  ]
+  // "color-picker.languages": ["python", "javascript", "typescript"]
+}

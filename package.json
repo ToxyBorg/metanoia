@@ -1,22 +1,34 @@
 {
-  "name": "create-next-app-experimantal-mantine",
+  "name": "create-next-app-experimental-mantine",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "npm update": "npm update",
     "dev": "next dev",
+    "dev turbo": "next dev --turbo",
+    "build && start": "next build && next start",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node": "18.11.9",
-    "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.8",
-    "eslint": "8.27.0",
-    "eslint-config-next": "13.0.2",
-    "next": "13.0.2",
+    "@emotion/react": "^11.10.6",
+    "@emotion/server": "^11.10.0",
+    "@mantine/core": "^5.10.4",
+    "@mantine/hooks": "^5.10.4",
+    "@mantine/next": "^5.10.4",
+    "@types/node": "18.14.0",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "eslint": "8.34.0",
+    "eslint-config-next": "13.1.6",
+    "jotai": "^2.0.2",
+    "next": "13.1.6",
     "react": "18.2.0",
+    "react-bottom-scroll-listener": "^5.1.0",
     "react-dom": "18.2.0",
-    "typescript": "4.8.4"
+    "react-icons": "^4.7.1",
+    "server-only": "^0.0.1",
+    "typescript": "4.9.5"
   }
 }
