@@ -9,7 +9,12 @@
     "build && start": "next build && next start",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "supabase login": "npx dotenv -e .env.local -- bash -c 'echo \"$SUPABASE_ACCESS_TOKEN\" | npx -S supabase login'",
+    "supabase init": "mkdir -p services/ && npx supabase init --workdir services/",
+    "supabase projects list": "npx supabase projects list",
+    "supabase link --project-ref": "npx dotenv -e .env.local -- bash -c 'npx supabase --workdir services/ link  --project-ref $SUPABASE_PROJECT_ID -p $SUPABASE_DB_PASSWORD'",
+    "type gen": "mkdir -p services/supabase/lib && npx supabase --workdir services/ gen types typescript --linked > services/supabase/lib/database.types.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -17,6 +22,11 @@
     "@mantine/core": "^5.10.4",
     "@mantine/hooks": "^5.10.4",
     "@mantine/next": "^5.10.4",
+    "@supabase/auth-helpers-nextjs": "^0.5.4",
+    "@supabase/auth-helpers-react": "^0.3.1",
+    "@supabase/auth-helpers-shared": "^0.2.4",
+    "@supabase/auth-ui-react": "^0.2.8",
+    "@supabase/supabase-js": "^2.8.0",
     "@types/node": "18.14.0",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
@@ -29,6 +39,10 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "server-only": "^0.0.1",
+    "supabase": "^1.38.6",
     "typescript": "4.9.5"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^7.0.0"
   }
 }

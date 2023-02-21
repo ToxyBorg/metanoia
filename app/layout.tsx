@@ -2,12 +2,25 @@ import "server-only"
 
 import ContextWrapper from "../Context"
 import { bodyColors } from "../Shared/colors"
+// import SupabaseListener from '../Context/SupabaseWrapper/supabase-listener'
+// import SupabaseProvider from '../Context/SupabaseWrapper//supabase-provider'
+// import { createClient } from '../services/supabase/utils/supabase-server'
 
-export default function RootLayout({
+// do not cache this layout
+// export const revalidate = 120
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+  // const supabase = createClient()
+
+  // const {
+  //   data: { session },
+  // } = await supabase.auth.getSession()
+
   return (
     <html lang="en">
       {/*
@@ -19,9 +32,14 @@ export default function RootLayout({
       <body
         style={{ background: bodyColors.bodyPageColorLight, color: bodyColors.bodyTextColorLight }}
       >
+        {/* <SupabaseProvider> */}
+        {/* <SupabaseListener serverAccessToken={session?.access_token} /> */}
         <ContextWrapper>
           {children}
         </ContextWrapper>
+        {/* </SupabaseProvider> */}
+
+
       </body>
 
     </html>
