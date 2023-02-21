@@ -4,7 +4,7 @@ import { createClient } from '../services/supabase/utils/supabase-server'
 import TextMantine from "../Components/test_components/TextMantine";
 
 // do not cache this page
-export const revalidate = 120
+// export const revalidate = 120
 
 export default async function Home() {
   const supabase = createClient()
