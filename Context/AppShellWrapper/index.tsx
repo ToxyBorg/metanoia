@@ -17,7 +17,7 @@ const AppShellWrapper = (props: Props) => {
             // header={<ResponsiveHeader />}
             navbar={<ResponsiveNavBar />}
 
-        // padding={"xs"}
+        // padding={"xl"}
         >
 
             {props.children}

@@ -2,12 +2,24 @@
 
 import type { NextComponentType, NextPageContext } from "next";
 import { Container, Text } from '@mantine/core';
+import { Database } from "../../services/supabase/lib/database.types"
 
+interface Props {
+    data: Database['public']["Tables"]["Items"]["Row"][] | null
+}
 
-const TextMantine = () => {
+const TextMantine = (props: Props) => {
     return (
         <Container p={"auto"}>
             <h1>HOME PAGE</h1>
+
+            {props.data?.map(item => {
+                return (
+                    <Text sx={{ fontSize: 18, lineHeight: 1.4 }} key={item.id}>
+                        Name: {item.name} and description: {item.description}
+                    </Text>
+                )
+            })}
 
             <Text sx={{ fontSize: 18, lineHeight: 1.4 }}  >
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
