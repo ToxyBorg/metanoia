@@ -25,6 +25,9 @@ export const bodyColors = {
 
     bodyPageColorDark: colors.DarkPurple,
     bodyTextColorDark: colors.Peach,//PeachLighter,
+
+    // TESTING GRADIENT BACKGROUNDS
+    bodyPageGradientLight: `linear-gradient(to bottom right,${colors.Amaranth}, ${colors.QuinacridoneMagenta})`
 }
 
 export const ActiveButtonBgColor = colors.DarkByzantium;

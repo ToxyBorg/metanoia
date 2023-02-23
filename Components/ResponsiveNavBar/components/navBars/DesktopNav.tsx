@@ -1,4 +1,4 @@
-import { Divider, Navbar, ScrollArea, useMantineColorScheme } from "@mantine/core";
+import { Divider, Navbar, ScrollArea, Transition, useMantineColorScheme } from "@mantine/core";
 import { IconContext } from "react-icons";
 import { NavBarColors } from "../../../../Shared/colors";
 import { desktopNavIconSizes, desktopNavRadius, desktopNavWidthHeight } from "../../../../Shared/sizes";
@@ -11,13 +11,13 @@ import { DesktopSettingsButton } from "../buttons/mainButtons/Settings";
 
 
 interface Props {
-    desktopBreakpoints: boolean
+    desktopBreakpoints: boolean,
+    // showDesktopNavBar: boolean,
 }
 
 
 const DesktopNav = (props: Props) => {
     const { colorScheme, } = useMantineColorScheme();
-
 
     return (
 
@@ -27,22 +27,34 @@ const DesktopNav = (props: Props) => {
                 size: desktopNavIconSizes.InnerIconSize
             }}>
 
+            {/* <Transition
+                mounted={props.desktopBreakpoints && props.showDesktopNavBar}
+                transition="slide-right" duration={1500}
+            >
+                {(styles) => */}
+
+
             <Navbar
+                // style={styles}
                 hiddenBreakpoint={0}
                 fixed
-                height={desktopNavWidthHeight.height} width={{ base: desktopNavWidthHeight.width }}
+                w={desktopNavWidthHeight.width}
+                height={desktopNavWidthHeight.height}
+                top={0}
+                px={"auto"}
                 py={"lg"}
-                ml={"md"} my={"xl"}
+                ml={"md"}
+                my={"auto"}
+
+                bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
 
                 sx={{
                     borderRadius: desktopNavRadius.navbarBorderRadius,
                     backdropFilter: "blur(2px)",
                     border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
                     // alignItems: "center"
-                    // overflowY: "scroll", scrollbarWidth: "none", WebkitScrollSnapType: ""
 
                 }}
-                bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
             >
 
                 <Navbar.Section my={"lg"}>
@@ -53,7 +65,7 @@ const DesktopNav = (props: Props) => {
                     color={colorScheme === "dark" ? NavBarColors.navDividerColorDark : NavBarColors.navDividerColorLight}
                 />
 
-                <ScrollArea type={"never"} h={"100%"}>
+                <ScrollArea type={"never"} h={"100%"} >
                     <Navbar.Section my={"xl"}  >
                         <DesktopSearch desktopScreenSize={props.desktopBreakpoints} />
                     </Navbar.Section>
@@ -67,7 +79,6 @@ const DesktopNav = (props: Props) => {
                     </Navbar.Section>
                 </ScrollArea>
 
-
                 <Divider my="xs" mx={"auto"} size={"md"} w={"2rem"}
                     color={colorScheme === "dark" ? NavBarColors.navDividerColorDark : NavBarColors.navDividerColorLight}
                 />
@@ -77,7 +88,8 @@ const DesktopNav = (props: Props) => {
                 </Navbar.Section>
 
             </Navbar>
-
+            {/* }
+            </Transition> */}
         </IconContext.Provider>
 
     )

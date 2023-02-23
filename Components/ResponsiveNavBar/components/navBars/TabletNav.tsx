@@ -29,15 +29,20 @@ const TabletNav = (props: Props) => {
             <Navbar
                 hiddenBreakpoint={0}
                 fixed
-                height={tabletNavWidthHeight.height} width={{ base: tabletNavWidthHeight.width }}
-                px={"md"} py={"lg"}
-                ml={"md"} my={"xl"}
+                height={tabletNavWidthHeight.height}
+                w={tabletNavWidthHeight.width}
+                // width={{ base: tabletNavWidthHeight.width }}
+                top={0}
+                px={"auto"}
+                py={"lg"}
+                ml={"md"}
+                my={"auto"}
 
                 sx={{
                     borderRadius: tabletNavRadius.navbarBorderRadius,
                     backdropFilter: "blur(2px)",
                     border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
-                    alignItems: "center"
+                    // alignItems: "center"
                 }}
                 bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
             >
@@ -46,7 +51,7 @@ const TabletNav = (props: Props) => {
                     <TabletHome />
                 </Navbar.Section>
 
-                <Divider mt="xs" mb={"md"} size={"md"} w={"100%"}
+                <Divider my="xs" mx={"auto"} size={"md"} w={"2rem"}
                     color={colorScheme === "dark" ? NavBarColors.navDividerColorDark : NavBarColors.navDividerColorLight}
                 />
 
@@ -66,7 +71,7 @@ const TabletNav = (props: Props) => {
 
                 </ScrollArea>
 
-                <Divider my="xs" size={"md"} w={"100%"}
+                <Divider my="xs" mx={"auto"} size={"md"} w={"2rem"}
                     color={colorScheme === "dark" ? NavBarColors.navDividerColorDark : NavBarColors.navDividerColorLight}
                 />
 
@@ -75,7 +80,7 @@ const TabletNav = (props: Props) => {
                 </Navbar.Section>
 
             </Navbar>
-        </IconContext.Provider>
+        </IconContext.Provider >
 
     )
 }

@@ -30,6 +30,7 @@ export const MobileCartButton = (mobileScreenSize: { mobileScreenSize?: boolean 
             <ActionIcon variant="transparent" onClick={() => handlers.toggle()}
                 size={mobileNavIconSizes.ActionIconSize}
                 sx={{ borderRadius: mobileNavRadius.iconsBorderRadius }}
+                title={cart.name}
             >
                 <cart.icon title={cart.name} />
             </ActionIcon>
@@ -88,6 +89,8 @@ export const TabletCartButton = (tabletScreenSize: { tabletScreenSize: boolean }
             <ActionIcon variant="transparent" onClick={() => handlers.toggle()}
                 size={tabletNavIconSizes.ActionIconSize}
                 sx={{ borderRadius: tabletNavRadius.iconsBorderRadius }}
+                mx={"auto"}
+                title={cart.name}
             >
                 <cart.icon title={cart.name} />
             </ActionIcon>

@@ -232,11 +232,6 @@ export const DesktopCategories = (desktopScreenSize: { desktopScreenSize: boolea
 
                 <categories.icon title={categories.name} />
             </ActionIcon>
-            {/* <Text
-                    color={colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight}>
-                    {categories.name}
-                </Text> */}
-            {/* </Stack> */}
 
             <IconContext.Provider
                 value={{
