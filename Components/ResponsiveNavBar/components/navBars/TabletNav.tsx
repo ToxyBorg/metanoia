@@ -1,9 +1,10 @@
-import { Divider, Navbar, ScrollArea, useMantineColorScheme } from "@mantine/core";
+import { Divider, Navbar, ScrollArea, Stack, useMantineColorScheme } from "@mantine/core";
 import { IconContext } from "react-icons";
 import { NavBarColors } from "../../../../Shared/colors";
 import { tabletNavIconSizes, tabletNavRadius, tabletNavWidthHeight } from "../../../../Shared/sizes";
 import { TabletCartButton } from "../buttons/mainButtons/Cart";
 import { TabletCategories } from "../buttons/mainButtons/Categories";
+import { TabletContactInfo } from "../buttons/mainButtons/ContactInfo";
 import { TabletHome } from "../buttons/mainButtons/Home";
 import { TabletSearch } from "../buttons/mainButtons/Search";
 import { TabletSettingsButton } from "../buttons/mainButtons/Settings";
@@ -56,19 +57,13 @@ const TabletNav = (props: Props) => {
                 />
 
                 <ScrollArea type={"never"} h={"100%"}>
-
-                    <Navbar.Section my={"xl"} >
-                        <TabletSearch tabletScreenSize={props.tabletBreakpoints} />
+                    <Navbar.Section my={"xl"} grow>
+                        <Stack spacing="xl">
+                            <TabletSearch tabletScreenSize={props.tabletBreakpoints} />
+                            <TabletCategories tabletScreenSize={props.tabletBreakpoints} />
+                            <TabletCartButton tabletScreenSize={props.tabletBreakpoints} />
+                        </Stack>
                     </Navbar.Section>
-
-                    <Navbar.Section my={"xl"}>
-                        <TabletCategories tabletScreenSize={props.tabletBreakpoints} />
-                    </Navbar.Section>
-
-                    <Navbar.Section my={"xl"} grow >
-                        <TabletCartButton tabletScreenSize={props.tabletBreakpoints} />
-                    </Navbar.Section>
-
                 </ScrollArea>
 
                 <Divider my="xs" mx={"auto"} size={"md"} w={"2rem"}
@@ -76,7 +71,10 @@ const TabletNav = (props: Props) => {
                 />
 
                 <Navbar.Section my={"lg"}>
-                    <TabletSettingsButton tabletScreenSize={props.tabletBreakpoints} />
+                    <Stack spacing="md">
+                        <TabletContactInfo tabletScreenSize={props.tabletBreakpoints} />
+                        <TabletSettingsButton tabletScreenSize={props.tabletBreakpoints} />
+                    </Stack>
                 </Navbar.Section>
 
             </Navbar>

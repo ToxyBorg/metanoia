@@ -3,9 +3,10 @@ import { ActionIcon, Grid, Modal, Text, useMantineColorScheme } from "@mantine/c
 
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { useAtomValue } from "jotai";
+import Link from "next/link";
 import { IconContext } from "react-icons";
 import { ModalColors, NavBarColors } from "../../../../../Shared/colors";
-import { darkThemeIcon, lightThemeIcon, settings } from "../../../../../Shared/icons";
+import { darkThemeIcon, instagram, lightThemeIcon, mail, settings } from "../../../../../Shared/icons";
 import { desktopNavIconSizes, desktopNavRadius, mobileNavIconSizes, mobileNavRadius, tabletNavIconSizes, tabletNavRadius } from "../../../../../Shared/sizes";
 // import { screenSizesAtom } from "../../../../../Stores/screenSizesStore";
 
@@ -28,6 +29,8 @@ export const MobileSettingsButton = (mobileScreenSize: { mobileScreenSize?: bool
     if (!mobileScreenSize) {
         handlers.close()
     }
+
+    const allButtons = [mail, instagram]
 
 
     return (
@@ -73,13 +76,11 @@ export const MobileSettingsButton = (mobileScreenSize: { mobileScreenSize?: bool
 
                     <Grid justify={"space-around"}>
 
-                        <Grid.Col span={5} m={"xs"}>
-
+                        <Grid.Col span={3} m={"xs"}>
                             <ActionIcon
                                 size={50} m={"auto"}
                                 bg={colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight}
                                 variant="outline"
-                                // color={colorScheme === "dark" ? 'yellow' : 'blue'}
                                 sx={{
                                     borderRadius: 10,
                                     border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
@@ -87,16 +88,33 @@ export const MobileSettingsButton = (mobileScreenSize: { mobileScreenSize?: bool
                                 onClick={
                                     () => {
                                         toggleColorScheme();
-                                        // window.location.reload()
                                     }
                                 }
                                 title="Toggle color scheme"
                             >
                                 {colorScheme === "dark" ? <lightThemeIcon.icon title={lightThemeIcon.name} /> : <darkThemeIcon.icon title={darkThemeIcon.name} />}
                             </ActionIcon>
-
-
                         </Grid.Col>
+
+                        {allButtons.map(button => {
+                            return (
+                                <Grid.Col span={3} m={"xs"} key={button.name}>
+                                    <ActionIcon
+                                        size={50} m={"auto"}
+                                        bg={colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight}
+                                        variant="outline"
+                                        sx={{
+                                            borderRadius: 10,
+                                            border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
+                                        }}
+                                        title={button.name}
+                                        component={Link} href={button.link!}
+                                    >
+                                        <button.icon title={button.name} />
+                                    </ActionIcon>
+                                </Grid.Col>
+                            )
+                        })}
 
                     </Grid>
 

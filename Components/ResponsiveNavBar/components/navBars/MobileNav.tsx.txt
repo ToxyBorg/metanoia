@@ -9,7 +9,6 @@ import { MobileCartButton } from "../buttons/mainButtons/Cart";
 import { MobileCategories } from "../buttons/mainButtons/Categories";
 import { MobileHome } from "../buttons/mainButtons/Home";
 import { MobileSearch } from "../buttons/mainButtons/Search";
-import { MobileUserButton } from "../buttons/mainButtons/User";
 import { useColorScheme } from "@mantine/hooks";
 import { MobileSettingsButton } from "../buttons/mainButtons/Settings";
 
