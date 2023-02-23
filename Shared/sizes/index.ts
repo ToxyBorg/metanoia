@@ -59,3 +59,21 @@ export const desktopNavRadius = {
     navbarBorderRadius: 15,
 }
 
+////////////////////////////////////////////////////////////////////////
+
+/**             FOOTER SIZES */
+export const footerWidthHeight = { height: "3.75rem", width: "100%" }
+
+/**             FOOTER ICON SIZES */
+export const footerIconSizes: {
+    InnerIconSize: string;
+    ActionIconSize: MantineNumberSize;
+    ActionIconLocalSVGSize: MantineNumberSize;
+
+} = { InnerIconSize: "2rem", ActionIconSize: "lg", ActionIconLocalSVGSize: 45 }
+
+// /**             FOOTER ICON BORDER RADIUS */
+// export const footerRadius = {
+//     iconsBorderRadius: 50,
+//     navbarBorderRadius: 15,
+// }

@@ -1,9 +1,10 @@
 // import "server-only";
 "use client"
 
-import { AppShell } from "@mantine/core";
+import { AppShell, Footer } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { useEffect } from "react";
+import ResponsiveFooter from "../../Components/ResponsiveFooter";
 import ResponsiveHeader from "../../Components/ResponsiveHeader";
 import ResponsiveNavBar from "../../Components/ResponsiveNavBar";
 import { desktopSizes, tabletSizes } from "../../Shared/screenSizes";
@@ -51,6 +52,9 @@ const AppShellWrapper = (props: Props) => {
         <AppShell
             header={open ? <ResponsiveHeader /> : undefined}
             navbar={open ? <ResponsiveNavBar /> : undefined}
+            footer={
+                <ResponsiveFooter />
+            }
             padding={0}
         >
             {props.children}

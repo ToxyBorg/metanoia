@@ -1,9 +1,10 @@
-import { Divider, Navbar, ScrollArea, Transition, useMantineColorScheme } from "@mantine/core";
+import { Divider, Navbar, ScrollArea, Stack, Transition, useMantineColorScheme } from "@mantine/core";
 import { IconContext } from "react-icons";
 import { NavBarColors } from "../../../../Shared/colors";
 import { desktopNavIconSizes, desktopNavRadius, desktopNavWidthHeight } from "../../../../Shared/sizes";
 import { DesktopCartButton } from "../buttons/mainButtons/Cart";
 import { DesktopCategories } from "../buttons/mainButtons/Categories";
+import { DesktopContactInfo } from "../buttons/mainButtons/ContactInfo";
 import { DesktopHome } from "../buttons/mainButtons/Home";
 import { DesktopSearch } from "../buttons/mainButtons/Search";
 import { DesktopSettingsButton } from "../buttons/mainButtons/Settings";
@@ -66,16 +67,12 @@ const DesktopNav = (props: Props) => {
                 />
 
                 <ScrollArea type={"never"} h={"100%"} >
-                    <Navbar.Section my={"xl"}  >
-                        <DesktopSearch desktopScreenSize={props.desktopBreakpoints} />
-                    </Navbar.Section>
-
-                    <Navbar.Section my={"xl"}  >
-                        <DesktopCategories desktopScreenSize={props.desktopBreakpoints} />
-                    </Navbar.Section>
-
                     <Navbar.Section my={"xl"} grow >
-                        <DesktopCartButton desktopScreenSize={props.desktopBreakpoints} />
+                        <Stack spacing="xl">
+                            <DesktopSearch desktopScreenSize={props.desktopBreakpoints} />
+                            <DesktopCategories desktopScreenSize={props.desktopBreakpoints} />
+                            <DesktopCartButton desktopScreenSize={props.desktopBreakpoints} />
+                        </Stack>
                     </Navbar.Section>
                 </ScrollArea>
 
@@ -84,7 +81,11 @@ const DesktopNav = (props: Props) => {
                 />
 
                 <Navbar.Section my={"lg"}>
-                    <DesktopSettingsButton desktopScreenSize={props.desktopBreakpoints} />
+                    <Stack spacing="md">
+                        <DesktopContactInfo desktopScreenSize={props.desktopBreakpoints} />
+                        <DesktopSettingsButton desktopScreenSize={props.desktopBreakpoints} />
+                    </Stack>
+
                 </Navbar.Section>
 
             </Navbar>

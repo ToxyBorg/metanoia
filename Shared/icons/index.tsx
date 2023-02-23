@@ -3,11 +3,12 @@
  * Changing here, will change it everywhere.
  */
 
-import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog } from "react-icons/bi"
+import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail } from "react-icons/bi"
 import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing } from 'react-icons/gi';
 import { BsSunFill, BsMoonFill } from 'react-icons/bs';
-
+import { FiInstagram, FiMail } from 'react-icons/fi';
 import { GrCircleAlert, GrUserAdmin } from 'react-icons/gr';
+import { RiContactsLine } from 'react-icons/ri'
 
 interface IconBaseProps extends React.SVGAttributes<SVGElement | SVGSVGElement> {
   children?: React.ReactNode;
@@ -18,9 +19,10 @@ interface IconBaseProps extends React.SVGAttributes<SVGElement | SVGSVGElement> 
 type IconType = (props: IconBaseProps) => JSX.Element;
 
 interface IconInfo {
-  icon: IconType, name: string, color?: string
+  icon: IconType, name: string, color?: string, link?: string
 }
 
+// Metanoia Brand SVG
 type localSVGType = { strokeColor: string, strokeWidth: number, lineColor: string }
 export const MetanoiaSVG = (props: localSVGType) => {
 
@@ -54,8 +56,9 @@ export const search: IconInfo = { icon: BiSearchAlt, name: "Search" }
 export const categories: IconInfo = { icon: BiCategoryAlt, name: "Categories" }
 export const cart: IconInfo = { icon: BiCart, name: "Cart" }
 export const settings: IconInfo = { icon: BiCog, name: "Settings" }
+export const contactInfo: IconInfo = { icon: BiMessageAltDetail, name: "Contact Info" }
 
-export const user: IconInfo = { icon: BiUser, name: "Account" }
+// export const user: IconInfo = { icon: BiUser, name: "Account" }
 
 
 export const admin: IconInfo = { icon: GrUserAdmin, name: "Admin" }
@@ -76,3 +79,9 @@ export const circleAlert: IconInfo = { icon: GrCircleAlert, name: "CircleAlert" 
 // HEADER THEME SWITCHER
 export const lightThemeIcon: IconInfo = { icon: BsSunFill, name: "LightThemeSun" }
 export const darkThemeIcon: IconInfo = { icon: BsMoonFill, name: "DarkThemeMoon" }
+
+// SOCIAL ICONS
+export const mail: IconInfo = { icon: FiMail, name: "Mail", link: "mailto:metanoia.js@gmail.com" }
+export const instagram: IconInfo = { icon: FiInstagram, name: "Instagram", link: "https://www.instagram.com/metanoia_.co/" }
+
+// FOOTER SOCIAL ICONS

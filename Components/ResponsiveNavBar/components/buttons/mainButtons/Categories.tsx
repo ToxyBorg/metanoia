@@ -243,7 +243,7 @@ export const DesktopCategories = (desktopScreenSize: { desktopScreenSize: boolea
                     bg={colorScheme === "dark" ? NavBarCollapseColors.collapseBackgroundColorDark : NavBarCollapseColors.collapseBackgroundColorLight}
                     // w={"100%"}
                     px={"xs"} py={"xs"}
-                    sx={{ borderRadius: "0 0 10px 10px", border: `2px solid ${colorScheme === "dark" ? NavBarCollapseColors.collapseBackgroundColorDark : NavBarCollapseColors.collapseBackgroundColorLight}` }}
+                    sx={{ borderRadius: 10, border: `2px solid ${colorScheme === "dark" ? NavBarCollapseColors.collapseBackgroundColorDark : NavBarCollapseColors.collapseBackgroundColorLight}` }}
 
                 >
                     <Stack align="center" >

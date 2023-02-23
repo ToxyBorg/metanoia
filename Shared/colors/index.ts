@@ -49,6 +49,24 @@ export const NavBarColors = {
 
 }
 
+export const FooterColors = {
+    // DARK THEME FOR FOOTER
+    iconsLineColorDark: colors.Peach, // ICON COLORS
+    iconsBackgroundColorDark: colors.CarolinaBlue, // ACTION ICONS BACKGROUND COLOR
+    backgroundColorDark: colors.CarolinaBlueTranslucid, // FOOTER BACKGROUND COLOR
+    borderColorDark: colors.Peach, // FOOTER BORDER COLOR
+    footerDividerColorDark: colors.Peach, // FOOTER ICON DIVIDER COLOR
+
+    // LIGHT THEME FOR FOOTER
+    iconsLineColorLight: colors.DarkPurple, // ICON COLORS
+    iconsBackgroundColorLight: colors.CarolinaBlueLighter, // ACTION ICONS BACKGROUND COLOR
+    backgroundColorLight: colors.CarolinaBlueTranslucid, // FOOTER BACKGROUND COLOR
+    borderColorLight: colors.DarkPurple, // FOOTER BORDER COLOR
+    footerDividerColorLight: colors.DarkPurple, // FOOTER ICON DIVIDER COLOR
+
+}
+
+
 export const DrawerColors = {
     // DARK THEME FOR DRAWERS
     iconsLineColorDark: colors.Peach, // ICON COLORS
@@ -128,3 +146,4 @@ export const ModalColors = {
     modalHeaderBorderColorLight: colors.DarkPurple, // MODAL HEADER BORDER COLOR
 
 }
+
