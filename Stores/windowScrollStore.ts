@@ -6,7 +6,7 @@ type windowScrollDirectionType = "UP" | "DOWN"
 
 /**         NAV WINDOW SCROLL */
 const windowScrollDirectionInitAtom = atom<windowScrollDirectionType>("UP")
-export const windowScrollDirectionAtom = atom(
+const windowScrollDirectionAtom = atom(
     (get) => get(windowScrollDirectionInitAtom),
     (get, set, setter?: windowScrollDirectionType) => {
 

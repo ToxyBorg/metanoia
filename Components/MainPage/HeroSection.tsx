@@ -1,7 +1,6 @@
 "use client"
 import { createStyles, Overlay, Container, Title, Button, Text } from '@mantine/core';
 import { useAtomValue } from 'jotai';
-import { refDataAtom } from '../../Stores/heroOutOfViewStore';
 
 const useStyles = createStyles((theme) => ({
     hero: {
@@ -68,13 +67,12 @@ const useStyles = createStyles((theme) => ({
 
 const HeroSection = () => {
     const { classes } = useStyles();
-    const { ref, entry } = useAtomValue(refDataAtom)
 
 
     // entry?.isIntersecting ? console.log("visible") : console.log("NOT visible")
 
     return (
-        <div className={classes.hero} ref={ref}>
+        <div className={classes.hero}>
             <Overlay
                 gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 40%)"
                 opacity={1}
@@ -88,8 +86,7 @@ const HeroSection = () => {
                 </Text>
 
                 <Button variant="gradient" size="xl" radius="xl" className={classes.control}>
-                    {entry?.isIntersecting ? 'Fully visible' : 'Obscured'}
-                    {/* red */}
+                    red
                 </Button>
             </Container>
         </div>

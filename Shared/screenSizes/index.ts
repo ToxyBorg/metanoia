@@ -4,7 +4,7 @@ export const mobileSizes = { minSize: "(min-width:250px)", maxSize: "(max-width:
 
 /*                   TABLET */
 
-export const tabletSizes = { minSize: "(min-width:425px)", maxSize: "(max-width:786px)" }
+export const tabletSizes = { minSize: "(min-width:426px)", maxSize: "(max-width:786px)" }
 
 /*                   DESKTOP */
 
