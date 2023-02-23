@@ -20,6 +20,8 @@ export const MobileHome = () => {
 
             size={mobileNavIconSizes.ActionIconLocalSVGSize}
             sx={{ borderRadius: mobileNavRadius.iconsBorderRadius }}
+            title={"Home"}
+
         >
             {/* <home.icon title={home.name} /> */}
             <MetanoiaSVG
@@ -50,6 +52,8 @@ export const TabletHome = () => {
 
             size={tabletNavIconSizes.ActionIconLocalSVGSize}
             sx={{ borderRadius: tabletNavRadius.iconsBorderRadius }}
+            mx={"auto"}
+            title={"Home"}
         >
             {/* <home.icon title={home.name} /> */}
             <MetanoiaSVG

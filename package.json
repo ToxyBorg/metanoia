@@ -39,7 +39,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "server-only": "^0.0.1",
-    "supabase": "^1.38.6",
+    "supabase": "^1.38.7",
     "typescript": "4.9.5"
   },
   "devDependencies": {

@@ -54,7 +54,7 @@ const MobileNav = (props: Props) => {
     )
 }
 
-export default MobileNav
+// export default MobileNav
 
 /*
         <Transition

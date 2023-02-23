@@ -36,7 +36,7 @@ export const MobileSettingsButton = (mobileScreenSize: { mobileScreenSize?: bool
                 size={mobileNavIconSizes.ActionIconSize}
                 sx={{ borderRadius: mobileNavRadius.iconsBorderRadius }}
                 title={settings.name}
-                mx={"auto"}
+            // mx={"auto"}
             >
                 <settings.icon title={settings.name} />
             </ActionIcon>

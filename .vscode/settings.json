@@ -18,8 +18,7 @@
     "tsconfig.json": true,
     ".gitignore": true,
     ".vscode": true,
-    ".next": true,
-    "next.config.js": true
+    ".next": true
   },
   "hide-files.files": [
     "node_modules",
@@ -30,8 +29,7 @@
     "tsconfig.json",
     ".gitignore",
     ".vscode",
-    ".next",
-    "next.config.js"
+    ".next"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
@@ -42,6 +40,6 @@
     "plaintext",
     "typescriptreact"
   ],
-  "dotenv.enableAutocloaking": false
+  "dotenv.enableAutocloaking": true
   // "color-picker.languages": ["python", "javascript", "typescript"]
 }

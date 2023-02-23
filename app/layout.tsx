@@ -30,7 +30,11 @@ export default async function RootLayout({
       <head />
 
       <body
-        style={{ background: bodyColors.bodyPageColorLight, color: bodyColors.bodyTextColorLight }}
+        style={{
+          // backgroundImage: bodyColors.bodyPageGradientLight,
+          background: bodyColors.bodyPageColorLight,
+          color: bodyColors.bodyTextColorLight
+        }}
       >
         {/* <SupabaseProvider> */}
         {/* <SupabaseListener serverAccessToken={session?.access_token} /> */}
