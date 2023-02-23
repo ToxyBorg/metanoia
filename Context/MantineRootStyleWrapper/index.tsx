@@ -7,7 +7,6 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useServerInsertedHTML } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { bodyColors } from '../../Shared/colors';
-import { containerRefAtom, refDataAtom } from '../../Stores/heroOutOfViewStore';
 
 
 export default function MantineRootStyleWrapper({ children }: { children: React.ReactNode }) {

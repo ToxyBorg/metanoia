@@ -2,14 +2,11 @@
 "use client"
 
 import { AppShell } from "@mantine/core";
-import { useIntersection } from "@mantine/hooks";
-import { atom, useAtomValue, useSetAtom } from "jotai";
-import { MutableRefObject, RefObject, useRef } from "react";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useEffect } from "react";
 import ResponsiveHeader from "../../Components/ResponsiveHeader";
 import ResponsiveNavBar from "../../Components/ResponsiveNavBar";
-import { containerRefAtom, refDataAtom } from "../../Stores/heroOutOfViewStore";
-import { screenSizesAtom } from "../../Stores/screenSizesStore";
-import { windowScrollDirectionAtom } from "../../Stores/windowScrollStore";
+import { desktopSizes, tabletSizes } from "../../Shared/screenSizes";
 
 interface Props {
     children: React.ReactNode
@@ -30,10 +27,30 @@ const AppShellWrapper = (props: Props) => {
 
     // const containerRef = useAtomValue(containerRefAtom)
 
+
+    const [open, handlers] = useDisclosure(true)
+    useEffect(() => {
+
+        let windowScrollPos = scrollY;
+
+        window.onscroll = () => {
+
+            if (scrollY < windowScrollPos) { // Scrolling up
+                handlers.open()
+
+            } else if (scrollY > windowScrollPos) { // Scrolling down
+                handlers.close()
+            }
+
+            windowScrollPos = scrollY
+        }
+
+    }, [handlers])
+
     return (
         <AppShell
-            header={<ResponsiveHeader />}
-            navbar={<ResponsiveNavBar />}
+            header={open ? <ResponsiveHeader /> : undefined}
+            navbar={open ? <ResponsiveNavBar /> : undefined}
             padding={0}
         >
             {props.children}

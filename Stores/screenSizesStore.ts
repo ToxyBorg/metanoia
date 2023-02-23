@@ -7,7 +7,7 @@ type allSizes = "OUT_OF_RANGE" | "MOBILE" | "TABLET" | "DESKTOP"
 
 /**              MOBILE SCREEN SIZES */
 const screenSizesInitAtom = atom<allSizes>("OUT_OF_RANGE")
-export const screenSizesAtom = atom(
+const screenSizesAtom = atom(
     (get) => get(screenSizesInitAtom),
     (get, set) => {
         let validRange: allSizes = "OUT_OF_RANGE"
