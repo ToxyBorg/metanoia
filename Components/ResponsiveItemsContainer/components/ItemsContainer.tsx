@@ -55,13 +55,13 @@ interface Props {
 }
 
 const ItemCardsCarousel = (props: Props) => {
-    // const autoplay = useRef(Autoplay({ delay: 5000 }));
+    const autoplay = useRef(Autoplay({ delay: 5000 }));
     return (
 
         <Carousel slideGap={0}
-        // plugins={[autoplay.current]}
-        // onMouseEnter={autoplay.current.stop}
-        // onMouseLeave={autoplay.current.reset}
+            plugins={[autoplay.current]}
+            onMouseEnter={autoplay.current.stop}
+            onMouseLeave={autoplay.current.reset}
         >
             {
                 props.allCards.map((card) => {
