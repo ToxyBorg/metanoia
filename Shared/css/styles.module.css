@@ -18,7 +18,7 @@ body::-webkit-scrollbar-thumb {
     /* display: flex; */
     /* align-items: center; */
     /* justify-content: center; */
-    background-size: 500% 500%;
+    background-size: 300% 300%;
     animation: AnimateBG 7s ease infinite;
 }
 
