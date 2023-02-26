@@ -15,10 +15,12 @@
     ".eslintrc.json": true,
     "next-env.d.ts": true,
     "README.md": true,
-    "tsconfig.json": true,
-    ".gitignore": true,
     ".vscode": true,
-    ".next": true
+    ".next": true,
+    "tsconfig.json": true,
+    "next.config.js": true,
+    ".env.local": true,
+    ".gitignore": true
   },
   "hide-files.files": [
     "node_modules",
@@ -26,10 +28,12 @@
     ".eslintrc.json",
     "next-env.d.ts",
     "README.md",
-    "tsconfig.json",
-    ".gitignore",
     ".vscode",
-    ".next"
+    ".next",
+    "tsconfig.json",
+    "next.config.js",
+    ".env.local",
+    ".gitignore"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,

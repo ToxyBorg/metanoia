@@ -2,11 +2,17 @@
 
 import { CacheProvider } from '@emotion/react';
 import { useEmotionCache, MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core';
-import { useIntersection } from '@mantine/hooks';
+import { useIntersection, useMouse } from '@mantine/hooks';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useServerInsertedHTML } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { bodyColors } from '../../Shared/colors';
+import styles from "../../Shared/css/styles.module.css"
+import { containerRefAtom, refDataAtom } from '../../Stores/heroOutOfViewStore';
+import { xMousePosAtom } from '../../Stores/leftSideHover';
+import { screenSizesAtom } from '../../Stores/screenSizesStore';
+import { windowScrollDirectionAtom } from '../../Stores/windowScrollStore';
+
 
 
 export default function MantineRootStyleWrapper({ children }: { children: React.ReactNode }) {
@@ -27,28 +33,46 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
 
     const toggleColorScheme = () => {
         setColorScheme(colorScheme === "dark" ? "light" : "dark");
+
+        // document.body.className =
+        //     colorScheme === "dark"
+        //         ? styles.Animated_Background_Gradient_DEFAULT
+        //         : styles.Animated_Background_Gradient_DARK;
+
         document.body.style.background =
             colorScheme === "dark"
-                ? bodyColors.bodyPageColorLight
-                : bodyColors.bodyPageColorDark;
+                ? bodyColors.bodyPageGradientLight
+                : bodyColors.bodyPageGradientDark;
 
-        document.body.style.color =
-            colorScheme === "dark"
-                ? bodyColors.bodyTextColorLight
-                : bodyColors.bodyTextColorDark;
+        // document.body.style.color =
+        //     colorScheme === "dark"
+        //         ? bodyColors.bodyTextColorLight
+        //         : bodyColors.bodyTextColorDark;
     };
 
-    // const containerRefSetter = useSetAtom(containerRefAtom)
-    // containerRefSetter(useRef())
 
-    // const { ref, entry } = useIntersection({
-    //     root: useAtomValue(containerRefAtom)?.current,
-    //     threshold: 0,
-    // });
+    const { ref: mousePosRef, x, y } = useMouse();
+    const xMousePosSetter = useSetAtom(xMousePosAtom)
+    xMousePosSetter({ xMousePosRef: mousePosRef, x: x })
 
-    // const refDataSetter = useSetAtom(refDataAtom)
-    // refDataSetter({ ref: ref, entry: entry })
 
+    const containerRefSetter = useSetAtom(containerRefAtom)
+    containerRefSetter(useRef())
+
+    const { ref, entry } = useIntersection({
+        root: useAtomValue(containerRefAtom)?.current,
+        threshold: 0,
+    });
+
+    const refDataSetter = useSetAtom(refDataAtom)
+    refDataSetter({ ref: ref, entry: entry })
+
+
+    const screenSizesSetter = useSetAtom(screenSizesAtom)
+    screenSizesSetter()
+
+    const windowScrollDirectionSetter = useSetAtom(windowScrollDirectionAtom)
+    windowScrollDirectionSetter()
 
     return (
         <CacheProvider value={cache}>
@@ -56,20 +80,14 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
                 <MantineProvider withGlobalStyles withNormalizeCSS withCSSVariables
                     theme={{
                         colorScheme: colorScheme,
-                        breakpoints: {
+                        // breakpoints: {
 
-                            // xs: 576,
-                            // sm: 768,
-                            // md: 992,
-                            // lg: 1200,
-                            // xl: 1400
-
-                            xs: 376,
-                            sm: 426,
-                            md: 787,
-                            lg: 900,
-                            xl: 1440,
-                        },
+                        //     xs: 376,
+                        //     sm: 426,
+                        //     md: 787,
+                        //     lg: 900,
+                        //     xl: 1440,
+                        // },
                     }}>
                     {children}
                 </MantineProvider>

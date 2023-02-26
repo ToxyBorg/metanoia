@@ -1,43 +1,21 @@
 "use client"
 
-import { ActionIcon, Group, Header, Text, Transition, useMantineColorScheme } from "@mantine/core";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import { useAtom, useAtomValue } from "jotai";
-import type { NextComponentType, NextPageContext } from "next";
-import { useEffect } from "react";
-import { darkThemeIcon, lightThemeIcon } from "../../Shared/icons";
-import { mobileSizes } from "../../Shared/screenSizes";
+import { useAtomValue } from "jotai";
+import { navBarLockedAtom } from "../../Stores/navBarLockStore";
+import { screenSizesAtom } from "../../Stores/screenSizesStore";
+import { windowScrollDirectionAtom } from "../../Stores/windowScrollStore";
 import MobileHeader from "./headers/MobileHeader";
 
 
 const ResponsiveHeader = () => {
+    const navBarLocked = useAtomValue(navBarLockedAtom)
+    const scrollDirection = useAtomValue(windowScrollDirectionAtom)
+    const screenSizes = useAtomValue(screenSizesAtom)
 
-    // const [open, handlers] = useDisclosure(true)
-    // useEffect(() => {
-
-    //     let windowScrollPos = scrollY;
-
-    //     window.onscroll = () => {
-
-    //         if (scrollY < windowScrollPos) { // Scrolling up
-    //             handlers.open()
-
-    //         } else if (scrollY > windowScrollPos) { // Scrolling down
-    //             handlers.close()
-    //         }
-
-    //         windowScrollPos = scrollY
-    //     }
-
-    // }, [handlers])
-
-    const mobileMinSize = useMediaQuery(mobileSizes.minSize);
-    const mobileMaxSize = useMediaQuery(mobileSizes.maxSize);
-
-
-
-    if ((mobileMinSize && mobileMaxSize)) {
-        return <MobileHeader mobileBreakpoints={(mobileMinSize && mobileMaxSize)} />
+    if (screenSizes == "MOBILE" || screenSizes == "TABLET") {
+        return <MobileHeader mobileBreakpoints={screenSizes == "MOBILE" || screenSizes == "TABLET"}
+            showMobileNavBar={!(scrollDirection == "DOWN" && !navBarLocked)}
+        />
     }
     else return <></>
 }

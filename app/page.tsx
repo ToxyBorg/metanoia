@@ -2,7 +2,7 @@ import "server-only"
 
 import { createClient } from '../services/supabase/utils/supabase-server'
 import TextMantine from "../Components/test_components/TextMantine";
-import ResponsiveItemCards from "../Components/ResponsiveItemCards";
+import ResponsiveItemCards from "../Components/ResponsiveItemsContainer";
 import HeroSection from "../Components/MainPage/HeroSection";
 
 // do not cache this page

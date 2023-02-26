@@ -1,5 +1,8 @@
 import "server-only"
 
+import styles from "../Shared/css/styles.module.css"
+import cx from 'classnames';
+
 import ContextWrapper from "../Context"
 import { bodyColors } from "../Shared/colors"
 // import SupabaseListener from '../Context/SupabaseWrapper/supabase-listener'
@@ -9,12 +12,25 @@ import { bodyColors } from "../Shared/colors"
 // do not cache this layout
 // export const revalidate = 120
 
+// Static metadata
+// export const metadata = {
+//   title: "Shop Metanoia",
+//   viewport: {
+//     width: "device-width",
+//     initialScale: 1
+//   },
+//   description: "Metanoia online store. Website made by ToxyBorg (Amir)",
+//   icons: {
+//     icon: "/favicon.ico"
+//   }
+// };
+
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-
   // const supabase = createClient()
 
   // const {
@@ -23,18 +39,24 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
+
       <head />
 
       <body
         style={{
           // backgroundImage: bodyColors.bodyPageGradientLight,
-          background: bodyColors.bodyPageColorLight,
-          color: bodyColors.bodyTextColorLight
+          // background: bodyColors.bodyPageColorLight,
+          width: "100%", height: "100%",
+          overflowX: "hidden",
+
+          // backgroundImage: bodyColors.bodyPageGradientLight,
+          background: bodyColors.bodyPageGradientLight,
+          color: bodyColors.bodyTextColorLight,
         }}
+        className={cx(
+          styles.Animated_Background_Gradient,
+          styles.HiddenScrollBar
+        )}
       >
         {/* <SupabaseProvider> */}
         {/* <SupabaseListener serverAccessToken={session?.access_token} /> */}
@@ -46,6 +68,6 @@ export default async function RootLayout({
 
       </body>
 
-    </html>
+    </html >
   )
 }

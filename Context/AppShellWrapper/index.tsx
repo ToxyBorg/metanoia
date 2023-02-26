@@ -1,13 +1,14 @@
 // import "server-only";
 "use client"
 
-import { AppShell, Footer } from "@mantine/core";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import { useEffect } from "react";
+import { AppShell } from "@mantine/core";
+import { useMergedRef } from "@mantine/hooks";
+import { useAtomValue } from "jotai";
 import ResponsiveFooter from "../../Components/ResponsiveFooter";
 import ResponsiveHeader from "../../Components/ResponsiveHeader";
 import ResponsiveNavBar from "../../Components/ResponsiveNavBar";
-import { desktopSizes, tabletSizes } from "../../Shared/screenSizes";
+import { refDataAtom } from "../../Stores/heroOutOfViewStore";
+import { xMousePosAtom } from "../../Stores/leftSideHover";
 
 interface Props {
     children: React.ReactNode
@@ -15,49 +16,35 @@ interface Props {
 
 const AppShellWrapper = (props: Props) => {
 
-    // const containerRefSetter = useSetAtom(containerRefAtom)
-    // containerRefSetter(useRef())
+    const xMousePos = useAtomValue(xMousePosAtom)
+    const scrollPastContainer = useAtomValue(refDataAtom)
 
-    // const { ref, entry } = useIntersection({
-    //     root: useAtomValue(containerRefAtom)?.current,
-    //     threshold: 0.85,
-    // });
-
-    // const refDataSetter = useSetAtom(refDataAtom)
-    // refDataSetter({ ref: ref, entry: entry })
-
-    // const containerRef = useAtomValue(containerRefAtom)
+    const mergedRef = useMergedRef(xMousePos.xMousePosRef, scrollPastContainer.ref)
 
 
-    const [open, handlers] = useDisclosure(true)
-    useEffect(() => {
+    // const navBarLocked = useAtomValue(navBarLockedAtom)
 
-        let windowScrollPos = scrollY;
+    // const scrollDirection = useAtomValue(windowScrollDirectionAtom)
 
-        window.onscroll = () => {
-
-            if (scrollY < windowScrollPos) { // Scrolling up
-                handlers.open()
-
-            } else if (scrollY > windowScrollPos) { // Scrolling down
-                handlers.close()
-            }
-
-            windowScrollPos = scrollY
-        }
-
-    }, [handlers])
-
+    // console.log("MOUSE X : ", xMousePos.x, " navbar locked? ", navBarLocked)
     return (
+
         <AppShell
-            header={open ? <ResponsiveHeader /> : undefined}
-            navbar={open ? <ResponsiveNavBar /> : undefined}
+            // header={scrollDirection == "DOWN" && !navBarLocked ? undefined : <ResponsiveHeader />}
+            header={<ResponsiveHeader />}
+
+            // navbar={scrollDirection == "DOWN" && !navBarLocked  ? undefined : <ResponsiveNavBar />}
+            // navbar={xMousePos.x >= 20 && !navBarLocked ? undefined : <ResponsiveNavBar />}
+            navbar={<ResponsiveNavBar />}
             footer={
                 <ResponsiveFooter />
             }
             padding={0}
+
         >
-            {props.children}
+            <div ref={mergedRef}>
+                {props.children}
+            </div>
         </AppShell>
     )
 }
