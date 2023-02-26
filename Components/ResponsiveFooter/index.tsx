@@ -10,6 +10,7 @@ import { IconContext } from "react-icons";
 import { FooterColors } from "../../Shared/colors";
 import { instagram, mail } from "../../Shared/icons";
 import { footerIconSizes, footerWidthHeight } from "../../Shared/sizes";
+import style from "../../Shared/css/styles.module.css";
 
 const ResponsiveFooter = () => {
 
@@ -25,8 +26,9 @@ const ResponsiveFooter = () => {
             p="md" pos={"static"} mt={"xl"}
             bg={colorScheme === "dark" ? FooterColors.backgroundColorDark : FooterColors.backgroundColorLight}
             sx={{
-                border: `2px solid ${colorScheme === "dark" ? FooterColors.borderColorDark : FooterColors.borderColorLight}`,
+                borderTop: `2px solid ${colorScheme === "dark" ? FooterColors.borderColorDark : FooterColors.borderColorLight}`,
             }}
+            className={style.Animated_Background_Gradient}
         >
 
             <IconContext.Provider
@@ -35,9 +37,13 @@ const ResponsiveFooter = () => {
                     size: footerIconSizes.InnerIconSize
                 }}>
 
-                <Group position="apart">
+                <Group position="apart" >
 
-                    <Text> THIS</Text>
+                    <Text
+                        color={colorScheme === "dark" ? FooterColors.iconsLineColorDark : FooterColors.iconsLineColorLight}
+                    >
+                        THIS
+                    </Text>
 
                     <Group position="center">
 

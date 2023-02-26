@@ -1,0 +1,46 @@
+/* body::-webkit-scrollbar {
+    width: 1px;
+} */
+
+/* body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+} */
+
+
+
+.Animated_Background_Gradient {
+
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    background-size: 500% 500%;
+    animation: AnimateBG 7s ease infinite;
+}
+
+/* .Animated_Background_Gradient>* {
+    background-size: 300% 300%;
+    animation: AnimateBG 7s ease infinite;
+} */
+
+.HiddenScrollBar::-webkit-scrollbar {
+    width: 0px;
+}
+
+@keyframes AnimateBG {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}

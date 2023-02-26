@@ -7,7 +7,7 @@ const colors = {
     QuinacridoneMagenta: "#88304E",
     DarkByzantium: "#522546",
 
-    DarkPurple: "hsl(275, 37%, 18%)",
+    DarkPurple: "#311d3f",
     DarkPurpleLighter: "hsl(275, 37%, 50%)",
     DarkPurpleTranslucid: "hsl(275, 37%, 18%, 0.7)",
 
@@ -17,6 +17,11 @@ const colors = {
     CarolinaBlue: "hsla(202, 61%, 54%)",
     CarolinaBlueLighter: "hsla(202, 61%, 60%)",
     CarolinaBlueDarker: "hsla(202, 61%, 40%)",
+
+    GradientLight: "linear-gradient(-45deg,#3bade3 0%,#576fe6 25%,#9844b7 51%,#ff357f 100%)",
+    // GradientDark: "linear-gradient(-45deg,#200122 0%,#3c0122 25%,#550122 51%,#4f0202 100%) ",
+    GradientDark: "linear-gradient(109.6deg, rgb(43, 1, 91) 13.4%, rgb(122, 2, 54) 100.2%) ",
+
 }
 
 export const bodyColors = {
@@ -26,26 +31,55 @@ export const bodyColors = {
     bodyPageColorDark: colors.DarkPurple,
     bodyTextColorDark: colors.Peach,//PeachLighter,
 
-    // TESTING GRADIENT BACKGROUNDS
-    bodyPageGradientLight: `linear-gradient(to bottom right,${colors.Amaranth}, ${colors.QuinacridoneMagenta})`
-}
+    // GRADIENT BACKGROUNDS
+    bodyPageGradientLight: colors.GradientLight,
+    bodyPageGradientDark: colors.GradientDark,
 
-export const ActiveButtonBgColor = colors.DarkByzantium;
+}
 
 export const NavBarColors = {
     // DARK THEME FOR NAVBAR
     iconsLineColorDark: colors.Peach, // ICON COLORS
     iconsBackgroundColorDark: colors.CarolinaBlue, // ACTION ICONS BACKGROUND COLOR
-    backgroundColorDark: colors.CarolinaBlueTranslucid, // NAVBAR BACKGROUND COLOR
+
+    backgroundColorDark: colors.GradientDark, // NAVBAR BACKGROUND COLOR
+
     borderColorDark: colors.Peach, // NAVBAR BORDER COLOR
+
     navDividerColorDark: colors.Peach, // NAVBAR ICON DIVIDER COLOR
 
     // LIGHT THEME FOR NAVBAR
-    iconsLineColorLight: colors.DarkPurple, // ICON COLORS
+    iconsLineColorLight: colors.Peach, // ICON COLORS
     iconsBackgroundColorLight: colors.CarolinaBlueLighter, // ACTION ICONS BACKGROUND COLOR
-    backgroundColorLight: colors.CarolinaBlueTranslucid, // NAVBAR BACKGROUND COLOR
-    borderColorLight: colors.DarkPurple, // NAVBAR BORDER COLOR
-    navDividerColorLight: colors.DarkPurple, // NAVBAR ICON DIVIDER COLOR
+
+    backgroundColorLight: colors.GradientLight, // NAVBAR BACKGROUND COLOR
+
+    borderColorLight: colors.Peach, // NAVBAR BORDER COLOR
+
+    navDividerColorLight: colors.Peach, // NAVBAR ICON DIVIDER COLOR
+
+}
+
+export const CardContainerColors = {
+    // DARK THEME FOR CARD CONTAINER
+    iconsLineColorDark: colors.Peach, // ICON COLORS
+    iconsBackgroundColorDark: colors.DarkPurple, // ACTION ICONS BACKGROUND COLOR
+
+    backgroundColorDark: colors.GradientDark, // CARD CONTAINER BACKGROUND COLOR
+    borderColorDark: colors.Peach, // CARD CONTAINER BORDER COLOR
+
+    textColorDark: colors.Peach, // CARD CONTAINER ICON DIVIDER COLOR
+
+    // LIGHT THEME FOR CARD CONTAINER
+    iconsLineColorLight: colors.Peach, // ICON COLORS
+    iconsBackgroundColorLight: colors.CarolinaBlueLighter, // ACTION ICONS BACKGROUND COLOR
+
+    backgroundColorLight: colors.GradientLight, // CARD CONTAINER BACKGROUND COLOR
+
+    borderColorLight: colors.Peach, // CARD CONTAINER BORDER COLOR
+
+    textColorLight: colors.Peach, // CARD CONTAINER ICON DIVIDER COLOR
+
 
 }
 
@@ -53,44 +87,79 @@ export const FooterColors = {
     // DARK THEME FOR FOOTER
     iconsLineColorDark: colors.Peach, // ICON COLORS
     iconsBackgroundColorDark: colors.CarolinaBlue, // ACTION ICONS BACKGROUND COLOR
-    backgroundColorDark: colors.CarolinaBlueTranslucid, // FOOTER BACKGROUND COLOR
+
+    backgroundColorDark: colors.GradientDark, // FOOTER BACKGROUND COLOR
+
     borderColorDark: colors.Peach, // FOOTER BORDER COLOR
+
     footerDividerColorDark: colors.Peach, // FOOTER ICON DIVIDER COLOR
 
     // LIGHT THEME FOR FOOTER
-    iconsLineColorLight: colors.DarkPurple, // ICON COLORS
+    iconsLineColorLight: colors.Peach, // ICON COLORS
     iconsBackgroundColorLight: colors.CarolinaBlueLighter, // ACTION ICONS BACKGROUND COLOR
-    backgroundColorLight: colors.CarolinaBlueTranslucid, // FOOTER BACKGROUND COLOR
-    borderColorLight: colors.DarkPurple, // FOOTER BORDER COLOR
-    footerDividerColorLight: colors.DarkPurple, // FOOTER ICON DIVIDER COLOR
+
+    backgroundColorLight: colors.GradientLight, // FOOTER BACKGROUND COLOR
+
+    borderColorLight: colors.Peach, // FOOTER BORDER COLOR
+
+    footerDividerColorLight: colors.Peach, // FOOTER ICON DIVIDER COLOR
 
 }
-
 
 export const DrawerColors = {
     // DARK THEME FOR DRAWERS
     iconsLineColorDark: colors.Peach, // ICON COLORS
-    iconsBackgroundColorDark: colors.CarolinaBlue, // ACTION ICONS BACKGROUND COLOR
+    iconsBackgroundColorDark: colors.GradientDark, // ACTION ICONS BACKGROUND COLOR
     iconsBorderColorDark: colors.Peach, // DRAWER ICONS BORDER COLOR
 
-    drawerBackgroundColorDark: colors.DarkPurple, // DRAWER BACKGROUND COLOR
+    drawerBackgroundColorDark: colors.GradientDark, // DRAWER BACKGROUND COLOR
     drawerBorderColorDark: colors.Peach, // DRAWER BORDER COLOR
 
-    drawerHeaderBackgroundColorDark: colors.CarolinaBlue, // DRAWER HEADER BACKGROUND COLOR
+    drawerHeaderBackgroundColorDark: colors.GradientDark, // DRAWER HEADER BACKGROUND COLOR
     drawerHeaderTextColorDark: colors.Peach, // DRAWER HEADER TEXT COLOR
     drawerHeaderBorderColorDark: colors.Peach, // DRAWER HEADER BORDER COLOR
 
     // LIGHT THEME FOR DRAWERS
-    iconsLineColorLight: colors.DarkPurple, // ICON COLORS
-    iconsBackgroundColorLight: colors.CarolinaBlueLighter, // ACTION ICONS BACKGROUND COLOR
-    iconsBorderColorLight: colors.DarkPurple, // DRAWER ICONS BORDER COLOR
+    iconsLineColorLight: colors.Peach, // ICON COLORS
+    iconsBackgroundColorLight: colors.GradientLight, // ACTION ICONS BACKGROUND COLOR
+    iconsBorderColorLight: colors.Peach, // DRAWER ICONS BORDER COLOR
 
-    drawerBackgroundColorLight: colors.Peach,//PeachLighter, // DRAWER BACKGROUND COLOR
+    drawerBackgroundColorLight: colors.GradientLight,//PeachLighter, // DRAWER BACKGROUND COLOR
     drawerBorderColorLight: colors.CarolinaBlueLighter, // DRAWER BORDER COLOR
 
-    drawerHeaderBackgroundColorLight: colors.CarolinaBlueLighter, // DRAWER HEADER BACKGROUND COLOR
-    drawerHeaderTextColorLight: colors.DarkPurple, // DRAWER HEADER TEXT COLOR
-    drawerHeaderBorderColorLight: colors.DarkPurple, // DRAWER HEADER BORDER COLOR
+    drawerHeaderBackgroundColorLight: colors.GradientLight, // DRAWER HEADER BACKGROUND COLOR
+    drawerHeaderTextColorLight: colors.Peach, // DRAWER HEADER TEXT COLOR
+    drawerHeaderBorderColorLight: colors.Peach, // DRAWER HEADER BORDER COLOR
+}
+
+export const SpotlightColors = {
+    // DARK THEME FOR SPOTLIGHT 
+    iconsLineColorDark: colors.Peach, // ICON COLORS
+    iconsBackgroundColorDark: colors.GradientDark, // ACTION ICONS BACKGROUND COLOR
+    iconsBorderColorDark: colors.Peach, // SPOTLIGHT ICONS BORDER COLOR
+
+    spotlightBackgroundColorDark: colors.GradientDark, // spotlight BACKGROUND COLOR
+    spotlightBorderColorDark: colors.Peach, // spotlight BORDER COLOR
+
+    spotlightHeaderBackgroundColorDark: colors.GradientDark, // spotlight HEADER BACKGROUND COLOR
+    spotlightHeaderTextColorDark: colors.Peach, // spotlight HEADER TEXT COLOR
+    spotlightHeaderBorderColorDark: colors.Peach, // spotlight HEADER BORDER COLOR
+
+    spotlightActionBackgroundColorDark: colors.GradientDark,
+
+    // LIGHT THEME FOR SPOTLIGHT
+    iconsLineColorLight: colors.Peach, // ICON COLORS
+    iconsBackgroundColorLight: colors.GradientLight, // ACTION ICONS BACKGROUND COLOR
+    iconsBorderColorLight: colors.Peach, // spotlight ICONS BORDER COLOR
+
+    spotlightBackgroundColorLight: colors.GradientLight,//PeachLighter, // spotlight BACKGROUND COLOR
+    spotlightBorderColorLight: colors.CarolinaBlueLighter, // spotlight BORDER COLOR
+
+    spotlightHeaderBackgroundColorLight: colors.GradientLight, // spotlight HEADER BACKGROUND COLOR
+    spotlightHeaderTextColorLight: colors.Peach, // spotlight HEADER TEXT COLOR
+    spotlightHeaderBorderColorLight: colors.Peach, // spotlight HEADER BORDER COLOR
+
+    spotlightActionBackgroundColorLight: colors.GradientLight
 }
 
 export const NavBarCollapseColors = {
@@ -123,27 +192,27 @@ export const NavBarCollapseColors = {
 export const ModalColors = {
     // DARK THEME FOR MODALS
     iconsLineColorDark: colors.Peach, // ICON COLORS
-    iconsBackgroundColorDark: colors.CarolinaBlue, // ACTION ICONS BACKGROUND COLOR
+    iconsBackgroundColorDark: colors.GradientDark, // ACTION ICONS BACKGROUND COLOR
     iconsBorderColorDark: colors.Peach, // MODAL ICONS BORDER COLOR
 
-    modalBackgroundColorDark: colors.DarkPurple, // MODAL BACKGROUND COLOR
+    modalBackgroundColorDark: colors.GradientDark, // MODAL BACKGROUND COLOR
     modalBorderColorDark: colors.Peach, // MODAL BORDER COLOR
 
-    modalHeaderBackgroundColorDark: colors.CarolinaBlue, // MODAL HEADER BACKGROUND COLOR
+    modalHeaderBackgroundColorDark: colors.GradientDark, // MODAL HEADER BACKGROUND COLOR
     modalHeaderTextColorDark: colors.Peach, // MODAL HEADER TEXT COLOR
     modalHeaderBorderColorDark: colors.Peach, // MODAL HEADER BORDER COLOR
 
     // LIGHT THEME FOR MODALS
-    iconsLineColorLight: colors.DarkPurple, // ICON COLORS
-    iconsBackgroundColorLight: colors.CarolinaBlueLighter, // ACTION ICONS BACKGROUND COLOR
-    iconsBorderColorLight: colors.DarkPurple, // MODAL ICONS BORDER COLOR
+    iconsLineColorLight: colors.Peach, // ICON COLORS
+    iconsBackgroundColorLight: colors.GradientLight, // ACTION ICONS BACKGROUND COLOR
+    iconsBorderColorLight: colors.Peach, // MODAL ICONS BORDER COLOR
 
-    modalBackgroundColorLight: colors.Peach,//PeachLighter, // MODAL BACKGROUND COLOR
+    modalBackgroundColorLight: colors.GradientLight,//PeachLighter, // MODAL BACKGROUND COLOR
     modalBorderColorLight: colors.CarolinaBlueLighter, // MODAL BORDER COLOR
 
-    modalHeaderBackgroundColorLight: colors.CarolinaBlueLighter, // MODAL HEADER BACKGROUND COLOR
-    modalHeaderTextColorLight: colors.DarkPurple, // MODAL HEADER TEXT COLOR
-    modalHeaderBorderColorLight: colors.DarkPurple, // MODAL HEADER BORDER COLOR
+    modalHeaderBackgroundColorLight: colors.GradientLight, // MODAL HEADER BACKGROUND COLOR
+    modalHeaderTextColorLight: colors.Peach, // MODAL HEADER TEXT COLOR
+    modalHeaderBorderColorLight: colors.Peach, // MODAL HEADER BORDER COLOR
 
 }
 

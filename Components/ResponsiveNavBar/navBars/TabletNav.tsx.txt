@@ -1,15 +1,14 @@
 import { Divider, Navbar, ScrollArea, Stack, useMantineColorScheme } from "@mantine/core";
 import { IconContext } from "react-icons";
-import { NavBarColors } from "../../../../Shared/colors";
-import { tabletNavIconSizes, tabletNavRadius, tabletNavWidthHeight } from "../../../../Shared/sizes";
-import { TabletCartButton } from "../buttons/mainButtons/Cart";
-import { TabletCategories } from "../buttons/mainButtons/Categories";
-import { TabletContactInfo } from "../buttons/mainButtons/ContactInfo";
-import { TabletHome } from "../buttons/mainButtons/Home";
-import { TabletSearch } from "../buttons/mainButtons/Search";
-import { TabletSettingsButton } from "../buttons/mainButtons/Settings";
-
-
+import { NavBarColors } from "../../../Shared/colors";
+import style from "../../../Shared/css/styles.module.css";
+import { tabletNavIconSizes, tabletNavRadius, tabletNavWidthHeight } from "../../../Shared/sizes";
+import { Cart } from "../../buttons/navigationButtons/Cart";
+import { Categories } from "../../buttons/navigationButtons/Categories";
+import { ContactInfo } from "../../buttons/navigationButtons/ContactInfo";
+import { Home } from "../../buttons/navigationButtons/Home";
+import { Search } from "../../buttons/navigationButtons/Search";
+import { Settings } from "../../buttons/navigationButtons/Settings";
 
 interface Props {
     tabletBreakpoints: boolean
@@ -46,10 +45,12 @@ const TabletNav = (props: Props) => {
                     // alignItems: "center"
                 }}
                 bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
+                className={style.Animated_Background_Gradient}
+
             >
 
                 <Navbar.Section my={"lg"} >
-                    <TabletHome />
+                    <Home />
                 </Navbar.Section>
 
                 <Divider my="xs" mx={"auto"} size={"md"} w={"2rem"}
@@ -59,9 +60,10 @@ const TabletNav = (props: Props) => {
                 <ScrollArea type={"never"} h={"100%"}>
                     <Navbar.Section my={"xl"} grow>
                         <Stack spacing="xl">
-                            <TabletSearch tabletScreenSize={props.tabletBreakpoints} />
-                            <TabletCategories tabletScreenSize={props.tabletBreakpoints} />
-                            <TabletCartButton tabletScreenSize={props.tabletBreakpoints} />
+                            <Search />
+                            <Categories />
+                            <Cart />
+
                         </Stack>
                     </Navbar.Section>
                 </ScrollArea>
@@ -72,8 +74,8 @@ const TabletNav = (props: Props) => {
 
                 <Navbar.Section my={"lg"}>
                     <Stack spacing="md">
-                        <TabletContactInfo tabletScreenSize={props.tabletBreakpoints} />
-                        <TabletSettingsButton tabletScreenSize={props.tabletBreakpoints} />
+                        <ContactInfo />
+                        <Settings />
                     </Stack>
                 </Navbar.Section>
 

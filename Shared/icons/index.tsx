@@ -23,14 +23,14 @@ interface IconInfo {
 }
 
 // Metanoia Brand SVG
-type localSVGType = { strokeColor: string, strokeWidth: number, lineColor: string }
+type localSVGType = { strokeColor: string | undefined, strokeWidth: string | number | undefined, lineColor: string | undefined }
 export const MetanoiaSVG = (props: localSVGType) => {
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={"100%"}
-      height={"100%"}
+      width={"95%"}
+      height={"95%"}
       fill={props.lineColor}
       version="1"
       viewBox="0 0 385 385"
@@ -70,15 +70,15 @@ export const necklaces: IconInfo = { icon: GiPearlNecklace, name: "Necklaces" }
 export const bracelets: IconInfo = { icon: GiRing, name: "Bracelets" }
 
 // NAVBAR LOCK BUTTON
-export const navLock: IconInfo = { icon: BiLock, name: "NavLock" }
-export const navUnlock: IconInfo = { icon: BiLockOpen, name: "NavUnlock" }
+export const navLock: IconInfo = { icon: BiLock, name: "Lock Navbar" }
+export const navUnlock: IconInfo = { icon: BiLockOpen, name: "Unlock Navbar" }
 
 // NAVBAR SEARCH DRAWER INPUT TOOLTIP
 export const circleAlert: IconInfo = { icon: GrCircleAlert, name: "CircleAlert" }
 
 // HEADER THEME SWITCHER
-export const lightThemeIcon: IconInfo = { icon: BsSunFill, name: "LightThemeSun" }
-export const darkThemeIcon: IconInfo = { icon: BsMoonFill, name: "DarkThemeMoon" }
+export const lightThemeIcon: IconInfo = { icon: BsSunFill, name: "Light Theme" }
+export const darkThemeIcon: IconInfo = { icon: BsMoonFill, name: "Dark Theme" }
 
 // SOCIAL ICONS
 export const mail: IconInfo = { icon: FiMail, name: "Mail", link: "mailto:metanoia.js@gmail.com" }
