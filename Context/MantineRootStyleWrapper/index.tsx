@@ -34,20 +34,17 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
     const toggleColorScheme = () => {
         setColorScheme(colorScheme === "dark" ? "light" : "dark");
 
-        // document.body.className =
-        //     colorScheme === "dark"
-        //         ? styles.Animated_Background_Gradient_DEFAULT
-        //         : styles.Animated_Background_Gradient_DARK;
+        document.body.className = styles.Animated_Background_Gradient;
 
         document.body.style.background =
             colorScheme === "dark"
                 ? bodyColors.bodyPageGradientLight
                 : bodyColors.bodyPageGradientDark;
 
-        // document.body.style.color =
-        //     colorScheme === "dark"
-        //         ? bodyColors.bodyTextColorLight
-        //         : bodyColors.bodyTextColorDark;
+        document.body.style.color =
+            colorScheme === "dark"
+                ? bodyColors.bodyTextColorLight
+                : bodyColors.bodyTextColorDark;
     };
 
 
