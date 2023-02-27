@@ -7,7 +7,7 @@ import { useAtomValue } from "jotai";
 import ResponsiveFooter from "../../Components/ResponsiveFooter";
 import ResponsiveHeader from "../../Components/ResponsiveHeader";
 import ResponsiveNavBar from "../../Components/ResponsiveNavBar";
-import { refDataAtom } from "../../Stores/heroOutOfViewStore";
+import { containerRefAtom, refDataAtom } from "../../Stores/heroOutOfViewStore";
 import { xMousePosAtom } from "../../Stores/leftSideHover";
 
 interface Props {
@@ -17,9 +17,9 @@ interface Props {
 const AppShellWrapper = (props: Props) => {
 
     const xMousePos = useAtomValue(xMousePosAtom)
-    const scrollPastContainer = useAtomValue(refDataAtom)
+    const scrollPastRootContainer = useAtomValue(containerRefAtom)
 
-    const mergedRef = useMergedRef(xMousePos.xMousePosRef, scrollPastContainer.ref)
+    const mergedRef = useMergedRef(xMousePos.xMousePosRef, scrollPastRootContainer?.current!)
 
 
     // const navBarLocked = useAtomValue(navBarLockedAtom)
