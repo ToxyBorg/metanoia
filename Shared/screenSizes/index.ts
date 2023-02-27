@@ -1,10 +1,10 @@
 /*                   MOBILE */
 
-export const mobileSizes = { minSize: "(min-width:250px)", maxSize: "(max-width:430px)" }
+export const mobileSizes = { minSize: "(min-width:250px)", maxSize: "(max-width:786px)" }
 
 /*                   TABLET */
 
-export const tabletSizes = { minSize: "(min-width:430px)", maxSize: "(max-width:786px)" }
+// export const tabletSizes = { minSize: "(min-width:430px)", maxSize: "(max-width:786px)" }
 
 /*                   DESKTOP */
 

@@ -1,0 +1,17 @@
+import type { NextComponentType, NextPageContext } from "next";
+
+interface Props { }
+
+const Loading: NextComponentType<NextPageContext, {}, Props> = (
+    props: Props,
+) => {
+    return (
+        <div>
+            <h1>
+                Loading... Beep boop
+            </h1>
+        </div>
+    )
+}
+
+export default Loading
