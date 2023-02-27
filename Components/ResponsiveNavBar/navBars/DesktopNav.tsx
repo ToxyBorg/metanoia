@@ -47,16 +47,20 @@ const DesktopNav = (props: Props) => {
                         ml={"md"} mr={"lg"}
                         my={"auto"}
 
-                        bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
+                        // bg={colorScheme === "dark" ? NavBarColors.backgroundColorDarkVertical : NavBarColors.backgroundColorLightVertical}
+                        className={style.Animated_Background_Gradient}
 
                         sx={{
                             borderRadius: desktopNavRadius.navbarBorderRadius,
                             backdropFilter: "blur(2px)",
                             border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
-                            // alignItems: "center"
+                            backgroundImage: colorScheme === "dark" ? NavBarColors.backgroundColorDarkVertical : NavBarColors.backgroundColorLightVertical,
+                            // backgroundImage: colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight,
+                            // backgroundSize: "200% 200%",
+
+                            // animation: `${style.AnimateBG} 7s ease infinite`,
 
                         }}
-                        className={style.Animated_Background_Gradient}
                     >
 
                         <Navbar.Section my={"lg"}>

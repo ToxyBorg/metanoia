@@ -8,6 +8,8 @@ import { useServerInsertedHTML } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { bodyColors } from '../../Shared/colors';
 import styles from "../../Shared/css/styles.module.css"
+import cx from 'classnames';
+
 import { containerRefAtom, refDataAtom } from '../../Stores/heroOutOfViewStore';
 import { xMousePosAtom } from '../../Stores/leftSideHover';
 import { screenSizesAtom } from '../../Stores/screenSizesStore';
@@ -34,12 +36,21 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
     const toggleColorScheme = () => {
         setColorScheme(colorScheme === "dark" ? "light" : "dark");
 
-        document.body.className = styles.Animated_Background_Gradient;
+        // document.body.className = styles.Animated_Background_Gradient;
+        // document.body.className = cx(styles.Animated_Background_Gradient, styles.HiddenScrollBar)
 
-        document.body.style.background =
+        document.body.style.width = "100%"
+        document.body.style.height = "100%"
+
+
+
+        document.body.style.backgroundImage =
             colorScheme === "dark"
                 ? bodyColors.bodyPageGradientLight
                 : bodyColors.bodyPageGradientDark;
+
+        document.body.style.backgroundSize = "300% 300%";
+        document.body.style.animation = `${styles.AnimateBG} 7s ease infinite`;
 
         document.body.style.color =
             colorScheme === "dark"

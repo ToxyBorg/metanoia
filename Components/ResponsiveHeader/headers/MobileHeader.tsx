@@ -49,8 +49,10 @@ const MobileHeader: NextComponentType<NextPageContext, {}, Props> = (
 
                         <Group noWrap grow
                             sx={{
-                                borderRadius: mobileNavRadius.navbarBorderRadius, backdropFilter: "blur(2px)",
-                                border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`
+                                borderRadius: mobileNavRadius.navbarBorderRadius,
+                                backdropFilter: "blur(2px)",
+                                border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
+
                             }}
                             mx={"auto"} my={"xs"} px={"0.75rem"}
                             w={mobileNavWidthHeight.width} h={"clamp(5vh, 4rem , 15vh)"}

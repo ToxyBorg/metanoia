@@ -49,14 +49,21 @@ export default async function RootLayout({
           width: "100%", height: "100%",
           overflowX: "hidden",
 
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+
           // backgroundImage: bodyColors.bodyPageGradientLight,
-          background: bodyColors.bodyPageGradientLight,
+          // background: bodyColors.bodyPageGradientLight,
+          backgroundImage: bodyColors.bodyPageGradientLight,
+
+          backgroundSize: "300% 300%",
+          animation: `${styles.AnimateBG} 7s ease infinite`,
+
           color: bodyColors.bodyTextColorLight,
         }}
-        className={cx(
-          styles.Animated_Background_Gradient,
-          styles.HiddenScrollBar
-        )}
+        className={styles.HiddenScrollBar}
+
       >
         {/* <SupabaseProvider> */}
         {/* <SupabaseListener serverAccessToken={session?.access_token} /> */}
