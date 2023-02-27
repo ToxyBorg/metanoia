@@ -18,9 +18,11 @@ const colors = {
     CarolinaBlueLighter: "hsla(202, 61%, 60%)",
     CarolinaBlueDarker: "hsla(202, 61%, 40%)",
 
-    GradientLight: "linear-gradient(-45deg,#3bade3 0%,#576fe6 25%,#9844b7 51%,#ff357f 100%)",
-    // GradientDark: "linear-gradient(-45deg,#200122 0%,#3c0122 25%,#550122 51%,#4f0202 100%) ",
-    GradientDark: "linear-gradient(109.6deg, rgb(43, 1, 91) 13.4%, rgb(122, 2, 54) 100.2%) ",
+    GradientLight: "linear-gradient(-45deg,rgb(59, 173, 227) 0%,rgb(87, 111, 230) 25%,rgb(152, 68, 183) 51%,rgb(255, 53, 127) 100%)",
+    GradientLightVertical: "linear-gradient(-100deg,rgb(59, 173, 227) 0%,rgb(87, 111, 230) 25%,rgb(152, 68, 183) 51%,rgb(255, 53, 127) 100%)",
+
+    GradientDark: "linear-gradient(-45deg, rgb(35, 1, 91) 0%, rgb(68, 1, 91) 25% , rgb(100, 1, 91) 51%,rgb(122, 2, 54) 100%) ",
+    GradientDarkVertical: "linear-gradient(-100deg, rgb(35, 1, 91) 0%, rgb(68, 1, 91) 25% , rgb(100, 1, 91) 51%,rgb(122, 2, 54) 100%) ",
 
 }
 
@@ -43,6 +45,7 @@ export const NavBarColors = {
     iconsBackgroundColorDark: colors.CarolinaBlue, // ACTION ICONS BACKGROUND COLOR
 
     backgroundColorDark: colors.GradientDark, // NAVBAR BACKGROUND COLOR
+    backgroundColorDarkVertical: colors.GradientDarkVertical, // VERTICAL NAVBAR BACKGROUND COLOR 
 
     borderColorDark: colors.Peach, // NAVBAR BORDER COLOR
 
@@ -53,6 +56,7 @@ export const NavBarColors = {
     iconsBackgroundColorLight: colors.CarolinaBlueLighter, // ACTION ICONS BACKGROUND COLOR
 
     backgroundColorLight: colors.GradientLight, // NAVBAR BACKGROUND COLOR
+    backgroundColorLightVertical: colors.GradientLightVertical, // VERTICAL NAVBAR BACKGROUND COLOR 
 
     borderColorLight: colors.Peach, // NAVBAR BORDER COLOR
 
