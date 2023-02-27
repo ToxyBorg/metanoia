@@ -30,7 +30,11 @@ export const ContactInfo = () => {
                 <contactInfo.icon title={contactInfo.name} />
             </ActionIcon>
 
-            <Modal opened={opened} onClose={() => handlers.close()} title="CONTACT INFO" radius={"md"} size={"xl"}
+            <Modal opened={opened} onClose={() => handlers.close()} title="CONTACT INFO" radius={"md"}
+
+                size="xl"
+                transition="slide-down"
+                transitionDuration={300}
 
                 styles={(theme) => ({
                     modal: {

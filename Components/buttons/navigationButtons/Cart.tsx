@@ -30,6 +30,9 @@ export const Cart = () => {
             </ActionIcon>
 
             <Modal opened={opened} onClose={() => handlers.close()} title="CART" radius={"md"}
+                size="auto"
+                transition="slide-down"
+                transitionDuration={300}
 
                 styles={(theme) => ({
                     modal: {

@@ -5,9 +5,9 @@
 
 import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail } from "react-icons/bi"
 import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing } from 'react-icons/gi';
-import { BsSunFill, BsMoonFill } from 'react-icons/bs';
+import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle } from 'react-icons/bs';
 import { FiInstagram, FiMail } from 'react-icons/fi';
-import { GrCircleAlert, GrUserAdmin } from 'react-icons/gr';
+import { GrAddCircle, GrCircleAlert, GrUserAdmin } from 'react-icons/gr';
 import { RiContactsLine } from 'react-icons/ri'
 
 interface IconBaseProps extends React.SVGAttributes<SVGElement | SVGSVGElement> {
@@ -54,7 +54,7 @@ export const MetanoiaSVG = (props: localSVGType) => {
 // export const home: IconInfo = { icon: BiHomeCircle, name: "Home" }
 export const search: IconInfo = { icon: BiSearchAlt, name: "Search" }
 export const categories: IconInfo = { icon: BiCategoryAlt, name: "Categories" }
-export const cart: IconInfo = { icon: BiCart, name: "Cart" }
+export const cart: IconInfo = { icon: BsCart, name: "Cart" }
 export const settings: IconInfo = { icon: BiCog, name: "Settings" }
 export const contactInfo: IconInfo = { icon: BiMessageAltDetail, name: "Contact Info" }
 
@@ -84,4 +84,9 @@ export const darkThemeIcon: IconInfo = { icon: BsMoonFill, name: "Dark Theme" }
 export const mail: IconInfo = { icon: FiMail, name: "Mail", link: "mailto:metanoia.js@gmail.com" }
 export const instagram: IconInfo = { icon: FiInstagram, name: "Instagram", link: "https://www.instagram.com/metanoia_.co/" }
 
-// FOOTER SOCIAL ICONS
+// ITEM CARDS ICONS
+export const itemDescription: IconInfo = { icon: BsCardText, name: "Item Description" }
+export const itemDescriptionShowMore: IconInfo = { icon: BsArrowDownCircle, name: "Show more" }
+export const itemDescriptionShowLess: IconInfo = { icon: BsArrowUpCircle, name: "Show less" }
+export const cartAdd: IconInfo = { icon: BsCartPlus, name: "Add to Cart" }
+export const cartRemove: IconInfo = { icon: BsCartDash, name: "Remove from Cart" }

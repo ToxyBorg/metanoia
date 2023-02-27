@@ -18,21 +18,25 @@ const NavBarLock: NextComponentType<NextPageContext, {}, Props> = (
 
     return (
         <ActionIcon
-            onClick={() => SetNavBarLocked(!navBarLocked)}
+            bg={colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight}
             w={"100%"} h={"100%"}
-            mx={"auto"}
+
+            onClick={() => SetNavBarLocked(!navBarLocked)}
+            // mx={"auto"}
+            title={navBarLocked ? navUnlock.name : navLock.name}
+
             variant="outline"
             radius={"md"}
+            p={"xs"}
 
             sx={(theme) => ({
-                backgroundImage: colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight,
+                // backgroundImage: colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight,
                 border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
 
             })}
 
             className={style.Animated_Background_Gradient}
 
-            title={navBarLocked ? navUnlock.name : navLock.name}
 
         >
 
@@ -44,7 +48,8 @@ const NavBarLock: NextComponentType<NextPageContext, {}, Props> = (
 
                 <Text
                     color={colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight}
-                    fz={"clamp(0.85rem, 2vw , 5rem)"}
+                    fz={"clamp(0.85rem, 1.5vw , 2rem)"}
+
                 >
                     {navBarLocked ? navUnlock.name : navLock.name}
                 </Text>

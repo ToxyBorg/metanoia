@@ -7,7 +7,7 @@ import type { NextComponentType, NextPageContext } from "next";
 import Image from 'next/image';
 import { mobileSizes } from "../../Shared/screenSizes";
 import { screenSizesAtom } from "../../Stores/screenSizesStore";
-import Cards from "../ResponsiveItemCards/Cards";
+import Cards from "./components/Cards";
 import ItemsContainer from "./components/ItemsContainer";
 
 

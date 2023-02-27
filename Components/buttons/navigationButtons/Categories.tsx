@@ -32,13 +32,20 @@ export const Categories = () => {
             </ActionIcon>
 
 
-            <Modal opened={opened} onClose={() => handlers.close()} title="CATEGORIES" radius={"md"} size={"xl"}
+            <Modal opened={opened} onClose={() => handlers.close()} title="CATEGORIES" radius={"md"}
+                size="auto"
+                transition="slide-down"
+                transitionDuration={300}
+                // transitionTimingFunction="ease"
+
                 styles={(theme) => ({
                     modal: {
 
                         margin: "auto",
                         backgroundImage: colorScheme === "dark" ? ModalColors.modalBackgroundColorDark : ModalColors.modalBackgroundColorLight,
                         border: `2px solid ${colorScheme === "dark" ? ModalColors.modalBorderColorDark : ModalColors.modalBorderColorLight}`,
+
+                        // transitionTimingFunction: "ease-in-out",
 
                         backgroundSize: "300% 300%",
                         animation: `${style.AnimateBG} 7s ease infinite`
@@ -79,11 +86,15 @@ export const Categories = () => {
                             return (
                                 <Grid.Col span={6} key={button.name}>
 
-                                    <ActionIcon onClick={() => handlers.toggle()}
+                                    <ActionIcon
+
                                         bg={colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight}
                                         w={"100%"} h={"100%"}
 
+                                        onClick={() => handlers.toggle()}
+
                                         title={button.name}
+
                                         variant="outline"
                                         component={Link} href={`/${button.name.toLowerCase()}`}
                                         radius={"md"}
