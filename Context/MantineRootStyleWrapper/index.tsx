@@ -58,7 +58,7 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
 
     const { ref, entry } = useIntersection({
         root: useAtomValue(containerRefAtom)?.current,
-        threshold: 0,
+        threshold: 0.5,
     });
 
     const refDataSetter = useSetAtom(refDataAtom)

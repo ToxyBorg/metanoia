@@ -1,17 +1,18 @@
 "use client"
 import { createStyles, Overlay, Container, Title, Button, Text, Center, SimpleGrid } from '@mantine/core';
 import { useAtomValue } from 'jotai';
-
+import { refDataAtom } from '../../Stores/heroOutOfViewStore';
 
 
 const HeroSection = () => {
 
 
-    // entry?.isIntersecting ? console.log("visible") : console.log("NOT visible")
+    const scrollPastRootContainerChildData = useAtomValue(refDataAtom)
+
 
     return (
 
-        <Container w={"100svw"} h={"100vh"}>
+        <Container w={"100%"} h={"100vh"} ref={scrollPastRootContainerChildData.ref} sx={{ border: "2px solid black" }}>
             <Center>
                 <SimpleGrid
                     cols={4}
@@ -39,3 +40,4 @@ const HeroSection = () => {
 }
 
 export default HeroSection
+
