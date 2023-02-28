@@ -1,13 +1,13 @@
 "use client"
 
-import { ActionIcon, AspectRatio, Badge, Button, Card, Collapse, Group, Indicator, Popover, ScrollArea, Spoiler, Stack, Text, TextInput, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, AspectRatio, Badge, Button, Card, Collapse, Group, Indicator, Overlay, Popover, ScrollArea, Spoiler, Stack, Text, TextInput, useMantineColorScheme } from "@mantine/core";
 import { useCounter, useDisclosure } from "@mantine/hooks";
 import type { NextComponentType, NextPageContext } from "next";
 import Image from 'next/image';
 import { IconContext } from "react-icons";
 import { CardContainerColors, NavBarColors } from "../../../Shared/colors";
 import styles from "../../../Shared/css/styles.module.css";
-import { cart, cartAdd, cartRemove, itemDescription, itemDescriptionShowLess, itemDescriptionShowMore } from "../../../Shared/icons";
+import { cart, cartAdd, cartRemove, itemDescription, itemDescriptionShowLess, itemDescriptionShowMore, showAllImages } from "../../../Shared/icons";
 import CardModal from "./CardModal";
 
 interface Props {
@@ -23,6 +23,7 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
 ) => {
     const [count, countHandlers] = useCounter(0, { min: 0, max: 10 });
     const [opened, handlers] = useDisclosure(false);
+    const [cardOverlayVisibility, cardOverlayVisibilityHandlers] = useDisclosure(false);
     const { colorScheme, } = useMantineColorScheme();
 
     const [cardModalOpened, cardModalHandlers] = useDisclosure(false);
@@ -50,10 +51,30 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
                 }}
                 radius={"md"}
             >
-                <Card.Section>
-                    <AspectRatio ratio={10 / 16}>
+
+                <Card.Section pos={"relative"} >
+                    <AspectRatio ratio={10 / 16} pos={"relative"}
+                        onMouseOver={cardOverlayVisibilityHandlers.open}
+                        onMouseOut={cardOverlayVisibilityHandlers.close}
+
+                        onTouchStart={cardOverlayVisibilityHandlers.toggle}
+                    // onTouchEnd={cardOverlayVisibilityHandlers.close}
+
+                    >
+                        {cardOverlayVisibility &&
+                            <Overlay opacity={0.6} color="#000" blur={2} zIndex={1}
+                            // onMouseOut={cardOverlayVisibilityHandlers.close}
+                            // onTouchStart={cardOverlayVisibilityHandlers.close}
+                            // onClick={cardOverlayVisibilityHandlers.close}
+                            // onTouchEnd={cardOverlayVisibilityHandlers.open}
+                            />
+                        }
                         <Image fill={true} src={props.imageURL} alt={props.imageName} loading='lazy'
-                            onClick={cardModalHandlers.open}
+                        // onMouseOver={cardOverlayVisibilityHandlers.open}
+                        // onTouchStart={cardOverlayVisibilityHandlers.open}
+
+                        // onMouseLeave
+                        // onMouseLeave={cardOverlayVisibilityHandlers.close}
                         />
                     </AspectRatio>
 
@@ -67,53 +88,13 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
                             ? CardContainerColors.backgroundColorDarkTranslucid
                             : CardContainerColors.backgroundColorLightTranslucid
                         }
-                    // className={styles.Animated_Background_Gradient}
+                        // className={styles.Animated_Background_Gradient}
+
+                        sx={{
+                            zIndex: 2
+                        }}
 
                     >
-                        <Collapse in={opened}
-                            p={"xs"}
-                            m={"xs"}
-
-                            transitionDuration={800} transitionTimingFunction="linear" animateOpacity
-
-                            sx={(theme) => ({
-                                // backgroundColor: theme.fn.rgba(theme.colors.grape[5], 0.2),
-                                // borderRadius: "15px 15px 0 0",
-                                borderRadius: 15,
-                                backdropFilter: "blur(5px)",
-                                border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                            })}
-
-                            bg={colorScheme === "dark"
-                                ? CardContainerColors.backgroundColorDark
-                                : CardContainerColors.backgroundColorLight
-                            }
-                            className={styles.Animated_Background_Gradient}
-                        >
-                            <Spoiler maxHeight={120}
-                                showLabel={
-                                    <ActionIcon variant="transparent" title={itemDescriptionShowMore.name} mt={"xs"}>
-                                        <itemDescriptionShowMore.icon />
-                                    </ActionIcon>
-                                }
-                                hideLabel={
-                                    < ActionIcon variant="transparent" title={itemDescriptionShowLess.name} mt={"xs"}>
-                                        <itemDescriptionShowLess.icon />
-                                    </ActionIcon>
-                                }
-                            >
-                                <Text size="sm"
-                                    color={
-                                        colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight
-                                    }
-                                >
-                                    {props.description}
-                                </Text>
-                            </Spoiler>
-
-                        </Collapse>
 
                         <Group position="apart" p={"1rem"} h={"fit-content"} spacing={"xs"}> {/* h={"clamp(5vh, 4rem , 15vh)"} */}
                             <Badge variant="gradient"
@@ -131,6 +112,15 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
                             </Badge>
 
                             <Group>
+
+                                <ActionIcon variant="transparent"
+                                    onClick={cardModalHandlers.open}
+                                    title={showAllImages.name}
+                                >
+                                    <showAllImages.icon style={{ alignSelf: "center" }} />
+                                </ActionIcon>
+
+
                                 <Popover width={"auto"} trapFocus position="top" withArrow shadow="md" radius={"md"}>
                                     <Popover.Target>
                                         <Indicator label={count} showZero={false} dot={false} overflowCount={999} inline size={22}>
@@ -157,12 +147,54 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
                                     </Popover.Dropdown>
                                 </Popover>
 
-                                <ActionIcon variant="transparent"
+                                <Popover width={"auto"} trapFocus position="top" withArrow shadow="md" radius={"md"}>
+                                    <Popover.Target>
+                                        <Indicator label={count} showZero={false} dot={false} overflowCount={999} inline size={22}>
+                                            <ActionIcon variant="transparent" title={itemDescription.name}>
+                                                <itemDescription.icon style={{ alignSelf: "center" }} />
+                                            </ActionIcon>
+                                        </Indicator>
+                                    </Popover.Target>
+                                    <Popover.Dropdown
+                                        // sx={{ border: "2px solid black" }}
+                                        bg={colorScheme === "dark"
+                                            ? CardContainerColors.backgroundColorDark
+                                            : CardContainerColors.backgroundColorLight
+                                        }
+                                        className={styles.Animated_Background_Gradient}
+
+                                    >
+                                        <Spoiler maxHeight={120}
+                                            showLabel={
+                                                <ActionIcon variant="transparent" title={itemDescriptionShowMore.name} mt={"xs"}>
+                                                    <itemDescriptionShowMore.icon />
+                                                </ActionIcon>
+                                            }
+                                            hideLabel={
+                                                < ActionIcon variant="transparent" title={itemDescriptionShowLess.name} mt={"xs"}>
+                                                    <itemDescriptionShowLess.icon />
+                                                </ActionIcon>
+                                            }
+                                        >
+                                            <Text size="sm"
+                                                color={
+                                                    colorScheme === "dark"
+                                                        ? CardContainerColors.textColorDark
+                                                        : CardContainerColors.textColorLight
+                                                }
+                                            >
+                                                {props.description}
+                                            </Text>
+                                        </Spoiler>
+                                    </Popover.Dropdown>
+                                </Popover>
+
+                                {/* <ActionIcon variant="transparent"
                                     onClick={handlers.toggle}
                                     title={itemDescription.name}
                                 >
                                     <itemDescription.icon style={{ alignSelf: "center" }} />
-                                </ActionIcon>
+                                </ActionIcon> */}
                             </Group>
 
 

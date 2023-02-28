@@ -70,7 +70,7 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
                                 >
                                     <Card.Section>
                                         <AspectRatio ratio={10 / 16}>
-                                            <Image fill={true} src={props.imageURL} alt={props.imageName} loading='lazy' />
+                                            <Image fill={true} src={info} alt={info} loading='lazy' />
                                         </AspectRatio>
                                     </Card.Section>
 
