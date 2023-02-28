@@ -18,7 +18,6 @@
     ".vscode": true,
     ".next": true,
     "tsconfig.json": true,
-    "next.config.js": true,
     ".env.local": true,
     ".gitignore": true
   },
@@ -31,7 +30,6 @@
     ".vscode",
     ".next",
     "tsconfig.json",
-    "next.config.js",
     ".env.local",
     ".gitignore"
   ],
