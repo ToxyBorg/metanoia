@@ -57,7 +57,7 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
                         onMouseOver={cardOverlayVisibilityHandlers.open}
                         onMouseOut={cardOverlayVisibilityHandlers.close}
 
-                        onTouchStart={cardOverlayVisibilityHandlers.toggle}
+                    // onTouchStart={cardOverlayVisibilityHandlers.toggle}
                     // onTouchEnd={cardOverlayVisibilityHandlers.close}
 
                     >
