@@ -3,9 +3,10 @@
 import type { NextComponentType, NextPageContext } from "next";
 import { Container, Text } from '@mantine/core';
 import { Database } from "../../services/supabase/lib/database.types"
+import { AllItemsData } from "../../Stores/itemDataStore";
 
 interface Props {
-    data: Database['public']["Tables"]["Items"]["Row"][] | null
+    data: AllItemsData
 }
 
 const TextMantine = (props: Props) => {
@@ -13,10 +14,10 @@ const TextMantine = (props: Props) => {
         <Container p={"auto"}>
             <h1>HOME PAGE</h1>
 
-            {props.data?.map(item => {
+            {props.data.map(item => {
                 return (
-                    <Text sx={{ fontSize: 18, lineHeight: 1.4 }} key={item.id}>
-                        Name: {item.name} and description: {item.description}
+                    <Text sx={{ fontSize: 18, lineHeight: 1.4 }} key={item.item_id}>
+                        Name: {item.title} and description: {item.description}
                     </Text>
                 )
             })}

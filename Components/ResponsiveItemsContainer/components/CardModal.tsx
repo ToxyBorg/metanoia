@@ -54,7 +54,30 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
                     size: "clamp(6vw, 6rem , 15vw)"
                 }}>
 
-                <Carousel slideGap={"xl"}>
+                <Carousel slideGap={"xl"} withIndicators>
+
+                    <Carousel.Slide key={props.imageURL} >
+                        <Center>
+                            <Card pos={"relative"} shadow="md"
+                                sx={{
+                                    border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                    // width: "100%",
+                                    width: "clamp(60%, 400px, 100%)",
+
+                                }}
+                                radius={"md"}
+
+                            >
+                                <Card.Section>
+                                    <AspectRatio ratio={10 / 16}>
+                                        <Image fill={true} src={props.imageURL} alt={props.imageName} loading='lazy' />
+                                    </AspectRatio>
+                                </Card.Section>
+
+                            </Card>
+
+                        </Center>
+                    </Carousel.Slide>
 
                     {props.secondaryImages.map((info) => (
 
@@ -63,7 +86,9 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
                                 <Card pos={"relative"} shadow="md"
                                     sx={{
                                         border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                        width: "100%",
+                                        // width: "100%",
+                                        width: "clamp(60%, 400px, 100%)",
+
                                     }}
                                     radius={"md"}
 
