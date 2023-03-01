@@ -34,24 +34,42 @@ export interface Database {
   }
   public: {
     Tables: {
-      Items: {
+      all_items: {
         Row: {
+          category: Database["public"]["Enums"]["categories"]
           created_at: string
-          description: string | null
-          id: number
-          name: string | null
+          description: string
+          item_id: string
+          mainImageURL: string
+          price: number
+          secondaryImagesURLS: string[]
+          stock: number
+          tags: string[]
+          title: string
         }
         Insert: {
+          category: Database["public"]["Enums"]["categories"]
           created_at?: string
-          description?: string | null
-          id?: number
-          name?: string | null
+          description: string
+          item_id?: string
+          mainImageURL: string
+          price: number
+          secondaryImagesURLS: string[]
+          stock?: number
+          tags: string[]
+          title: string
         }
         Update: {
+          category?: Database["public"]["Enums"]["categories"]
           created_at?: string
-          description?: string | null
-          id?: number
-          name?: string | null
+          description?: string
+          item_id?: string
+          mainImageURL?: string
+          price?: number
+          secondaryImagesURLS?: string[]
+          stock?: number
+          tags?: string[]
+          title?: string
         }
       }
     }
@@ -62,7 +80,7 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      categories: "earrings" | "rings" | "necklaces" | "bracelets"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -72,7 +90,10 @@ export interface Database {
     Tables: {
       buckets: {
         Row: {
+          allowed_mime_types: string[] | null
+          avif_autodetection: boolean | null
           created_at: string | null
+          file_size_limit: number | null
           id: string
           name: string
           owner: string | null
@@ -80,7 +101,10 @@ export interface Database {
           updated_at: string | null
         }
         Insert: {
+          allowed_mime_types?: string[] | null
+          avif_autodetection?: boolean | null
           created_at?: string | null
+          file_size_limit?: number | null
           id: string
           name: string
           owner?: string | null
@@ -88,7 +112,10 @@ export interface Database {
           updated_at?: string | null
         }
         Update: {
+          allowed_mime_types?: string[] | null
+          avif_autodetection?: boolean | null
           created_at?: string | null
+          file_size_limit?: number | null
           id?: string
           name?: string
           owner?: string | null

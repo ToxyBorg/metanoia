@@ -18,7 +18,7 @@ interface IconBaseProps extends React.SVGAttributes<SVGElement | SVGSVGElement> 
 }
 type IconType = (props: IconBaseProps) => JSX.Element;
 
-interface IconInfo {
+export interface IconInfo {
   icon: IconType, name: string, color?: string, link?: string
 }
 
@@ -64,10 +64,10 @@ export const contactInfo: IconInfo = { icon: BiMessageAltDetail, name: "Contact 
 export const admin: IconInfo = { icon: GrUserAdmin, name: "Admin" }
 
 // NAVBAR CATEGORIES
-export const earrings: IconInfo = { icon: GiEarrings, name: "Earrings" }
-export const rings: IconInfo = { icon: GiDiamondRing, name: "Rings" }
-export const necklaces: IconInfo = { icon: GiPearlNecklace, name: "Necklaces" }
-export const bracelets: IconInfo = { icon: GiRing, name: "Bracelets" }
+export const earrings: IconInfo = { icon: GiEarrings, name: "earrings" }
+export const rings: IconInfo = { icon: GiDiamondRing, name: "rings" }
+export const necklaces: IconInfo = { icon: GiPearlNecklace, name: "necklaces" }
+export const bracelets: IconInfo = { icon: GiRing, name: "bracelets" }
 
 // NAVBAR LOCK BUTTON
 export const navLock: IconInfo = { icon: BiLock, name: "Lock Navbar" }

@@ -1,28 +1,42 @@
 "use client"
 
-import { ActionIcon, AspectRatio, Badge, Button, Card, Collapse, Group, Indicator, Overlay, Popover, ScrollArea, Spoiler, Stack, Text, TextInput, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, AspectRatio, Badge, Card, Group, Indicator, Popover, Space, Spoiler, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
 import { useCounter, useDisclosure } from "@mantine/hooks";
-import type { NextComponentType, NextPageContext } from "next";
+import { showNotification } from "@mantine/notifications";
+import { useAtom } from "jotai";
 import Image from 'next/image';
 import { IconContext } from "react-icons";
 import { CardContainerColors, NavBarColors } from "../../../Shared/colors";
 import styles from "../../../Shared/css/styles.module.css";
 import { cart, cartAdd, cartRemove, itemDescription, itemDescriptionShowLess, itemDescriptionShowMore, showAllImages } from "../../../Shared/icons";
+import { cartItemsDataAtom, SingleCartItemType } from "../../../Stores/cartStore";
+import { SingleItemData } from "../../../Stores/itemDataStore";
 import CardModal from "./CardModal";
 
 interface Props {
-    imageURL: string,
-    imageName: string,
-    description: string,
-    price: number,
-    secondaryImages: string[]
+    SingleItemData: SingleItemData
 }
 
-const Cards: NextComponentType<NextPageContext, {}, Props> = (
-    props: Props,
-) => {
-    const [count, countHandlers] = useCounter(0, { min: 0, max: 10 });
-    const [opened, handlers] = useDisclosure(false);
+const Cards = (props: Props) => {
+
+    const [cartItemsDataAtomValue, cartItemsDataAtomSetter] = useAtom(cartItemsDataAtom)
+
+    let searched_obj: SingleCartItemType | undefined = cartItemsDataAtomValue.find(callback_func);
+
+    // callback function returning the boolean value
+    function callback_func(object: SingleCartItemType): boolean {
+
+        // if the object color is green, return true; otherwise, return false for a particular object element
+        if (object.id == props.SingleItemData.item_id) {
+            return true;
+        }
+        return false;
+    };
+
+    const count = searched_obj == undefined ? 0 : searched_obj.itemNumber
+
+    // const [count, countHandlers] = useCounter(searched_obj == undefined ? 0 : searched_obj.itemNumber, { min: 0, max: props.SingleItemData.stock });
+
     const [cardOverlayVisibility, cardOverlayVisibilityHandlers] = useDisclosure(false);
     const { colorScheme, } = useMantineColorScheme();
 
@@ -38,8 +52,8 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
             }}>
 
             <CardModal
-                imageURL={props.imageURL} imageName={props.imageName}
-                secondaryImages={props.secondaryImages}
+                imageURL={props.SingleItemData.mainImageURL} imageName={props.SingleItemData.title}
+                secondaryImages={props.SingleItemData.secondaryImagesURLS}
                 cardModalOpened={cardModalOpened} cardModalHandlers={cardModalHandlers}
             />
 
@@ -57,38 +71,66 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
                         onMouseOver={cardOverlayVisibilityHandlers.open}
                         onMouseOut={cardOverlayVisibilityHandlers.close}
 
-                    // onTouchStart={cardOverlayVisibilityHandlers.toggle}
-                    // onTouchEnd={cardOverlayVisibilityHandlers.close}
+                    >
+                        <Transition mounted={cardOverlayVisibility} transition="slide-down" duration={400} timingFunction="ease">
+                            {(styles) =>
+
+                                <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
+                                    style={{ ...styles, zIndex: 1 }}
+                                />}
+                        </Transition>
+
+                        <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' />
+                    </AspectRatio>
+
+                    <Stack
+                        pos={"absolute"}
+                        top={0}
+                        w={"100%"}
+
+                        // bg={colorScheme === "dark"
+                        //     ? CardContainerColors.backgroundColorDarkTranslucid
+                        //     : CardContainerColors.backgroundColorLightTranslucid
+                        // }
+
+                        sx={{
+                            zIndex: 2
+                        }}
 
                     >
-                        {cardOverlayVisibility &&
-                            <Overlay opacity={0.6} color="#000" blur={2} zIndex={1}
-                            // onMouseOut={cardOverlayVisibilityHandlers.close}
-                            // onTouchStart={cardOverlayVisibilityHandlers.close}
-                            // onClick={cardOverlayVisibilityHandlers.close}
-                            // onTouchEnd={cardOverlayVisibilityHandlers.open}
-                            />
-                        }
-                        <Image fill={true} src={props.imageURL} alt={props.imageName} loading='lazy'
-                        // onMouseOver={cardOverlayVisibilityHandlers.open}
-                        // onTouchStart={cardOverlayVisibilityHandlers.open}
+                        <Group position="apart" p={"1rem"} h={"fit-content"} spacing={"xs"}>
 
-                        // onMouseLeave
-                        // onMouseLeave={cardOverlayVisibilityHandlers.close}
-                        />
-                    </AspectRatio>
+                            <Badge variant="gradient"
+                                sx={{
+                                    border: `2px solid ${colorScheme === "dark"
+                                        ? CardContainerColors.borderColorDark
+                                        : CardContainerColors.borderColorLight}`,
+                                    // fontSize: 
+                                }}
+                                bg={colorScheme === "dark"
+                                    ? CardContainerColors.backgroundColorDark
+                                    : CardContainerColors.backgroundColorLight
+                                }
+                                className={styles.Animated_Background_Gradient}
+                            // size={"xl"}
+                            >
+                                {props.SingleItemData.title}
+                            </Badge>
+                        </Group>
+
+
+                    </Stack>
+
 
                     <Stack
                         pos={"absolute"}
                         bottom={0}
                         w={"100%"}
 
-                        // bg={"linear-gradient(to top, hsla(0, 0%, 0%, 80%) 0%, hsla(0, 0%, 50%, 0%) 100%)"}
                         bg={colorScheme === "dark"
                             ? CardContainerColors.backgroundColorDarkTranslucid
                             : CardContainerColors.backgroundColorLightTranslucid
                         }
-                        // className={styles.Animated_Background_Gradient}
 
                         sx={{
                             zIndex: 2
@@ -96,7 +138,8 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
 
                     >
 
-                        <Group position="apart" p={"1rem"} h={"fit-content"} spacing={"xs"}> {/* h={"clamp(5vh, 4rem , 15vh)"} */}
+                        <Group position="apart" p={"1rem"} h={"fit-content"} spacing={"xs"}>
+
                             <Badge variant="gradient"
                                 sx={{
                                     border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
@@ -108,7 +151,7 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
                                 className={styles.Animated_Background_Gradient}
                                 size={"xl"}
                             >
-                                {props.price} DA
+                                {props.SingleItemData.price} DA
                             </Badge>
 
                             <Group>
@@ -136,12 +179,231 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
                                         }
                                         className={styles.Animated_Background_Gradient}
                                     >
-                                        <Group>
-                                            <ActionIcon variant="transparent" title={cartAdd.name} onClick={countHandlers.increment}>
-                                                <cartAdd.icon style={{ alignSelf: "center" }} />
+                                        <Badge variant="gradient"
+                                            sx={{
+                                                border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                            }}
+                                            bg={colorScheme === "dark"
+                                                ? CardContainerColors.backgroundColorDark
+                                                : CardContainerColors.backgroundColorLight
+                                            }
+                                            className={styles.Animated_Background_Gradient}
+                                            size={"md"}
+                                        >
+                                            {props.SingleItemData.stock - count} in stock
+                                            {/* {count} in stock */}
+
+                                        </Badge>
+                                        <Space h="sm" />
+                                        <Group position="center">
+                                            <ActionIcon variant="transparent" title={cartAdd.name}
+                                                onClick={
+
+                                                    () => {
+
+                                                        let isIn = false;
+
+                                                        for (const obj of cartItemsDataAtomValue) {
+                                                            if (obj.item.item_id === props.SingleItemData.item_id) {
+                                                                isIn = true;
+                                                                break
+                                                            }
+                                                        }
+
+                                                        if (isIn) {
+                                                            const newArr = cartItemsDataAtomValue.map(obj => {
+                                                                if (obj.item.item_id === props.SingleItemData.item_id) {
+
+                                                                    return {
+                                                                        ...obj,
+                                                                        itemNumber: obj.itemNumber != props.SingleItemData.stock ? obj.itemNumber + 1 : obj.itemNumber + 0
+                                                                    };
+                                                                }
+                                                                return obj;
+                                                            });
+                                                            cartItemsDataAtomSetter(newArr)
+                                                        }
+                                                        else {
+                                                            const newArr = cartItemsDataAtomValue
+                                                            newArr.push({
+                                                                id: props.SingleItemData.item_id,
+                                                                item: props.SingleItemData,
+                                                                itemNumber: 1
+                                                            })
+                                                            cartItemsDataAtomSetter(newArr)
+
+                                                        }
+
+
+                                                        props.SingleItemData.stock > count && showNotification({
+
+                                                            color: "green",
+                                                            radius: "md",
+                                                            title: 'Cart notification',
+                                                            message: `We have added one ${props.SingleItemData.title} to your cart.
+                                            Go check it out!`,
+
+                                                            styles: (theme) => ({
+
+
+                                                                root: {
+                                                                    background: colorScheme === "dark"
+                                                                        ? CardContainerColors.backgroundColorDark
+                                                                        : CardContainerColors.backgroundColorLight,
+                                                                    backgroundSize: "300% 300%",
+                                                                    animation: `${styles.AnimateBG} 7s ease infinite`,
+
+                                                                    border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                                                },
+
+                                                                title: {
+
+                                                                    background: colorScheme === "dark"
+                                                                        ? CardContainerColors.backgroundColorDark
+                                                                        : CardContainerColors.backgroundColorLight,
+                                                                    backgroundSize: "300% 300%",
+                                                                    animation: `${styles.AnimateBG} 7s ease infinite`,
+
+
+                                                                    // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                                                    padding: "0.5rem",
+                                                                    borderRadius: 5,
+
+                                                                    fontWeight: "bolder",
+                                                                    color: colorScheme === "dark"
+                                                                        ? CardContainerColors.textColorDark
+                                                                        : CardContainerColors.textColorLight
+                                                                },
+                                                                description: {
+                                                                    fontStyle: "italic",
+
+                                                                    color: colorScheme === "dark"
+                                                                        ? CardContainerColors.textColorDark
+                                                                        : CardContainerColors.textColorLight
+                                                                },
+                                                                closeButton: {
+                                                                    color: colorScheme === "dark"
+                                                                        ? CardContainerColors.textColorDark
+                                                                        : CardContainerColors.textColorLight,
+
+                                                                    '&:hover': {
+                                                                        backgroundColor: "green"
+                                                                    },
+                                                                },
+                                                            }),
+
+                                                        })
+
+                                                        // countHandlers.increment()
+
+
+                                                    }
+
+                                                }
+                                            >
+                                                <cartAdd.icon />
                                             </ActionIcon>
-                                            <ActionIcon variant="transparent" title={cartRemove.name} onClick={countHandlers.decrement}>
-                                                <cartRemove.icon style={{ alignSelf: "center" }} />
+                                            <ActionIcon variant="transparent" title={cartRemove.name}
+                                                onClick={
+                                                    () => {
+
+                                                        let isIn = false;
+
+                                                        for (const obj of cartItemsDataAtomValue) {
+                                                            if (obj.item.item_id === props.SingleItemData.item_id) {
+                                                                isIn = true;
+                                                                break
+                                                            }
+                                                        }
+
+
+                                                        if (isIn) {
+
+
+                                                            const newArr = cartItemsDataAtomValue.map(obj => {
+                                                                if (obj.item.item_id === props.SingleItemData.item_id) {
+
+                                                                    return {
+                                                                        ...obj,
+                                                                        itemNumber: obj.itemNumber > 0 ? count - 1 : count - 0
+                                                                    };
+                                                                }
+                                                                return obj;
+                                                            });
+
+                                                            if (count <= 1) {
+                                                                const indexOfObject = newArr.findIndex((object) => {
+                                                                    return object.id === props.SingleItemData.item_id;
+                                                                });
+                                                                if (indexOfObject !== -1) {
+                                                                    newArr.splice(indexOfObject, 1);
+                                                                }
+                                                            }
+                                                            cartItemsDataAtomSetter(newArr)
+                                                        }
+
+                                                        count > 0 && showNotification({
+
+                                                            color: "red",
+                                                            radius: "md",
+                                                            title: 'Cart notification',
+                                                            message: `We have removed one ${props.SingleItemData.title} to your cart.`,
+
+                                                            styles: (theme) => ({
+
+
+                                                                root: {
+                                                                    background: colorScheme === "dark"
+                                                                        ? CardContainerColors.backgroundColorDark
+                                                                        : CardContainerColors.backgroundColorLight,
+                                                                    backgroundSize: "300% 300%",
+                                                                    animation: `${styles.AnimateBG} 7s ease infinite`,
+
+                                                                    border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                                                },
+
+                                                                title: {
+                                                                    background: colorScheme === "dark"
+                                                                        ? CardContainerColors.backgroundColorDark
+                                                                        : CardContainerColors.backgroundColorLight,
+                                                                    backgroundSize: "300% 300%",
+                                                                    animation: `${styles.AnimateBG} 7s ease infinite`,
+
+
+                                                                    // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                                                    padding: "0.5rem",
+                                                                    borderRadius: 5,
+
+                                                                    fontWeight: "bolder",
+                                                                    color: colorScheme === "dark"
+                                                                        ? CardContainerColors.textColorDark
+                                                                        : CardContainerColors.textColorLight
+                                                                },
+                                                                description: {
+                                                                    fontStyle: "italic",
+                                                                    color: colorScheme === "dark"
+                                                                        ? CardContainerColors.textColorDark
+                                                                        : CardContainerColors.textColorLight
+                                                                },
+                                                                closeButton: {
+                                                                    color: colorScheme === "dark"
+                                                                        ? CardContainerColors.textColorDark
+                                                                        : CardContainerColors.textColorLight,
+
+                                                                    '&:hover': {
+                                                                        backgroundColor: "red"
+                                                                    },
+                                                                },
+                                                            }),
+
+                                                        });
+
+                                                        // countHandlers.decrement()
+
+                                                    }
+                                                }
+                                            >
+                                                <cartRemove.icon />
                                             </ActionIcon>
                                         </Group>
                                     </Popover.Dropdown>
@@ -149,14 +411,11 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
 
                                 <Popover width={"auto"} trapFocus position="top" withArrow shadow="md" radius={"md"}>
                                     <Popover.Target>
-                                        <Indicator label={count} showZero={false} dot={false} overflowCount={999} inline size={22}>
-                                            <ActionIcon variant="transparent" title={itemDescription.name}>
-                                                <itemDescription.icon style={{ alignSelf: "center" }} />
-                                            </ActionIcon>
-                                        </Indicator>
+                                        <ActionIcon variant="transparent" title={itemDescription.name}>
+                                            <itemDescription.icon style={{ alignSelf: "center" }} />
+                                        </ActionIcon>
                                     </Popover.Target>
                                     <Popover.Dropdown
-                                        // sx={{ border: "2px solid black" }}
                                         bg={colorScheme === "dark"
                                             ? CardContainerColors.backgroundColorDark
                                             : CardContainerColors.backgroundColorLight
@@ -183,18 +442,12 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
                                                         : CardContainerColors.textColorLight
                                                 }
                                             >
-                                                {props.description}
+                                                {props.SingleItemData.description}
                                             </Text>
                                         </Spoiler>
                                     </Popover.Dropdown>
                                 </Popover>
 
-                                {/* <ActionIcon variant="transparent"
-                                    onClick={handlers.toggle}
-                                    title={itemDescription.name}
-                                >
-                                    <itemDescription.icon style={{ alignSelf: "center" }} />
-                                </ActionIcon> */}
                             </Group>
 
 
@@ -208,7 +461,7 @@ const Cards: NextComponentType<NextPageContext, {}, Props> = (
 
 
 
-        </IconContext.Provider>
+        </IconContext.Provider >
 
     )
 }

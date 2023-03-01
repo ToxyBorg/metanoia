@@ -3,11 +3,13 @@ import "server-only"
 import styles from "../Shared/css/styles.module.css"
 import cx from 'classnames';
 
-import ContextWrapper from "../Context"
+import ContextWrapper from "../Context/ContextWrapper"
 import { bodyColors } from "../Shared/colors"
 // import SupabaseListener from '../Context/SupabaseWrapper/supabase-listener'
 // import SupabaseProvider from '../Context/SupabaseWrapper//supabase-provider'
-// import { createClient } from '../services/supabase/utils/supabase-server'
+import { createClient } from '../services/supabase/utils/supabase-server'
+import { rings, bracelets, necklaces, earrings } from "../Shared/icons";
+import { AllItemsData } from "../Stores/itemDataStore";
 
 // do not cache this layout
 // export const revalidate = 120
@@ -26,16 +28,60 @@ import { bodyColors } from "../Shared/colors"
 // };
 
 
+
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   // const supabase = createClient()
+  // const { data: allItems_data, error } = await supabase.from('all_items').select("*")
 
-  // const {
-  //   data: { session },
-  // } = await supabase.auth.getSession()
+  const error = false;
+  const allItems_data: AllItemsData = [
+    {
+      category: "rings",
+      created_at: "16:33",
+      description: "Test description Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
+      item_id: "randID451785475",
+      mainImageURL: "https://picsum.photos/id/1/400/600",
+      price: 5487,
+      secondaryImagesURLS: [
+        "https://picsum.photos/id/2/400/600",
+        "https://picsum.photos/id/3/400/600",
+        "https://picsum.photos/id/4/400/600"
+      ],
+      stock: 12,
+      tags: [
+        "amethyst",
+        "other weird rock",
+        "red rock or something"
+      ],
+      title: "Test product title"
+    },
+    {
+      category: "bracelets",
+      created_at: "16:33",
+      description: "Test description Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
+      item_id: "randID451785754",
+      mainImageURL: "https://picsum.photos/id/8/400/600",
+      price: 5487,
+      secondaryImagesURLS: [
+        "https://picsum.photos/id/58/400/600",
+        "https://picsum.photos/id/45/400/600",
+        "https://picsum.photos/id/15/400/600"
+      ],
+      stock: 15,
+      tags: [
+        "yo mama",
+        "other weird rock",
+        "red rock or something"
+      ],
+      title: "Longer Test product title with lots of new words"
+    }
+  ]
+
 
   return (
     <html lang="en">
@@ -67,7 +113,7 @@ export default async function RootLayout({
       >
         {/* <SupabaseProvider> */}
         {/* <SupabaseListener serverAccessToken={session?.access_token} /> */}
-        <ContextWrapper>
+        <ContextWrapper AllItemsData={error ? [] : allItems_data}>
           {children}
         </ContextWrapper>
         {/* </SupabaseProvider> */}
