@@ -40,7 +40,7 @@ const ItemsContainer = () => {
                 size: "clamp(2vw, 3rem , 10vw)"
             }}>
 
-            <Stack spacing={"lg"} p={"xs"}
+            <Stack spacing={"lg"} p={0}
                 sx={{
                     maxWidth: "1500px"
                 }}

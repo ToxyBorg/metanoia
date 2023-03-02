@@ -47,11 +47,13 @@ const ResponsiveHeader = () => {
                     <Header
                         style={styles}
 
-                        w={"100%"} height={""}
+                        w={"100%"} height={"auto"}
                         fixed
                         position={{ bottom: 0 }}
                         bg={"hsla(0, 0%, 100%, 0%)"}
+                    // bg={"hsla(0, 0%, 100%, 0%)"}
                     >
+
 
                         <Group noWrap grow
                             sx={{
@@ -60,7 +62,7 @@ const ResponsiveHeader = () => {
                                 border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
 
                             }}
-                            mx={"auto"} my={"xs"} px={"0.75rem"}
+                            mx={"auto"} my={"md"} px={"0.75rem"}
                             w={mobileNavWidthHeight.width} h={"clamp(5vh, 4rem , 15vh)"}
                             bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
                             className={style.Animated_Background_Gradient}

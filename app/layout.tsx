@@ -15,17 +15,17 @@ import { AllItemsData } from "../Stores/itemDataStore";
 // export const revalidate = 120
 
 // Static metadata
-// export const metadata = {
-//   title: "Shop Metanoia",
-//   viewport: {
-//     width: "device-width",
-//     initialScale: 1
-//   },
-//   description: "Metanoia online store. Website made by ToxyBorg (Amir)",
-//   icons: {
-//     icon: "/favicon.ico"
-//   }
-// };
+export const metadata = {
+  title: "Shop Metanoia",
+  viewport: {
+    width: "device-width",
+    initialScale: 1
+  },
+  description: "Metanoia online store. Website made by ToxyBorg (Amir)",
+  icons: {
+    icon: "/favicon.ico"
+  }
+};
 
 
 
@@ -35,72 +35,68 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // const supabase = createClient()
-  // const { data: allItems_data, error } = await supabase.from('all_items').select("*")
+  const supabase = createClient()
+  const { data: allItems_data, error } = await supabase.from('all_items').select("*")
 
-  const error = false;
-  const allItems_data: AllItemsData = [
-    {
-      category: "rings",
-      created_at: "16:33",
-      description: "Test description Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
-      item_id: "randID451785475",
-      mainImageURL: "https://picsum.photos/id/1/400/600",
-      price: 5487,
-      secondaryImagesURLS: [
-        "https://picsum.photos/id/2/400/600",
-        "https://picsum.photos/id/3/400/600",
-        "https://picsum.photos/id/4/400/600"
-      ],
-      stock: 12,
-      tags: [
-        "amethyst",
-        "other weird rock",
-        "red rock or something"
-      ],
-      title: "Test product title"
-    },
-    {
-      category: "bracelets",
-      created_at: "16:33",
-      description: "Test description Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
-      item_id: "randID451785754",
-      mainImageURL: "https://picsum.photos/id/8/400/600",
-      price: 5487,
-      secondaryImagesURLS: [
-        "https://picsum.photos/id/58/400/600",
-        "https://picsum.photos/id/45/400/600",
-        "https://picsum.photos/id/15/400/600"
-      ],
-      stock: 15,
-      tags: [
-        "yo mama",
-        "other weird rock",
-        "red rock or something"
-      ],
-      title: "Longer Test product title with lots of new words"
-    }
-  ]
+  // const error = false;
+  // const allItems_data: AllItemsData = [
+  //   {
+  //     category: "rings",
+  //     created_at: "16:33",
+  //     description: "Test description Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
+  //     item_id: "randID451785475",
+  //     mainImageURL: "https://picsum.photos/id/1/400/600",
+  //     price: 5447,
+  //     secondaryImagesURLS: [
+  //       "https://picsum.photos/id/2/400/600",
+  //       "https://picsum.photos/id/3/400/600",
+  //       "https://picsum.photos/id/4/400/600"
+  //     ],
+  //     stock: 12,
+  //     tags: [
+  //       "amethyst",
+  //       "other weird rock",
+  //       "red rock or something"
+  //     ],
+  //     title: "Test product title"
+  //   },
+  //   {
+  //     category: "bracelets",
+  //     created_at: "16:33",
+  //     description: "Test description Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
+  //     item_id: "randID451785754",
+  //     mainImageURL: "https://picsum.photos/id/8/400/600",
+  //     price: 5487,
+  //     secondaryImagesURLS: [
+  //       "https://picsum.photos/id/58/400/600",
+  //       "https://picsum.photos/id/45/400/600",
+  //       "https://picsum.photos/id/15/400/600"
+  //     ],
+  //     stock: 15,
+  //     tags: [
+  //       "yo mama",
+  //       "other weird rock",
+  //       "red rock or something"
+  //     ],
+  //     title: "Longer Test product title with lots of new words"
+  //   }
+  // ]
 
 
   return (
     <html lang="en">
 
-      <head />
+      {/* <head /> */}
 
       <body
         style={{
-          // backgroundImage: bodyColors.bodyPageGradientLight,
-          // background: bodyColors.bodyPageColorLight,
           width: "100%", height: "100%",
           overflowX: "hidden",
 
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          // display: "flex",
+          // alignItems: "center",
+          // justifyContent: "center",
 
-          // backgroundImage: bodyColors.bodyPageGradientLight,
-          // background: bodyColors.bodyPageGradientLight,
           backgroundImage: bodyColors.bodyPageGradientLight,
 
           backgroundSize: "300% 300%",

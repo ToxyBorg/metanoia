@@ -27,88 +27,116 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
 
     const { colorScheme, } = useMantineColorScheme();
 
-    return (
-        <Modal opened={props.cardModalOpened} onClose={props.cardModalHandlers.close}
 
-            radius={"md"}
-            size="xl"
-            transition="slide-down"
-            transitionDuration={300}
-            withCloseButton={false}
-            styles={(theme) => ({
-                modal: {
+    return (
+
+        <IconContext.Provider
+            value={{
+                color: colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight,
+                size: "clamp(6vw, 6rem , 15vw)"
+            }}>
+            <Modal.Root opened={props.cardModalOpened} onClose={props.cardModalHandlers.close}
+                returnFocus
+                radius={"md"}
+                size="xl"
+                transitionProps={{
+                    transition: "slide-down",
+                    duration: 300,
+                }}
+
+
+            // styles={(theme) => ({
+            //     content: {
+            //         margin: "auto",
+            //         background: colorScheme === "dark" ? ModalColors.modalBackgroundColorDark : ModalColors.modalBackgroundColorLight,
+            //         border: `2px solid ${colorScheme === "dark" ? ModalColors.modalBorderColorDark : ModalColors.modalBorderColorLight}`,
+
+            //         backgroundSize: "300% 300%",
+            //         animation: `${style.AnimateBG} 7s ease infinite`,
+            //     },
+
+            // })}
+
+            >
+
+                <Modal.Overlay />
+
+                <Modal.Content sx={{
+
+
+                    padding: "1rem",
                     margin: "auto",
-                    background: colorScheme === "dark" ? ModalColors.modalBackgroundColorDark : ModalColors.modalBackgroundColorLight,
+                    backgroundImage: colorScheme === "dark" ? ModalColors.modalBackgroundColorDark : ModalColors.modalBackgroundColorLight,
                     border: `2px solid ${colorScheme === "dark" ? ModalColors.modalBorderColorDark : ModalColors.modalBorderColorLight}`,
 
+                    // transitionTimingFunction: "ease-in-out",
+
                     backgroundSize: "300% 300%",
-                    animation: `${style.AnimateBG} 7s ease infinite`,
-                },
-
-            })}
-
-        >
-            <IconContext.Provider
-                value={{
-                    color: colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight,
-                    size: "clamp(6vw, 6rem , 15vw)"
+                    animation: `${style.AnimateBG} 7s ease infinite`
                 }}>
 
-                <Carousel slideGap={"xl"} withIndicators>
+                    <Modal.Body p={0} m={"xs"}>
 
-                    <Carousel.Slide key={props.imageURL} >
-                        <Center>
-                            <Card pos={"relative"} shadow="md"
-                                sx={{
-                                    border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                    // width: "100%",
-                                    width: "clamp(60%, 400px, 100%)",
 
-                                }}
-                                radius={"md"}
+                        <Carousel slideGap={"xl"} withIndicators>
 
-                            >
-                                <Card.Section>
-                                    <AspectRatio ratio={10 / 16}>
-                                        <Image fill={true} src={props.imageURL} alt={props.imageName} loading='lazy' />
-                                    </AspectRatio>
-                                </Card.Section>
+                            <Carousel.Slide key={props.imageURL} >
+                                <Center>
+                                    <Card pos={"relative"} shadow="md"
+                                        sx={{
+                                            border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                            // width: "100%",
+                                            width: "clamp(60%, 400px, 100%)",
 
-                            </Card>
+                                        }}
+                                        radius={"md"}
 
-                        </Center>
-                    </Carousel.Slide>
+                                    >
+                                        <Card.Section>
+                                            <AspectRatio ratio={10 / 16}>
+                                                <Image fill={true} src={props.imageURL} alt={props.imageName} loading='lazy' />
+                                            </AspectRatio>
+                                        </Card.Section>
 
-                    {props.secondaryImages.map((info) => (
+                                    </Card>
 
-                        <Carousel.Slide key={info} >
-                            <Center>
-                                <Card pos={"relative"} shadow="md"
-                                    sx={{
-                                        border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                        // width: "100%",
-                                        width: "clamp(60%, 400px, 100%)",
+                                </Center>
+                            </Carousel.Slide>
 
-                                    }}
-                                    radius={"md"}
+                            {props.secondaryImages.map((info) => (
 
-                                >
-                                    <Card.Section>
-                                        <AspectRatio ratio={10 / 16}>
-                                            <Image fill={true} src={info} alt={info} loading='lazy' />
-                                        </AspectRatio>
-                                    </Card.Section>
+                                <Carousel.Slide key={info} >
+                                    <Center>
+                                        <Card pos={"relative"} shadow="md"
+                                            sx={{
+                                                border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                                // width: "100%",
+                                                width: "clamp(60%, 400px, 100%)",
 
-                                </Card>
+                                            }}
+                                            radius={"md"}
 
-                            </Center>
-                        </Carousel.Slide>
+                                        >
+                                            <Card.Section>
+                                                <AspectRatio ratio={10 / 16}>
+                                                    <Image fill={true} src={info} alt={info} loading='lazy' />
+                                                </AspectRatio>
+                                            </Card.Section>
 
-                    ))}
-                </Carousel>
+                                        </Card>
 
-            </IconContext.Provider>
-        </Modal>
+                                    </Center>
+                                </Carousel.Slide>
+
+                            ))}
+                        </Carousel>
+
+                    </Modal.Body>
+
+                </Modal.Content>
+
+            </Modal.Root>
+        </IconContext.Provider>
     )
 }
 

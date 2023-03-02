@@ -2,7 +2,7 @@
 "use client"
 import { useSetAtom } from "jotai";
 import { bracelets, earrings, necklaces, rings } from "../Shared/icons";
-import { AllItemsData, categorizedItemsDataAtom } from "../Stores/itemDataStore";
+import { AllItemsData, allItemsDataAtom, categorizedItemsDataAtom } from "../Stores/itemDataStore";
 
 import AppShellWrapper from "./AppShellWrapper";
 import MantineRootStyleWrapper from "./MantineRootStyleWrapper";
@@ -42,6 +42,9 @@ const ContextWrapper = (props: Props) => {
             },
         }
     )
+
+    const allItemsDataAtomSetter = useSetAtom(allItemsDataAtom)
+    allItemsDataAtomSetter(props.AllItemsData)
 
     return (
 
