@@ -5,6 +5,7 @@ import { createClient } from '../services/supabase/utils/supabase-server'
 import ResponsiveItemsContainer from "../Components/ResponsiveItemsContainer/ResponsiveItemsContainer";
 import HeroSection from "../Components/MainPage/HeroSection";
 import { bracelets, earrings, necklaces, rings } from "../Shared/icons";
+import TestingModals from "../Components/test_components/TestingModals";
 
 // do not cache this page
 // export const revalidate = 120
@@ -18,7 +19,7 @@ export default async function Home() {
 
   return (
     <>
-      <HeroSection />
+      {/* <HeroSection /> */}
       {/* {ringsError || braceletsError || necklacesError || earringsError ? null : <ResponsiveItemsContainer AllItemsData={
         {
           "rings": { data: ringsData, icon: rings },
@@ -26,8 +27,9 @@ export default async function Home() {
           "necklaces": { data: necklacesData, icon: necklaces },
           "earrings": { data: earringsData, icon: earrings },
         }} />} */}
-
+      {/* <div></div> */}
       <ResponsiveItemsContainer />
+      {/* <TestingModals /> */}
     </>
   )
 }

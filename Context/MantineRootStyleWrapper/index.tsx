@@ -14,7 +14,7 @@ import { containerRefAtom, refDataAtom } from '../../Stores/heroOutOfViewStore';
 import { xMousePosAtom } from '../../Stores/leftSideHover';
 import { screenSizesAtom } from '../../Stores/screenSizesStore';
 import { windowScrollDirectionAtom } from '../../Stores/windowScrollStore';
-import { NotificationsProvider } from '@mantine/notifications';
+import { Notifications } from '@mantine/notifications';
 
 
 
@@ -99,9 +99,8 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
                         // },
                     }}>
 
-                    <NotificationsProvider>
-                        {children}
-                    </NotificationsProvider>
+                    <Notifications />
+                    {children}
                 </MantineProvider>
             </ColorSchemeProvider>
         </CacheProvider>

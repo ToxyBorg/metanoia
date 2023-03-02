@@ -166,7 +166,7 @@ const Cards = (props: Props) => {
 
                                 <Popover width={"auto"} trapFocus position="top" withArrow shadow="md" radius={"md"}>
                                     <Popover.Target>
-                                        <Indicator label={count} showZero={false} dot={false} overflowCount={999} inline size={22}>
+                                        <Indicator label={count} inline size={22} disabled={count <= 0}>
                                             <ActionIcon variant="transparent" title={cart.name}>
                                                 <cart.icon style={{ alignSelf: "center" }} />
                                             </ActionIcon>

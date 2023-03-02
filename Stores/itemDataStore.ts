@@ -37,3 +37,17 @@ export const categorizedItemsDataAtom = atom<CategorizedItemsData, [data: Catego
 
     }
 )
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+const allItemsDataInitAtom = atom<AllItemsData>([])
+
+export const allItemsDataAtom = atom<AllItemsData, [data: AllItemsData], AllItemsData | void>(
+    (get) => get(allItemsDataInitAtom),
+    (_get, set, data) => {
+
+        set(allItemsDataInitAtom, data)
+
+    }
+)
+

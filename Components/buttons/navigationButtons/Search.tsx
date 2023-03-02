@@ -1,5 +1,5 @@
 "use client"
-import { ActionIcon, AspectRatio, Badge, Center, createStyles, Group, Text, UnstyledButton, useMantineColorScheme } from "@mantine/core"
+import { ActionIcon, AspectRatio, Badge, Center, createStyles, Group, rem, Text, UnstyledButton, useMantineColorScheme } from "@mantine/core"
 
 import { search } from "../../../Shared/icons"
 import { SpotlightColors } from "../../../Shared/colors";
@@ -10,82 +10,90 @@ import style from "../../../Shared/css/styles.module.css";
 import Image from 'next/image';
 import { useAtomValue } from "jotai";
 import { screenSizesAtom } from "../../../Stores/screenSizesStore";
+import { SpotlightContext } from "@mantine/spotlight/lib/Spotlight.context";
+import { allItemsDataAtom, categorizedItemsDataAtom } from "../../../Stores/itemDataStore";
 
-const actions: SpotlightAction[] = [
-    {
-        image: 'https://img.icons8.com/clouds/256/000000/futurama-bender.png',
-        title: 'Bender Bending Rodríguez',
-        description: 'Fascinated with cooking, though has no sense of taste',
-        new: true,
-        onTrigger: () => { },
-    },
+// const actions: SpotlightAction[] = [
+//     {
+//         image: 'https://img.icons8.com/clouds/256/000000/futurama-bender.png',
+//         title: 'Bender Bending Rodríguez',
+//         description: 'Fascinated with cooking, though has no sense of taste',
+//         new: true,
+//         onTrigger: () => { },
+//     },
 
-    {
-        image: 'https://img.icons8.com/clouds/256/000000/futurama-mom.png',
-        title: 'Carol Miller',
-        description: 'One of the richest people on Earth',
-        new: false,
-        onTrigger: () => { },
-    },
-    {
-        image: 'https://img.icons8.com/clouds/256/000000/homer-simpson.png',
-        title: 'Homer Simpson',
-        description: 'Overweight, lazy, and often ignorant',
-        new: false,
-        onTrigger: () => { },
-    },
-    {
-        image: 'https://img.icons8.com/clouds/256/000000/spongebob-squarepants.png',
-        title: 'Spongebob Squarepants',
-        description: 'Not just a sponge',
-        new: false,
-        onTrigger: () => { },
-    },
-    {
-        image: 'https://img.icons8.com/clouds/256/000000/futurama-bender.png',
-        title: 'Bender Bending Rodríguez',
-        description: 'Fascinated with cooking, though has no sense of taste',
-        new: true,
-        onTrigger: () => { },
-    },
+//     {
+//         image: 'https://img.icons8.com/clouds/256/000000/futurama-mom.png',
+//         title: 'Carol Miller',
+//         description: 'One of the richest people on Earth',
+//         new: false,
+//         onTrigger: () => { },
+//     },
+//     {
+//         image: 'https://img.icons8.com/clouds/256/000000/homer-simpson.png',
+//         title: 'Homer Simpson',
+//         description: 'Overweight, lazy, and often ignorant',
+//         new: false,
+//         onTrigger: () => { },
+//     },
+//     {
+//         image: 'https://img.icons8.com/clouds/256/000000/spongebob-squarepants.png',
+//         title: 'Spongebob Squarepants',
+//         description: 'Not just a sponge',
+//         new: false,
+//         onTrigger: () => { },
+//     },
+//     {
+//         image: 'https://img.icons8.com/clouds/256/000000/futurama-bender.png',
+//         title: 'Bender Bending Rodríguez',
+//         description: 'Fascinated with cooking, though has no sense of taste',
+//         new: true,
+//         onTrigger: () => { },
+//     },
 
-    {
-        image: 'https://img.icons8.com/clouds/256/000000/futurama-mom.png',
-        title: 'Carol Miller',
-        description: 'One of the richest people on Earth',
-        new: false,
-        onTrigger: () => { },
-    },
-    {
-        image: 'https://img.icons8.com/clouds/256/000000/homer-simpson.png',
-        title: 'Homer Simpson',
-        description: 'Overweight, lazy, and often ignorant',
-        new: false,
-        onTrigger: () => { },
-    },
-    {
-        image: 'https://img.icons8.com/clouds/256/000000/spongebob-squarepants.png',
-        title: 'Spongebob Squarepants',
-        description: 'Not just a sponge',
-        new: false,
-        onTrigger: () => { },
-    },
-];
+//     {
+//         image: 'https://img.icons8.com/clouds/256/000000/futurama-mom.png',
+//         title: 'Carol Miller',
+//         description: 'One of the richest people on Earth',
+//         new: false,
+//         onTrigger: () => { },
+//     },
+//     {
+//         image: 'https://img.icons8.com/clouds/256/000000/homer-simpson.png',
+//         title: 'Homer Simpson',
+//         description: 'Overweight, lazy, and often ignorant',
+//         new: false,
+//         onTrigger: () => { },
+//     },
+//     {
+//         image: 'https://img.icons8.com/clouds/256/000000/spongebob-squarepants.png',
+//         title: 'Spongebob Squarepants',
+//         description: 'Not just a sponge',
+//         new: false,
+//         onTrigger: () => { },
+//     },
+// ];
 
 const useStyles = createStyles((theme) => ({
     action: {
         position: 'relative',
         display: 'block',
         width: '100%',
-        padding: '1rem 1.25rem',
+        padding: `${rem(10)} ${rem(12)}`,
         borderRadius: theme.radius.sm,
-    },
+        ...theme.fn.hover({
+            backgroundImage: theme.colorScheme === "dark" ? SpotlightColors.spotlightActionBackgroundColorDark : SpotlightColors.spotlightActionBackgroundColorLight,
+            border: `2px solid ${theme.colorScheme === "dark" ? SpotlightColors.spotlightBorderColorDark : SpotlightColors.spotlightBorderColorLight}`,
+        }),
 
-    actionHovered: {
-        backgroundImage: theme.colorScheme === "dark" ? SpotlightColors.spotlightActionBackgroundColorDark : SpotlightColors.spotlightActionBackgroundColorLight,
-        border: `2px solid ${theme.colorScheme === "dark" ? SpotlightColors.spotlightBorderColorDark : SpotlightColors.spotlightBorderColorLight}`,
+        '&[data-hovered]': {
+            backgroundImage: theme.colorScheme === "dark" ? SpotlightColors.spotlightActionBackgroundColorDark : SpotlightColors.spotlightActionBackgroundColorLight,
+            border: `2px solid ${theme.colorScheme === "dark" ? SpotlightColors.spotlightBorderColorDark : SpotlightColors.spotlightBorderColorLight}`,
+
+        },
     },
 }));
+
 
 function CustomAction({
     action,
@@ -102,7 +110,9 @@ function CustomAction({
     return (
         <UnstyledButton
 
-            className={cx(classes.action, { [classes.actionHovered]: hovered }, style.Animated_Background_Gradient)}
+            // className={cx(classes.action, { [classes.action]: hovered }, style.Animated_Background_Gradient)}
+            className={cx(classes.action, style.Animated_Background_Gradient)}
+            data-hovered={hovered || undefined}
 
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => router.push(`/category/${action.id}`)}
@@ -133,7 +143,7 @@ function CustomAction({
                     )}
                 </div>
 
-                {action.new && <Badge>new</Badge>}
+                <Badge>{action.price}</Badge>
             </Group>
         </UnstyledButton>
     );
@@ -144,9 +154,44 @@ export const Search = () => {
 
     const { colorScheme, } = useMantineColorScheme();
 
-    const screenSizes = useAtomValue(screenSizesAtom)
 
-    // const allSizes = getAllSizes[screenSizes]
+    const allItemsDataAtomValue = useAtomValue(allItemsDataAtom)
+
+    // const allCards: SpotlightAction[] = Object.entries(allItemsDataAtom).map(([key, value]) => {
+    //     return {
+    //         id: key
+    //     }
+    // })
+    const actions: SpotlightAction[] = allItemsDataAtomValue.map((info) => {
+
+        // const allKeywords: string[] = [...info.tags, info.category, info.price.toString(), info.item_id];
+
+        // allKeywords.push(info.tags.forEach.)
+
+
+        // const tester = info.tags;
+
+        // tester.push(info.category)
+        // tester.push(info.price.toString())
+
+        // // allKeywords.push(info.tags.map((info) => info.toLowerCase()))
+
+
+        // console.log(tester)
+        // console.log(info.tags.toString())
+
+        return {
+            id: info.item_id,
+            group: info.category,
+            title: info.title,
+            description: info.description,
+            image: info.mainImageURL,
+            price: info.price,
+            tags: info.tags,
+            keywords: [...info.tags, info.category, info.price.toString(), info.item_id],
+            onTrigger: () => { },
+        }
+    })
 
     return (
 
@@ -157,19 +202,24 @@ export const Search = () => {
             limit={4}
 
             searchIcon={<search.icon size={18} color={colorScheme === "dark" ? SpotlightColors.iconsLineColorDark : SpotlightColors.iconsLineColorLight} />}
-            overlayBlur={0} overlayOpacity={0.7}
+
+            overlayProps={{
+                blur: 0,
+                opacity: 0.7,
+            }}
+            // overlayBlur={0} overlayOpacity={0.7}
             searchPlaceholder="Search..."
             shortcut="mod + k"
             nothingFoundMessage="Nothing found..."
 
-            transitionDuration={300}
-            transition="slide-down"
-
-            // className={style.Animated_Background_Gradient}
+            transitionProps={{
+                duration: 300,
+                transition: "slide-down"
+            }}
 
             styles={(theme) => ({
 
-                spotlight: {
+                content: {
                     backgroundImage: theme.colorScheme === "dark" ? SpotlightColors.spotlightBackgroundColorDark : SpotlightColors.spotlightBackgroundColorLight,
                     border: `2px solid ${theme.colorScheme === "dark" ? SpotlightColors.spotlightBorderColorDark : SpotlightColors.spotlightBorderColorLight}`,
                     backgroundSize: "300% 300%",

@@ -1,5 +1,5 @@
 "use client"
-import { ActionIcon, Grid, Modal, Stack, Text, useMantineColorScheme } from "@mantine/core"
+import { ActionIcon, Center, Grid, Modal, Stack, Text, useMantineColorScheme } from "@mantine/core"
 
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { useAtom, useAtomValue } from "jotai";
@@ -11,6 +11,7 @@ import { screenSizesAtom } from "../../../Stores/screenSizesStore";
 import style from "../../../Shared/css/styles.module.css";
 import NavBarLock from "../extraButtons/NavBarLock";
 import { navBarLockedAtom } from "../../../Stores/navBarLockStore";
+import ResponsiveModalContext from "../../ResponsiveModalContext/ResponsiveModalContext";
 
 
 export const Settings = () => {
@@ -26,6 +27,7 @@ export const Settings = () => {
     const [navBarLocked, SetNavBarLocked] = useAtom(navBarLockedAtom)
 
 
+
     return (
         <>
             <ActionIcon variant="transparent" onClick={() => handlers.toggle()}
@@ -36,171 +38,129 @@ export const Settings = () => {
                 <settings.icon title={settings.name} />
             </ActionIcon>
 
-            <Modal opened={opened} onClose={() => handlers.close()} title="SETTINGS" radius={"md"}
-                size="xl"
-                transition="slide-down"
-                transitionDuration={300}
+            <ResponsiveModalContext responsiveModalOpened={opened} responsiveModalHandlers={handlers} modalTitle={"SETTINGS"}>
 
-                styles={(theme) => ({
-                    modal: {
-                        margin: "auto",
-                        background: colorScheme === "dark" ? ModalColors.modalBackgroundColorDark : ModalColors.modalBackgroundColorLight,
-                        border: `2px solid ${colorScheme === "dark" ? ModalColors.modalBorderColorDark : ModalColors.modalBorderColorLight}`,
+                <Grid justify={"space-around"} >
 
-                        backgroundSize: "300% 300%",
-                        animation: `${style.AnimateBG} 7s ease infinite`
+                    <Grid.Col span={6}>
+                        <ActionIcon
+                            w={"100%"} h={"100%"}
+                            bg={colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight}
 
-                    },
-                    header: {
-                        background: colorScheme === "dark" ? ModalColors.modalHeaderBackgroundColorDark : ModalColors.modalHeaderBackgroundColorLight,
-                        color: colorScheme === "dark" ? ModalColors.modalHeaderTextColorDark : ModalColors.modalHeaderTextColorLight,
-                        borderRadius: 7,
-                        border: `2px solid ${colorScheme === "dark" ? ModalColors.modalHeaderBorderColorDark : ModalColors.modalHeaderBorderColorLight}`,
-                        padding: "0.25rem", paddingInline: "1rem",
-                        marginInline: "auto",
+                            variant="outline"
+                            radius={"md"}
+                            p={"xs"}
 
-                        backgroundSize: "300% 300%",
-                        animation: `${style.AnimateBG} 7s ease infinite`
-                    },
-                    close: {
-                        color: colorScheme === "dark" ? ModalColors.modalHeaderTextColorDark : ModalColors.modalHeaderTextColorLight,
-                    },
-                    title: {
-                        fontSize: "clamp(0.85rem, 2vw , 5rem)"
-                    }
+                            title="Toggle color scheme"
 
+                            sx={{
+                                border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
+                            }}
+                            onClick={
+                                () => {
+                                    toggleColorScheme();
+                                }
+                            }
 
-                })}
+                            className={style.Animated_Background_Gradient}
 
-            >
-                <IconContext.Provider
-                    value={{
-                        color: colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight,
-                        size: "clamp(6vw, 6rem , 15vw)"
-                    }}
-                >
+                        >
+                            <Stack align="center" spacing={"xs"} >
+                                {colorScheme === "dark" ?
+                                    <lightThemeIcon.icon title={lightThemeIcon.name} style={{ alignSelf: "center", }} />
+                                    : <darkThemeIcon.icon title={darkThemeIcon.name} style={{ alignSelf: "center", }} />}
+                                <Text
+                                    color={colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight}
+                                    fz={"clamp(0.85rem, 2vw , 5rem)"}
 
-                    <Grid justify={"space-around"}>
+                                >
+                                    {colorScheme === "dark" ? lightThemeIcon.name : darkThemeIcon.name}
+                                </Text>
 
-                        <Grid.Col span={6}>
-                            <ActionIcon
-                                w={"100%"} h={"100%"}
-                                bg={colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight}
+                            </Stack>
+                        </ActionIcon>
+                    </Grid.Col>
 
-                                variant="outline"
-                                radius={"md"}
-                                p={"xs"}
+                    <Grid.Col span={6}>
+                        <ActionIcon
+                            bg={colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight}
+                            w={"100%"} h={"100%"}
 
-                                title="Toggle color scheme"
+                            onClick={() => SetNavBarLocked(!navBarLocked)}
+                            // mx={"auto"}
+                            title={navBarLocked ? navUnlock.name : navLock.name}
 
-                                sx={{
-                                    border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
-                                }}
-                                onClick={
-                                    () => {
-                                        toggleColorScheme();
-                                    }
+                            variant="outline"
+                            radius={"md"}
+                            p={"xs"}
+
+                            sx={(theme) => ({
+                                // backgroundImage: colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight,
+                                border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
+
+                            })}
+
+                            className={style.Animated_Background_Gradient}
+
+                        >
+
+                            <Stack align="center" spacing={"xs"} >
+                                {navBarLocked ?
+                                    <navUnlock.icon title={navUnlock.name} style={{ alignSelf: "center", }} /> :
+                                    <navLock.icon title={navLock.name} style={{ alignSelf: "center", }} />
                                 }
 
-                                className={style.Animated_Background_Gradient}
+                                <Text
+                                    color={colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight}
+                                    fz={"clamp(0.85rem, 2vw , 5rem)"}
 
-                            >
-                                <Stack align="center" spacing={"xs"} >
-                                    {colorScheme === "dark" ?
-                                        <lightThemeIcon.icon title={lightThemeIcon.name} style={{ alignSelf: "center", }} />
-                                        : <darkThemeIcon.icon title={darkThemeIcon.name} style={{ alignSelf: "center", }} />}
-                                    <Text
-                                        color={colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight}
-                                        fz={"clamp(0.85rem, 2vw , 5rem)"}
+                                >
+                                    {navBarLocked ? navUnlock.name : navLock.name}
+                                </Text>
 
-                                    >
-                                        {colorScheme === "dark" ? lightThemeIcon.name : darkThemeIcon.name}
-                                    </Text>
+                            </Stack>
+                        </ActionIcon>
+                    </Grid.Col>
 
-                                </Stack>
-                            </ActionIcon>
-                        </Grid.Col>
+                    {(screenSizes == "MOBILE") && allButtons.map(button => {
+                        return (
+                            <Grid.Col span={6} key={button.name}>
+                                <ActionIcon
+                                    w={"100%"} h={"100%"}
+                                    bg={colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight}
 
-                        <Grid.Col span={6}>
-                            <ActionIcon
-                                bg={colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight}
-                                w={"100%"} h={"100%"}
+                                    variant="outline"
+                                    radius={"md"}
+                                    p={"xs"}
 
-                                onClick={() => SetNavBarLocked(!navBarLocked)}
-                                // mx={"auto"}
-                                title={navBarLocked ? navUnlock.name : navLock.name}
+                                    sx={{
+                                        border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
+                                    }}
+                                    title={button.name}
+                                    component={Link} href={button.link!}
 
-                                variant="outline"
-                                radius={"md"}
-                                p={"xs"}
+                                    className={style.Animated_Background_Gradient}
 
-                                sx={(theme) => ({
-                                    // backgroundImage: colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight,
-                                    border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
+                                >
+                                    <Stack align="center" spacing={"xs"} >
+                                        <button.icon title={button.name} style={{ alignSelf: "center", }} />
 
-                                })}
+                                        <Text
+                                            color={colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight}
+                                            fz={"clamp(0.85rem, 2vw , 5rem)"}
+                                        >
+                                            {button.name}
+                                        </Text>
+                                    </Stack>
+                                </ActionIcon>
+                            </Grid.Col>
+                        )
+                    })}
 
-                                className={style.Animated_Background_Gradient}
+                </Grid>
 
-                            >
+            </ResponsiveModalContext>
 
-                                <Stack align="center" spacing={"xs"} >
-                                    {navBarLocked ?
-                                        <navUnlock.icon title={navUnlock.name} style={{ alignSelf: "center", }} /> :
-                                        <navLock.icon title={navLock.name} style={{ alignSelf: "center", }} />
-                                    }
-
-                                    <Text
-                                        color={colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight}
-                                        fz={"clamp(0.85rem, 2vw , 5rem)"}
-
-                                    >
-                                        {navBarLocked ? navUnlock.name : navLock.name}
-                                    </Text>
-
-                                </Stack>
-                            </ActionIcon>
-                        </Grid.Col>
-
-                        {(screenSizes == "MOBILE") && allButtons.map(button => {
-                            return (
-                                <Grid.Col span={6} key={button.name}>
-                                    <ActionIcon
-                                        w={"100%"} h={"100%"}
-                                        bg={colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight}
-
-                                        variant="outline"
-                                        radius={"md"}
-                                        p={"xs"}
-
-                                        sx={{
-                                            border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
-                                        }}
-                                        title={button.name}
-                                        component={Link} href={button.link!}
-
-                                        className={style.Animated_Background_Gradient}
-
-                                    >
-                                        <Stack align="center" spacing={"xs"} >
-                                            <button.icon title={button.name} style={{ alignSelf: "center", }} />
-
-                                            <Text
-                                                color={colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight}
-                                                fz={"clamp(0.85rem, 2vw , 5rem)"}
-                                            >
-                                                {button.name}
-                                            </Text>
-                                        </Stack>
-                                    </ActionIcon>
-                                </Grid.Col>
-                            )
-                        })}
-
-                    </Grid>
-
-                </IconContext.Provider>
-            </Modal>
         </>
     )
 }
