@@ -38,7 +38,8 @@ export const Settings = () => {
                 <settings.icon title={settings.name} />
             </ActionIcon>
 
-            <ResponsiveModalContext responsiveModalOpened={opened} responsiveModalHandlers={handlers} modalTitle={"SETTINGS"}>
+
+            <ResponsiveModalContext size={"xl"} responsiveModalOpened={opened} responsiveModalHandlers={handlers} modalTitle={"SETTINGS"}>
 
                 <Grid justify={"space-around"} >
 

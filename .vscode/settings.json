@@ -17,9 +17,11 @@
     "README.md": true,
     ".vscode": true,
     ".next": true,
-    "tsconfig.json": true,
     ".env.local": true,
-    ".gitignore": true
+    ".gitignore": true,
+    "tsconfig.json": true,
+    "next.config.js": true,
+    "pages": true
   },
   "hide-files.files": [
     "node_modules",
@@ -29,9 +31,11 @@
     "README.md",
     ".vscode",
     ".next",
-    "tsconfig.json",
     ".env.local",
-    ".gitignore"
+    ".gitignore",
+    "tsconfig.json",
+    "next.config.js",
+    "pages"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,

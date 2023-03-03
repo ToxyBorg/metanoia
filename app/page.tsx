@@ -11,23 +11,10 @@ import TestingModals from "../Components/test_components/TestingModals";
 // export const revalidate = 120
 
 export default async function Home() {
-  // const supabase = createClient()
-  // const { data: ringsData, error: ringsError } = await supabase.from('rings').select("*")
-  // const { data: braceletsData, error: braceletsError } = await supabase.from('bracelets').select("*")
-  // const { data: necklacesData, error: necklacesError } = await supabase.from('necklaces').select("*")
-  // const { data: earringsData, error: earringsError } = await supabase.from('earrings').select("*")
 
   return (
     <>
-      {/* <HeroSection /> */}
-      {/* {ringsError || braceletsError || necklacesError || earringsError ? null : <ResponsiveItemsContainer AllItemsData={
-        {
-          "rings": { data: ringsData, icon: rings },
-          "bracelets": { data: braceletsData, icon: bracelets },
-          "necklaces": { data: necklacesData, icon: necklaces },
-          "earrings": { data: earringsData, icon: earrings },
-        }} />} */}
-      {/* <div></div> */}
+      <HeroSection />
       <ResponsiveItemsContainer />
       {/* <TestingModals /> */}
     </>

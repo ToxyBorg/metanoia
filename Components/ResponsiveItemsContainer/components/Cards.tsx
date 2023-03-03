@@ -240,8 +240,8 @@ const Cards = (props: Props) => {
                                                             color: "green",
                                                             radius: "md",
                                                             title: 'Cart notification',
-                                                            message: `We have added one ${props.SingleItemData.title} to your cart.
-                                            Go check it out!`,
+                                                            // message: `We have added one ${props.SingleItemData.title} to your cart.Go check it out!`,
+                                                            message: <p>We have added one <b>{props.SingleItemData.title}</b> to your cart.Go check it out!</p>,
 
                                                             styles: (theme) => ({
 
@@ -347,7 +347,7 @@ const Cards = (props: Props) => {
                                                             color: "red",
                                                             radius: "md",
                                                             title: 'Cart notification',
-                                                            message: `We have removed one ${props.SingleItemData.title} to your cart.`,
+                                                            message: <p>We have removed one <b>{props.SingleItemData.title}</b> from your cart.</p>,
 
                                                             styles: (theme) => ({
 
