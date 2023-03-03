@@ -2,7 +2,7 @@ import { atom } from "jotai";
 import { SingleItemData } from "./itemDataStore";
 
 
-type cartType = {
+export type cartType = {
     id: string,
     item: SingleItemData,
     itemNumber: number

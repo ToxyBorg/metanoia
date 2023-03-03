@@ -5,7 +5,7 @@
 
 import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail } from "react-icons/bi"
 import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing } from 'react-icons/gi';
-import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages } from 'react-icons/bs';
+import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX } from 'react-icons/bs';
 import { FiInstagram, FiMail } from 'react-icons/fi';
 import { GrAddCircle, GrCircleAlert, GrUserAdmin } from 'react-icons/gr';
 import { RiContactsLine } from 'react-icons/ri'
@@ -91,3 +91,7 @@ export const itemDescriptionShowLess: IconInfo = { icon: BsArrowUpCircle, name: 
 export const cartAdd: IconInfo = { icon: BsCartPlus, name: "Add to Cart" }
 export const cartRemove: IconInfo = { icon: BsCartDash, name: "Remove from Cart" }
 export const showAllImages: IconInfo = { icon: BsImages, name: "Show all images" }
+
+// CART CHECKOUT STEPPER
+export const cartCheck: IconInfo = { icon: BsCartCheck, name: "Confirm your cart" }
+export const cartEmpty: IconInfo = { icon: BsCartX, name: "Empty your cart" }

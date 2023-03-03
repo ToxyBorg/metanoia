@@ -30,7 +30,8 @@ export const ContactInfo = () => {
             >
                 <contactInfo.icon title={contactInfo.name} />
             </ActionIcon>
-            <ResponsiveModalContext responsiveModalOpened={opened} responsiveModalHandlers={handlers} modalTitle={"CONTACT INFO"}>
+
+            <ResponsiveModalContext size={"xl"} responsiveModalOpened={opened} responsiveModalHandlers={handlers} modalTitle={"CONTACT INFO"}>
 
 
 

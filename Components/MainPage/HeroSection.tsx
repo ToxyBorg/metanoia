@@ -12,7 +12,7 @@ const HeroSection = () => {
 
     return (
 
-        <Container w={"100%"} h={"100vh"} ref={scrollPastRootContainerChildData.ref} sx={{ border: "2px solid black" }}>
+        <Container mb={"xl"} w={"100%"} h={"100vh"} ref={scrollPastRootContainerChildData.ref} sx={{ border: "2px solid black" }}>
             <Center>
                 <SimpleGrid
                     cols={4}

@@ -38,25 +38,11 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
             <Modal.Root opened={props.cardModalOpened} onClose={props.cardModalHandlers.close}
                 returnFocus
                 radius={"md"}
-                size="xl"
+                size="md"
                 transitionProps={{
                     transition: "slide-down",
                     duration: 300,
                 }}
-
-
-            // styles={(theme) => ({
-            //     content: {
-            //         margin: "auto",
-            //         background: colorScheme === "dark" ? ModalColors.modalBackgroundColorDark : ModalColors.modalBackgroundColorLight,
-            //         border: `2px solid ${colorScheme === "dark" ? ModalColors.modalBorderColorDark : ModalColors.modalBorderColorLight}`,
-
-            //         backgroundSize: "300% 300%",
-            //         animation: `${style.AnimateBG} 7s ease infinite`,
-            //     },
-
-            // })}
-
             >
 
                 <Modal.Overlay />
@@ -68,8 +54,6 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
                     margin: "auto",
                     backgroundImage: colorScheme === "dark" ? ModalColors.modalBackgroundColorDark : ModalColors.modalBackgroundColorLight,
                     border: `2px solid ${colorScheme === "dark" ? ModalColors.modalBorderColorDark : ModalColors.modalBorderColorLight}`,
-
-                    // transitionTimingFunction: "ease-in-out",
 
                     backgroundSize: "300% 300%",
                     animation: `${style.AnimateBG} 7s ease infinite`
@@ -85,8 +69,8 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
                                     <Card pos={"relative"} shadow="md"
                                         sx={{
                                             border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                            // width: "100%",
-                                            width: "clamp(60%, 400px, 100%)",
+                                            // width: "clamp(60%, 400px, 100%)",
+                                            width: "100%"
 
                                         }}
                                         radius={"md"}
@@ -110,7 +94,6 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
                                         <Card pos={"relative"} shadow="md"
                                             sx={{
                                                 border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                                // width: "100%",
                                                 width: "clamp(60%, 400px, 100%)",
 
                                             }}

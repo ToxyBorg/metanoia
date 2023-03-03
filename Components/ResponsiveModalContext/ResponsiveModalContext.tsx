@@ -1,4 +1,4 @@
-import { Center, Grid, Modal, useMantineColorScheme } from "@mantine/core";
+import { Center, Grid, MantineNumberSize, Modal, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import type { NextComponentType, NextPageContext } from "next";
 import { IconContext } from "react-icons";
@@ -13,7 +13,9 @@ interface Props {
         readonly close: () => void;
         readonly toggle: () => void;
     },
-    modalTitle: string
+    modalTitle: string,
+    size?: MantineNumberSize | undefined,
+    fullScreen?: boolean,
 
 }
 
@@ -32,7 +34,8 @@ const ResponsiveModalContext: NextComponentType<NextPageContext, {}, Props> = (
             }}>
 
             <Modal.Root opened={props.responsiveModalOpened} onClose={() => props.responsiveModalHandlers.close()} radius={"md"}
-                size="xl"
+                size={props.size}
+                fullScreen={props.fullScreen}
                 transitionProps={{
                     transition: "slide-down",
                     duration: 300,
@@ -47,7 +50,7 @@ const ResponsiveModalContext: NextComponentType<NextPageContext, {}, Props> = (
 
 
                     padding: "1rem",
-                    margin: "auto",
+                    // margin: "auto",
                     backgroundImage: colorScheme === "dark" ? ModalColors.modalBackgroundColorDark : ModalColors.modalBackgroundColorLight,
                     border: `2px solid ${colorScheme === "dark" ? ModalColors.modalBorderColorDark : ModalColors.modalBorderColorLight}`,
 
@@ -67,7 +70,10 @@ const ResponsiveModalContext: NextComponentType<NextPageContext, {}, Props> = (
                         marginBottom: "0.5rem",
 
                         backgroundSize: "300% 300%",
-                        animation: `${style.AnimateBG} 7s ease infinite`
+                        animation: `${style.AnimateBG} 7s ease infinite`,
+
+                        zIndex: 2
+
                     }}>
 
                         <Modal.Title fz={"clamp(0.85rem, 2vw , 5rem)"}>{props.modalTitle}</Modal.Title>

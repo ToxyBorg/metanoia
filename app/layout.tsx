@@ -35,52 +35,72 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const supabase = createClient()
-  const { data: allItems_data, error } = await supabase.from('all_items').select("*")
+  // const supabase = createClient()
+  // const { data: allItems_data, error } = await supabase.from('all_items').select("*")
 
-  // const error = false;
-  // const allItems_data: AllItemsData = [
-  //   {
-  //     category: "rings",
-  //     created_at: "16:33",
-  //     description: "Test description Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
-  //     item_id: "randID451785475",
-  //     mainImageURL: "https://picsum.photos/id/1/400/600",
-  //     price: 5447,
-  //     secondaryImagesURLS: [
-  //       "https://picsum.photos/id/2/400/600",
-  //       "https://picsum.photos/id/3/400/600",
-  //       "https://picsum.photos/id/4/400/600"
-  //     ],
-  //     stock: 12,
-  //     tags: [
-  //       "amethyst",
-  //       "other weird rock",
-  //       "red rock or something"
-  //     ],
-  //     title: "Test product title"
-  //   },
-  //   {
-  //     category: "bracelets",
-  //     created_at: "16:33",
-  //     description: "Test description Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
-  //     item_id: "randID451785754",
-  //     mainImageURL: "https://picsum.photos/id/8/400/600",
-  //     price: 5487,
-  //     secondaryImagesURLS: [
-  //       "https://picsum.photos/id/58/400/600",
-  //       "https://picsum.photos/id/45/400/600",
-  //       "https://picsum.photos/id/15/400/600"
-  //     ],
-  //     stock: 15,
-  //     tags: [
-  //       "yo mama",
-  //       "other weird rock",
-  //       "red rock or something"
-  //     ],
-  //     title: "Longer Test product title with lots of new words"
-  //   }
-  // ]
+  const error = false;
+  const allItems_data: AllItemsData = [
+    {
+      category: "rings",
+      created_at: "16:33",
+      description: "Test description Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
+      item_id: "randID451785475",
+      mainImageURL: "https://picsum.photos/id/1/400/600",
+      price: 5447,
+      secondaryImagesURLS: [
+        "https://picsum.photos/id/2/400/600",
+        "https://picsum.photos/id/3/400/600",
+        "https://picsum.photos/id/4/400/600"
+      ],
+      stock: 12,
+      tags: [
+        "amethyst",
+        "other weird rock",
+        "red rock or something"
+      ],
+      title: "Test product title"
+    },
+    {
+      category: "bracelets",
+      created_at: "16:33",
+      description: "Test description Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
+      item_id: "randID451785754",
+      mainImageURL: "https://picsum.photos/id/8/400/600",
+      price: 5487,
+      secondaryImagesURLS: [
+        "https://picsum.photos/id/58/400/600",
+        "https://picsum.photos/id/45/400/600",
+        "https://picsum.photos/id/15/400/600"
+      ],
+      stock: 15,
+      tags: [
+        "yo mama",
+        "other weird rock",
+        "red rock or something"
+      ],
+      title: "Longer Test product title with lots of new words"
+    },
+    {
+      category: "earrings",
+      created_at: "16:33",
+      description: "Test description 2. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
+      item_id: "randID451787154",
+      mainImageURL: "https://picsum.photos/id/70/400/600",
+      price: 1050,
+      secondaryImagesURLS: [
+        "https://picsum.photos/id/75/400/600",
+        "https://picsum.photos/id/72/400/600",
+        "https://picsum.photos/id/71/400/600"
+      ],
+      stock: 10,
+      tags: [
+        "red amethyst",
+        "blue rock",
+        "test tag"
+      ],
+      title: "small title"
+    }
+  ]
 
 
   return (
