@@ -25,7 +25,7 @@ const ResponsiveNavBar = () => {
     const xMousePos = useAtomValue(xMousePosAtom)
     const navBarLocked = useAtomValue(navBarLockedAtom)
     // const scrollPastRootContainerChildData = useAtomValue(refDataAtom)
-    // const scrollDirection = useAtomValue(windowScrollDirectionAtom)
+    const scrollDirection = useAtomValue(windowScrollDirectionAtom)
 
 
     const { colorScheme, } = useMantineColorScheme();
@@ -39,8 +39,8 @@ const ResponsiveNavBar = () => {
             }}>
 
             <Transition
-                mounted={screenSizes == "DESKTOP" && ((xMousePos.x <= 100 || navBarLocked))}
-                // mounted={screenSizes == "DESKTOP" && ((xMousePos.x <= 100 || navBarLocked || scrollDirection == "UP"))}
+                // mounted={screenSizes == "DESKTOP" && ((xMousePos.x <= 100 || navBarLocked))}
+                mounted={screenSizes == "DESKTOP" && ((xMousePos.x <= 100 || navBarLocked || scrollDirection == "UP"))}
                 transition="slide-right" duration={800}
             >
                 {(styles) =>
