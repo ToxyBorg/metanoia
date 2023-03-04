@@ -1,3 +1,3 @@
 import { atom } from "jotai";
 
-export const switchToCheckout = atom<boolean>(false)
+const switchToCheckout = atom<boolean>(false)

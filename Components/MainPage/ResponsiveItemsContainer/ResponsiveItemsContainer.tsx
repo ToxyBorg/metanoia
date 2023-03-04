@@ -1,12 +1,11 @@
 "use client"
 
 import { useAtom, useAtomValue } from "jotai";
-import { screenSizesAtom } from "../../Stores/screenSizesStore";
+import { screenSizesAtom } from "../../../Stores/screenSizesStore";
 import ItemsContainer from "./components/ItemsContainer";
 import { Transition } from "@mantine/core";
-import { switchToCheckout } from "../../Stores/checkoutStore";
-import CheckoutContainer from "../CheckoutPage/CheckoutContainer";
-import { cartItemsDataAtom } from "../../Stores/cartStore";
+import CheckoutContainer from "../../CheckoutPage/CheckoutContainer";
+import { cartItemsDataAtom } from "../../../Stores/cartStore";
 
 interface Props {
     // AllItemsData: AllItemsData
@@ -15,33 +14,17 @@ interface Props {
 const ResponsiveItemsContainer = () => {
 
     const screenSizes = useAtomValue(screenSizesAtom)
-    const [switchToCheckoutValue, switchToCheckoutSetter] = useAtom(switchToCheckout)
-
-    const cartItemsDataAtomValue = useAtomValue(cartItemsDataAtom)
-
-    if (cartItemsDataAtomValue.length <= 0) {
-        switchToCheckoutSetter(false)
-    }
 
     return (
 
-        <>
 
-            <Transition mounted={screenSizes != "OUT_OF_RANGE" && !switchToCheckoutValue} transition="slide-left" duration={500} timingFunction="ease">
-                {(styles) =>
-                    <div style={styles}>
-                        <ItemsContainer />
-                    </div>}
-            </Transition>
+        <Transition mounted={screenSizes != "OUT_OF_RANGE"} transition="slide-left" duration={1500} timingFunction="ease">
+            {(styles) =>
+                <div style={styles}>
+                    <ItemsContainer />
+                </div>}
+        </Transition>
 
-            <Transition mounted={screenSizes != "OUT_OF_RANGE" && switchToCheckoutValue} transition="slide-right" duration={700} timingFunction="ease">
-                {(styles) =>
-                    <div style={styles}>
-                        <CheckoutContainer />
-                    </div>}
-            </Transition>
-
-        </>
 
     )
     // if (screenSizes != "OUT_OF_RANGE") {

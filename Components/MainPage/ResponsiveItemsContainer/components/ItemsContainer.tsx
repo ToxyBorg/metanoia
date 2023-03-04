@@ -5,13 +5,13 @@ import Autoplay from 'embla-carousel-autoplay';
 import { Carousel } from '@mantine/carousel';
 import { ActionIcon, Center, Group, Stack, Text, useMantineColorScheme } from "@mantine/core";
 import { IconContext } from "react-icons";
-import styles from "../../../Shared/css/styles.module.css";
 import Cards from "./Cards";
-import { CardContainerColors } from '../../../Shared/colors';
+import { CardContainerColors } from '../../../../Shared/colors';
 import Link from 'next/link';
 import { useAtom, useAtomValue } from 'jotai';
-import { categorizedItemsDataAtom } from '../../../Stores/itemDataStore';
-import { cartItemsDataAtom } from '../../../Stores/cartStore';
+import { categorizedItemsDataAtom } from '../../../../Stores/itemDataStore';
+import { cartItemsDataAtom } from '../../../../Stores/cartStore';
+import style from '../../../../Shared/css/style';
 
 
 const ItemsContainer = () => {
@@ -65,7 +65,7 @@ const ItemsContainer = () => {
                                 : CardContainerColors.backgroundColorLight
                             }
 
-                            className={styles.Animated_Background_Gradient}
+                            className={style.Animated_Background_Gradient}
 
                             pos={"relative"}
                         >
@@ -78,7 +78,7 @@ const ItemsContainer = () => {
                                     ? CardContainerColors.backgroundColorDark
                                     : CardContainerColors.backgroundColorLight
                                 }
-                                className={styles.Animated_Background_Gradient}
+                                className={style.Animated_Background_Gradient}
                                 sx={{
                                     border: `2px solid ${colorScheme === "dark" ?
                                         CardContainerColors.borderColorDark

@@ -11,7 +11,7 @@ import { screenSizesAtom } from "../../../Stores/screenSizesStore";
 import style from "../../../Shared/css/styles.module.css";
 import NavBarLock from "../extraButtons/NavBarLock";
 import { navBarLockedAtom } from "../../../Stores/navBarLockStore";
-import ResponsiveModalContext from "../../ResponsiveModalContext/ResponsiveModalContext";
+import ResponsiveModalContext from "../../UI/ResponsiveModalContext";
 
 
 export const Settings = () => {

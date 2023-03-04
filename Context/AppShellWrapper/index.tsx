@@ -1,13 +1,13 @@
 // import "server-only";
 "use client"
 
-import { AppShell } from "@mantine/core";
+import { AppShell, Container } from "@mantine/core";
 import { useMergedRef } from "@mantine/hooks";
 import { useAtomValue } from "jotai";
-import ResponsiveFooter from "../../Components/ResponsiveFooter";
-import ResponsiveHeader from "../../Components/ResponsiveHeader";
-import ResponsiveNavBar from "../../Components/ResponsiveNavBar";
-import { containerRefAtom, refDataAtom } from "../../Stores/heroOutOfViewStore";
+import ResponsiveFooter from "../../Components/appshellCompnents/ResponsiveFooter";
+import ResponsiveHeader from "../../Components/appshellCompnents/ResponsiveHeader";
+import ResponsiveNavBar from "../../Components/appshellCompnents/ResponsiveNavBar";
+// import { containerRefAtom, refDataAtom } from "../../Stores/heroOutOfViewStore";
 import { xMousePosAtom } from "../../Stores/leftSideHover";
 
 interface Props {
@@ -17,9 +17,9 @@ interface Props {
 const AppShellWrapper = (props: Props) => {
 
     const xMousePos = useAtomValue(xMousePosAtom)
-    const scrollPastRootContainer = useAtomValue(containerRefAtom)
+    // const scrollPastRootContainer = useAtomValue(containerRefAtom)
 
-    const mergedRef = useMergedRef(xMousePos.xMousePosRef, scrollPastRootContainer?.current!)
+    // const mergedRef = useMergedRef(xMousePos.xMousePosRef, scrollPastRootContainer?.current!)
 
 
     // const navBarLocked = useAtomValue(navBarLockedAtom)
@@ -41,10 +41,11 @@ const AppShellWrapper = (props: Props) => {
             }
             padding={0}
 
+            ref={xMousePos.xMousePosRef}
         >
-            <div ref={mergedRef}>
-                {props.children}
-            </div>
+            {/* <Container ref={xMousePos.xMousePosRef}> */}
+            {props.children}
+            {/* </Container> */}
         </AppShell>
     )
 }

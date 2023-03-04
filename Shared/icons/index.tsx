@@ -5,9 +5,9 @@
 
 import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail } from "react-icons/bi"
 import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing } from 'react-icons/gi';
-import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX } from 'react-icons/bs';
+import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import { FiInstagram, FiMail } from 'react-icons/fi';
-import { GrAddCircle, GrCircleAlert, GrUserAdmin } from 'react-icons/gr';
+import { GrAddCircle, GrCircleAlert, GrLinkNext, GrLinkPrevious, GrUserAdmin } from 'react-icons/gr';
 import { RiContactsLine } from 'react-icons/ri'
 
 interface IconBaseProps extends React.SVGAttributes<SVGElement | SVGSVGElement> {
@@ -95,3 +95,5 @@ export const showAllImages: IconInfo = { icon: BsImages, name: "Show all images"
 // CART CHECKOUT STEPPER
 export const cartCheck: IconInfo = { icon: BsCartCheck, name: "Confirm your cart" }
 export const cartEmpty: IconInfo = { icon: BsCartX, name: "Empty your cart" }
+export const checkoutNext: IconInfo = { icon: BsArrowRight, name: "Go to next step" }
+export const checkoutPrevious: IconInfo = { icon: BsArrowLeft, name: "Go to previous step" }

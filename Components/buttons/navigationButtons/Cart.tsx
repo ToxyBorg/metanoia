@@ -5,9 +5,9 @@ import { cart, categories } from "../../../Shared/icons"
 import { useDisclosure } from "@mantine/hooks";
 import { useAtomValue } from "jotai";
 import { cartItemsDataAtom } from "../../../Stores/cartStore";
-import ResponsiveModalContext from "../../ResponsiveModalContext/ResponsiveModalContext";
-import ResponsiveCartCarousel from "../../ResponsiveCartCarousel/ResponsiveCartCarousel";
-import ResponsiveCheckoutStepper from "../../ResponsiveCheckoutStepper/ResponsiveCheckoutStepper";
+import ResponsiveModalContext from "../../UI/ResponsiveModalContext";
+import ResponsiveCartCarousel from "../../UI/ResponsiveCartCarousel";
+import ResponsiveCheckoutStepper from "../../CheckoutPage/ResponsiveCheckoutStepper";
 import { IconContext } from "react-icons";
 import { ModalColors, NavBarColors } from "../../../Shared/colors";
 import { mobileNavRadius, mobileNavWidthHeight } from "../../../Shared/sizes";

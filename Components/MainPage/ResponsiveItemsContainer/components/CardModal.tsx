@@ -1,10 +1,10 @@
 import { AspectRatio, Card, Center, Grid, Modal, ScrollArea, SimpleGrid, Stack, Text, useMantineColorScheme } from "@mantine/core";
 import type { NextComponentType, NextPageContext } from "next";
 import { IconContext } from "react-icons";
-import { CardContainerColors, ModalColors } from "../../../Shared/colors";
-import style from "../../../Shared/css/styles.module.css";
 import Image from 'next/image';
 import { Carousel } from "@mantine/carousel";
+import { CardContainerColors, ModalColors } from "../../../../Shared/colors";
+import style from "../../../../Shared/css/style";
 
 
 interface Props {
