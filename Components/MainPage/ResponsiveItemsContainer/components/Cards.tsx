@@ -6,12 +6,12 @@ import { showNotification } from "@mantine/notifications";
 import { useAtom } from "jotai";
 import Image from 'next/image';
 import { IconContext } from "react-icons";
-import { CardContainerColors, NavBarColors } from "../../../Shared/colors";
-import styles from "../../../Shared/css/styles.module.css";
-import { cart, cartAdd, cartRemove, itemDescription, itemDescriptionShowLess, itemDescriptionShowMore, showAllImages } from "../../../Shared/icons";
-import { cartItemsDataAtom, SingleCartItemType } from "../../../Stores/cartStore";
-import { SingleItemData } from "../../../Stores/itemDataStore";
+import { CardContainerColors, NavBarColors } from "../../../../Shared/colors";
+import { cartItemsDataAtom, SingleCartItemType } from "../../../../Stores/cartStore";
+import { SingleItemData } from "../../../../Stores/itemDataStore";
+import { cart, cartAdd, cartRemove, itemDescription, itemDescriptionShowLess, itemDescriptionShowMore, showAllImages } from "../../../../Shared/icons";
 import CardModal from "./CardModal";
+import style from "../../../../Shared/css/style";
 
 interface Props {
     SingleItemData: SingleItemData
@@ -111,7 +111,7 @@ const Cards = (props: Props) => {
                                     ? CardContainerColors.backgroundColorDark
                                     : CardContainerColors.backgroundColorLight
                                 }
-                                className={styles.Animated_Background_Gradient}
+                                className={style.Animated_Background_Gradient}
                             // size={"xl"}
                             >
                                 {props.SingleItemData.title}
@@ -148,7 +148,7 @@ const Cards = (props: Props) => {
                                     ? CardContainerColors.backgroundColorDark
                                     : CardContainerColors.backgroundColorLight
                                 }
-                                className={styles.Animated_Background_Gradient}
+                                className={style.Animated_Background_Gradient}
                                 size={"xl"}
                             >
                                 {props.SingleItemData.price} DA
@@ -177,7 +177,7 @@ const Cards = (props: Props) => {
                                             ? CardContainerColors.backgroundColorDark
                                             : CardContainerColors.backgroundColorLight
                                         }
-                                        className={styles.Animated_Background_Gradient}
+                                        className={style.Animated_Background_Gradient}
                                     >
                                         <Badge variant="gradient"
                                             sx={{
@@ -187,7 +187,7 @@ const Cards = (props: Props) => {
                                                 ? CardContainerColors.backgroundColorDark
                                                 : CardContainerColors.backgroundColorLight
                                             }
-                                            className={styles.Animated_Background_Gradient}
+                                            className={style.Animated_Background_Gradient}
                                             size={"md"}
                                         >
                                             {props.SingleItemData.stock - count} in stock
@@ -251,7 +251,7 @@ const Cards = (props: Props) => {
                                                                         ? CardContainerColors.backgroundColorDark
                                                                         : CardContainerColors.backgroundColorLight,
                                                                     backgroundSize: "300% 300%",
-                                                                    animation: `${styles.AnimateBG} 7s ease infinite`,
+                                                                    animation: `${style.AnimateBG} 7s ease infinite`,
 
                                                                     border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
                                                                 },
@@ -262,7 +262,7 @@ const Cards = (props: Props) => {
                                                                         ? CardContainerColors.backgroundColorDark
                                                                         : CardContainerColors.backgroundColorLight,
                                                                     backgroundSize: "300% 300%",
-                                                                    animation: `${styles.AnimateBG} 7s ease infinite`,
+                                                                    animation: `${style.AnimateBG} 7s ease infinite`,
 
 
                                                                     // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
@@ -357,7 +357,7 @@ const Cards = (props: Props) => {
                                                                         ? CardContainerColors.backgroundColorDark
                                                                         : CardContainerColors.backgroundColorLight,
                                                                     backgroundSize: "300% 300%",
-                                                                    animation: `${styles.AnimateBG} 7s ease infinite`,
+                                                                    animation: `${style.AnimateBG} 7s ease infinite`,
 
                                                                     border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
                                                                 },
@@ -367,7 +367,7 @@ const Cards = (props: Props) => {
                                                                         ? CardContainerColors.backgroundColorDark
                                                                         : CardContainerColors.backgroundColorLight,
                                                                     backgroundSize: "300% 300%",
-                                                                    animation: `${styles.AnimateBG} 7s ease infinite`,
+                                                                    animation: `${style.AnimateBG} 7s ease infinite`,
 
 
                                                                     // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
@@ -420,7 +420,7 @@ const Cards = (props: Props) => {
                                             ? CardContainerColors.backgroundColorDark
                                             : CardContainerColors.backgroundColorLight
                                         }
-                                        className={styles.Animated_Background_Gradient}
+                                        className={style.Animated_Background_Gradient}
 
                                     >
                                         <Spoiler maxHeight={120}

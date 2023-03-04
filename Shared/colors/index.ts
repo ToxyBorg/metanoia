@@ -225,3 +225,31 @@ export const ModalColors = {
 
 }
 
+export const StepperColors = {
+    // DARK THEME FOR stepperS
+    iconsLineColorDark: colors.Peach, // ICON COLORS
+    iconsBackgroundColorDark: colors.GradientDark, // ACTION ICONS BACKGROUND COLOR
+    iconsBorderColorDark: colors.Peach, // stepper ICONS BORDER COLOR
+
+    stepperBackgroundColorDark: colors.GradientDark, // stepper BACKGROUND COLOR
+    stepperBorderColorDark: colors.Peach, // stepper BORDER COLOR
+
+    stepperHeaderBackgroundColorDark: colors.GradientDark, // stepper HEADER BACKGROUND COLOR
+    stepperHeaderTextColorDark: colors.Peach, // stepper HEADER TEXT COLOR
+    stepperHeaderBorderColorDark: colors.Peach, // stepper HEADER BORDER COLOR
+
+    // LIGHT THEME FOR stepperS
+    iconsLineColorLight: colors.Peach, // ICON COLORS
+    iconsBackgroundColorLight: colors.GradientLight, // ACTION ICONS BACKGROUND COLOR
+    iconsBorderColorLight: colors.Peach, // stepper ICONS BORDER COLOR
+
+    stepperBackgroundColorLight: colors.GradientLight,//PeachLighter, // stepper BACKGROUND COLOR
+    stepperBorderColorLight: colors.CarolinaBlueLighter, // stepper BORDER COLOR
+
+    stepperHeaderBackgroundColorLight: colors.GradientLight, // stepper HEADER BACKGROUND COLOR
+    stepperHeaderTextColorLight: colors.Peach, // stepper HEADER TEXT COLOR
+    stepperHeaderBorderColorLight: colors.Peach, // stepper HEADER BORDER COLOR
+
+}
+
+

@@ -7,7 +7,7 @@ import { IconContext } from "react-icons";
 import { ModalColors } from "../../../Shared/colors";
 import { contactInfo, instagram, mail } from "../../../Shared/icons";
 import style from "../../../Shared/css/styles.module.css";
-import ResponsiveModalContext from "../../ResponsiveModalContext/ResponsiveModalContext";
+import ResponsiveModalContext from "../../UI/ResponsiveModalContext";
 
 
 export const ContactInfo = () => {

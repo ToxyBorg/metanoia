@@ -7,14 +7,14 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useServerInsertedHTML } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { bodyColors } from '../../Shared/colors';
-import styles from "../../Shared/css/styles.module.css"
 import cx from 'classnames';
 
-import { containerRefAtom, refDataAtom } from '../../Stores/heroOutOfViewStore';
+// import { containerRefAtom, refDataAtom } from '../../Stores/heroOutOfViewStore';
 import { xMousePosAtom } from '../../Stores/leftSideHover';
 import { screenSizesAtom } from '../../Stores/screenSizesStore';
 import { windowScrollDirectionAtom } from '../../Stores/windowScrollStore';
 import { Notifications } from '@mantine/notifications';
+import style from '../../Shared/css/style';
 
 
 
@@ -51,7 +51,7 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
                 : bodyColors.bodyPageGradientDark;
 
         document.body.style.backgroundSize = "300% 300%";
-        document.body.style.animation = `${styles.AnimateBG} 7s ease infinite`;
+        document.body.style.animation = `${style.AnimateBG} 7s ease infinite`;
 
         document.body.style.color =
             colorScheme === "dark"
@@ -65,16 +65,16 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
     xMousePosSetter({ xMousePosRef: mousePosRef, x: x })
 
 
-    const containerRefSetter = useSetAtom(containerRefAtom)
-    containerRefSetter(useRef())
+    // const containerRefSetter = useSetAtom(containerRefAtom)
+    // containerRefSetter(useRef())
 
-    const { ref, entry } = useIntersection({
-        root: useAtomValue(containerRefAtom)?.current,
-        threshold: 0.5,
-    });
+    // const { ref, entry } = useIntersection({
+    //     root: useAtomValue(containerRefAtom)?.current,
+    //     threshold: 0.5,
+    // });
 
-    const refDataSetter = useSetAtom(refDataAtom)
-    refDataSetter({ ref: ref, entry: entry })
+    // const refDataSetter = useSetAtom(refDataAtom)
+    // refDataSetter({ ref: ref, entry: entry })
 
 
     const screenSizesSetter = useSetAtom(screenSizesAtom)

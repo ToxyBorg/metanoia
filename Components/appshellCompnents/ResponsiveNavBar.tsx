@@ -7,10 +7,11 @@ import { IconContext } from "react-icons";
 import { NavBarColors } from "../../Shared/colors";
 import style from "../../Shared/css/styles.module.css";
 import { desktopNavIconSizes, desktopNavRadius, desktopNavWidthHeight } from "../../Shared/sizes";
-import { refDataAtom } from "../../Stores/heroOutOfViewStore";
 import { xMousePosAtom } from "../../Stores/leftSideHover";
 import { navBarLockedAtom } from "../../Stores/navBarLockStore";
 import { screenSizesAtom } from "../../Stores/screenSizesStore";
+import { windowScrollDirectionAtom } from "../../Stores/windowScrollStore";
+import Checkout from "../buttons/extraButtons/Checkout";
 import { Cart } from "../buttons/navigationButtons/Cart";
 import { Categories } from "../buttons/navigationButtons/Categories";
 import { ContactInfo } from "../buttons/navigationButtons/ContactInfo";
@@ -23,7 +24,9 @@ const ResponsiveNavBar = () => {
     const screenSizes = useAtomValue(screenSizesAtom)
     const xMousePos = useAtomValue(xMousePosAtom)
     const navBarLocked = useAtomValue(navBarLockedAtom)
-    const scrollPastRootContainerChildData = useAtomValue(refDataAtom)
+    // const scrollPastRootContainerChildData = useAtomValue(refDataAtom)
+    // const scrollDirection = useAtomValue(windowScrollDirectionAtom)
+
 
     const { colorScheme, } = useMantineColorScheme();
 
@@ -36,7 +39,8 @@ const ResponsiveNavBar = () => {
             }}>
 
             <Transition
-                mounted={screenSizes == "DESKTOP" && ((xMousePos.x <= 20 || navBarLocked) || scrollPastRootContainerChildData.entry?.isIntersecting!)}
+                mounted={screenSizes == "DESKTOP" && ((xMousePos.x <= 100 || navBarLocked))}
+                // mounted={screenSizes == "DESKTOP" && ((xMousePos.x <= 100 || navBarLocked || scrollDirection == "UP"))}
                 transition="slide-right" duration={800}
             >
                 {(styles) =>
@@ -84,6 +88,7 @@ const ResponsiveNavBar = () => {
                                     <Search />
                                     <Categories />
                                     <Cart />
+                                    <Checkout />
                                 </Stack>
                             </Navbar.Section>
                         </ScrollArea>

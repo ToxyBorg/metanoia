@@ -1,6 +1,5 @@
 import "server-only"
 
-import styles from "../Shared/css/styles.module.css"
 import cx from 'classnames';
 
 import ContextWrapper from "../Context/ContextWrapper"
@@ -10,6 +9,7 @@ import { bodyColors } from "../Shared/colors"
 import { createClient } from '../services/supabase/utils/supabase-server'
 import { rings, bracelets, necklaces, earrings } from "../Shared/icons";
 import { AllItemsData } from "../Stores/itemDataStore";
+import style from "../Shared/css/style";
 
 // do not cache this layout
 // export const revalidate = 120
@@ -120,11 +120,11 @@ export default async function RootLayout({
           backgroundImage: bodyColors.bodyPageGradientLight,
 
           backgroundSize: "300% 300%",
-          animation: `${styles.AnimateBG} 7s ease infinite`,
+          animation: `${style.AnimateBG} 7s ease infinite`,
 
           color: bodyColors.bodyTextColorLight,
         }}
-        className={styles.HiddenScrollBar}
+        className={style.HiddenScrollBar}
 
       >
         {/* <SupabaseProvider> */}

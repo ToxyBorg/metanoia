@@ -14,6 +14,7 @@ export type CategorizedItemsData = {
     "earrings": { data: Database['public']["Tables"]['all_items']['Row'][], icon: IconInfo },
 }
 
+export type CategoriesType = "rings" | "bracelets" | "necklaces" | "earrings"
 
 export type SingleItemData = Database['public']["Tables"]["all_items"]["Row"]
 
