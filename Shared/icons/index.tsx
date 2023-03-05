@@ -5,12 +5,13 @@
 
 import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail } from "react-icons/bi"
 import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing } from 'react-icons/gi';
-import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill } from 'react-icons/bs';
+import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox } from 'react-icons/bs';
 import { FiInstagram, FiMail } from 'react-icons/fi';
 import { GrAddCircle, GrCircleAlert, GrLinkNext, GrLinkPrevious, GrUserAdmin } from 'react-icons/gr';
 import { TfiRulerAlt } from 'react-icons/tfi'
 import { FaRuler } from 'react-icons/fa'
 import { VscError } from 'react-icons/vsc';
+import { MdEmojiPeople } from 'react-icons/md';
 interface IconBaseProps extends React.SVGAttributes<SVGElement | SVGSVGElement> {
   children?: React.ReactNode;
   size?: string | number
@@ -93,17 +94,25 @@ export const cartAdd: IconInfo = { icon: BsCartPlus, name: "Add to Cart" }
 export const cartRemove: IconInfo = { icon: BsCartDash, name: "Remove from Cart" }
 export const showAllImages: IconInfo = { icon: BsImages, name: "Show all images" }
 
-// CART CHECKOUT STEPPER
-export const cartCheck: IconInfo = { icon: BsCartCheck, name: "Go to checkout" }
+// CHECKOUT STEPPER
 export const cartEmpty: IconInfo = { icon: BsCartX, name: "Empty your cart" }
+
 export const arrowNext: IconInfo = { icon: BsArrowRight, name: "Go to next step" }
 export const arrowPrevious: IconInfo = { icon: BsArrowLeft, name: "Go to previous step" }
-export const checkoutStepChecked: IconInfo = { icon: BsCheckLg, name: "Step checked" }
+
+export const cartStep: IconInfo = { icon: BsCartCheck, name: "Go to checkout" }
 export const cartStepChecked: IconInfo = { icon: BsCartCheckFill, name: "Cart checked" }
+
+export const measurementsStep: IconInfo = { icon: TfiRulerAlt, name: "Enter your measurements" }
+export const measurementsStepChecked: IconInfo = { icon: FaRuler, name: "Measurements checked" }
+
 export const deliveryStep: IconInfo = { icon: BsBoxSeam, name: "Choose a delivery option" }
 export const deliveryStepChecked: IconInfo = { icon: BsBoxSeamFill, name: "Delivery option checked" }
-export const measurementsStep: IconInfo = { icon: TfiRulerAlt, name: "Delivery option checked" }
-export const measurementsStepChecked: IconInfo = { icon: FaRuler, name: "Delivery option checked" }
+export const inPersonDelivery: IconInfo = { icon: MdEmojiPeople, name: "In-person delivery" }
+export const shippingDelivery: IconInfo = { icon: BsMailbox, name: "Shipping delivery" }
+
+export const checkoutStepChecked: IconInfo = { icon: BsCheckLg, name: "Step checked" }
+
 
 // 
 export const errorIcon: IconInfo = { icon: VscError, name: "Error" }
