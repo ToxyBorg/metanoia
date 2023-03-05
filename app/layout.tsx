@@ -68,7 +68,7 @@ export default async function RootLayout({
       mainImageURL: "https://picsum.photos/id/8/400/600",
       price: 5487,
       secondaryImagesURLS: [
-        "https://picsum.photos/id/58/400/600",
+        "https://picsum.photos/id/38/400/600",
         "https://picsum.photos/id/45/400/600",
         "https://picsum.photos/id/15/400/600"
       ],
@@ -85,6 +85,26 @@ export default async function RootLayout({
       created_at: "16:33",
       description: "Test description 2. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
       item_id: "randID451787154",
+      mainImageURL: "https://picsum.photos/id/110/400/600",
+      price: 1050,
+      secondaryImagesURLS: [
+        "https://picsum.photos/id/265/400/600",
+        "https://picsum.photos/id/119/400/600",
+        "https://picsum.photos/id/281/400/600"
+      ],
+      stock: 10,
+      tags: [
+        "red amethyst",
+        "blue rock",
+        "test tag"
+      ],
+      title: "small title"
+    },
+    {
+      category: "earrings",
+      created_at: "16:33",
+      description: "Test description 2. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
+      item_id: "randID45178hbj4",
       mainImageURL: "https://picsum.photos/id/70/400/600",
       price: 1050,
       secondaryImagesURLS: [
@@ -93,6 +113,46 @@ export default async function RootLayout({
         "https://picsum.photos/id/71/400/600"
       ],
       stock: 10,
+      tags: [
+        "red amethyst",
+        "blue rock",
+        "test tag"
+      ],
+      title: "small title"
+    },
+    {
+      category: "earrings",
+      created_at: "16:33",
+      description: "Test description 2. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
+      item_id: "randID4517dtd87154",
+      mainImageURL: "https://picsum.photos/id/200/400/600",
+      price: 1050,
+      secondaryImagesURLS: [
+        "https://picsum.photos/id/275/400/600",
+        "https://picsum.photos/id/132/400/600",
+        "https://picsum.photos/id/211/400/600"
+      ],
+      stock: 10,
+      tags: [
+        "red amethyst",
+        "blue rock",
+        "test tag"
+      ],
+      title: "small title"
+    },
+    {
+      category: "necklaces",
+      created_at: "16:33",
+      description: "Test description 2. Rerum quae recusandae quos? Ipsa veritatis quo fugit eveniet itaque quasi tempora",
+      item_id: "randID45178747hu154",
+      mainImageURL: "https://picsum.photos/id/170/400/600",
+      price: 9050,
+      secondaryImagesURLS: [
+        "https://picsum.photos/id/175/400/600",
+        "https://picsum.photos/id/172/400/600",
+        "https://picsum.photos/id/171/400/600"
+      ],
+      stock: 5,
       tags: [
         "red amethyst",
         "blue rock",

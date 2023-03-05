@@ -12,9 +12,11 @@ import { SingleItemData } from "../../../../Stores/itemDataStore";
 import { cart, cartAdd, cartRemove, itemDescription, itemDescriptionShowLess, itemDescriptionShowMore, showAllImages } from "../../../../Shared/icons";
 import CardModal from "./CardModal";
 import style from "../../../../Shared/css/style";
+import Link from "next/link";
 
 interface Props {
-    SingleItemData: SingleItemData
+    SingleItemData: SingleItemData,
+    clickGoToItemPage: boolean
 }
 
 const Cards = (props: Props) => {
@@ -67,21 +69,44 @@ const Cards = (props: Props) => {
             >
 
                 <Card.Section pos={"relative"} >
-                    <AspectRatio ratio={10 / 16} pos={"relative"}
-                        onMouseOver={cardOverlayVisibilityHandlers.open}
-                        onMouseOut={cardOverlayVisibilityHandlers.close}
 
-                    >
-                        <Transition mounted={cardOverlayVisibility} transition="slide-down" duration={400} timingFunction="ease">
-                            {(styles) =>
+                    {props.clickGoToItemPage
 
-                                <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
-                                    style={{ ...styles, zIndex: 1 }}
-                                />}
-                        </Transition>
+                        ?
+                        <Link href={`/${props.SingleItemData.category}/${props.SingleItemData.item_id}`}>
+                            <AspectRatio ratio={10 / 16} pos={"relative"}
+                                onMouseOver={cardOverlayVisibilityHandlers.open}
+                                onMouseOut={cardOverlayVisibilityHandlers.close}
+                            >
+                                <Transition mounted={cardOverlayVisibility} transition="slide-down" duration={400} timingFunction="ease">
+                                    {(styles) =>
 
-                        <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' />
-                    </AspectRatio>
+                                        <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
+                                            style={{ ...styles, zIndex: 1 }}
+                                        />}
+                                </Transition>
+
+                                <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' />
+                            </AspectRatio>
+                        </Link>
+
+                        :
+                        <AspectRatio ratio={10 / 16} pos={"relative"}
+                            onMouseOver={cardOverlayVisibilityHandlers.open}
+                            onMouseOut={cardOverlayVisibilityHandlers.close}
+                        >
+                            <Transition mounted={cardOverlayVisibility} transition="slide-down" duration={400} timingFunction="ease">
+                                {(styles) =>
+
+                                    <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
+                                        style={{ ...styles, zIndex: 1 }}
+                                    />}
+                            </Transition>
+
+                            <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' />
+                        </AspectRatio>
+                    }
+
 
                     <Stack
                         pos={"absolute"}
@@ -228,7 +253,8 @@ const Cards = (props: Props) => {
                                                             newArr.push({
                                                                 id: props.SingleItemData.item_id,
                                                                 item: props.SingleItemData,
-                                                                itemNumber: 1
+                                                                itemNumber: 1,
+                                                                measurements: null
                                                             })
                                                             cartItemsDataAtomSetter(newArr)
 

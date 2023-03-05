@@ -5,14 +5,18 @@ import { SingleItemData } from "./itemDataStore";
 export type cartType = {
     id: string,
     item: SingleItemData,
-    itemNumber: number
+    itemNumber: number,
+    // measurements: string | "DEFAULT"
+    measurements: string | null
 
 }[]
 
 export type SingleCartItemType = {
     id: string,
     item: SingleItemData,
-    itemNumber: number
+    itemNumber: number,
+    // measurements: string | "DEFAULT"
+    measurements: string | null
 
 }
 

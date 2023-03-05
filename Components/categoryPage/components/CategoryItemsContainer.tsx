@@ -1,12 +1,13 @@
 "use client"
 
-import { Container, Grid, Text, useMantineColorScheme } from "@mantine/core";
+import { Badge, Center, Container, Grid, Group, Stack, Text, useMantineColorScheme } from "@mantine/core";
 import { useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { redirect } from "next/navigation";
 import { IconContext } from "react-icons";
 import { CardContainerColors } from "../../../Shared/colors";
 import style from "../../../Shared/css/style";
+import { arrowNext } from "../../../Shared/icons";
 import { CategoriesType, categorizedItemsDataAtom } from "../../../Stores/itemDataStore";
 import Cards from "../../MainPage/ResponsiveItemsContainer/components/Cards";
 
@@ -24,7 +25,7 @@ const CategoryItemsContainer: NextComponentType<NextPageContext, {}, Props> = (
 
 
     const slugCategoryCards = allDataFromCategory.data.map(info => {
-        return <Cards key={info.item_id} SingleItemData={info} />
+        return <Cards key={info.item_id} SingleItemData={info} clickGoToItemPage={true} />
     })
 
 
@@ -47,11 +48,7 @@ const CategoryItemsContainer: NextComponentType<NextPageContext, {}, Props> = (
                     : CardContainerColors.iconsLineColorLight,
                 size: "clamp(2vw, 3rem , 10vw)"
             }}>
-
-            { }
-            <Grid
-
-                align={"center"}
+            <Stack
                 sx={(theme) => ({
                     border: `2px solid ${colorScheme === "dark"
                         ? CardContainerColors.borderColorDark
@@ -65,13 +62,57 @@ const CategoryItemsContainer: NextComponentType<NextPageContext, {}, Props> = (
                 }
 
                 className={style.Animated_Background_Gradient}
+
+                py={"xl"}
             >
-                {slugCategoryCards.map(card => {
-                    return <Grid.Col span="auto" key={card.key}>{card}</Grid.Col>
-                })}
+                <Center>
+                    <Badge
+                        bg={colorScheme === "dark"
+                            ? CardContainerColors.backgroundColorDark
+                            : CardContainerColors.backgroundColorLight
+                        }
+                        className={style.Animated_Background_Gradient}
+                        sx={{
+                            border: `2px solid ${colorScheme === "dark" ?
+                                CardContainerColors.borderColorDark
+                                : CardContainerColors.borderColorLight}`
+                        }}
+                        p={"0.5rem"}
+                        w={"fit-content"} h={"fit-content"}
+                        radius="md"
+                    >
+                        <Group align={"center"} spacing={"xs"}>
+
+                            <allDataFromCategory.icon.icon />
+
+                            <Text fz={"clamp(0.85rem, 2vw , 5rem)"}
+                                color={
+                                    colorScheme === "dark"
+                                        ? CardContainerColors.textColorDark
+                                        : CardContainerColors.textColorLight
+                                }
+                                mr={"md"}
+                            >
+                                {allDataFromCategory.icon.name}
+                            </Text>
+
+                        </Group>
+                    </Badge>
+                </Center>
+
+                <Grid>
+                    {slugCategoryCards.map(card => {
+                        return (
+                            <Grid.Col span="auto" key={card.key}>
+                                <Center>
+                                    {card}
+                                </Center>
+                            </Grid.Col>)
+                    })}
 
 
-            </Grid>
+                </Grid>
+            </Stack>
 
         </IconContext.Provider>
     )
