@@ -16,6 +16,7 @@ export type CategorizedItemsData = {
 
 export type CategoriesType = "rings" | "bracelets" | "necklaces" | "earrings"
 
+export const checkingType: CategoriesType[] = ["rings", "bracelets", "earrings", "necklaces"]
 export type SingleItemData = Database['public']["Tables"]["all_items"]["Row"]
 
 //////////////////////////////////////////////////////////////////////////////////////

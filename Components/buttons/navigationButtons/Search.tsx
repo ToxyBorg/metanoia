@@ -3,7 +3,7 @@ import { ActionIcon, AspectRatio, Badge, Card, Center, createStyles, Group, rem,
 
 import { search } from "../../../Shared/icons"
 import { CardContainerColors, SpotlightColors } from "../../../Shared/colors";
-import { SpotlightProvider, SpotlightAction, SpotlightActionProps, openSpotlight } from '@mantine/spotlight';
+import { SpotlightProvider, SpotlightAction, SpotlightActionProps, openSpotlight, closeSpotlight } from '@mantine/spotlight';
 import { useRouter } from 'next/navigation';
 import style from "../../../Shared/css/styles.module.css";
 
@@ -12,6 +12,7 @@ import { useAtomValue } from "jotai";
 import { screenSizesAtom } from "../../../Stores/screenSizesStore";
 import { SpotlightContext } from "@mantine/spotlight/lib/Spotlight.context";
 import { allItemsDataAtom, categorizedItemsDataAtom } from "../../../Stores/itemDataStore";
+import Link from "next/link";
 
 
 const useStyles = createStyles((theme) => ({
@@ -23,7 +24,7 @@ const useStyles = createStyles((theme) => ({
         borderRadius: theme.radius.md,
         backgroundImage: theme.colorScheme === "dark" ? SpotlightColors.spotlightActionBackgroundColorDark : SpotlightColors.spotlightActionBackgroundColorLight,
         // border: `2px solid ${theme.colorScheme === "dark" ? SpotlightColors.spotlightBorderColorDark : SpotlightColors.spotlightBorderColorLight}`,
-
+        color: theme.colorScheme === "dark" ? CardContainerColors.textColorDark : CardContainerColors.textColorLight,
         ...theme.fn.hover({
             // backgroundImage: theme.colorScheme === "dark" ? SpotlightColors.spotlightActionBackgroundColorDark : SpotlightColors.spotlightActionBackgroundColorLight,
             border: `2px solid ${theme.colorScheme === "dark" ? SpotlightColors.spotlightBorderColorDark : SpotlightColors.spotlightBorderColorLight}`,
@@ -36,6 +37,7 @@ const useStyles = createStyles((theme) => ({
         },
     },
 }));
+
 
 
 function CustomAction({
@@ -54,15 +56,22 @@ function CustomAction({
 
 
     return (
+        // <Link href={`/${action.category}/${action.id}`}>
         <UnstyledButton
 
             className={cx(classes.action, style.Animated_Background_Gradient)}
             data-hovered={hovered || undefined}
 
             onMouseDown={(event) => event.preventDefault()}
-            onClick={() => router.push(`/${action.group}/${action.id}`)}
+            // onClick={() => router.push(`/${action.category}/${action.id}`)}
+            onClick={() => {
+                router.push(`/${action.category}/${action.id}`)
+                closeSpotlight()
+            }
+            }
             {...others}
         >
+
             <Group noWrap>
                 {action.image && (
                     <Center>
@@ -99,13 +108,30 @@ function CustomAction({
                             </Spoiler>
 
                         )}
-                        <Badge>{action.price} DA</Badge>
+                        <Badge
+                            variant={"gradient"}
+                            sx={{
+                                border: `2px solid ${colorScheme === "dark"
+                                    ? CardContainerColors.borderColorDark
+                                    : CardContainerColors.borderColorLight}`,
+                                borderRadius: 15,
+                            }}
+                            bg={colorScheme === "dark"
+                                ? CardContainerColors.backgroundColorDark
+                                : CardContainerColors.backgroundColorLight
+                            }
+
+                            className={style.Animated_Background_Gradient}
+                        >
+                            {action.price} DA
+                        </Badge>
                     </Group>
 
                 </Stack>
 
             </Group>
         </UnstyledButton>
+        // </Link>
     );
 }
 
@@ -114,6 +140,7 @@ export const Search = () => {
 
     const { colorScheme, } = useMantineColorScheme();
 
+    const router = useRouter();
 
     const allItemsDataAtomValue = useAtomValue(allItemsDataAtom)
 
@@ -122,14 +149,14 @@ export const Search = () => {
 
         return {
             id: info.item_id,
-            group: info.category,
+            category: info.category,
             title: info.title,
             description: info.description,
             image: info.mainImageURL,
             price: info.price,
             tags: info.tags,
             keywords: [...info.tags, info.category, info.price.toString(), info.item_id],
-            onTrigger: () => { },
+            onTrigger: () => { router.push(`/${info.category}/${info.item_id}`) },
         }
     })
 
@@ -137,6 +164,7 @@ export const Search = () => {
 
         <SpotlightProvider
 
+            closeOnActionTrigger
             actions={actions}
             actionComponent={CustomAction}
             limit={4}

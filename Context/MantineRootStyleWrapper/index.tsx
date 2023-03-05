@@ -99,7 +99,7 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
                         // },
                     }}>
 
-                    <Notifications />
+                    <Notifications limit={2} />
                     {children}
                 </MantineProvider>
             </ColorSchemeProvider>

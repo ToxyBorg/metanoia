@@ -7,7 +7,7 @@ import { useAtomValue } from "jotai";
 import { cartItemsDataAtom } from "../../../Stores/cartStore";
 import ResponsiveModalContext from "../../UI/ResponsiveModalContext";
 import ResponsiveCartCarousel from "../../UI/ResponsiveCartCarousel";
-import ResponsiveCheckoutStepper from "../../CheckoutPage/ResponsiveCheckoutStepper";
+import ResponsiveCheckoutStepper from "../../CheckoutPage/CheckoutStepper";
 import { IconContext } from "react-icons";
 import { ModalColors, NavBarColors } from "../../../Shared/colors";
 import { mobileNavRadius, mobileNavWidthHeight } from "../../../Shared/sizes";

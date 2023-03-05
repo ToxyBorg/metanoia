@@ -38,6 +38,7 @@ export const Categories = () => {
                     {allButtons.map(button => {
                         return (
                             <Grid.Col span={6} key={button.name}>
+                                {/* <Link href={`/${button.name.toLowerCase()}`}> */}
 
                                 <ActionIcon
 
@@ -73,7 +74,7 @@ export const Categories = () => {
                                         </Text>
                                     </Stack>
                                 </ActionIcon>
-
+                                {/* </Link> */}
 
                             </Grid.Col>
                         )

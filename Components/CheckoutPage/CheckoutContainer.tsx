@@ -5,7 +5,7 @@ import { useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { cartItemsDataAtom } from "../../Stores/cartStore";
 import { CardContainerColors, NavBarColors } from '../../Shared/colors';
-import ResponsiveCheckoutStepper from './ResponsiveCheckoutStepper';
+import ResponsiveCheckoutStepper from './CheckoutStepper';
 import { screenSizesAtom } from '../../Stores/screenSizesStore';
 import style from '../../Shared/css/style';
 import Link from 'next/link';
@@ -77,11 +77,6 @@ const CheckoutContainer: NextComponentType<NextPageContext, {}, Props> = (
             }
         </Transition >
 
-
-
-
-
-
     )
 
     else return (
@@ -105,7 +100,8 @@ const CheckoutContainer: NextComponentType<NextPageContext, {}, Props> = (
                     }
 
                     className={style.Animated_Background_Gradient}
-                    mx={"auto"} my={"xl"} >
+                    mx={"auto"} my={"xl"}
+                >
                     <ResponsiveCheckoutStepper cartItemsDataAtomValue={cartItemsDataAtomValue} />
                 </Container>
             }

@@ -2,23 +2,21 @@ import "server-only"
 // "use client"
 
 import type { NextPage } from "next";
-import CategoryContainer from "../../Components/categoryPage/categoryContainer";
-import { CategoriesType } from "../../Stores/itemDataStore";
 import { redirect } from "next/navigation";
+import SingleItemContainer from "../../../Components/SingleItemPage/SingleItemContainer";
 
 interface Props {
-    categorySlug: CategoriesType
+    itemIdSlug: string
 }
 
 const Page = ({ params }: { params: Props }) => {
-
 
     // if (!checkingType.includes(params.categorySlug)) {
     //     redirect("./404")
     // }
 
     return (
-        <CategoryContainer category={params.categorySlug} />
+        <SingleItemContainer itemID={params.itemIdSlug} />
     )
 }
 

@@ -12,6 +12,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import { categorizedItemsDataAtom } from '../../../../Stores/itemDataStore';
 import { cartItemsDataAtom } from '../../../../Stores/cartStore';
 import style from '../../../../Shared/css/style';
+import { arrowNext } from '../../../../Shared/icons';
 
 
 const ItemsContainer = () => {
@@ -23,7 +24,7 @@ const ItemsContainer = () => {
     const allCards = Object.entries(categorizedItemsDataAtomValue).map(([key, value]) => {
 
         const categoryCards = value.data.map((info) => (
-            <Cards key={info.item_id} SingleItemData={info} />
+            <Cards key={info.item_id} SingleItemData={info} clickGoToItemPage={true} />
         ))
 
         return { cards: categoryCards, icon: value.icon }
@@ -103,6 +104,7 @@ const ItemsContainer = () => {
                                     >
                                         {data.icon.name}
                                     </Text>
+                                    <arrowNext.icon />
 
                                 </Group>
 
