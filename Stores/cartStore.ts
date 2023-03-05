@@ -6,7 +6,6 @@ export type cartType = {
     id: string,
     item: SingleItemData,
     itemNumber: number,
-    // measurements: string | "DEFAULT"
     measurements: string | null
 
 }[]
@@ -15,7 +14,6 @@ export type SingleCartItemType = {
     id: string,
     item: SingleItemData,
     itemNumber: number,
-    // measurements: string | "DEFAULT"
     measurements: string | null
 
 }

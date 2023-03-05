@@ -37,39 +37,77 @@ export interface Database {
       all_items: {
         Row: {
           category: Database["public"]["Enums"]["categories"]
-          created_at: string
+          created_at: string | null
           description: string
           item_id: string
           mainImageURL: string
           price: number
           secondaryImagesURLS: string[]
-          stock: number
+          stock: number | null
           tags: string[]
           title: string
         }
         Insert: {
           category: Database["public"]["Enums"]["categories"]
-          created_at?: string
+          created_at?: string | null
           description: string
           item_id?: string
           mainImageURL: string
           price: number
           secondaryImagesURLS: string[]
-          stock?: number
+          stock?: number | null
           tags: string[]
           title: string
         }
         Update: {
           category?: Database["public"]["Enums"]["categories"]
-          created_at?: string
+          created_at?: string | null
           description?: string
           item_id?: string
           mainImageURL?: string
           price?: number
           secondaryImagesURLS?: string[]
-          stock?: number
+          stock?: number | null
           tags?: string[]
           title?: string
+        }
+      }
+      orders: {
+        Row: {
+          created_at: string | null
+          delivery: Database["public"]["Enums"]["delivery"]
+          id: string
+          in_person_delivery_info:
+            | Database["public"]["CompositeTypes"]["in_person_delivery_info"]
+            | null
+          items: string[]
+          shipping_delivery_info:
+            | Database["public"]["CompositeTypes"]["shipping_delivery_info"]
+            | null
+        }
+        Insert: {
+          created_at?: string | null
+          delivery: Database["public"]["Enums"]["delivery"]
+          id: string
+          in_person_delivery_info?:
+            | Database["public"]["CompositeTypes"]["in_person_delivery_info"]
+            | null
+          items: string[]
+          shipping_delivery_info?:
+            | Database["public"]["CompositeTypes"]["shipping_delivery_info"]
+            | null
+        }
+        Update: {
+          created_at?: string | null
+          delivery?: Database["public"]["Enums"]["delivery"]
+          id?: string
+          in_person_delivery_info?:
+            | Database["public"]["CompositeTypes"]["in_person_delivery_info"]
+            | null
+          items?: string[]
+          shipping_delivery_info?:
+            | Database["public"]["CompositeTypes"]["shipping_delivery_info"]
+            | null
         }
       }
     }
@@ -81,9 +119,29 @@ export interface Database {
     }
     Enums: {
       categories: "earrings" | "rings" | "necklaces" | "bracelets"
+      delivery: "in-person" | "postal-service"
+      payment_method: "cash" | "bank-transfer"
     }
     CompositeTypes: {
-      [_ in never]: never
+      in_person_delivery_info: {
+        name: string
+        wilaya: string
+        street_address: string
+        phone: string
+        google_maps_link: string
+        message: string
+        instagram_link: string
+      }
+      shipping_delivery_info: {
+        name: string
+        wilaya: string
+        street_address: string
+        house_number: string
+        phone: string
+        google_maps_link: string
+        message: string
+        instagram_link: string
+      }
     }
   }
   storage: {

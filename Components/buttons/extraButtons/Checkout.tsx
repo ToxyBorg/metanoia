@@ -3,7 +3,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useAtomValue, useSetAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import Link from "next/link";
-import { cartCheck } from "../../../Shared/icons";
+import { cartStep } from "../../../Shared/icons";
 import { cartItemsDataAtom } from "../../../Stores/cartStore";
 
 interface Props {
@@ -26,7 +26,7 @@ const Checkout: NextComponentType<NextPageContext, {}, Props> = (
 
             w={"100%"} h={"100%"}
             mx={"auto"}
-            title={cartCheck.name}
+            title={cartStep.name}
 
             component={Link}
 
@@ -38,7 +38,7 @@ const Checkout: NextComponentType<NextPageContext, {}, Props> = (
                 }
             }
         >
-            <cartCheck.icon title={cartCheck.name} />
+            <cartStep.icon title={cartStep.name} />
         </ActionIcon>
 
 

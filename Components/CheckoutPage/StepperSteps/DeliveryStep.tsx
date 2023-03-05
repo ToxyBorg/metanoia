@@ -20,7 +20,8 @@ const DeliveryStep: NextComponentType<NextPageContext, {}, Props> = (
             <DeliveryInfo />
 
 
-            <ActionIcon variant="outline" title={arrowNext.name} w={"fit-content"} h={"100%"}
+            <ActionIcon
+                variant="outline" title={arrowNext.name} w={"fit-content"} h={"100%"}
                 mx={"auto"} py={"xs"} radius={"md"} px={"lg"}
                 bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
                 className={style.Animated_Background_Gradient}

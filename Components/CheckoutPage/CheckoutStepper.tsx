@@ -1,18 +1,12 @@
 
-import { ActionIcon, Button, Group, Stack, Stepper, Text, useMantineColorScheme } from "@mantine/core";
+import { Stepper, useMantineColorScheme } from "@mantine/core";
 import type { NextComponentType, NextPageContext } from "next";
 import { useState } from "react";
 import { IconContext } from "react-icons";
-import { cart, cartCheck, arrowNext, arrowPrevious, checkoutStepChecked, cartStepChecked, deliveryStep, deliveryStepChecked, measurementsStep, measurementsStepChecked } from "../../Shared/icons";
+import { cartStepChecked, deliveryStep, deliveryStepChecked, measurementsStep, measurementsStepChecked, cartStep } from "../../Shared/icons";
 import style from "../../Shared/css/styles.module.css"
-import { redirect } from "next/navigation";
-import Link from "next/link";
-import ResponsiveCartCarousel from "../UI/ResponsiveCartCarousel";
 import { cartType } from "../../Stores/cartStore";
-import { useCounter } from "@mantine/hooks";
-import { NavBarColors, StepperColors } from "../../Shared/colors";
-import { mobileNavRadius } from "../../Shared/sizes";
-import { atom, useAtomValue } from "jotai";
+import { StepperColors } from "../../Shared/colors";
 import CartStep from "./StepperSteps/CartStep";
 import DeliveryStep from "./StepperSteps/DeliveryStep";
 import MeasurementsStep from "./StepperSteps/MeasurementsStep";
@@ -90,7 +84,7 @@ const ResponsiveCheckoutStepper: NextComponentType<NextPageContext, {}, Props> =
             >
 
                 <Stepper.Step
-                    icon={<cartCheck.icon title={"cart hasn't been checked yet."} />}
+                    icon={<cartStep.icon title={"cart hasn't been checked yet."} />}
                     label="First step"
                     description="Check your cart"
                     completedIcon={<cartStepChecked.icon title={"uncheck your cart?"} />}
