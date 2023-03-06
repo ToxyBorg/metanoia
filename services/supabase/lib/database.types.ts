@@ -43,7 +43,7 @@ export interface Database {
           mainImageURL: string
           price: number
           secondaryImagesURLS: string[]
-          stock: number | null
+          stock: number
           tags: string[]
           title: string
         }
@@ -55,7 +55,7 @@ export interface Database {
           mainImageURL: string
           price: number
           secondaryImagesURLS: string[]
-          stock?: number | null
+          stock?: number
           tags: string[]
           title: string
         }
@@ -67,7 +67,7 @@ export interface Database {
           mainImageURL?: string
           price?: number
           secondaryImagesURLS?: string[]
-          stock?: number | null
+          stock?: number
           tags?: string[]
           title?: string
         }
@@ -76,11 +76,11 @@ export interface Database {
         Row: {
           created_at: string | null
           delivery: Database["public"]["Enums"]["delivery"]
-          id: string
           in_person_delivery_info:
             | Database["public"]["CompositeTypes"]["in_person_delivery_info"]
             | null
-          items: string[]
+          items: Database["public"]["CompositeTypes"]["order_items_info"][]
+          order_id: string
           shipping_delivery_info:
             | Database["public"]["CompositeTypes"]["shipping_delivery_info"]
             | null
@@ -88,11 +88,11 @@ export interface Database {
         Insert: {
           created_at?: string | null
           delivery: Database["public"]["Enums"]["delivery"]
-          id: string
           in_person_delivery_info?:
             | Database["public"]["CompositeTypes"]["in_person_delivery_info"]
             | null
-          items: string[]
+          items: Database["public"]["CompositeTypes"]["order_items_info"][]
+          order_id: string
           shipping_delivery_info?:
             | Database["public"]["CompositeTypes"]["shipping_delivery_info"]
             | null
@@ -100,11 +100,11 @@ export interface Database {
         Update: {
           created_at?: string | null
           delivery?: Database["public"]["Enums"]["delivery"]
-          id?: string
           in_person_delivery_info?:
             | Database["public"]["CompositeTypes"]["in_person_delivery_info"]
             | null
-          items?: string[]
+          items?: Database["public"]["CompositeTypes"]["order_items_info"][]
+          order_id?: string
           shipping_delivery_info?:
             | Database["public"]["CompositeTypes"]["shipping_delivery_info"]
             | null
@@ -131,6 +131,11 @@ export interface Database {
         google_maps_link: string
         message: string
         instagram_link: string
+      }
+      order_items_info: {
+        id: string
+        number: number
+        measurements: string
       }
       shipping_delivery_info: {
         name: string
