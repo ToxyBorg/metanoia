@@ -47,16 +47,12 @@ const MeasurementsCarousel: NextComponentType<NextPageContext, {}, Props> = (
                                 sx={{
                                     border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
                                     width: "clamp(20%, 250px, 100%)",
-                                    // height: "clamp(50vh, 350px, 60vh)",
-                                    // width: "50%"
-
                                 }}
                                 radius={"md"}
 
                             >
                                 <Card.Section>
                                     <AspectRatio ratio={10 / 16}>
-                                        {/* <Image fill={true} src={info.item.mainImageURL} alt={info.item.title} loading='lazy' /> */}
                                         <Image fill src={info.item.mainImageURL} alt={info.item.title} loading='lazy' />
                                     </AspectRatio>
 

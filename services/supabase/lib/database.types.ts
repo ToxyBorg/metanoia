@@ -76,38 +76,26 @@ export interface Database {
         Row: {
           created_at: string | null
           delivery: Database["public"]["Enums"]["delivery"]
-          in_person_delivery_info:
-            | Database["public"]["CompositeTypes"]["in_person_delivery_info"]
-            | null
+          in_person_delivery_info: Database["public"]["CompositeTypes"]["in_person_delivery_info"]
           items: Database["public"]["CompositeTypes"]["order_items_info"][]
           order_id: string
-          shipping_delivery_info:
-            | Database["public"]["CompositeTypes"]["shipping_delivery_info"]
-            | null
+          shipping_delivery_info: Database["public"]["CompositeTypes"]["shipping_delivery_info"]
         }
         Insert: {
           created_at?: string | null
           delivery: Database["public"]["Enums"]["delivery"]
-          in_person_delivery_info?:
-            | Database["public"]["CompositeTypes"]["in_person_delivery_info"]
-            | null
+          in_person_delivery_info: Database["public"]["CompositeTypes"]["in_person_delivery_info"]
           items: Database["public"]["CompositeTypes"]["order_items_info"][]
           order_id: string
-          shipping_delivery_info?:
-            | Database["public"]["CompositeTypes"]["shipping_delivery_info"]
-            | null
+          shipping_delivery_info: Database["public"]["CompositeTypes"]["shipping_delivery_info"]
         }
         Update: {
           created_at?: string | null
           delivery?: Database["public"]["Enums"]["delivery"]
-          in_person_delivery_info?:
-            | Database["public"]["CompositeTypes"]["in_person_delivery_info"]
-            | null
+          in_person_delivery_info?: Database["public"]["CompositeTypes"]["in_person_delivery_info"]
           items?: Database["public"]["CompositeTypes"]["order_items_info"][]
           order_id?: string
-          shipping_delivery_info?:
-            | Database["public"]["CompositeTypes"]["shipping_delivery_info"]
-            | null
+          shipping_delivery_info?: Database["public"]["CompositeTypes"]["shipping_delivery_info"]
         }
       }
     }
@@ -119,15 +107,20 @@ export interface Database {
     }
     Enums: {
       categories: "earrings" | "rings" | "necklaces" | "bracelets"
-      delivery: "in-person" | "postal-service"
+      delivery: "in-person" | "shipping"
       payment_method: "cash" | "bank-transfer"
     }
     CompositeTypes: {
       in_person_delivery_info: {
-        name: string
-        wilaya: string
-        street_address: string
-        phone: string
+        required: Database["public"]["CompositeTypes"]["required_in_person_delivery"]
+        not_required: Database["public"]["CompositeTypes"]["not_required_in_person_delivery"]
+      }
+      not_required_in_person_delivery: {
+        google_maps_link: string
+        message: string
+        instagram_link: string
+      }
+      not_required_shipping_delivery: {
         google_maps_link: string
         message: string
         instagram_link: string
@@ -137,15 +130,22 @@ export interface Database {
         number: number
         measurements: string
       }
-      shipping_delivery_info: {
+      required_in_person_delivery: {
+        name: string
+        wilaya: string
+        street_address: string
+        phone: string
+      }
+      required_shipping_delivery: {
         name: string
         wilaya: string
         street_address: string
         house_number: string
         phone: string
-        google_maps_link: string
-        message: string
-        instagram_link: string
+      }
+      shipping_delivery_info: {
+        required: Database["public"]["CompositeTypes"]["required_shipping_delivery"]
+        not_required: Database["public"]["CompositeTypes"]["not_required_shipping_delivery"]
       }
     }
   }
