@@ -1,14 +1,6 @@
 import { atom } from "jotai";
 import { Database } from "../services/supabase/lib/database.types";
-// import { SingleItemData } from "./itemDataStore";
 
-
-// export type deliveryType = {
-//     id: Database['public']["Tables"]['orders']['Row']['order_id'],
-//     delivery: Database['public']["Tables"]['orders']['Row']['delivery'],
-//     in_person_delivery_info: Database['public']["Tables"]['orders']['Row']['in_person_delivery_info'],
-//     shipping_delivery_info: Database['public']["Tables"]['orders']['Row']['shipping_delivery_info'],
-// } | null
 
 
 export type in_person_delivery = Database['public']["Tables"]['orders']['Row']['in_person_delivery_info']
