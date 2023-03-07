@@ -4,14 +4,15 @@
  */
 
 import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail } from "react-icons/bi"
-import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing } from 'react-icons/gi';
-import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox } from 'react-icons/bs';
+import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing, GiPayMoney } from 'react-icons/gi';
+import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox, BsCreditCard2Back, BsPaypal } from 'react-icons/bs';
 import { FiInstagram, FiMail } from 'react-icons/fi';
 import { GrAddCircle, GrCircleAlert, GrLinkNext, GrLinkPrevious, GrUserAdmin } from 'react-icons/gr';
 import { TfiRulerAlt } from 'react-icons/tfi'
-import { FaRuler } from 'react-icons/fa'
+import { FaEquals, FaPlus, FaRuler, FaTimes } from 'react-icons/fa'
 import { VscError } from 'react-icons/vsc';
 import { MdEmojiPeople } from 'react-icons/md';
+import { IoCashOutline, IoCash } from 'react-icons/io5'
 interface IconBaseProps extends React.SVGAttributes<SVGElement | SVGSVGElement> {
   children?: React.ReactNode;
   size?: string | number
@@ -50,6 +51,31 @@ export const MetanoiaSVG = (props: localSVGType) => {
       ></path>
     </svg>
   )
+}
+
+export const PostalServiceSVG = (props: localSVGType) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={"100%"}
+      height={"100%"}
+      fill={props.lineColor}
+      version="1"
+      viewBox="0 0 1200 1432"
+      strokeWidth={props.strokeWidth}
+      stroke={props.strokeColor}
+    >
+      <title>Postal Service</title>
+      <path
+        d="M6540 14039c-1646-60-3588-541-5630-1392-370-154-704-301-694-304 5-1 216-23 469-48 4657-461 7710-1242 9070-2321 146-115 393-366 479-486 137-190 221-362 271-555 177-681-206-1455-1092-2207-51-43-93-80-93-82 0-7 186 132 313 233 400 318 813 722 1097 1073 509 630 841 1294 979 1961 88 429 94 876 15 1269-163 819-651 1513-1415 2013-937 613-2227 903-3769 846zM10228 5907l-658-201v-305c0-344-3-359-74-418-95-78-275-69-336 17-19 26-20 45-20 299 0 152-4 271-9 271-7 0-868-260-1293-391l-98-30V4044c0-1211 4-1134-59-1187-57-47-136-71-241-71-101-1-149 14-170 53-6 12-10 120-10 279v259l-652-199c-359-109-670-203-690-209l-38-10v-437c0-402 2-440 19-477 37-82 116-121 226-112 75 6 2674 796 2755 837 139 70 228 165 273 295 7 20 13 260 17 694l5 665 645 197c355 108 665 204 690 214 151 60 299 181 360 295l35 65 3 458c2 368 0 457-10 456-7 0-309-91-670-202z"
+        transform="matrix(.1 0 0 -.1 0 1432)"
+      ></path>
+      <path
+        d="M4665 5198c-396-121-721-221-721-222-1 0-5-375-9-833-9-950 0-869-102-919-50-25-70-29-145-29-72 0-91 3-115 21l-28 21-3 318c-2 246-5 316-15 313-6-3-335-103-730-223l-718-219 3-421 3-422 29-41c62-89 182-137 341-136l100 1 1005 307c553 169 1262 385 1575 481 314 95 869 264 1235 375 366 112 682 211 703 222 54 27 123 93 155 147l27 46 3 508c1 279 0 507-4 507-6 0-1304-393-1406-426l-47-15-3-319-3-319-34-35c-46-48-121-78-208-84-67-4-73-3-97 21l-26 26v1571l-22-1c-13-1-347-100-743-221zM10028 4076l-458-140v-203c0-112 3-203 6-203 15 0 900 272 907 279 4 4 6 97 5 207l-3 199-457-139zM5162 2740c-249-77-457-142-462-145-6-4-10-96-10-227 0-214 1-220 20-215 11 3 224 67 475 143l455 139v222c0 172-3 223-12 222-7 0-217-63-466-139zM4062 2360c-249-77-457-142-462-145-6-4-10-94-10-227 0-219 0-220 21-215 11 3 225 68 475 144l454 138v223c0 171-3 222-12 221-7 0-217-63-466-139zM4047 1140l-32-70h-135V390h431l-3 37-3 38-167 3-168 2v250h310v80h-310v190h341l-3 38-3 37-113 3-112 3 25 49c31 61 31 64-1 79-25 11-26 10-57-59zM7720 1125c-106-30-199-108-243-203-31-68-31-245 1-314 62-137 208-218 394-218 149 0 257 39 334 122 64 69 87 125 92 229 9 184-74 314-238 375-64 24-267 29-340 9zm213-126c92-25 139-105 139-234 0-131-43-203-138-231-75-22-142-6-193 45-44 44-61 96-61 186 0 86 15 136 54 181 48 55 122 75 199 53zM8700 1130c-77-16-171-70-204-118-54-77-37-190 37-246 44-34 99-53 236-82s163-43 159-86c-5-55-44-73-151-73-101 1-166 17-254 66-29 16-55 29-58 29s-5-40-5-90c0-49 2-90 4-90s41-10 87-22c122-32 316-32 415-1 233 73 263 313 51 392-33 12-111 32-174 46-124 26-156 44-151 83 10 86 213 96 368 17 27-14 52-25 55-25s5 38 5 84v84l-72 17c-85 20-283 28-348 15zM6630 766V400h220v237l113 5c133 7 203 29 270 88 101 89 102 245 3 327-70 57-116 66-373 71l-233 4V766zm395 210c41-17 55-42 55-96 0-71-45-98-170-103l-55-2-3 108-3 107h71c39 0 86-6 105-14zM9250 1060v-70h260l2-292 3-293 108-3 107-3v591h260v140h-740v-70zM10160 765V400h590v140h-370v190h340v130h-340v130h370v140h-590V765zM3201 1064c-138-37-217-141-228-302-12-169 43-287 162-350 46-25 60-27 160-27 91 1 120 5 168 24l57 22v299h-240v-80h150V471l-37-8c-21-4-67-8-103-7-82 1-139 30-180 93-36 54-45 93-44 191 1 160 86 259 222 260 62 0 151-29 198-65l34-26v112l-44 19c-50 21-143 40-190 39-17 0-55-7-85-15zM1765 1061c-9-15-225-650-225-662 0-6 19-9 42-7l42 3 30 93 30 92h264l32-95 32-95h44c29 0 44 4 43 13 0 6-51 158-112 337l-112 325-52 3c-28 2-54-2-58-7zm108-252c26-80 47-149 47-153 0-7-194-8-202 0-3 3 17 75 45 159 28 85 54 151 57 147 4-4 28-73 53-153zM2390 730V390h400v80h-310v600h-90V730zM4510 732V390h90v271l52-3 53-3 93-115c128-159 119-152 181-148l52 3-115 140c-64 77-116 142-116 145s17 15 38 28c60 37 86 84 90 164 4 60 1 73-21 107-42 63-89 79-255 87l-142 7V732zm264 244c63-26 84-94 52-171-21-50-54-66-146-72l-80-6v263h70c39 0 86-6 104-14zM5237 1063c-4-3-7-156-7-340V390h90v680h-38c-21 0-42-3-45-7zM5647 1063c-4-3-7-156-7-340V390h430v80h-340v250h320v80h-320v190h340v80h-208c-115 0-212-3-215-7z"
+        transform="matrix(.1 0 0 -.1 0 1432)"
+      ></path>
+    </svg>
+  );
 }
 
 // NAVBAR
@@ -110,6 +136,18 @@ export const deliveryStep: IconInfo = { icon: BsBoxSeam, name: "Choose a deliver
 export const deliveryStepChecked: IconInfo = { icon: BsBoxSeamFill, name: "Delivery option checked" }
 export const inPersonDelivery: IconInfo = { icon: MdEmojiPeople, name: "In-person delivery" }
 export const shippingDelivery: IconInfo = { icon: BsMailbox, name: "Shipping delivery" }
+
+
+export const paymentStep: IconInfo = { icon: IoCashOutline, name: "Payment method" }
+export const paymentStepChecked: IconInfo = { icon: IoCash, name: "Payment method checked" }
+export const cashPayment: IconInfo = { icon: GiPayMoney, name: "Cash payment method" }
+export const bankTransferPayment: IconInfo = { icon: BsCreditCard2Back, name: "Bank transfer payment method" }
+export const multiplicationIcon: IconInfo = { icon: FaTimes, name: "Multiplication" }
+export const equalsIcon: IconInfo = { icon: FaEquals, name: "Equals" }
+export const plusIcon: IconInfo = { icon: FaPlus, name: "Plus" }
+export const paypalIcon: IconInfo = { icon: BsPaypal, name: "Paypal" }
+
+
 
 export const checkoutStepChecked: IconInfo = { icon: BsCheckLg, name: "Step checked" }
 

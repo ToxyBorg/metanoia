@@ -3,13 +3,14 @@ import { Stepper, useMantineColorScheme } from "@mantine/core";
 import type { NextComponentType, NextPageContext } from "next";
 import { useState } from "react";
 import { IconContext } from "react-icons";
-import { cartStepChecked, deliveryStep, deliveryStepChecked, measurementsStep, measurementsStepChecked, cartStep } from "../../Shared/icons";
+import { cartStepChecked, deliveryStep, deliveryStepChecked, measurementsStep, measurementsStepChecked, cartStep, paymentStep, paymentStepChecked } from "../../Shared/icons";
 import style from "../../Shared/css/styles.module.css"
 import { cartType } from "../../Stores/cartStore";
 import { StepperColors } from "../../Shared/colors";
 import CartStep from "./StepperSteps/CartStep";
 import DeliveryStep from "./StepperSteps/DeliveryStep";
 import MeasurementsStep from "./StepperSteps/MeasurementsStep";
+import PaymentStep from "./StepperSteps/PaymentStep";
 
 export type StepStateType = "stepInactive" | "stepProgress" | "stepCompleted" | undefined
 
@@ -27,8 +28,8 @@ const ResponsiveCheckoutStepper: NextComponentType<NextPageContext, {}, Props> =
     const { colorScheme, } = useMantineColorScheme();
 
     const [active, setActive] = useState(0);
-    const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
-    const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
+    const nextStep = () => setActive((current) => (current < 4 ? current + 1 : current));
+    // const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
     return (
 
@@ -111,8 +112,13 @@ const ResponsiveCheckoutStepper: NextComponentType<NextPageContext, {}, Props> =
                     <DeliveryStep nextStep={nextStep} />
                 </Stepper.Step>
 
-                <Stepper.Step label="Final step" description="Get full access">
-                    Step 4 content: Get full access
+                <Stepper.Step
+                    icon={<paymentStep.icon title={"payment method hasn't been checked yet."} />}
+                    label="Fourth step"
+                    description="Choose a payment method"
+                    completedIcon={<paymentStepChecked.icon title={"Choose a different payment method?"} />}
+                >
+                    <PaymentStep nextStep={nextStep} />
                 </Stepper.Step>
 
                 <Stepper.Completed>
@@ -121,65 +127,7 @@ const ResponsiveCheckoutStepper: NextComponentType<NextPageContext, {}, Props> =
 
             </Stepper>
 
-            {/* <Group noWrap position="apart"
-                sx={{
-                    borderRadius: mobileNavRadius.navbarBorderRadius,
-                    border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
 
-                }}
-                mx={"auto"} mt={"sm"}
-                p={"0.75rem"}
-                w={"clamp(15%, 250px, 75%)"}
-                bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
-                className={style.Animated_Background_Gradient}
-
-            >
-
-                <ActionIcon variant="outline" title={arrowPrevious.name} w={"100%"} h={"100%"}
-                    mx={"auto"} py={"xs"} radius={"md"}
-                    bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
-                    className={style.Animated_Background_Gradient}
-                    onClick={handlers.decrement}
-                    sx={{
-                        border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`
-                    }}
-                >
-                    <Stack spacing={0}>
-                        <arrowPrevious.icon />
-                        <Text size={"xs"}
-                            color={colorScheme === "dark"
-                                ? StepperColors.iconsLineColorDark
-                                : StepperColors.iconsLineColorLight
-                            }
-                        >
-                            Previous
-                        </Text>
-                    </Stack>
-                </ActionIcon>
-
-                <ActionIcon variant="outline" title={arrowNext.name} w={"100%"} h={"100%"}
-                    mx={"auto"} py={"xs"} radius={"md"}
-                    bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
-                    className={style.Animated_Background_Gradient}
-                    onClick={handlers.increment}
-                    sx={{
-                        border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`
-                    }}
-                >
-                    <Stack spacing={0}>
-                        <arrowNext.icon />
-                        <Text size={"xs"}
-                            color={colorScheme === "dark"
-                                ? StepperColors.iconsLineColorDark
-                                : StepperColors.iconsLineColorLight
-                            }
-                        >
-                            Next
-                        </Text>
-                    </Stack>
-                </ActionIcon>
-
-            </Group> */}
 
 
         </IconContext.Provider>
