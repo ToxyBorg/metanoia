@@ -1,17 +1,18 @@
 
-import { Stepper, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, Group, Stepper, Text, useMantineColorScheme } from "@mantine/core";
 import type { NextComponentType, NextPageContext } from "next";
 import { useState } from "react";
 import { IconContext } from "react-icons";
-import { cartStepChecked, deliveryStep, deliveryStepChecked, measurementsStep, measurementsStepChecked, cartStep, paymentStep, paymentStepChecked, emailVerificationStep, emailVerificationStepChecked } from "../../Shared/icons";
+import { cartStepChecked, deliveryStep, deliveryStepChecked, measurementsStep, measurementsStepChecked, cartStep, paymentStep, paymentStepChecked, emailVerificationStep, emailVerificationStepChecked, arrowNext } from "../../Shared/icons";
 import style from "../../Shared/css/styles.module.css"
 import { cartType } from "../../Stores/cartStore";
-import { StepperColors } from "../../Shared/colors";
+import { NavBarColors, StepperColors } from "../../Shared/colors";
 import CartStep from "./StepperSteps/CartStep";
 import DeliveryStep from "./StepperSteps/DeliveryStep";
 import MeasurementsStep from "./StepperSteps/MeasurementsStep";
 import PaymentStep from "./StepperSteps/PaymentStep";
 import EmailOrderStep from "./StepperSteps/EmailOrderStep";
+import FinalStep from "./StepperSteps/FinalStep";
 
 export type StepStateType = "stepInactive" | "stepProgress" | "stepCompleted" | undefined
 
@@ -135,13 +136,33 @@ const ResponsiveCheckoutStepper: NextComponentType<NextPageContext, {}, Props> =
                 </Stepper.Step>
 
                 <Stepper.Completed>
-                    Completed, click back button to get to previous step
+                    <FinalStep />
                 </Stepper.Completed>
 
             </Stepper>
 
-
-
+            {/* 
+            <ActionIcon variant="outline" title={arrowNext.name} w={"fit-content"} h={"100%"}
+                mx={"auto"} py={"xs"} radius={"md"} px={"lg"}
+                bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
+                className={style.Animated_Background_Gradient}
+                onClick={nextStep}
+                sx={{
+                    border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`
+                }}
+            >
+                <Group>
+                    <arrowNext.icon />
+                    <Text size={"md"}
+                        color={colorScheme === "dark"
+                            ? StepperColors.iconsLineColorDark
+                            : StepperColors.iconsLineColorLight
+                        }
+                    >
+                        SKIP
+                    </Text>
+                </Group>
+            </ActionIcon> */}
 
         </IconContext.Provider>
     );
