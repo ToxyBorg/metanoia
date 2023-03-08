@@ -8,8 +8,8 @@ import { CardContainerColors, NavBarColors, StepperColors } from "../../../Share
 import style from "../../../Shared/css/style";
 import { arrowNext } from "../../../Shared/icons";
 import { delivery, deliveryAtom, in_person_delivery, in_person_deliveryAtom, shipping_delivery, shipping_deliveryAtom } from "../../../Stores/deliveryInfoStore";
-import In_person_delivery from "../components/DeliveryInfo/In_person_delivery";
-import Shipping_delivery from "../components/DeliveryInfo/Shipping_delivery";
+import In_person_delivery from "../stepperComponents/DeliveryInfo/In_person_delivery";
+import Shipping_delivery from "../stepperComponents/DeliveryInfo/Shipping_delivery";
 
 interface Props {
     nextStep: () => void
@@ -126,10 +126,11 @@ const DeliveryStep: NextComponentType<NextPageContext, {}, Props> = (
                         }
                         else {
 
-                            deliveryAtomSetter({
-                                delivery: visible,
-                                data: in_person_deliveryAtomValue
-                            })
+                            // deliveryAtomSetter({
+                            //     delivery: visible,
+                            //     // data: in_person_deliveryAtomValue
+                            // })
+                            deliveryAtomSetter(visible)
                             props.nextStep()
                         }
 
@@ -212,11 +213,11 @@ const DeliveryStep: NextComponentType<NextPageContext, {}, Props> = (
                             })
                         }
                         else {
-                            deliveryAtomSetter({
-                                delivery: visible,
-                                data: shipping_deliveryAtomValue
-                            })
-
+                            // deliveryAtomSetter({
+                            //     delivery: visible,
+                            //     // data: shipping_deliveryAtomValue
+                            // })
+                            deliveryAtomSetter(visible)
                             props.nextStep()
                         }
 

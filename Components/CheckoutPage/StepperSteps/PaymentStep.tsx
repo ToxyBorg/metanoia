@@ -7,8 +7,8 @@ import { CardContainerColors, NavBarColors, StepperColors } from "../../../Share
 import style from "../../../Shared/css/style";
 import { arrowNext } from "../../../Shared/icons";
 import { paymentMethodAtom, paymentMethodType } from "../../../Stores/paymentMethodStore";
-import BankTransferPayment from "../components/PaymentInfo/BankTransferPayment";
-import CashPayment from "../components/PaymentInfo/CashPayment";
+import BankTransferPayment from "../stepperComponents/PaymentInfo/BankTransferPayment";
+import CashPayment from "../stepperComponents/PaymentInfo/CashPayment";
 
 interface Props {
     nextStep: () => void
@@ -17,6 +17,7 @@ interface Props {
 const PaymentStep: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
 ) => {
+
     const { colorScheme, } = useMantineColorScheme();
     const [visible, setVisible] = useState<paymentMethodType>();
 

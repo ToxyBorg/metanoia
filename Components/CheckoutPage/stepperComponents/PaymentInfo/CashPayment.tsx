@@ -184,7 +184,7 @@ const CashPayment: NextComponentType<NextPageContext, {}, Props> = (
                                     {pricing} DA
                                 </Badge>
 
-                                {deliveryAtomValue?.delivery == "in-person" &&
+                                {deliveryAtomValue == "in-person" &&
                                     <>
                                         <plusIcon.icon title={plusIcon.name} />
 
@@ -203,6 +203,30 @@ const CashPayment: NextComponentType<NextPageContext, {}, Props> = (
                                             size={"lg"}
                                         >
                                             Delivery fee
+                                        </Badge>
+                                    </>
+
+                                }
+
+                                {deliveryAtomValue == "shipping" &&
+                                    <>
+                                        <plusIcon.icon title={plusIcon.name} />
+
+                                        <Badge variant="gradient"
+                                            sx={{
+                                                border: `2px solid ${colorScheme === "dark"
+                                                    ? CardContainerColors.borderColorDark
+                                                    : CardContainerColors.borderColorLight}`,
+                                                // fontSize: 
+                                            }}
+                                            bg={colorScheme === "dark"
+                                                ? CardContainerColors.backgroundColorDark
+                                                : CardContainerColors.backgroundColorLight
+                                            }
+                                            className={style.Animated_Background_Gradient}
+                                            size={"lg"}
+                                        >
+                                            Shipping fee
                                         </Badge>
                                     </>
 

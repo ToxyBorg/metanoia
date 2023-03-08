@@ -5,14 +5,18 @@
 
 import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail } from "react-icons/bi"
 import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing, GiPayMoney } from 'react-icons/gi';
-import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox, BsCreditCard2Back, BsPaypal } from 'react-icons/bs';
+import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsArrowDown, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox, BsCreditCard2Back, BsPaypal } from 'react-icons/bs';
 import { FiInstagram, FiMail } from 'react-icons/fi';
 import { GrAddCircle, GrCircleAlert, GrLinkNext, GrLinkPrevious, GrUserAdmin } from 'react-icons/gr';
 import { TfiRulerAlt } from 'react-icons/tfi'
 import { FaEquals, FaPlus, FaRuler, FaTimes } from 'react-icons/fa'
 import { VscError } from 'react-icons/vsc';
-import { MdEmojiPeople } from 'react-icons/md';
+import { MdEmojiPeople, MdMarkEmailRead, MdOutlineMarkEmailRead } from 'react-icons/md';
 import { IoCashOutline, IoCash } from 'react-icons/io5'
+import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai'
+import { HiOutlineAtSymbol } from 'react-icons/hi'
+
+
 interface IconBaseProps extends React.SVGAttributes<SVGElement | SVGSVGElement> {
   children?: React.ReactNode;
   size?: string | number
@@ -104,6 +108,10 @@ export const navUnlock: IconInfo = { icon: BiLockOpen, name: "Unlock Navbar" }
 // NAVBAR SEARCH DRAWER INPUT TOOLTIP
 export const circleAlert: IconInfo = { icon: GrCircleAlert, name: "CircleAlert" }
 
+// NAVBAR SLIDE LEFT 
+export const navSlideLeft: IconInfo = { icon: AiOutlineDoubleLeft, name: "Hide navbar" }
+export const navSlideRight: IconInfo = { icon: AiOutlineDoubleRight, name: "Unhide navbar" }
+
 // HEADER THEME SWITCHER
 export const lightThemeIcon: IconInfo = { icon: BsSunFill, name: "Light Theme" }
 export const darkThemeIcon: IconInfo = { icon: BsMoonFill, name: "Dark Theme" }
@@ -125,6 +133,7 @@ export const cartEmpty: IconInfo = { icon: BsCartX, name: "Empty your cart" }
 
 export const arrowNext: IconInfo = { icon: BsArrowRight, name: "Go to next step" }
 export const arrowPrevious: IconInfo = { icon: BsArrowLeft, name: "Go to previous step" }
+export const arrowDown: IconInfo = { icon: BsArrowDown, name: "Go to next step" }
 
 export const cartStep: IconInfo = { icon: BsCartCheck, name: "Go to checkout" }
 export const cartStepChecked: IconInfo = { icon: BsCartCheckFill, name: "Cart checked" }
@@ -147,6 +156,10 @@ export const equalsIcon: IconInfo = { icon: FaEquals, name: "Equals" }
 export const plusIcon: IconInfo = { icon: FaPlus, name: "Plus" }
 export const paypalIcon: IconInfo = { icon: BsPaypal, name: "Paypal" }
 
+
+export const emailVerificationStep: IconInfo = { icon: MdOutlineMarkEmailRead, name: "Email verification" }
+export const emailVerificationStepChecked: IconInfo = { icon: MdMarkEmailRead, name: "Email verification checked" }
+export const emailAtSymbol: IconInfo = { icon: HiOutlineAtSymbol, name: "Enter your email" }
 
 
 export const checkoutStepChecked: IconInfo = { icon: BsCheckLg, name: "Step checked" }

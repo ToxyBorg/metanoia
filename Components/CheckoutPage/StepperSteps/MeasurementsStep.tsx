@@ -6,7 +6,7 @@ import { CardContainerColors, NavBarColors, StepperColors } from "../../../Share
 import style from "../../../Shared/css/style";
 import { arrowNext, errorIcon } from "../../../Shared/icons";
 import { cartType } from "../../../Stores/cartStore";
-import MeasurementsCarousel from "../components/MeasurementsCarousel";
+import MeasurementsCarousel from "../stepperComponents/MeasurementsCarousel";
 
 interface Props {
   cartItemsDataAtomValue: cartType,
