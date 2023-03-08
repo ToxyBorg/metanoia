@@ -76,6 +76,7 @@ export interface Database {
         Row: {
           created_at: string | null
           delivery: Database["public"]["Enums"]["delivery"]
+          email: string
           in_person_delivery_info: Database["public"]["CompositeTypes"]["in_person_delivery_info"]
           items: Database["public"]["CompositeTypes"]["order_items_info"][]
           order_id: string
@@ -85,15 +86,17 @@ export interface Database {
         Insert: {
           created_at?: string | null
           delivery: Database["public"]["Enums"]["delivery"]
+          email: string
           in_person_delivery_info: Database["public"]["CompositeTypes"]["in_person_delivery_info"]
           items: Database["public"]["CompositeTypes"]["order_items_info"][]
-          order_id: string
+          order_id?: string
           payment: Database["public"]["Enums"]["payment_method"]
           shipping_delivery_info: Database["public"]["CompositeTypes"]["shipping_delivery_info"]
         }
         Update: {
           created_at?: string | null
           delivery?: Database["public"]["Enums"]["delivery"]
+          email?: string
           in_person_delivery_info?: Database["public"]["CompositeTypes"]["in_person_delivery_info"]
           items?: Database["public"]["CompositeTypes"]["order_items_info"][]
           order_id?: string

@@ -36,9 +36,9 @@ export const shipping_deliveryAtom = atom<shipping_delivery>({
 })
 
 export type delivery = Database['public']["Tables"]['orders']['Row']['delivery']
-export type deliveryInfo = {
-    delivery: delivery,
-    data: in_person_delivery | shipping_delivery
-} | null
+// export type deliveryInfo = {
+//     delivery: delivery,
+//     // data: in_person_delivery | shipping_delivery
+// }
 
-export const deliveryAtom = atom<deliveryInfo>(null)
+export const deliveryAtom = atom<delivery>("in-person")

@@ -10,11 +10,11 @@ import { bodyColors } from '../../Shared/colors';
 import cx from 'classnames';
 
 // import { containerRefAtom, refDataAtom } from '../../Stores/heroOutOfViewStore';
-import { xMousePosAtom } from '../../Stores/leftSideHover';
 import { screenSizesAtom } from '../../Stores/screenSizesStore';
 import { windowScrollDirectionAtom } from '../../Stores/windowScrollStore';
 import { Notifications } from '@mantine/notifications';
 import style from '../../Shared/css/style';
+import { cartItemsDataAtom, cartType } from '../../Stores/cartStore';
 
 
 
@@ -60,9 +60,9 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
     };
 
 
-    const { ref: mousePosRef, x, y } = useMouse();
-    const xMousePosSetter = useSetAtom(xMousePosAtom)
-    xMousePosSetter({ xMousePosRef: mousePosRef, x: x })
+    // const { ref: mousePosRef, x, y } = useMouse();
+    // const xMousePosSetter = useSetAtom(xMousePosAtom)
+    // xMousePosSetter({ xMousePosRef: mousePosRef, x: x })
 
 
     // const containerRefSetter = useSetAtom(containerRefAtom)
@@ -82,6 +82,36 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
 
     const windowScrollDirectionSetter = useSetAtom(windowScrollDirectionAtom)
     windowScrollDirectionSetter()
+
+
+    const cartItemsDataAtomSetter = useSetAtom(cartItemsDataAtom)
+
+    if (typeof window !== "undefined") {
+        // Write your client-side statements here.
+        // const isValid = (value: string | null): value is string => [null, undefined, ""].includes(value)
+
+        // const newSchool = (): cartType | undefined => {
+        //     const { "cart": value }: Storage = localStorage;
+
+        //     if (!isValid(value)) {
+        //         return undefined;
+        //     }
+        //     const gotValue = JSON.parse(value);
+        //     return gotValue
+        // };
+
+        // if (newSchool() !== undefined) {
+        //     cartItemsDataAtomSetter(newSchool()!)
+
+        const data = window.localStorage.getItem('cart')
+        if (data != null) {
+            cartItemsDataAtomSetter(JSON.parse(data))
+        }
+    }
+
+
+
+
 
     return (
         <CacheProvider value={cache}>

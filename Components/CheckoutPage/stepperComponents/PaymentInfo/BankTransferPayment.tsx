@@ -181,7 +181,7 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                     {pricing} DA
                                 </Badge>
 
-                                {deliveryAtomValue?.delivery == "in-person" &&
+                                {deliveryAtomValue == "in-person" &&
                                     <>
                                         <plusIcon.icon title={plusIcon.name} />
 
@@ -205,8 +205,36 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
 
                                 }
 
+
+                                {deliveryAtomValue == "shipping" &&
+                                    <>
+                                        <plusIcon.icon title={plusIcon.name} />
+
+                                        <Badge variant="gradient"
+                                            sx={{
+                                                border: `2px solid ${colorScheme === "dark"
+                                                    ? CardContainerColors.borderColorDark
+                                                    : CardContainerColors.borderColorLight}`,
+                                                // fontSize: 
+                                            }}
+                                            bg={colorScheme === "dark"
+                                                ? CardContainerColors.backgroundColorDark
+                                                : CardContainerColors.backgroundColorLight
+                                            }
+                                            className={style.Animated_Background_Gradient}
+                                            size={"lg"}
+                                        >
+                                            Shipping fee
+                                        </Badge>
+                                    </>
+
+                                }
+
+
                             </Group>
                         </Timeline.Item>
+
+                        {/* ///////////////////////////////////////////////// */}
 
                         <Timeline.Item
                             title={
@@ -215,7 +243,7 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                     fs={"italic"}
                                     color={colorScheme === "dark" ? CardContainerColors.textColorDark : CardContainerColors.textColorLight}
                                 >
-                                    Pricing
+                                    Banking information
                                 </Text>
                             }
                             radius={"md"}
@@ -288,8 +316,6 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                         </Text>
 
                                     </Tabs.Tab>
-
-
 
                                 </Tabs.List>
 

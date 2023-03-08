@@ -24,5 +24,10 @@ export const cartItemsDataAtom = atom<cartType, [data: cartType], cartType | voi
     (get) => get(cartItemsDataInitAtom),
     (_get, set, data) => {
         set(cartItemsDataInitAtom, data)
+
+        if (typeof window !== "undefined") {
+            window.localStorage.setItem("cart", JSON.stringify(data));
+        }
+
     }
 )

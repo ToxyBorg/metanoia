@@ -4,8 +4,8 @@ import cx from 'classnames';
 
 import ContextWrapper from "../Context/ContextWrapper"
 import { bodyColors } from "../Shared/colors"
-// import SupabaseListener from '../Context/SupabaseWrapper/supabase-listener'
-// import SupabaseProvider from '../Context/SupabaseWrapper//supabase-provider'
+import SupabaseListener from '../Context/SupabaseWrapper/supabase-listener'
+import SupabaseProvider from '../Context/SupabaseWrapper//supabase-provider'
 import { createClient } from '../services/supabase/utils/supabase-server'
 import { rings, bracelets, necklaces, earrings } from "../Shared/icons";
 import { AllItemsData } from "../Stores/itemDataStore";
@@ -35,8 +35,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // const supabase = createClient()
+  const supabase = createClient()
   // const { data: allItems_data, error } = await supabase.from('all_items').select("*")
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
 
   const error = false;
   const allItems_data: AllItemsData = [
@@ -187,12 +190,12 @@ export default async function RootLayout({
         className={style.HiddenScrollBar}
 
       >
-        {/* <SupabaseProvider> */}
-        {/* <SupabaseListener serverAccessToken={session?.access_token} /> */}
-        <ContextWrapper AllItemsData={error ? [] : allItems_data}>
-          {children}
-        </ContextWrapper>
-        {/* </SupabaseProvider> */}
+        <SupabaseProvider>
+          <SupabaseListener serverAccessToken={session?.access_token} />
+          <ContextWrapper AllItemsData={error ? [] : allItems_data}>
+            {children}
+          </ContextWrapper>
+        </SupabaseProvider>
 
 
       </body>

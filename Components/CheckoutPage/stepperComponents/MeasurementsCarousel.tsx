@@ -7,6 +7,7 @@ import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { IconContext } from "react-icons";
 import { CardContainerColors } from "../../../Shared/colors";
 import { cartItemsDataAtom, cartType, SingleCartItemType } from "../../../Stores/cartStore";
+import { orderItemsDataAtom } from "../../../Stores/orderStore";
 
 interface Props {
     cartItemsDataAtomValue: cartType,
@@ -165,6 +166,7 @@ export function FloatingLabelInput(inputProps: InputProps) {
                 (event) => {
 
                     const newArr = inputProps.cartItemsDataAtomValue.map(obj => {
+
                         if (obj.item.item_id === inputProps.info.id) {
 
                             return {

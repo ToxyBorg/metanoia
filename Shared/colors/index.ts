@@ -230,6 +230,7 @@ export const StepperColors = {
     iconsLineColorDark: colors.Peach, // ICON COLORS
     iconsBackgroundColorDark: colors.GradientDark, // ACTION ICONS BACKGROUND COLOR
     iconsBorderColorDark: colors.Peach, // stepper ICONS BORDER COLOR
+    iconsLineColorInputFieldDark: colors.Peach,
 
     stepperBackgroundColorDark: colors.GradientDark, // stepper BACKGROUND COLOR
     stepperBorderColorDark: colors.Peach, // stepper BORDER COLOR
@@ -242,6 +243,7 @@ export const StepperColors = {
     iconsLineColorLight: colors.Peach, // ICON COLORS
     iconsBackgroundColorLight: colors.GradientLight, // ACTION ICONS BACKGROUND COLOR
     iconsBorderColorLight: colors.Peach, // stepper ICONS BORDER COLOR
+    iconsLineColorInputFieldLight: colors.QuinacridoneMagenta,
 
     stepperBackgroundColorLight: colors.GradientLight,//PeachLighter, // stepper BACKGROUND COLOR
     stepperBorderColorLight: colors.CarolinaBlueLighter, // stepper BORDER COLOR

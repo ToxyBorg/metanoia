@@ -8,7 +8,6 @@ import ResponsiveFooter from "../../Components/appshellCompnents/ResponsiveFoote
 import ResponsiveHeader from "../../Components/appshellCompnents/ResponsiveHeader";
 import ResponsiveNavBar from "../../Components/appshellCompnents/ResponsiveNavBar";
 // import { containerRefAtom, refDataAtom } from "../../Stores/heroOutOfViewStore";
-import { xMousePosAtom } from "../../Stores/leftSideHover";
 
 interface Props {
     children: React.ReactNode
@@ -16,7 +15,7 @@ interface Props {
 
 const AppShellWrapper = (props: Props) => {
 
-    const xMousePos = useAtomValue(xMousePosAtom)
+    // const xMousePos = useAtomValue(xMousePosAtom)
     // const scrollPastRootContainer = useAtomValue(containerRefAtom)
 
     // const mergedRef = useMergedRef(xMousePos.xMousePosRef, scrollPastRootContainer?.current!)
@@ -41,7 +40,7 @@ const AppShellWrapper = (props: Props) => {
             }
             padding={0}
 
-            ref={xMousePos.xMousePosRef}
+        // ref={xMousePos.xMousePosRef}
         >
             {/* <Container ref={xMousePos.xMousePosRef}> */}
             {props.children}

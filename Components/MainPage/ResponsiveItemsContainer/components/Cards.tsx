@@ -7,7 +7,7 @@ import { useAtom } from "jotai";
 import Image from 'next/image';
 import { IconContext } from "react-icons";
 import { CardContainerColors, NavBarColors } from "../../../../Shared/colors";
-import { cartItemsDataAtom, SingleCartItemType } from "../../../../Stores/cartStore";
+import { cartItemsDataAtom, cartType, SingleCartItemType } from "../../../../Stores/cartStore";
 import { SingleItemData } from "../../../../Stores/itemDataStore";
 import { cart, cartAdd, cartRemove, itemDescription, itemDescriptionShowLess, itemDescriptionShowMore, showAllImages } from "../../../../Shared/icons";
 import CardModal from "./CardModal";
@@ -22,6 +22,8 @@ interface Props {
 const Cards = (props: Props) => {
 
     const [cartItemsDataAtomValue, cartItemsDataAtomSetter] = useAtom(cartItemsDataAtom)
+
+
 
     let searched_obj: SingleCartItemType | undefined = cartItemsDataAtomValue.find(callback_func);
 
