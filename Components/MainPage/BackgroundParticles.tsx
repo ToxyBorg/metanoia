@@ -70,7 +70,7 @@ const BackgroundParticles: NextComponentType<NextPageContext, {}, Props> = (
                         width: 1,
                     },
                     collisions: {
-                        enable: true,
+                        enable: false,
                     },
                     move: {
                         direction: "none",
@@ -78,9 +78,10 @@ const BackgroundParticles: NextComponentType<NextPageContext, {}, Props> = (
                         outModes: {
                             default: "bounce",
                         },
-                        random: false,
-                        speed: 1.5,
+                        random: true,
+                        speed: 2,
                         straight: false,
+                        bounce: false,
                     },
                     number: {
                         density: {
