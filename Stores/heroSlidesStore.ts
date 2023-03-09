@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 
+export const heroContainerFadeInAtom = atom<boolean>(false)
 export const titleSlideAtom = atom<boolean>(false)
 export const secondTitleSlideAtom = atom<boolean>(false)
 export const heroTextSlideAtom = atom<boolean>(false)

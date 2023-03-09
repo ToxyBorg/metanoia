@@ -8,7 +8,7 @@ import { NavBarColors } from '../../Shared/colors';
 import style from '../../Shared/css/style';
 import { arrowDown, MetanoiaSVG } from '../../Shared/icons';
 import { heroScrollIntoViewAtom } from '../../Stores/heroScrollIntoView';
-import { goDownArrowSlideAtom, heroTextSlideAtom, metanoiaIconSlideAtom, secondTitleSlideAtom, titleSlideAtom } from '../../Stores/heroSlidesStore';
+import { goDownArrowSlideAtom, heroContainerFadeInAtom, heroTextSlideAtom, metanoiaIconSlideAtom, secondTitleSlideAtom, titleSlideAtom } from '../../Stores/heroSlidesStore';
 import { screenSizesAtom } from '../../Stores/screenSizesStore';
 import BackgroundParticles from './BackgroundParticles';
 
@@ -19,6 +19,7 @@ const HeroSection = () => {
 
     // const scrollPastRootContainerChildData = useAtomValue(refDataAtom)
     const screenSizes = useAtomValue(screenSizesAtom)
+    const [heroContainerFadeInAtomValue, SetHeroContainerFadeInAtom] = useAtom(heroContainerFadeInAtom)
     const [titleSlide, setTitleSlide] = useAtom(titleSlideAtom)
     const [secondTitleSlide, setSecondTitleSlide] = useAtom(secondTitleSlideAtom)
     const [heroTextSlide, setHeroTextSlide] = useAtom(heroTextSlideAtom)
@@ -43,7 +44,7 @@ const HeroSection = () => {
             }}>
 
 
-            <Transition mounted={screenSizes != "OUT_OF_RANGE"} transition="slide-right" duration={1000} timingFunction="ease" onEntered={() => setTitleSlide(true)} >
+            <Transition mounted={screenSizes != "OUT_OF_RANGE"} transition="slide-down" duration={1000} timingFunction="ease" onEntered={() => setHeroTextSlide(true)} >
                 {(styles) =>
 
                     <Center
@@ -52,9 +53,13 @@ const HeroSection = () => {
 
                         pos={"relative"}
                         style={styles}
+                    // sx={{
+                    //     border: "2px solid black"
+                    // }}
+
                     >
 
-                        <Transition mounted={goDownArrowSlide} transition="slide-down" duration={1000} timingFunction="ease" >
+                        <Transition mounted={goDownArrowSlide} transition="slide-down" duration={500} timingFunction="ease" onEntered={() => (true)}>
                             {(styles) =>
                                 <ActionIcon
                                     style={styles}
@@ -81,21 +86,54 @@ const HeroSection = () => {
                             }
                         </Transition>
 
-
+                        {/* <Transition mounted={heroContainerFadeInAtomValue} transition="fade" duration={1000} timingFunction="ease" >
+                            {(styles) => */}
                         <Container
-                            sx={{
+                            // style={styles}
+                            pos={"relative"}
+                            // sx={{
 
-                                background: "rgba(255, 255, 255, 0.03)",
-                                borderRadius: "16px",
-                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-                                backdropFilter: "blur(5px)",
-                                WebkitBackdropFilter: "blur(5px)",
-                                border: "1px solid rgba(255, 255, 255, 0.3)",
-                                color: colorScheme === "dark" ? NavBarColors.iconsLineColorDark : NavBarColors.iconsLineColorLight
+
+                            //     background: "rgba(255, 255, 255, 0.03)",
+                            //     borderRadius: "15px",
+                            //     boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                            //     backdropFilter: "blur(5px)",
+                            //     WebkitBackdropFilter: "blur(5px)",
+                            //     border: "1px solid rgba(255, 255, 255, 0.3)",
+                            //     color: colorScheme === "dark" ? NavBarColors.iconsLineColorDark : NavBarColors.iconsLineColorLight
+                            // }}
+
+                            sx={{
+                                color: colorScheme === "dark" ? NavBarColors.iconsLineColorDark : NavBarColors.iconsLineColorLight,
+                                // minWidth: 250,
+                                // maxWidth: 1500,
                             }}
 
                         >
 
+
+                            <Transition mounted={heroContainerFadeInAtomValue} transition="fade" duration={800} timingFunction="ease" onEntered={() => setGoDownArrowSlide(true)}>
+                                {(styles) =>
+                                    <Overlay color="#000" opacity={0.85}
+                                        style={styles}
+                                        zIndex={0}
+                                        sx={{
+                                            background: "rgba(255, 255, 255, 0.03)",
+                                            borderRadius: "15px",
+                                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                                            backdropFilter: "blur(5px)",
+                                            WebkitBackdropFilter: "blur(5px)",
+                                            border: "1px solid rgba(255, 255, 255, 0.3)",
+
+                                        }}
+                                    />
+
+                                }
+                            </Transition>
+
+                            {/* {heroContainerFadeInAtomValue &&
+                               
+                            } */}
 
                             <Stack spacing={"xl"}
 
@@ -103,32 +141,31 @@ const HeroSection = () => {
                                 pos={"relative"}
                             >
 
-                                <Transition mounted={titleSlide} transition="slide-left" duration={1800} timingFunction="ease" onEntered={() => setSecondTitleSlide(true)} >
+                                <Transition mounted={titleSlide} transition="slide-down" duration={800} timingFunction="ease" onEntered={() => SetHeroContainerFadeInAtom(true)} >
                                     {(styles) =>
                                         <Title order={1} style={styles}>Welcome To</Title>
                                     }
                                 </Transition>
 
-                                <Transition mounted={secondTitleSlide} transition="slide-right" duration={1500} timingFunction="ease" onEntered={() => setHeroTextSlide(true)} >
+                                <Transition mounted={secondTitleSlide} transition="slide-down" duration={800} timingFunction="ease" onEntered={() => setTitleSlide(true)} >
                                     {(styles) =>
 
                                         <Title style={styles} order={2} >Metanoia</Title>
                                     }
                                 </Transition>
 
-                                <Transition mounted={heroTextSlide} transition="slide-up" duration={1500} timingFunction="ease" onEntered={() => setMetanoiaIconSlide(true)} >
+                                <Transition mounted={heroTextSlide} transition="slide-down" duration={800} timingFunction="ease" onEntered={() => setSecondTitleSlide(true)} >
                                     {(styles) =>
                                         <Spoiler maxHeight={120} style={styles} showLabel="Show more" hideLabel="Hide">
                                             <Text size="xl" mt="xl" sx={{ overflowWrap: "break-word" }}>
-                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam esse suscipit laboriosam. Voluptates sint a quasi deserunt aperiam architecto eligendi excepturi. Suscipit eveniet cupiditate quidem repellendus quasi autem a accusamus aut exercitationem natus ab dignissimos doloremque nam distinctio odit ratione repudiandae, debitis ipsa, labore esse! Natus numquam perspiciatis illo ducimus.
-                                            </Text>
+                                                Welcome to our world of exquisite handmade jewelry! Each piece of our jewelry is crafted with utmost precision and care, making it a unique and special addition to your collection. Our designs are inspired by nature, art, and the beauty of the world around us. From delicate earrings to statement necklaces, every piece of our jewelry is a work of art that tells a story. We use only the finest materials, from gleaming gemstones to precious metals, to create jewelry that you will treasure for years to come. Browse our collection today and find the perfect piece to reflect your style and personality!                                            </Text>
                                         </Spoiler>
 
                                     }
                                 </Transition>
 
 
-                                <Transition mounted={metanoiaIconSlide} transition="slide-down" duration={1800} timingFunction="ease" onEntered={() => setGoDownArrowSlide(true)} >
+                                {/* <Transition mounted={metanoiaIconSlide} transition="slide-down" duration={1800} timingFunction="ease" onEntered={() => setGoDownArrowSlide(true)} >
                                     {(styles) =>
 
                                         <ActionIcon variant="transparent"
@@ -155,11 +192,13 @@ const HeroSection = () => {
 
                                         </ ActionIcon>
                                     }
-                                </Transition>
+                                </Transition> */}
 
 
                             </Stack>
                         </Container>
+                        {/* } */}
+                        {/* </Transition> */}
 
                     </Center>
 
