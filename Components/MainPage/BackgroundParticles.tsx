@@ -39,7 +39,7 @@ const BackgroundParticles: NextComponentType<NextPageContext, {}, Props> = (
                 interactivity: {
                     events: {
                         onClick: {
-                            enable: true,
+                            // enable: true,
                             mode: "push",
                         },
                         onHover: {
