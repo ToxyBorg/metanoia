@@ -60,7 +60,8 @@ const ResponsiveHeader = () => {
                                 borderRadius: mobileNavRadius.navbarBorderRadius,
                                 backdropFilter: "blur(2px)",
                                 border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
-
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                             }}
                             mx={"auto"} my={"md"} px={"0.75rem"}
                             w={mobileNavWidthHeight.width} h={"clamp(5vh, 4rem , 15vh)"}

@@ -58,6 +58,9 @@ const ResponsiveNavBar = () => {
                         sx={{
                             borderRadius: desktopNavRadius.navbarBorderRadius,
                             backdropFilter: "blur(2px)",
+                            WebkitBackdropFilter: "blur(2px)",
+                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+
                             border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
                             backgroundImage: colorScheme === "dark" ? NavBarColors.backgroundColorDarkVertical : NavBarColors.backgroundColorLightVertical,
                             // backgroundImage: colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight,
@@ -110,6 +113,8 @@ const ResponsiveNavBar = () => {
                             // backgroundSize: "200% 200%",
 
                             // animation: `${style.AnimateBG} 7s ease infinite`,
+                            WebkitBackdropFilter: "blur(2px)",
+                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
 
                         }}
                     >

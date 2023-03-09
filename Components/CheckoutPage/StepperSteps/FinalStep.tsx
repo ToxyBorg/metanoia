@@ -27,6 +27,8 @@ const FinalStep: NextComponentType<NextPageContext, {}, Props> = (
                     ? CardContainerColors.borderColorDark
                     : CardContainerColors.borderColorLight}`,
                 borderRadius: 15,
+                // WebkitBackdropFilter: "blur(2px)",
+                // boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
             })}
 
             bg={colorScheme === "dark"
@@ -40,7 +42,7 @@ const FinalStep: NextComponentType<NextPageContext, {}, Props> = (
         >
             <Text size={"xl"} fw={"bolder"} fs={"italic"}>
                 Congratulations! Your order has been added.
-                We will contact you soon for further information.
+                We will contact you soon with further information.
             </Text>
         </Center>
     )

@@ -39,6 +39,8 @@ const CashPayment: NextComponentType<NextPageContext, {}, Props> = (
                     ? CardContainerColors.borderColorDark
                     : CardContainerColors.borderColorLight}`,
                 borderRadius: 15,
+                WebkitBackdropFilter: "blur(2px)",
+                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
             })}
 
             bg={colorScheme === "dark"
@@ -75,7 +77,14 @@ const CashPayment: NextComponentType<NextPageContext, {}, Props> = (
 
                                 backgroundSize: "300% 300%",
                                 animation: `${style.AnimateBG} 7s ease infinite`,
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+
                             },
+                            itemBullet: {
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                            }
 
 
                         }}
@@ -117,6 +126,8 @@ const CashPayment: NextComponentType<NextPageContext, {}, Props> = (
                                                 border: `2px solid ${colorScheme === "dark"
                                                     ? CardContainerColors.borderColorDark
                                                     : CardContainerColors.borderColorLight}`,
+                                                WebkitBackdropFilter: "blur(2px)",
+                                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                                 // fontSize: 
                                             }}
                                             bg={colorScheme === "dark"
@@ -136,6 +147,8 @@ const CashPayment: NextComponentType<NextPageContext, {}, Props> = (
                                                 border: `2px solid ${colorScheme === "dark"
                                                     ? CardContainerColors.borderColorDark
                                                     : CardContainerColors.borderColorLight}`,
+                                                WebkitBackdropFilter: "blur(2px)",
+                                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                                 // fontSize: 
                                             }}
                                             bg={colorScheme === "dark"

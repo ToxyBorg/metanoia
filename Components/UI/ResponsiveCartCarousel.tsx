@@ -40,7 +40,9 @@ const ResponsiveCartCarousel: NextComponentType<NextPageContext, {}, Props> = (
                   border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
                   width: "clamp(20%, 250px, 100%)",
                   // height: "clamp(50vh, 350px, 60vh)",
-                  // width: "50%"
+                  // width: "50%",
+                  WebkitBackdropFilter: "blur(2px)",
+                  boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
 
                 }}
                 radius={"md"}

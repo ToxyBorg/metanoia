@@ -35,6 +35,9 @@ const useStyles = createStyles((theme) => ({
             border: `2px solid ${theme.colorScheme === "dark" ? SpotlightColors.spotlightBorderColorDark : SpotlightColors.spotlightBorderColorLight}`,
 
         },
+
+        WebkitBackdropFilter: "blur(2px)",
+        boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
     },
 }));
 
@@ -79,7 +82,8 @@ function CustomAction({
                         <Card pos={"relative"} shadow="md"
                             sx={{
                                 border: `2px solid ${colorScheme === "dark" ? SpotlightColors.spotlightBorderColorDark : SpotlightColors.spotlightBorderColorLight}`,
-
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
                                 width: "5rem",
                             }}
                             radius={"md"}
@@ -115,6 +119,8 @@ function CustomAction({
                                     ? CardContainerColors.borderColorDark
                                     : CardContainerColors.borderColorLight}`,
                                 borderRadius: 15,
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
                             }}
                             bg={colorScheme === "dark"
                                 ? CardContainerColors.backgroundColorDark
@@ -190,7 +196,9 @@ export const Search = () => {
                     backgroundImage: theme.colorScheme === "dark" ? SpotlightColors.spotlightBackgroundColorDark : SpotlightColors.spotlightBackgroundColorLight,
                     border: `2px solid ${theme.colorScheme === "dark" ? SpotlightColors.spotlightBorderColorDark : SpotlightColors.spotlightBorderColorLight}`,
                     backgroundSize: "300% 300%",
-                    animation: `${style.AnimateBG} 7s ease infinite`
+                    animation: `${style.AnimateBG} 7s ease infinite`,
+                    // WebkitBackdropFilter: "blur(2px)",
+                    // boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
 
                 },
                 searchInput: {
@@ -198,6 +206,8 @@ export const Search = () => {
                     color: theme.colorScheme === "dark" ? SpotlightColors.spotlightHeaderTextColorDark : SpotlightColors.spotlightHeaderTextColorLight,
                     backgroundSize: "300% 300%",
                     animation: `${style.AnimateBG} 7s ease infinite`,
+                    WebkitBackdropFilter: "blur(2px)",
+                    boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
                 },
 
 
