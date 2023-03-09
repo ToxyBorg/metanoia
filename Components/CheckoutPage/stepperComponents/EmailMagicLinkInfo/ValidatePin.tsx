@@ -3,6 +3,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
+import { browser } from "process";
 import { useState } from "react";
 import { useSupabase } from "../../../../Context/SupabaseWrapper/supabase-provider";
 import { CardContainerColors, NavBarColors, StepperColors } from "../../../../Shared/colors";
@@ -286,6 +287,9 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
                     })
 
                 } else {
+
+                    const { error } = await supabase.auth.signOut()
+
                     props.nextStep()
                 }
             }
@@ -427,6 +431,9 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
                 })
 
             } else {
+
+                const { error } = await supabase.auth.signOut()
+
                 props.nextStep()
             }
 
