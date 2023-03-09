@@ -20,7 +20,8 @@
     ".gitignore": true,
     "tsconfig.json": true,
     "next.config.js": true,
-    "pages": true
+    "pages": true,
+    ".env.local": true
   },
   "hide-files.files": [
     "node_modules",
@@ -33,7 +34,8 @@
     ".gitignore",
     "tsconfig.json",
     "next.config.js",
-    "pages"
+    "pages",
+    ".env.local"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,

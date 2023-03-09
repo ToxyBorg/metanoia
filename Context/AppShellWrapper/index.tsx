@@ -10,6 +10,7 @@ import ResponsiveNavBar from "../../Components/appshellCompnents/ResponsiveNavBa
 // import { containerRefAtom, refDataAtom } from "../../Stores/heroOutOfViewStore";
 import Confetti from 'react-confetti'
 import { lastStepReachedAtom } from "../../Stores/lastStepStore";
+import BackgroundParticles from "../../Components/MainPage/BackgroundParticles";
 
 
 interface Props {
@@ -58,6 +59,9 @@ const AppShellWrapper = (props: Props) => {
             }
             padding={0}
 
+        // zIndex={1}
+        // pos={"relative"}
+
         // ref={xMousePos.xMousePosRef}
         >
             <Transition mounted={lastStepReachedAtomValue} transition="fade" duration={500} timingFunction="ease">
@@ -66,6 +70,8 @@ const AppShellWrapper = (props: Props) => {
                 }
             </Transition>
             {/* {lastStepReachedAtomValue && <Confetti style={{ width: "100vw", height: "100%" }} />} */}
+
+            <BackgroundParticles />
 
             {props.children}
             {/* </Container> */}

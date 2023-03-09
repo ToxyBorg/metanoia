@@ -23,12 +23,16 @@ const ResponsiveFooter = () => {
 
         <Footer
             height={footerWidthHeight.height} w={footerWidthHeight.width}
-            p="md" pos={"static"} mt={"xl"}
+            p="md"
+            pos={"static"}
+            mt={"xl"}
             bg={colorScheme === "dark" ? FooterColors.backgroundColorDark : FooterColors.backgroundColorLight}
             sx={{
                 borderTop: `2px solid ${colorScheme === "dark" ? FooterColors.borderColorDark : FooterColors.borderColorLight}`,
             }}
             className={style.Animated_Background_Gradient}
+        // zIndex={2}
+
         >
 
             <IconContext.Provider
