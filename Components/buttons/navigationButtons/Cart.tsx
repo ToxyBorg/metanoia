@@ -121,6 +121,7 @@ export const Cart = () => {
 
                             onClick={() => {
                                 handlers.close()
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
                                 // router.push("/")
                             }}
                             component={Link}

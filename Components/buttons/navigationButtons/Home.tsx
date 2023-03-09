@@ -32,7 +32,7 @@ export const Home = () => {
             <MetanoiaSVG
                 lineColor={colorScheme === "dark" ? NavBarColors.iconsLineColorDark : NavBarColors.iconsLineColorLight}
                 strokeColor={colorScheme === "dark" ? NavBarColors.iconsLineColorDark : NavBarColors.iconsLineColorLight}
-                strokeWidth={60}
+                strokeWidth={10}
 
             />
 
