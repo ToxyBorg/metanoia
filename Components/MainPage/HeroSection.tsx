@@ -49,6 +49,8 @@ const HeroSection = () => {
 
                     <Center
                         mb={"xl"}
+                        mx={"xs"}
+
                         h={"100vh"}
 
                         pos={"relative"}
@@ -123,7 +125,9 @@ const HeroSection = () => {
                                             boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                             backdropFilter: "blur(5px)",
                                             WebkitBackdropFilter: "blur(5px)",
-                                            border: "1px solid rgba(255, 255, 255, 0.3)",
+                                            // border: "1px solid rgba(255, 255, 255, 0.3)",
+                                            border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
+
 
                                         }}
                                     />
