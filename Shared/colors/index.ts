@@ -255,3 +255,8 @@ export const StepperColors = {
 }
 
 
+export const BackgroundParticlesColors = {
+
+    particlesColor: colors.Peach,
+    linksColors: colors.Peach
+}
