@@ -17,6 +17,7 @@ import { arrowNext } from '../../../../Shared/icons';
 
 const ItemsContainer = () => {
 
+
     const { colorScheme, } = useMantineColorScheme();
     const categorizedItemsDataAtomValue = useAtomValue(categorizedItemsDataAtom)
 
@@ -41,7 +42,7 @@ const ItemsContainer = () => {
                 size: "clamp(2vw, 3rem , 10vw)"
             }}>
 
-            <Stack spacing={"lg"} p={0}
+            <Stack spacing={"xl"} p={0}
                 sx={{
                     maxWidth: "1500px"
                 }}

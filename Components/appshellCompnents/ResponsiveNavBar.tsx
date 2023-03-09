@@ -43,6 +43,7 @@ const ResponsiveNavBar = () => {
                 // mounted={screenSizes == "DESKTOP" && ((xMousePos.x <= 100 || navBarLocked))}
                 mounted={screenSizes == "DESKTOP" && ((!navBarLocked && scrollDirection == "DOWN"))}
                 transition="slide-down" duration={800}
+
             >
                 {(styles) =>
 
@@ -67,11 +68,13 @@ const ResponsiveNavBar = () => {
                             // backgroundSize: "200% 200%",
 
                             // animation: `${style.AnimateBG} 7s ease infinite`,
-                            zIndex: 2
+                            zIndex: 2,
+
+                            // ":hover": {
+                            //     border: "2px solid black"
+                            // }
 
                         }}
-
-
 
                     >
                         <NavBarShow />

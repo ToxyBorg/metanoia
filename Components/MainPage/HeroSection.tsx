@@ -1,11 +1,13 @@
 "use client"
 import { createStyles, Overlay, Container, Title, Button, Text, Center, SimpleGrid, Transition, Stack, Group, useMantineColorScheme, ActionIcon, Spoiler } from '@mantine/core';
-import { useAtom, useAtomValue } from 'jotai';
+import { useScrollIntoView } from '@mantine/hooks';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useState } from 'react';
 import { IconContext } from 'react-icons';
 import { NavBarColors } from '../../Shared/colors';
 import style from '../../Shared/css/style';
 import { arrowDown, MetanoiaSVG } from '../../Shared/icons';
+import { heroScrollIntoViewAtom } from '../../Stores/heroScrollIntoView';
 import { goDownArrowSlideAtom, heroTextSlideAtom, metanoiaIconSlideAtom, secondTitleSlideAtom, titleSlideAtom } from '../../Stores/heroSlidesStore';
 import { screenSizesAtom } from '../../Stores/screenSizesStore';
 import BackgroundParticles from './BackgroundParticles';
@@ -22,6 +24,14 @@ const HeroSection = () => {
     const [heroTextSlide, setHeroTextSlide] = useAtom(heroTextSlideAtom)
     const [metanoiaIconSlide, setMetanoiaIconSlide] = useAtom(metanoiaIconSlideAtom)
     const [goDownArrowSlide, setGoDownArrowSlide] = useAtom(goDownArrowSlideAtom)
+
+
+    const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({
+        // offset: 60,
+    });
+
+    const heroScrollIntoViewAtomSetter = useSetAtom(heroScrollIntoViewAtom)
+    heroScrollIntoViewAtomSetter({ targetRef: targetRef })
 
     return (
 
@@ -56,7 +66,12 @@ const HeroSection = () => {
                                     py={"xs"}
                                     px={"lg"}
 
-                                    onClick={() => { }}
+                                    onClick={() =>
+                                        scrollIntoView({
+                                            alignment: 'start',
+                                        })
+                                    }
+
                                     pos={"fixed"} bottom={0}
 
                                 >
