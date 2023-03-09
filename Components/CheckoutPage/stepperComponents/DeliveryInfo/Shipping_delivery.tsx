@@ -27,6 +27,8 @@ const Shipping_delivery: NextComponentType<NextPageContext, {}, Props> = (
                     ? CardContainerColors.borderColorDark
                     : CardContainerColors.borderColorLight}`,
                 borderRadius: 15,
+                WebkitBackdropFilter: "blur(2px)",
+                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
             })}
 
             bg={colorScheme === "dark"
@@ -172,6 +174,10 @@ export function FloatingLabelInput(inputProps: InputProps) {
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             mt="md"
+            sx={{
+                WebkitBackdropFilter: "blur(2px)",
+                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+            }}
 
         />
     );

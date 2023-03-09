@@ -45,7 +45,8 @@ const ResponsiveCheckoutStepper: NextComponentType<NextPageContext, {}, Props> =
 
             <Stepper active={active} breakpoint={"xs"}
                 sx={{
-                    overflow: "hidden"
+                    overflow: "hidden",
+
                 }}
 
                 styles={{
@@ -75,6 +76,8 @@ const ResponsiveCheckoutStepper: NextComponentType<NextPageContext, {}, Props> =
                         animation: `${style.AnimateBG} 7s ease infinite`,
                         padding: "1rem",
                         borderRadius: 15,
+                        WebkitBackdropFilter: "blur(2px)",
+                        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.5)",
 
                     },
                     content: {

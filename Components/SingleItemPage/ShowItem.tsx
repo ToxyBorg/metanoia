@@ -32,6 +32,8 @@ const ShowItem: NextComponentType<NextPageContext, {}, Props> = (
                         ? CardContainerColors.borderColorDark
                         : CardContainerColors.borderColorLight}`,
                     borderRadius: 15,
+                    WebkitBackdropFilter: "blur(2px)",
+                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                 })}
 
                 bg={colorScheme === "dark"
@@ -56,6 +58,8 @@ const ShowItem: NextComponentType<NextPageContext, {}, Props> = (
                                     ? CardContainerColors.borderColorDark
                                     : CardContainerColors.borderColorLight}`,
                                 borderRadius: 15,
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                             }}
                             bg={colorScheme === "dark"
                                 ? CardContainerColors.backgroundColorDark
@@ -101,6 +105,8 @@ const ShowItem: NextComponentType<NextPageContext, {}, Props> = (
                                                         ? CardContainerColors.borderColorDark
                                                         : CardContainerColors.borderColorLight}`,
                                                     borderRadius: 15,
+                                                    WebkitBackdropFilter: "blur(2px)",
+                                                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                                 }}
                                                 bg={colorScheme === "dark"
                                                     ? CardContainerColors.backgroundColorDark

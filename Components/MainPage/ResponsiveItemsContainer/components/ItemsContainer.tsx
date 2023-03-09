@@ -59,6 +59,8 @@ const ItemsContainer = () => {
                                     ? CardContainerColors.borderColorDark
                                     : CardContainerColors.borderColorLight}`,
                                 borderRadius: 15,
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                             })}
 
                             bg={colorScheme === "dark"
@@ -83,7 +85,9 @@ const ItemsContainer = () => {
                                 sx={{
                                     border: `2px solid ${colorScheme === "dark" ?
                                         CardContainerColors.borderColorDark
-                                        : CardContainerColors.borderColorLight}`
+                                        : CardContainerColors.borderColorLight}`,
+                                    WebkitBackdropFilter: "blur(2px)",
+                                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                 }}
                                 ml={"xl"} p={"0.5rem"}
                                 w={"fit-content"} h={"fit-content"}

@@ -55,7 +55,10 @@ export const Settings = () => {
                             title="Toggle color scheme"
 
                             sx={{
-                                border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
+                                border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`,
+                                // borderRadius: 15,
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
                             }}
                             onClick={
                                 () => {
@@ -97,7 +100,9 @@ export const Settings = () => {
 
                             sx={(theme) => ({
                                 // backgroundImage: colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight,
-                                border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
+                                border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`,
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
 
                             })}
 
@@ -135,7 +140,9 @@ export const Settings = () => {
                                     p={"xs"}
 
                                     sx={{
-                                        border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`
+                                        border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`,
+                                        WebkitBackdropFilter: "blur(2px)",
+                                        boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
                                     }}
                                     title={button.name}
                                     component={Link} href={button.link!}

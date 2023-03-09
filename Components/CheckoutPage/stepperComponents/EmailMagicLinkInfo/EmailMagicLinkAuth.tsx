@@ -169,6 +169,8 @@ const EmailMagicLinkAuth: NextComponentType<NextPageContext, {}, Props> = (
                     ? CardContainerColors.borderColorDark
                     : CardContainerColors.borderColorLight}`,
                 borderRadius: 15,
+                WebkitBackdropFilter: "blur(2px)",
+                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
             })}
 
             bg={colorScheme === "dark"
@@ -190,7 +192,9 @@ const EmailMagicLinkAuth: NextComponentType<NextPageContext, {}, Props> = (
                             ? CardContainerColors.borderColorDark
                             : CardContainerColors.borderColorLight}`,
                         borderRadius: 15,
-                        overflow: "hidden"
+                        overflow: "hidden",
+                        WebkitBackdropFilter: "blur(2px)",
+                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
 
                     })}
 
@@ -217,9 +221,71 @@ const EmailMagicLinkAuth: NextComponentType<NextPageContext, {}, Props> = (
                                 loadingOverlayVisibleHandlers.open()
                                 signInWithEmail()
                             }
+                            else {
+                                showNotification({
+
+                                    color: "red",
+                                    radius: "md",
+                                    title: 'Email Error',
+                                    message: <p>The email entered is not a valid one. Try again!</p>,
+                                    // icon: <errorIcon.icon />,
+
+                                    styles: (theme) => ({
+
+
+                                        root: {
+                                            background: colorScheme === "dark"
+                                                ? CardContainerColors.backgroundColorDark
+                                                : CardContainerColors.backgroundColorLight,
+                                            backgroundSize: "300% 300%",
+                                            animation: `${style.AnimateBG} 7s ease infinite`,
+
+                                            border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                        },
+
+                                        title: {
+
+                                            background: colorScheme === "dark"
+                                                ? CardContainerColors.backgroundColorDark
+                                                : CardContainerColors.backgroundColorLight,
+                                            backgroundSize: "300% 300%",
+                                            animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                                            // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                            padding: "0.5rem",
+                                            borderRadius: 5,
+
+                                            fontWeight: "bolder",
+                                            color: colorScheme === "dark"
+                                                ? CardContainerColors.textColorDark
+                                                : CardContainerColors.textColorLight
+                                        },
+                                        description: {
+                                            fontStyle: "italic",
+
+                                            color: colorScheme === "dark"
+                                                ? CardContainerColors.textColorDark
+                                                : CardContainerColors.textColorLight
+                                        },
+                                        closeButton: {
+                                            color: colorScheme === "dark"
+                                                ? CardContainerColors.textColorDark
+                                                : CardContainerColors.textColorLight,
+
+                                            '&:hover': {
+                                                backgroundColor: "red"
+                                            },
+                                        },
+                                    }),
+
+                                })
+                            }
                         }}
                         sx={{
-                            border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`
+                            border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
+                            WebkitBackdropFilter: "blur(2px)",
+                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                         }}
                     >
                         <Group>
@@ -338,6 +404,11 @@ export function FloatingLabelInput(inputProps: InputProps) {
 
             // error={!emailSchema.isValidSync(emailAtomValue.value)}
             error={!emailAtomValue.isValid}
+
+            sx={{
+                WebkitBackdropFilter: "blur(2px)",
+                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+            }}
         />
     );
 }

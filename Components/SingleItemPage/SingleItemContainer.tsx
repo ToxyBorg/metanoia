@@ -45,6 +45,8 @@ const SingleItemContainer: NextComponentType<NextPageContext, {}, Props> = (
                 ? CardContainerColors.borderColorDark
                 : CardContainerColors.borderColorLight}`,
               borderRadius: 15,
+              WebkitBackdropFilter: "blur(2px)",
+              boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
             })}
 
             bg={colorScheme === "dark"
@@ -70,6 +72,12 @@ const SingleItemContainer: NextComponentType<NextPageContext, {}, Props> = (
 
                 title={"Home"}
                 mx={"auto"}
+                radius={"lg"}
+                sx={{
+                  // borderRadius: 15,
+                  WebkitBackdropFilter: "blur(2px)",
+                  boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                }}
 
               >
                 {/* <home.icon title={home.name} /> */}

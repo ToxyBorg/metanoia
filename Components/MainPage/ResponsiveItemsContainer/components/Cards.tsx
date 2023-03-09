@@ -66,6 +66,8 @@ const Cards = (props: Props) => {
                 sx={{
                     border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
                     width: "clamp(15vw,400px,80vw)",
+                    WebkitBackdropFilter: "blur(2px)",
+                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                 }}
                 radius={"md"}
             >

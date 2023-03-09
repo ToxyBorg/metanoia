@@ -1,5 +1,5 @@
 "use client"
-import { ActionIcon, Box, Group, Indicator, ScrollArea, Stack, useMantineColorScheme } from "@mantine/core"
+import { ActionIcon, Box, Group, Indicator, ScrollArea, Stack, Text, useMantineColorScheme } from "@mantine/core"
 
 import { cart, categories } from "../../../Shared/icons"
 import { useDisclosure } from "@mantine/hooks";
@@ -14,9 +14,13 @@ import { mobileNavRadius, mobileNavWidthHeight } from "../../../Shared/sizes";
 import style from "../../../Shared/css/styles.module.css";
 import ClearCart from "../extraButtons/ClearCart";
 import Checkout from "../extraButtons/Checkout";
+// import { useRouter } from "next/router";
+import Link from "next/link";
 
 
 export const Cart = () => {
+
+    // const router = useRouter()
 
     const { colorScheme, } = useMantineColorScheme();
 
@@ -65,6 +69,8 @@ export const Cart = () => {
                                 sx={{
                                     borderRadius: mobileNavRadius.navbarBorderRadius,
                                     border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
+                                    WebkitBackdropFilter: "blur(2px)",
+                                    boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
 
                                 }}
                                 mx={"auto"}
@@ -101,15 +107,35 @@ export const Cart = () => {
                                 padding: theme.spacing.xl,
                                 borderRadius: theme.radius.md,
                                 cursor: 'pointer',
+                                textDecoration: "none",
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
+
+                                color: colorScheme === "dark" ? NavBarColors.iconsLineColorDark : theme.colors.dark[5],
 
                                 '&:hover': {
                                     backgroundColor:
                                         theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1],
                                 },
                             })}
+
+                            onClick={() => {
+                                handlers.close()
+                                // router.push("/")
+                            }}
+                            component={Link}
+                            href={"/"}
                         >
-                            Head back to store.
+                            <Text td={"none"}
+                            // sx={{
+                            //     color: 
+                            // }}
+                            >
+
+                                Head back to store.
+                            </Text>
                         </Box>
+
                     </Stack>
 
                 }

@@ -37,6 +37,8 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                     ? CardContainerColors.borderColorDark
                     : CardContainerColors.borderColorLight}`,
                 borderRadius: 15,
+                WebkitBackdropFilter: "blur(2px)",
+                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
             })}
 
             bg={colorScheme === "dark"
@@ -72,7 +74,13 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
 
                                 backgroundSize: "300% 300%",
                                 animation: `${style.AnimateBG} 7s ease infinite`,
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                             },
+                            itemBullet: {
+                                WebkitBackdropFilter: "blur(2px)",
+                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                            }
 
 
                         }}
@@ -114,6 +122,8 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                                 border: `2px solid ${colorScheme === "dark"
                                                     ? CardContainerColors.borderColorDark
                                                     : CardContainerColors.borderColorLight}`,
+                                                WebkitBackdropFilter: "blur(2px)",
+                                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                                 // fontSize: 
                                             }}
                                             bg={colorScheme === "dark"
@@ -133,6 +143,8 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                                 border: `2px solid ${colorScheme === "dark"
                                                     ? CardContainerColors.borderColorDark
                                                     : CardContainerColors.borderColorLight}`,
+                                                WebkitBackdropFilter: "blur(2px)",
+                                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                                 // fontSize: 
                                             }}
                                             bg={colorScheme === "dark"
@@ -169,6 +181,8 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                         border: `2px solid ${colorScheme === "dark"
                                             ? CardContainerColors.borderColorDark
                                             : CardContainerColors.borderColorLight}`,
+                                        WebkitBackdropFilter: "blur(2px)",
+                                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                         // fontSize: 
                                     }}
                                     bg={colorScheme === "dark"
@@ -190,6 +204,8 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                                 border: `2px solid ${colorScheme === "dark"
                                                     ? CardContainerColors.borderColorDark
                                                     : CardContainerColors.borderColorLight}`,
+                                                WebkitBackdropFilter: "blur(2px)",
+                                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                                 // fontSize: 
                                             }}
                                             bg={colorScheme === "dark"
@@ -249,7 +265,7 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                             radius={"md"}
                             bullet={<bankTransferPayment.icon />}
                         >
-                            <Tabs defaultValue="first" variant="outline"
+                            <Tabs defaultValue="first" variant="pills"
 
                                 styles={{
                                     panel: {
@@ -267,6 +283,8 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
 
                                         backgroundSize: "300% 300%",
                                         animation: `${style.AnimateBG} 7s ease infinite`,
+                                        WebkitBackdropFilter: "blur(2px)",
+                                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                     }
                                 }}
                                 color={colorScheme === "dark"
@@ -275,9 +293,10 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                 }
                                 radius={"md"}
                             >
-                                <Tabs.List grow position="center">
+                                <Tabs.List grow position="center" >
 
                                     <Tabs.Tab
+
 
                                         icon=
                                         {
@@ -285,6 +304,7 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                                 w={"1.5rem"} h={"1.5rem"}
                                                 title={"Postal Service"}
                                                 mx={"auto"}
+
                                             >
                                                 <PostalServiceSVG
                                                     lineColor={colorScheme === "dark" ? NavBarColors.iconsLineColorDark : NavBarColors.iconsLineColorLight}
@@ -293,7 +313,14 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                                 />
                                             </ActionIcon>
                                         }
-                                        value="first">
+
+                                        sx={{
+                                            WebkitBackdropFilter: "blur(2px)",
+                                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                                        }}
+
+                                        value="first"
+                                    >
                                         <Text
                                             fw={"bolder"}
                                             fs={"italic"}
@@ -304,6 +331,11 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                     </Tabs.Tab>
 
                                     <Tabs.Tab
+                                        sx={{
+                                            WebkitBackdropFilter: "blur(2px)",
+                                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                                        }}
+
                                         icon={<paypalIcon.icon title={paypalIcon.name} />}
                                         value="second"
                                     >

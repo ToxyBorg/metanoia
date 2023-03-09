@@ -61,7 +61,9 @@ const PaymentStep: NextComponentType<NextPageContext, {}, Props> = (
 
                 }}
                 sx={{
-                    border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`
+                    border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
+                    WebkitBackdropFilter: "blur(2px)",
+                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                 }}
             >
                 <Group>
