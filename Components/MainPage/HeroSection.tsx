@@ -1,11 +1,12 @@
 "use client"
 import { createStyles, Overlay, Container, Title, Button, Text, Center, SimpleGrid, Transition, Stack, Group, useMantineColorScheme, ActionIcon, Spoiler } from '@mantine/core';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { useState } from 'react';
 import { IconContext } from 'react-icons';
 import { NavBarColors } from '../../Shared/colors';
 import style from '../../Shared/css/style';
 import { arrowDown, MetanoiaSVG } from '../../Shared/icons';
+import { goDownArrowSlideAtom, heroTextSlideAtom, metanoiaIconSlideAtom, secondTitleSlideAtom, titleSlideAtom } from '../../Stores/heroSlidesStore';
 import { screenSizesAtom } from '../../Stores/screenSizesStore';
 import BackgroundParticles from './BackgroundParticles';
 
@@ -16,11 +17,11 @@ const HeroSection = () => {
 
     // const scrollPastRootContainerChildData = useAtomValue(refDataAtom)
     const screenSizes = useAtomValue(screenSizesAtom)
-    const [titleSlide, setTitleSlide] = useState(false)
-    const [secondTitleSlide, setSecondTitleSlide] = useState(false)
-    const [heroTextSlide, setHeroTextSlide] = useState(false)
-    const [metanoiaIconSlide, setMetanoiaIconSlide] = useState(false)
-    const [goDownArrowSlide, setGoDownArrowSlide] = useState(false)
+    const [titleSlide, setTitleSlide] = useAtom(titleSlideAtom)
+    const [secondTitleSlide, setSecondTitleSlide] = useAtom(secondTitleSlideAtom)
+    const [heroTextSlide, setHeroTextSlide] = useAtom(heroTextSlideAtom)
+    const [metanoiaIconSlide, setMetanoiaIconSlide] = useAtom(metanoiaIconSlideAtom)
+    const [goDownArrowSlide, setGoDownArrowSlide] = useAtom(goDownArrowSlideAtom)
 
     return (
 
@@ -32,7 +33,7 @@ const HeroSection = () => {
             }}>
 
 
-            <Transition mounted={screenSizes != "OUT_OF_RANGE"} transition="slide-right" duration={1000} timingFunction="ease" onEntered={() => setTitleSlide(true)} onExited={() => setTitleSlide(false)}>
+            <Transition mounted={screenSizes != "OUT_OF_RANGE"} transition="slide-right" duration={1000} timingFunction="ease" onEntered={() => setTitleSlide(true)} >
                 {(styles) =>
 
                     <Center
@@ -87,20 +88,20 @@ const HeroSection = () => {
                                 pos={"relative"}
                             >
 
-                                <Transition mounted={titleSlide} transition="slide-left" duration={1800} timingFunction="ease" onEntered={() => setSecondTitleSlide(true)} onExited={() => setSecondTitleSlide(false)}>
+                                <Transition mounted={titleSlide} transition="slide-left" duration={1800} timingFunction="ease" onEntered={() => setSecondTitleSlide(true)} >
                                     {(styles) =>
                                         <Title order={1} style={styles}>Welcome To</Title>
                                     }
                                 </Transition>
 
-                                <Transition mounted={secondTitleSlide} transition="slide-right" duration={1500} timingFunction="ease" onEntered={() => setHeroTextSlide(true)} onExited={() => setHeroTextSlide(false)}>
+                                <Transition mounted={secondTitleSlide} transition="slide-right" duration={1500} timingFunction="ease" onEntered={() => setHeroTextSlide(true)} >
                                     {(styles) =>
 
                                         <Title style={styles} order={2} >Metanoia</Title>
                                     }
                                 </Transition>
 
-                                <Transition mounted={heroTextSlide} transition="slide-up" duration={1500} timingFunction="ease" onEntered={() => setMetanoiaIconSlide(true)} onExited={() => setMetanoiaIconSlide(false)}>
+                                <Transition mounted={heroTextSlide} transition="slide-up" duration={1500} timingFunction="ease" onEntered={() => setMetanoiaIconSlide(true)} >
                                     {(styles) =>
                                         <Spoiler maxHeight={120} style={styles} showLabel="Show more" hideLabel="Hide">
                                             <Text size="xl" mt="xl" sx={{ overflowWrap: "break-word" }}>
@@ -112,7 +113,7 @@ const HeroSection = () => {
                                 </Transition>
 
 
-                                <Transition mounted={metanoiaIconSlide} transition="slide-down" duration={1800} timingFunction="ease" onEntered={() => setGoDownArrowSlide(true)} onExited={() => setGoDownArrowSlide(false)}>
+                                <Transition mounted={metanoiaIconSlide} transition="slide-down" duration={1800} timingFunction="ease" onEntered={() => setGoDownArrowSlide(true)} >
                                     {(styles) =>
 
                                         <ActionIcon variant="transparent"
