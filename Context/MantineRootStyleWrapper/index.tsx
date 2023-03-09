@@ -2,7 +2,7 @@
 
 import { CacheProvider } from '@emotion/react';
 import { useEmotionCache, MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core';
-import { useIntersection, useMouse } from '@mantine/hooks';
+import { useIntersection, useMouse, useScrollIntoView } from '@mantine/hooks';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useServerInsertedHTML } from 'next/navigation';
 import { useRef, useState } from 'react';
@@ -75,6 +75,7 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
 
     // const refDataSetter = useSetAtom(refDataAtom)
     // refDataSetter({ ref: ref, entry: entry })
+
 
 
     const screenSizesSetter = useSetAtom(screenSizesAtom)
