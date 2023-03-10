@@ -107,7 +107,7 @@ const ItemsContainer = () => {
                                         }
                                         mr={"md"}
                                     >
-                                        {data.icon.name}
+                                        {data.icon.name.toUpperCase()}
                                     </Text>
                                     <arrowNext.icon />
 

@@ -15,7 +15,7 @@ import { MdEmojiPeople, MdMarkEmailRead, MdOutlineMarkEmailRead } from 'react-ic
 import { IoCashOutline, IoCash } from 'react-icons/io5'
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai'
 import { HiOutlineAtSymbol } from 'react-icons/hi'
-
+import { SlOptionsVertical } from 'react-icons/sl'
 
 interface IconBaseProps extends React.SVGAttributes<SVGElement | SVGSVGElement> {
   children?: React.ReactNode;
@@ -151,10 +151,11 @@ export const paymentStep: IconInfo = { icon: IoCashOutline, name: "Payment metho
 export const paymentStepChecked: IconInfo = { icon: IoCash, name: "Payment method checked" }
 export const cashPayment: IconInfo = { icon: GiPayMoney, name: "Cash payment method" }
 export const bankTransferPayment: IconInfo = { icon: BsCreditCard2Back, name: "Bank transfer payment method" }
+export const paypalIcon: IconInfo = { icon: BsPaypal, name: "Paypal" }
+
 export const multiplicationIcon: IconInfo = { icon: FaTimes, name: "Multiplication" }
 export const equalsIcon: IconInfo = { icon: FaEquals, name: "Equals" }
 export const plusIcon: IconInfo = { icon: FaPlus, name: "Plus" }
-export const paypalIcon: IconInfo = { icon: BsPaypal, name: "Paypal" }
 
 
 export const emailVerificationStep: IconInfo = { icon: MdOutlineMarkEmailRead, name: "Email verification" }
@@ -168,3 +169,6 @@ export const checkoutStepChecked: IconInfo = { icon: BsCheckLg, name: "Step chec
 // 
 export const errorIcon: IconInfo = { icon: VscError, name: "Error" }
 
+
+// ADMIN ICONS
+export const adminOptions: IconInfo = { icon: SlOptionsVertical, name: "Admin options" }
