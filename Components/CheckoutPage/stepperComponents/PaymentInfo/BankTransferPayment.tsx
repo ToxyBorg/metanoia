@@ -231,6 +231,8 @@ const BankTransferPayment: NextComponentType<NextPageContext, {}, Props> = (
                                                 border: `2px solid ${colorScheme === "dark"
                                                     ? CardContainerColors.borderColorDark
                                                     : CardContainerColors.borderColorLight}`,
+                                                WebkitBackdropFilter: "blur(2px)",
+                                                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                                 // fontSize: 
                                             }}
                                             bg={colorScheme === "dark"

@@ -38,6 +38,7 @@ const FinalStep: NextComponentType<NextPageContext, {}, Props> = (
 
             className={style.Animated_Background_Gradient}
 
+            p={"lg"}
             h={"50vh"}
         >
             <Text size={"xl"} fw={"bolder"} fs={"italic"}>

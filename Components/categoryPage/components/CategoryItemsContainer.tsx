@@ -97,7 +97,7 @@ const CategoryItemsContainer: NextComponentType<NextPageContext, {}, Props> = (
                                 }
                                 mr={"md"}
                             >
-                                {allDataFromCategory.icon.name}
+                                {allDataFromCategory.icon.name.toUpperCase()}
                             </Text>
 
                         </Group>
