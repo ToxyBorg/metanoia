@@ -1,10 +1,9 @@
 "use client"
 
-import { ActionIcon, AspectRatio, Badge, Card, Group, Indicator, Popover, Space, Spoiler, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, AspectRatio, Badge, Card, Group, Image, Indicator, Popover, Space, Spoiler, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
 import { useCounter, useDisclosure } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
 import { useAtom } from "jotai";
-import Image from 'next/image';
 import { IconContext } from "react-icons";
 import { CardContainerColors, NavBarColors } from "../../../../Shared/colors";
 import { cartItemsDataAtom, cartType, SingleCartItemType } from "../../../../Stores/cartStore";
@@ -86,12 +85,16 @@ const Cards = (props: Props) => {
                                 <Transition mounted={cardOverlayVisibility} transition="slide-down" duration={400} timingFunction="ease">
                                     {(styles) =>
 
-                                        <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
+                                        // <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
+                                        //     style={{ ...styles, zIndex: 1 }}
+                                        // />}
+                                        <Image fit={'cover'} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title}
                                             style={{ ...styles, zIndex: 1 }}
                                         />}
                                 </Transition>
 
-                                <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' />
+                                {/* <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' /> */}
+                                <Image fit={'cover'} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} />
                             </AspectRatio>
                         </Link>
 
@@ -103,12 +106,16 @@ const Cards = (props: Props) => {
                             <Transition mounted={cardOverlayVisibility} transition="slide-down" duration={400} timingFunction="ease">
                                 {(styles) =>
 
-                                    <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
+                                    // <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
+                                    //     style={{ ...styles, zIndex: 1 }}
+                                    // />}
+                                    <Image fit={'cover'} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title}
                                         style={{ ...styles, zIndex: 1 }}
                                     />}
                             </Transition>
 
-                            <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' />
+                            {/* <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' /> */}
+                            <Image fit={'cover'} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} />
                         </AspectRatio>
                     }
 
