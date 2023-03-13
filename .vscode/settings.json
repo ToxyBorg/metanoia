@@ -20,8 +20,7 @@
     ".gitignore": true,
     "tsconfig.json": true,
     "next.config.js": true,
-    "pages": true,
-    ".env.local": true
+    "pages": true
   },
   "hide-files.files": [
     "node_modules",
@@ -34,8 +33,7 @@
     ".gitignore",
     "tsconfig.json",
     "next.config.js",
-    "pages",
-    ".env.local"
+    "pages"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
@@ -46,6 +44,6 @@
     "plaintext",
     "typescriptreact"
   ],
-  "dotenv.enableAutocloaking": true
+  "dotenv.enableAutocloaking": false
   // "color-picker.languages": ["python", "javascript", "typescript"]
 }

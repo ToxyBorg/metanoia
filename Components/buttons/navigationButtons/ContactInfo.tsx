@@ -33,8 +33,6 @@ export const ContactInfo = () => {
 
             <ResponsiveModalContext size={"xl"} responsiveModalOpened={opened} responsiveModalHandlers={handlers} modalTitle={"CONTACT INFO"}>
 
-
-
                 <Grid justify={"space-evenly"}>
 
                     {allButtons.map(button => {

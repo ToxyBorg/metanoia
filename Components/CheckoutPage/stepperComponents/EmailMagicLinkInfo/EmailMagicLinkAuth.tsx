@@ -2,7 +2,7 @@ import type { NextComponentType, NextPageContext } from "next";
 import { useSupabase } from "../../../../Context/SupabaseWrapper/supabase-provider";
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { ActionIcon, Button, Container, createStyles, Group, LoadingOverlay, PinInput, rem, Stack, Text, TextInput, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, Button, Center, Container, createStyles, Group, LoadingOverlay, PinInput, rem, Stack, Text, TextInput, useMantineColorScheme } from "@mantine/core";
 import { ReactNode, useState } from "react";
 import { CardContainerColors, NavBarColors, StepperColors } from "../../../../Shared/colors";
 import { arrowDown, emailAtSymbol } from "../../../../Shared/icons";
@@ -10,7 +10,7 @@ import { emailAtom, emailSchema } from "../../../../Stores/orderEmailStore";
 import { useAtom, useAtomValue } from "jotai";
 import ValidatePin from "./ValidatePin";
 import style from "../../../../Shared/css/style";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useTimeout } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
 
 interface Props {
@@ -20,6 +20,9 @@ interface Props {
 const EmailMagicLinkAuth: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
 ) => {
+
+    const { start, clear } = useTimeout(() => loadingOverlayVisibleHandlers.close(), 60000);
+
     const { colorScheme, } = useMantineColorScheme();
 
     const { supabase, } = useSupabase()
@@ -92,7 +95,7 @@ const EmailMagicLinkAuth: NextComponentType<NextPageContext, {}, Props> = (
 
             })
             pinHandlers.close()
-            loadingOverlayVisibleHandlers.close()
+            // loadingOverlayVisibleHandlers.close()
 
         }
         else {
@@ -154,8 +157,10 @@ const EmailMagicLinkAuth: NextComponentType<NextPageContext, {}, Props> = (
                 }),
 
             })
+            loadingOverlayVisibleHandlers.open()
+            start()
             pinHandlers.open()
-            loadingOverlayVisibleHandlers.close()
+            // loadingOverlayVisibleHandlers.close()
         }
 
     }
@@ -196,6 +201,8 @@ const EmailMagicLinkAuth: NextComponentType<NextPageContext, {}, Props> = (
                         WebkitBackdropFilter: "blur(2px)",
                         boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
 
+                        // textAlign: "center"
+
                     })}
 
                     bg={colorScheme === "dark"
@@ -208,17 +215,20 @@ const EmailMagicLinkAuth: NextComponentType<NextPageContext, {}, Props> = (
                     pos={"relative"}
 
                 >
-                    <LoadingOverlay visible={loadingOverlayVisible} overlayBlur={2} />
-                    <FloatingLabelInput pinHandlers={pinHandlers} />
+                    <LoadingOverlay visible={loadingOverlayVisible} overlayBlur={2} zIndex={3} />
+
+                    <FloatingLabelInput pinHandlers={pinHandlers} loadingOverlayVisible={loadingOverlayVisible} />
 
                     <ActionIcon
+                        disabled={loadingOverlayVisible}
                         variant="outline" title={arrowDown.name} w={"fit-content"} h={"100%"}
                         mx={"auto"} py={"xs"} radius={"md"} px={"lg"}
                         bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
                         className={style.Animated_Background_Gradient}
                         onClick={() => {
                             if (emailAtomValue.isValid && emailAtomValue.value.length > 0) {
-                                loadingOverlayVisibleHandlers.open()
+                                // loadingOverlayVisibleHandlers.open()
+                                // emailResendAtomSetter(60)
                                 signInWithEmail()
                             }
                             else {
@@ -301,6 +311,23 @@ const EmailMagicLinkAuth: NextComponentType<NextPageContext, {}, Props> = (
                         </Group>
                     </ActionIcon>
 
+                    {loadingOverlayVisible &&
+                        <Center>
+
+                            <Text fw={"bolder"} pos={"absolute"}
+                                color={colorScheme === "dark"
+                                    ? StepperColors.iconsLineColorDark
+                                    : "black"
+                                }
+                                sx={{
+                                    zIndex: 3,
+                                    overflowWrap: "break-word",
+                                }}
+                            >
+                                You can resend a Pin in 60 seconds. Please wait.
+                            </Text>
+                        </Center>
+                    }
                 </Stack>
 
 
@@ -367,7 +394,8 @@ interface InputProps {
         readonly open: () => void;
         readonly close: () => void;
         readonly toggle: () => void;
-    }
+    },
+    loadingOverlayVisible: boolean
 }
 export function FloatingLabelInput(inputProps: InputProps) {
     const [focused, setFocused] = useState(false);
@@ -379,6 +407,7 @@ export function FloatingLabelInput(inputProps: InputProps) {
 
     return (
         <TextInput
+            disabled={inputProps.loadingOverlayVisible}
             rightSection={
                 <emailAtSymbol.icon
                     title={emailAtSymbol.name}

@@ -15,6 +15,9 @@ import { windowScrollDirectionAtom } from '../../Stores/windowScrollStore';
 import { Notifications } from '@mantine/notifications';
 import style from '../../Shared/css/style';
 import { cartItemsDataAtom, cartType } from '../../Stores/cartStore';
+import { adminAddItemAtom, adminAddItemType } from '../../Stores/adminAddItemStore';
+import { useSupabase } from '../SupabaseWrapper/supabase-provider';
+import { currentSessionUserIsAdmin } from '../../Stores/adminSpecialButtonsStore';
 
 
 
@@ -76,6 +79,29 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
     // const refDataSetter = useSetAtom(refDataAtom)
     // refDataSetter({ ref: ref, entry: entry })
 
+    const { supabase, } = useSupabase()
+
+    const currentSessionUserIsAdminSetter = useSetAtom(currentSessionUserIsAdmin)
+    const handleUserIsAdmin = async () => {
+        const { data: { user } } = await supabase.auth.getUser()
+        // getSession().session.user
+
+        if (user !== null) {
+            if (process.env.NEXT_PUBLIC_ADMIN_EMAILS) {
+
+                const LIST = JSON.parse(process.env.NEXT_PUBLIC_ADMIN_EMAILS);
+
+                if (Array.isArray(LIST)) {
+                    if (LIST.includes(user.email)) {
+                        currentSessionUserIsAdminSetter(true)
+                    }
+                }
+            }
+        } else {
+            currentSessionUserIsAdminSetter(false)
+        }
+    }
+    handleUserIsAdmin()
 
 
     const screenSizesSetter = useSetAtom(screenSizesAtom)
@@ -86,28 +112,23 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
 
 
     const cartItemsDataAtomSetter = useSetAtom(cartItemsDataAtom)
+    const adminAddItemAtomSetter = useSetAtom(adminAddItemAtom)
 
     if (typeof window !== "undefined") {
-        // Write your client-side statements here.
-        // const isValid = (value: string | null): value is string => [null, undefined, ""].includes(value)
 
-        // const newSchool = (): cartType | undefined => {
-        //     const { "cart": value }: Storage = localStorage;
-
-        //     if (!isValid(value)) {
-        //         return undefined;
-        //     }
-        //     const gotValue = JSON.parse(value);
-        //     return gotValue
-        // };
-
-        // if (newSchool() !== undefined) {
-        //     cartItemsDataAtomSetter(newSchool()!)
-
-        const data = window.localStorage.getItem('cart')
-        if (data != null) {
-            cartItemsDataAtomSetter(JSON.parse(data))
+        const cart_data = window.localStorage.getItem('cart')
+        if (cart_data != null) {
+            cartItemsDataAtomSetter(JSON.parse(cart_data))
         }
+        const admin_item_data = window.localStorage.getItem('admin_item_added')
+        if (admin_item_data != null) {
+            const adminData: adminAddItemType = JSON.parse(admin_item_data)
+            // adminData['mainImageURL'] = '';
+            // adminData['mainImageURL'] = null;
+            // adminData['secondaryImagesURLS'] = [null, null, null]
+            adminAddItemAtomSetter(adminData)
+        }
+
     }
 
 

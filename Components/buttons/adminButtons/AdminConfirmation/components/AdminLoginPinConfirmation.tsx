@@ -1,38 +1,30 @@
-import { ActionIcon, Button, Center, Group, LoadingOverlay, PinInput, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, Center, Group, LoadingOverlay, PinInput, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
-import { browser } from "process";
 import { useState } from "react";
-import { useSupabase } from "../../../../Context/SupabaseWrapper/supabase-provider";
-import { CardContainerColors, NavBarColors, StepperColors } from "../../../../Shared/colors";
-import style from "../../../../Shared/css/style";
-import { arrowNext } from "../../../../Shared/icons";
-import { cartItemsDataAtom } from "../../../../Stores/cartStore";
-import { deliveryAtom, in_person_deliveryAtom, shipping_deliveryAtom } from "../../../../Stores/deliveryInfoStore";
-import { orderItemsDataAtom } from "../../../../Stores/orderStore";
-import { paymentMethodAtom } from "../../../../Stores/paymentMethodStore";
+import { useSupabase } from "../../../../../Context/SupabaseWrapper/supabase-provider";
+import { CardContainerColors, NavBarColors, StepperColors } from "../../../../../Shared/colors";
+import style from "../../../../../Shared/css/style";
+import { arrowNext } from "../../../../../Shared/icons";
+import { currentSessionUserIsAdmin } from "../../../../../Stores/adminSpecialButtonsStore";
 
 interface Props {
-    nextStep: () => void
     email: string
     pinOpened: boolean
 }
 
-const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
+const AdminLoginPinConfirmation: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
 ) => {
 
-    const orderItemsDataAtomValue = useAtomValue(orderItemsDataAtom)
-    const deliveryAtomValue = useAtomValue(deliveryAtom)
-    const in_person_deliveryAtomValue = useAtomValue(in_person_deliveryAtom)
-    const shipping_deliveryAtomValue = useAtomValue(shipping_deliveryAtom)
-    const paymentMethodAtomValue = useAtomValue(paymentMethodAtom)
+
 
     const { colorScheme, } = useMantineColorScheme();
 
     const [loadingOverlayVisible, loadingOverlayVisibleHandlers] = useDisclosure(false);
+    const currentSessionUserIsAdminSetter = useSetAtom(currentSessionUserIsAdmin)
 
 
     const [tokenValue, setTokenValue] = useState('');
@@ -181,89 +173,24 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
                     }),
 
                 })
-                loadingOverlayVisibleHandlers.close()
 
-                const { data, error: insertError } = await supabase
-                    .from('orders')
-                    .insert([
-                        {
-                            items: orderItemsDataAtomValue,
-                            email: props.email,
-                            delivery: deliveryAtomValue,
-                            payment: paymentMethodAtomValue,
-                            in_person_delivery_info: in_person_deliveryAtomValue,
-                            shipping_delivery_info: shipping_deliveryAtomValue
-                        },
-                    ])
+                if (signUpTokenData.user !== null) {
+                    if (process.env.NEXT_PUBLIC_ADMIN_EMAILS) {
 
-                if (insertError) {
-                    showNotification({
+                        const LIST = JSON.parse(process.env.NEXT_PUBLIC_ADMIN_EMAILS);
 
-                        color: "red",
-                        radius: "md",
-                        title: 'Order Confirmation Error',
-                        message: <p>Your order could not be uploaded to our servers. Please try again!</p>,
-                        // icon: <errorIcon.icon />,
-
-                        styles: (theme) => ({
-
-
-                            root: {
-                                background: colorScheme === "dark"
-                                    ? CardContainerColors.backgroundColorDark
-                                    : CardContainerColors.backgroundColorLight,
-                                backgroundSize: "300% 300%",
-                                animation: `${style.AnimateBG} 7s ease infinite`,
-
-                                border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                            },
-
-                            title: {
-
-                                background: colorScheme === "dark"
-                                    ? CardContainerColors.backgroundColorDark
-                                    : CardContainerColors.backgroundColorLight,
-                                backgroundSize: "300% 300%",
-                                animation: `${style.AnimateBG} 7s ease infinite`,
-
-
-                                // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                padding: "0.5rem",
-                                borderRadius: 5,
-
-                                fontWeight: "bolder",
-                                color: colorScheme === "dark"
-                                    ? CardContainerColors.textColorDark
-                                    : CardContainerColors.textColorLight
-                            },
-                            description: {
-                                fontStyle: "italic",
-
-                                color: colorScheme === "dark"
-                                    ? CardContainerColors.textColorDark
-                                    : CardContainerColors.textColorLight
-                            },
-                            closeButton: {
-                                color: colorScheme === "dark"
-                                    ? CardContainerColors.textColorDark
-                                    : CardContainerColors.textColorLight,
-
-                                '&:hover': {
-                                    backgroundColor: "red"
-                                },
-                            },
-                        }),
-
-                    })
-
+                        if (Array.isArray(LIST)) {
+                            if (LIST.includes(signUpTokenData.user.email)) {
+                                currentSessionUserIsAdminSetter(true)
+                            }
+                        }
+                    }
                 } else {
-
-                    const { error } = await supabase.auth.signOut()
-
-                    props.nextStep()
+                    currentSessionUserIsAdminSetter(false)
                 }
-            }
 
+                loadingOverlayVisibleHandlers.close()
+            }
 
         }
         else {
@@ -325,91 +252,23 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
                 }),
 
             })
-            loadingOverlayVisibleHandlers.close()
+            if (magicLinkTokenData.user !== null) {
+                if (process.env.NEXT_PUBLIC_ADMIN_EMAILS) {
 
-            const { data, error: insertError } = await supabase
-                .from('orders')
-                .insert([
-                    {
-                        items: orderItemsDataAtomValue,
-                        email: props.email,
-                        delivery: deliveryAtomValue,
-                        payment: paymentMethodAtomValue,
-                        in_person_delivery_info: in_person_deliveryAtomValue,
-                        shipping_delivery_info: shipping_deliveryAtomValue
-                    },
-                ])
+                    const LIST = JSON.parse(process.env.NEXT_PUBLIC_ADMIN_EMAILS);
 
-            if (insertError) {
-                showNotification({
-
-                    color: "red",
-                    radius: "md",
-                    title: 'Order Confirmation Error',
-                    message: <p>Your order could not be uploaded to our servers. Please try again!</p>,
-                    // icon: <errorIcon.icon />,
-
-                    styles: (theme) => ({
-
-
-                        root: {
-                            background: colorScheme === "dark"
-                                ? CardContainerColors.backgroundColorDark
-                                : CardContainerColors.backgroundColorLight,
-                            backgroundSize: "300% 300%",
-                            animation: `${style.AnimateBG} 7s ease infinite`,
-
-                            border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                        },
-
-                        title: {
-
-                            background: colorScheme === "dark"
-                                ? CardContainerColors.backgroundColorDark
-                                : CardContainerColors.backgroundColorLight,
-                            backgroundSize: "300% 300%",
-                            animation: `${style.AnimateBG} 7s ease infinite`,
-
-
-                            // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                            padding: "0.5rem",
-                            borderRadius: 5,
-
-                            fontWeight: "bolder",
-                            color: colorScheme === "dark"
-                                ? CardContainerColors.textColorDark
-                                : CardContainerColors.textColorLight
-                        },
-                        description: {
-                            fontStyle: "italic",
-
-                            color: colorScheme === "dark"
-                                ? CardContainerColors.textColorDark
-                                : CardContainerColors.textColorLight
-                        },
-                        closeButton: {
-                            color: colorScheme === "dark"
-                                ? CardContainerColors.textColorDark
-                                : CardContainerColors.textColorLight,
-
-                            '&:hover': {
-                                backgroundColor: "red"
-                            },
-                        },
-                    }),
-
-                })
-
+                    if (Array.isArray(LIST)) {
+                        if (LIST.includes(magicLinkTokenData.user.email)) {
+                            currentSessionUserIsAdminSetter(true)
+                        }
+                    }
+                }
             } else {
-
-                const { error } = await supabase.auth.signOut()
-
-                props.nextStep()
+                currentSessionUserIsAdminSetter(false)
             }
-
+            loadingOverlayVisibleHandlers.close()
         }
     }
-
 
     return (
         <Center>
@@ -510,4 +369,4 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
     )
 }
 
-export default ValidatePin
+export default AdminLoginPinConfirmation
