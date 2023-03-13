@@ -323,12 +323,15 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
                         }
                     }
                     else {
+
                         const newIndex = adminEditItemAtomValue.secondaryImagesURLS.findIndex(object => {
                             return object.newData === imageData.newData;
                         });
+                        // console.log("UNDIFINED SO index => ", newIndex)
+
                         const { data, error } = await supabase
                             .storage
-                            .from('avatars')
+                            .from('items')
                             .upload(`${item_id}/${newIndex}`, imageData.newData!, {
                                 cacheControl: '0',
                                 upsert: true
