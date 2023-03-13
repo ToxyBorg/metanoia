@@ -1,5 +1,5 @@
 import { Button, Center, Container, Text, useMantineColorScheme } from "@mantine/core";
-import { useViewportSize } from "@mantine/hooks";
+import { useTimeout, useViewportSize } from "@mantine/hooks";
 import { useSetAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { useState } from "react";
@@ -19,6 +19,7 @@ const FinalStep: NextComponentType<NextPageContext, {}, Props> = (
     const lastStepReachedAtomSetter = useSetAtom(lastStepReachedAtom)
 
     lastStepReachedAtomSetter(true)
+
 
     return (
         <Center

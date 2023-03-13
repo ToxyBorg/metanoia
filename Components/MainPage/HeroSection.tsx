@@ -29,7 +29,7 @@ const HeroSection = () => {
                 {(styles) =>
 
                     <Container
-                        mt={"xl"}
+                        mt={"3rem"}
                         mb={"5rem"}
 
                         fluid
@@ -42,8 +42,7 @@ const HeroSection = () => {
                         }}
                     >
 
-
-
+                        {/* <Center> */}
 
                         <SimpleGrid
                             cols={2}
@@ -130,6 +129,9 @@ const HeroSection = () => {
 
 
                         </SimpleGrid>
+
+                        {/* </Center> */}
+
 
                     </Container>
 

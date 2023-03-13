@@ -153,6 +153,7 @@ export function FloatingLabelInput(inputProps: InputProps) {
         inputProps.info.measurements != null ? inputProps.info.measurements : ""
     );
     const { classes } = useStyles({ floating: value.trim().length !== 0 || focused });
+    // const { colorScheme, } = useMantineColorScheme();
 
     const cartItemsDataAtomSetter = useSetAtom(cartItemsDataAtom)
 
@@ -184,6 +185,13 @@ export function FloatingLabelInput(inputProps: InputProps) {
                 }
 
             }
+            // styles={{
+            //     input: {
+            //         border: `2px solid ${colorScheme === "dark"
+            //             ? CardContainerColors.borderColorDark
+            //             : CardContainerColors.borderColorLight}`,
+            //     }
+            // }}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             mt="md"

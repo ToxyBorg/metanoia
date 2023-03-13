@@ -8,7 +8,7 @@ import { atomWithValidate } from "jotai-form";
 type OrderData = Database['public']["Tables"]['orders']['Row'][]
 
 // defining a validation schema for the atom
-export const emailSchema = Yup.string().email().max(45);
+export const adminEmailSchema = Yup.string().email().max(45);
 // export const emailSchema = z.string().email()
 
 // creating the atom with an async validation function
@@ -21,9 +21,9 @@ export const emailSchema = Yup.string().email().max(45);
 
 // });
 
-export const emailAtom = atomWithValidate('', {
+export const adminEmailAtom = atomWithValidate('', {
     validate: (v) => {
-        emailSchema.validateSync(v);
+        adminEmailSchema.validateSync(v);
         return v;
     },
 });

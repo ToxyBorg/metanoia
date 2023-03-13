@@ -1,4 +1,4 @@
-import { Center, Grid, MantineNumberSize, Modal, useMantineColorScheme } from "@mantine/core";
+import { Center, Grid, MantineNumberSize, Modal, SpacingValue, SystemProp, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import type { NextComponentType, NextPageContext } from "next";
 import { IconContext } from "react-icons";
@@ -16,6 +16,9 @@ interface Props {
     modalTitle: string,
     size?: MantineNumberSize | undefined,
     fullScreen?: boolean,
+    contentMargin?: SystemProp<SpacingValue>,
+    contentPadding?: SystemProp<SpacingValue>,
+    zIndex?: number
 
 }
 
@@ -41,6 +44,10 @@ const ResponsiveModalContext: NextComponentType<NextPageContext, {}, Props> = (
                     duration: 300,
                 }}
 
+
+                zIndex={props.zIndex ? props.zIndex : undefined}
+
+
             >
 
 
@@ -48,7 +55,8 @@ const ResponsiveModalContext: NextComponentType<NextPageContext, {}, Props> = (
 
                 <Modal.Content sx={{
 
-
+                    overflow: 'hidden',
+                    // position: "relative",
                     padding: "1rem",
                     // margin: "auto",
                     backgroundImage: colorScheme === "dark" ? ModalColors.modalBackgroundColorDark : ModalColors.modalBackgroundColorLight,
@@ -72,9 +80,11 @@ const ResponsiveModalContext: NextComponentType<NextPageContext, {}, Props> = (
                         backgroundSize: "300% 300%",
                         animation: `${style.AnimateBG} 7s ease infinite`,
 
-                        zIndex: 2,
+                        zIndex: 3,
                         WebkitBackdropFilter: "blur(2px)",
                         boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
+
+                        // position: "sticky"
 
                     }}>
 
@@ -91,7 +101,7 @@ const ResponsiveModalContext: NextComponentType<NextPageContext, {}, Props> = (
                         }} />
                     </Modal.Header>
 
-                    <Modal.Body p={0} m={"xs"}>
+                    <Modal.Body p={props.contentPadding ? props.contentPadding : 0} m={props.contentMargin ? props.contentMargin : "xs"}>
                         {/* <Center> */}
 
                         {props.children}

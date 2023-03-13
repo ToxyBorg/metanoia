@@ -11,6 +11,7 @@ import ResponsiveNavBar from "../../Components/appshellCompnents/ResponsiveNavBa
 import Confetti from 'react-confetti'
 import { lastStepReachedAtom } from "../../Stores/lastStepStore";
 import BackgroundParticles from "../../Components/MainPage/BackgroundParticles";
+import AdminOptionsButton from "../../Components/buttons/adminButtons/AdminOptionsButton";
 
 
 interface Props {
@@ -20,7 +21,6 @@ interface Props {
 const AppShellWrapper = (props: Props) => {
 
     const [lastStepReachedAtomValue, lastStepReachedAtomSetter] = useAtom(lastStepReachedAtom)
-
 
     // const xMousePos = useAtomValue(xMousePosAtom)
     // const scrollPastRootContainer = useAtomValue(containerRefAtom)
@@ -36,7 +36,8 @@ const AppShellWrapper = (props: Props) => {
 
     // const { height, width } = useViewportSize();
 
-    const { start, clear } = useTimeout(() => lastStepReachedAtomSetter(false), 6000);
+    // const { start, clear } = useTimeout(() =>, 60000);
+    const { start, clear } = useTimeout(() => { lastStepReachedAtomSetter(false), window.location.reload() }, 6000);
 
     if (lastStepReachedAtomValue) {
         start()
@@ -72,6 +73,7 @@ const AppShellWrapper = (props: Props) => {
             {/* {lastStepReachedAtomValue && <Confetti style={{ width: "100vw", height: "100%" }} />} */}
 
             <BackgroundParticles />
+            <AdminOptionsButton />
 
             {props.children}
             {/* </Container> */}

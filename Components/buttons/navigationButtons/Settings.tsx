@@ -12,6 +12,7 @@ import style from "../../../Shared/css/styles.module.css";
 import NavBarLock from "../extraButtons/NavBarLock";
 import { navBarLockedAtom } from "../../../Stores/navBarLockStore";
 import ResponsiveModalContext from "../../UI/ResponsiveModalContext";
+import AdminLogin from "../adminButtons/AdminConfirmation/AdminLogin";
 
 
 export const Settings = () => {
@@ -164,6 +165,12 @@ export const Settings = () => {
                             </Grid.Col>
                         )
                     })}
+
+
+                    <Grid.Col span={6}>
+                        <AdminLogin />
+                    </Grid.Col>
+
 
                 </Grid>
 
