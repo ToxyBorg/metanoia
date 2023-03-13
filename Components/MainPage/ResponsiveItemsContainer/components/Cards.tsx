@@ -1,6 +1,6 @@
 "use client"
 
-import { ActionIcon, AspectRatio, Badge, Card, Group, Image, Indicator, Popover, Space, Spoiler, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, AspectRatio, Badge, Card, Group, Indicator, Popover, Space, Spoiler, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
 import { useCounter, useDisclosure } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
 import { useAtom } from "jotai";
@@ -13,6 +13,7 @@ import CardModal from "./CardModal";
 import style from "../../../../Shared/css/style";
 import Link from "next/link";
 import AdminCardOptionsButton from "../../../buttons/adminButtons/AdminCardOptionsButton";
+import Image from "next/image";
 
 interface Props {
     SingleItemData: SingleItemData,
@@ -85,16 +86,14 @@ const Cards = (props: Props) => {
                                 <Transition mounted={cardOverlayVisibility} transition="slide-down" duration={400} timingFunction="ease">
                                     {(styles) =>
 
-                                        // <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
-                                        //     style={{ ...styles, zIndex: 1 }}
-                                        // />}
-                                        <Image fit={'cover'} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title}
+                                        <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
                                             style={{ ...styles, zIndex: 1 }}
-                                        />}
+                                        />
+                                    }
+
                                 </Transition>
 
-                                {/* <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' /> */}
-                                <Image fit={'cover'} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} />
+                                <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' />
                             </AspectRatio>
                         </Link>
 
@@ -106,16 +105,15 @@ const Cards = (props: Props) => {
                             <Transition mounted={cardOverlayVisibility} transition="slide-down" duration={400} timingFunction="ease">
                                 {(styles) =>
 
-                                    // <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
-                                    //     style={{ ...styles, zIndex: 1 }}
-                                    // />}
-                                    <Image fit={'cover'} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title}
+                                    <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
                                         style={{ ...styles, zIndex: 1 }}
-                                    />}
+                                    />
+                                }
+
+
                             </Transition>
 
-                            {/* <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' /> */}
-                            <Image fit={'cover'} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} />
+                            <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' />
                         </AspectRatio>
                     }
 

@@ -185,11 +185,11 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
             for (const imageData of adminEditItemAtomValue.secondaryImagesURLS) {
 
                 if (imageData.modified) {
-                    console.log("SECONDARY IMAGE MODIFIED: ", imageData.newData)
+                    // console.log("SECONDARY IMAGE MODIFIED: ", imageData.newData)
                     noItemModified = false
 
                     const oldImageIndex = imageData.oldData[imageData.oldData.length - 1]
-                    console.log("index => ", oldImageIndex)
+                    // console.log("index => ", oldImageIndex)
 
                     if (oldImageIndex !== undefined) {
                         const { data, error } = await supabase
@@ -323,10 +323,13 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
                         }
                     }
                     else {
+                        const newIndex = adminEditItemAtomValue.secondaryImagesURLS.findIndex(object => {
+                            return object.newData === imageData.newData;
+                        });
                         const { data, error } = await supabase
                             .storage
                             .from('avatars')
-                            .upload(`${item_id}/${oldImageIndex}`, imageData.newData!, {
+                            .upload(`${item_id}/${newIndex}`, imageData.newData!, {
                                 cacheControl: '0',
                                 upsert: true
                             })
