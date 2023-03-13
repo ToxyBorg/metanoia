@@ -53,7 +53,7 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
                     .storage
                     .from('items')
                     .update(`${item_id}/main`, adminEditItemAtomValue.mainImageURL.newData!, {
-                        cacheControl: '3600',
+                        cacheControl: '0',
                         // Overwrite file if it exis
                         upsert: true
                     })
@@ -185,14 +185,17 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
             for (const imageData of adminEditItemAtomValue.secondaryImagesURLS) {
 
                 if (imageData.modified) {
+                    console.log("SECONDARY IMAGE MODIFIED: ", imageData.newData)
                     noItemModified = false
 
                     const oldImageIndex = imageData.oldData[imageData.oldData.length - 1]
+                    console.log("index => ", oldImageIndex)
+
                     const { data, error } = await supabase
                         .storage
                         .from('items')
                         .update(`${item_id}/${oldImageIndex}`, imageData.newData!, {
-                            cacheControl: '3600',
+                            cacheControl: '0',
                             // Overwrite file if it exis
                             upsert: true
                         })
