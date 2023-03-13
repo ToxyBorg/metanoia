@@ -12,7 +12,7 @@ import { AllItemsData } from "../Stores/itemDataStore";
 import style from "../Shared/css/style";
 
 // do not cache this layout
-// export const revalidate = 120
+export const revalidate = 0
 
 // Static metadata
 export const metadata = {
@@ -39,7 +39,7 @@ export default async function RootLayout({
   } = await supabase.auth.getSession()
 
 
-
+  console.log("DATA: ", allItems_data)
 
   return (
     <html lang="en">
