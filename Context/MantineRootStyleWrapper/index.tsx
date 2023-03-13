@@ -4,7 +4,7 @@ import { CacheProvider } from '@emotion/react';
 import { useEmotionCache, MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core';
 import { useIntersection, useMouse, useScrollIntoView } from '@mantine/hooks';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { useServerInsertedHTML } from 'next/navigation';
+import { useRouter, useServerInsertedHTML } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { bodyColors } from '../../Shared/colors';
 import cx from 'classnames';
@@ -18,6 +18,7 @@ import { cartItemsDataAtom, cartType } from '../../Stores/cartStore';
 import { adminAddItemAtom, adminAddItemType } from '../../Stores/adminAddItemStore';
 import { useSupabase } from '../SupabaseWrapper/supabase-provider';
 import { currentSessionUserIsAdmin } from '../../Stores/adminSpecialButtonsStore';
+import { routerPushToMainPageAtom } from '../../Stores/lastStepStore';
 
 
 
@@ -123,17 +124,14 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
         const admin_item_data = window.localStorage.getItem('admin_item_added')
         if (admin_item_data != null) {
             const adminData: adminAddItemType = JSON.parse(admin_item_data)
-            // adminData['mainImageURL'] = '';
-            // adminData['mainImageURL'] = null;
-            // adminData['secondaryImagesURLS'] = [null, null, null]
             adminAddItemAtomSetter(adminData)
         }
 
     }
 
-
-
-
+    const routerPushToMainPageAtomSetter = useSetAtom(routerPushToMainPageAtom)
+    const router = useRouter();
+    routerPushToMainPageAtomSetter(router)
 
     return (
         <CacheProvider value={cache}>

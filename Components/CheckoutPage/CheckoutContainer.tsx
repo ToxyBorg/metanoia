@@ -1,6 +1,6 @@
 "use client"
 import { redirect } from 'next/navigation';
-import { ActionIcon, Container, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, Center, Container, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
 import { useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { cartItemsDataAtom } from "../../Stores/cartStore";
@@ -47,10 +47,12 @@ const CheckoutContainer: NextComponentType<NextPageContext, {}, Props> = (
                     mx={"auto"} my={"xl"}
                 >
                     <Stack>
+                        <Center>
+                            <h1>
+                                Your cart is empty. Please Head back to the main page and add items to your cart.
+                            </h1>
+                        </Center>
 
-                        <h1>
-                            Your cart is empty. Please Head back to the main page and add items to your cart.
-                        </h1>
 
                         <ActionIcon variant="transparent" component={Link} href={"/"}
                             onClick={() => {
@@ -66,6 +68,10 @@ const CheckoutContainer: NextComponentType<NextPageContext, {}, Props> = (
                             sx={{
                                 WebkitBackdropFilter: "blur(2px)",
                                 boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+
+                                border: `2px solid ${colorScheme === "dark"
+                                    ? CardContainerColors.borderColorDark
+                                    : CardContainerColors.borderColorLight}`,
                             }}
 
                         >

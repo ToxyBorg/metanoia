@@ -9,7 +9,7 @@ import ResponsiveHeader from "../../Components/appshellCompnents/ResponsiveHeade
 import ResponsiveNavBar from "../../Components/appshellCompnents/ResponsiveNavBar";
 // import { containerRefAtom, refDataAtom } from "../../Stores/heroOutOfViewStore";
 import Confetti from 'react-confetti'
-import { lastStepReachedAtom } from "../../Stores/lastStepStore";
+import { lastStepReachedAtom, routerPushToMainPageAtom } from "../../Stores/lastStepStore";
 import BackgroundParticles from "../../Components/MainPage/BackgroundParticles";
 import AdminOptionsButton from "../../Components/buttons/adminButtons/AdminOptionsButton";
 
@@ -20,24 +20,18 @@ interface Props {
 
 const AppShellWrapper = (props: Props) => {
 
+
     const [lastStepReachedAtomValue, lastStepReachedAtomSetter] = useAtom(lastStepReachedAtom)
+    const routerPushToMainPageAtomValue = useAtomValue(routerPushToMainPageAtom)
 
-    // const xMousePos = useAtomValue(xMousePosAtom)
-    // const scrollPastRootContainer = useAtomValue(containerRefAtom)
-
-    // const mergedRef = useMergedRef(xMousePos.xMousePosRef, scrollPastRootContainer?.current!)
-
-
-    // const navBarLocked = useAtomValue(navBarLockedAtom)
-
-    // const scrollDirection = useAtomValue(windowScrollDirectionAtom)
-
-    // console.log("MOUSE X : ", xMousePos.x, " navbar locked? ", navBarLocked)
-
-    // const { height, width } = useViewportSize();
-
-    // const { start, clear } = useTimeout(() =>, 60000);
-    const { start, clear } = useTimeout(() => { lastStepReachedAtomSetter(false), window.location.reload() }, 6000);
+    const { start, clear } = useTimeout(
+        () => {
+            lastStepReachedAtomSetter(false)
+            routerPushToMainPageAtomValue?.push('/')
+            // window.location.reload()
+        },
+        6000
+    );
 
     if (lastStepReachedAtomValue) {
         start()
@@ -70,13 +64,11 @@ const AppShellWrapper = (props: Props) => {
                     <Confetti style={{ ...styles, width: "100vw", height: "100%" }} />
                 }
             </Transition>
-            {/* {lastStepReachedAtomValue && <Confetti style={{ width: "100vw", height: "100%" }} />} */}
 
             <BackgroundParticles />
             <AdminOptionsButton />
 
             {props.children}
-            {/* </Container> */}
         </AppShell>
     )
 }

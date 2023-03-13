@@ -79,6 +79,8 @@ export default async function RootLayout({
   )
 }
 
+//////////////////////////////////////////////////////////////////
+
 // const error = false;
 // const allItems_data: AllItemsData = [
 //   {
@@ -149,8 +151,6 @@ export default async function RootLayout({
 //     mainImageURL: "https://picsum.photos/id/70/400/600",
 //     price: 1050,
 //     secondaryImagesURLS: [
-//       "https://picsum.photos/id/75/400/600",
-//       "https://picsum.photos/id/72/400/600",
 //       "https://picsum.photos/id/71/400/600"
 //     ],
 //     stock: 10,
@@ -169,7 +169,6 @@ export default async function RootLayout({
 //     mainImageURL: "https://picsum.photos/id/200/400/600",
 //     price: 1050,
 //     secondaryImagesURLS: [
-//       "https://picsum.photos/id/275/400/600",
 //       "https://picsum.photos/id/132/400/600",
 //       "https://picsum.photos/id/211/400/600"
 //     ],
@@ -190,7 +189,6 @@ export default async function RootLayout({
 //     price: 9050,
 //     secondaryImagesURLS: [
 //       "https://picsum.photos/id/175/400/600",
-//       "https://picsum.photos/id/172/400/600",
 //       "https://picsum.photos/id/171/400/600"
 //     ],
 //     stock: 5,

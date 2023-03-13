@@ -1,25 +1,28 @@
-import { ActionIcon, Center, Container, Grid, Group, LoadingOverlay, Stack, Text, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, Center, Container, Group, LoadingOverlay, Stack, Text, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { CardContainerColors } from "../../../../Shared/colors";
 import style from "../../../../Shared/css/style";
-import { adminAddItem } from "../../../../Shared/icons";
-import { adminAddItemAtom } from "../../../../Stores/adminAddItemStore";
+import { adminEditButton } from "../../../../Shared/icons";
+import { adminEditItemAtom, defaultEditDataAtom } from "../../../../Stores/adminEditItemStore";
+import { SingleItemData } from "../../../../Stores/itemDataStore";
 import ResponsiveModalContext from "../../../UI/ResponsiveModalContext";
-import AddItemCategory from "./components/AddItemCategory";
-import AddItemConfirmationButton from "./components/AddItemConfirmationButton";
-import AddItemDescription from "./components/AddItemDescription";
-import AddItemPrice from "./components/AddItemPrice";
-import AddItemStock from "./components/AddItemStock";
-import AddItemTags from "./components/AddItemTags";
-import AddItemTitle from "./components/AddItemTitle";
-import AddMainImage from "./components/AddMainImage";
-import AddSecondaryImages from "./components/AddSecondaryImages";
+import EditItemCategory from "./components/EditItemCategory";
+import EditItemConfirmationButton from "./components/EditItemConfirmationButton";
+import EditItemDescription from "./components/EditItemDescription";
+import EditItemPrice from "./components/EditItemPrice";
+import EditItemStock from "./components/EditItemStock";
+import EditItemTags from "./components/EditItemTags";
+import EditItemTitle from "./components/EditItemTitle";
+import EditMainImage from "./components/EditMainImage";
+import EditSecondaryImages from "./components/EditSecondaryImages";
 
-interface Props { }
+interface Props {
+    SingleItemData: SingleItemData
+}
 
-const AdminAddItem: NextComponentType<NextPageContext, {}, Props> = (
+const AdminEditItem: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
 ) => {
     const [opened, handlers] = useDisclosure(false);
@@ -28,26 +31,22 @@ const AdminAddItem: NextComponentType<NextPageContext, {}, Props> = (
 
     const [loadingOverlayVisible, loadingOverlayVisibleHandlers] = useDisclosure(false);
 
-    const [adminAddItemAtomValue, adminAddItemAtomSetter] = useAtom(adminAddItemAtom)
+    const adminEditItemAtomSetter = useSetAtom(adminEditItemAtom)
 
     if (!opened) {
-        const newArr = adminAddItemAtomValue
-        newArr['mainImageURL'] = null
-        newArr['secondaryImagesURLS'] = [null, null, null]
-        adminAddItemAtomSetter(newArr)
+        adminEditItemAtomSetter(defaultEditDataAtom)
     }
-
     return (
         <>
             <ActionIcon variant="transparent" onClick={() => handlers.toggle()}
                 w={"100%"} h={"100%"}
                 mx={"auto"}
-                title={adminAddItem.name}
+                title={adminEditButton.name}
 
             >
                 <Group align={"center"} spacing={"xs"}>
 
-                    <adminAddItem.icon />
+                    <adminEditButton.icon />
 
                     <Text
                         color={
@@ -57,14 +56,14 @@ const AdminAddItem: NextComponentType<NextPageContext, {}, Props> = (
                         }
                         mr={"md"}
                     >
-                        {adminAddItem.name}
+                        {adminEditButton.name}
                     </Text>
 
                 </Group>
 
             </ActionIcon>
 
-            <ResponsiveModalContext responsiveModalOpened={opened} responsiveModalHandlers={handlers} modalTitle={"ADD AN ITEM"}
+            <ResponsiveModalContext responsiveModalOpened={opened} responsiveModalHandlers={handlers} modalTitle={"EDIT ITEM"}
 
                 size={"auto"} contentMargin={"auto"}
             >
@@ -77,8 +76,8 @@ const AdminAddItem: NextComponentType<NextPageContext, {}, Props> = (
                         <Container >
                             <Center>
                                 <Stack >
-                                    <AddMainImage />
-                                    <AddSecondaryImages />
+                                    <EditMainImage SingleItemDataMainImageURL={props.SingleItemData.mainImageURL} />
+                                    <EditSecondaryImages SingleItemDataSecondaryImagesURLS={props.SingleItemData.secondaryImagesURLS} />
                                 </Stack>
                             </Center>
                         </Container>
@@ -103,12 +102,12 @@ const AdminAddItem: NextComponentType<NextPageContext, {}, Props> = (
 
                             >
                                 <Stack spacing={"2rem"} p={"2rem"} >
-                                    <AddItemTitle />
-                                    <AddItemDescription />
-                                    <AddItemCategory />
-                                    <AddItemPrice />
-                                    <AddItemStock />
-                                    <AddItemTags />
+                                    <EditItemTitle SingleItemDataTitle={props.SingleItemData.title} />
+                                    <EditItemDescription SingleItemDataDescription={props.SingleItemData.description} />
+                                    <EditItemCategory SingleItemDataCategory={props.SingleItemData.category} />
+                                    <EditItemPrice SingleItemDataPrice={props.SingleItemData.price} />
+                                    <EditItemStock SingleItemDataStock={props.SingleItemData.stock} />
+                                    <EditItemTags SingleItemDataTags={props.SingleItemData.tags} />
                                 </Stack>
 
                             </Center>
@@ -116,7 +115,7 @@ const AdminAddItem: NextComponentType<NextPageContext, {}, Props> = (
 
                     </Group>
 
-                    <AddItemConfirmationButton loadingOverlayVisibleHandlers={loadingOverlayVisibleHandlers} handlers={handlers} />
+                    <EditItemConfirmationButton loadingOverlayVisibleHandlers={loadingOverlayVisibleHandlers} handlers={handlers} SingleItemDataID={props.SingleItemData.item_id} />
                 </Stack>
 
 
@@ -128,4 +127,4 @@ const AdminAddItem: NextComponentType<NextPageContext, {}, Props> = (
     )
 }
 
-export default AdminAddItem
+export default AdminEditItem
