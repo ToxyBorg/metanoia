@@ -39,7 +39,7 @@ export default async function RootLayout({
   } = await supabase.auth.getSession()
 
 
-  console.log("DATA: ", allItems_data)
+  // console.log("DATA: ", allItems_data)
 
   return (
     <html lang="en">
