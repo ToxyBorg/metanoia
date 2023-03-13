@@ -4,21 +4,16 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: [
-      "images.unsplash.com",
-      "https://tagpjpitlabjswlonwwj.supabase.co/",
-    ],
+    // domains: ["images.unsplash.com", "tagpjpitlabjswlonwwj.supabase.co"],
     // deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     // imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    unoptimized: false,
-
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
         hostname: "tagpjpitlabjswlonwwj.supabase.co",
         port: "",
-        pathname:
-          "tagpjpitlabjswlonwwj.supabase.co/storage/v1/object/public/items/**",
+        pathname: "/storage/v1/object/public/items/**",
       },
     ],
   },
