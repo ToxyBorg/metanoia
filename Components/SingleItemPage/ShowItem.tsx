@@ -69,10 +69,11 @@ const ShowItem: NextComponentType<NextPageContext, {}, Props> = (
                             className={style.Animated_Background_Gradient}
 
                         >
-                            <Stack
-
-                            >
+                            <Stack>
                                 <Text
+                                    sx={{
+                                        textShadow: "0 4px 30px rgba(0, 0, 0, 0.5)"
+                                    }}
                                     color={
                                         colorScheme === "dark"
                                             ? CardContainerColors.textColorDark
@@ -90,6 +91,9 @@ const ShowItem: NextComponentType<NextPageContext, {}, Props> = (
                                             ? CardContainerColors.textColorDark
                                             : CardContainerColors.textColorLight
                                     }
+                                    sx={{
+                                        textShadow: "0 4px 30px rgba(0, 0, 0, 0.5)"
+                                    }}
 
                                     fs={"italic"}
                                 >

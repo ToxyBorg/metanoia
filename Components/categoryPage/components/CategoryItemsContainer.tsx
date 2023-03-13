@@ -63,9 +63,12 @@ const CategoryItemsContainer: NextComponentType<NextPageContext, {}, Props> = (
                     >
                         <Stack>
 
-                            <h1>
-                                This category currently has no items. Please try something else or head back home.
-                            </h1>
+                            <Center>
+                                <h1>
+                                    This category currently has no items.
+                                </h1>
+                            </Center>
+
 
                             <ActionIcon variant="transparent" component={Link} href={"/"}
                                 onClick={() => {
@@ -82,6 +85,11 @@ const CategoryItemsContainer: NextComponentType<NextPageContext, {}, Props> = (
                                     // borderRadius: 15,
                                     WebkitBackdropFilter: "blur(2px)",
                                     boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+
+                                    border: `2px solid ${colorScheme === "dark"
+                                        ? CardContainerColors.borderColorDark
+                                        : CardContainerColors.borderColorLight}`,
+
                                 }}
 
                             >

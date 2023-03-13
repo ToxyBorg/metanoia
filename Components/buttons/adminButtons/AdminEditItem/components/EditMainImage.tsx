@@ -1,42 +1,40 @@
-import { AspectRatio, Button, Card, Center, FileButton, Group, rem, SimpleGrid, Text, Transition, useMantineColorScheme, useMantineTheme } from "@mantine/core";
-import { Dropzone, DropzoneProps, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { AspectRatio, Card, Center, Group, Text, Transition, useMantineColorScheme, useMantineTheme } from "@mantine/core";
+import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { CardContainerColors } from "../../../../../Shared/colors";
 import style from "../../../../../Shared/css/style";
 import { adminAddItem, adminRejectImageUpload, adminUploadImage } from "../../../../../Shared/icons";
-import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
+import { adminEditItemAtom } from "../../../../../Stores/adminEditItemStore";
+import { SingleItemData } from "../../../../../Stores/itemDataStore";
 
-interface Props { }
+interface Props extends Partial<DropzoneProps> {
+    SingleItemDataMainImageURL: SingleItemData['mainImageURL']
+}
 
-const AddMainImage: NextComponentType<NextPageContext, {}, Props> = (
-    props: Partial<DropzoneProps>,
+const EditMainImage: NextComponentType<NextPageContext, {}, Props> = (
+    props: Props,
 ) => {
+    // const [adminAddItemAtomValue, adminAddItemAtomSetter] = useAtom(adminAddItemAtom)
+    const [adminEditItemAtomValue, adminEditItemAtomSetter] = useAtom(adminEditItemAtom)
+    // const adminEditItemAtomSetter = useSetAtom(adminEditItemAtom)
 
-    const [adminAddItemAtomValue, adminAddItemAtomSetter] = useAtom(adminAddItemAtom)
 
     const [Loading, setLoading] = useState(false)
 
     const { colorScheme, } = useMantineColorScheme();
     const theme = useMantineTheme();
 
-    // const [imageUploaderOverlayVisibility, imageUploaderOverlayVisibilityHandlers] = useDisclosure(
-    //     adminAddItemAtomValue.mainImageURL.length > 0
-    //         ? false
-    //         : true
-    // )
 
-    const [imageUploaderOverlayVisibility, imageUploaderOverlayVisibilityHandlers] = useDisclosure(
-        adminAddItemAtomValue.mainImageURL != null
-            ? false
-            : true
-    )
 
-    const [ImageURL, setImageURL] = useState('')
+    const [imageUploaderOverlayVisibility, imageUploaderOverlayVisibilityHandlers] = useDisclosure(false)
+    const [selectedAnImage, selectedAnImageHandlers] = useDisclosure(false)
+
+    const [ImageURL, setImageURL] = useState(props.SingleItemDataMainImageURL)
 
     return (
         <Center>
@@ -59,7 +57,7 @@ const AddMainImage: NextComponentType<NextPageContext, {}, Props> = (
                     <AspectRatio ratio={10 / 16} pos={"relative"}
                         onMouseOver={() => { imageUploaderOverlayVisibilityHandlers.open() }}
                         // onMouseOut={() => { if (adminAddItemAtomValue.mainImageURL.length > 0) imageUploaderOverlayVisibilityHandlers.close() }}
-                        onMouseOut={() => { if (adminAddItemAtomValue.mainImageURL != null) imageUploaderOverlayVisibilityHandlers.close() }}
+                        onMouseOut={() => { if (ImageURL.length > 1) imageUploaderOverlayVisibilityHandlers.close() }}
                     >
                         <Transition mounted={imageUploaderOverlayVisibility} transition="slide-down" duration={500} timingFunction="ease">
                             {(styles) =>
@@ -74,11 +72,18 @@ const AddMainImage: NextComponentType<NextPageContext, {}, Props> = (
                                     multiple={false}
                                     maxFiles={1}
                                     onDrop={(file) => {
+
                                         setLoading(true)
-                                        const adminTempItem = adminAddItemAtomValue;
+                                        const adminTempItem = adminEditItemAtomValue;
                                         // adminTempItem['mainImageURL'] = URL.createObjectURL(file[0])
-                                        adminTempItem['mainImageURL'] = file[0]
-                                        adminAddItemAtomSetter(adminTempItem)
+                                        adminTempItem['mainImageURL'] = {
+                                            newData: file[0],
+                                            oldData: props.SingleItemDataMainImageURL,
+                                            modified: true
+                                        }
+                                        adminEditItemAtomSetter(adminTempItem)
+
+                                        selectedAnImageHandlers.open()
                                         setImageURL(URL.createObjectURL(file[0]))
 
 
@@ -191,14 +196,14 @@ const AddMainImage: NextComponentType<NextPageContext, {}, Props> = (
                         <Image
                             fill
 
-                            src={ImageURL}
-                            alt={ImageURL}
+                            src={selectedAnImage ? ImageURL : props.SingleItemDataMainImageURL}
+                            alt={selectedAnImage ? ImageURL : props.SingleItemDataMainImageURL}
 
                             onLoadingComplete={() => {
-                                if (ImageURL.length > 1) {
+
+                                if (selectedAnImage) {
                                     URL.revokeObjectURL(ImageURL)
                                 }
-
                                 setLoading(false);
                             }}
 
@@ -215,4 +220,4 @@ const AddMainImage: NextComponentType<NextPageContext, {}, Props> = (
     )
 }
 
-export default AddMainImage
+export default EditMainImage

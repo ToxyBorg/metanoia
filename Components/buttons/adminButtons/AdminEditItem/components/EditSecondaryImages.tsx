@@ -1,25 +1,28 @@
-import { AspectRatio, Button, Card, FileButton, Group, rem, SimpleGrid, Text, Transition, useMantineColorScheme, useMantineTheme } from "@mantine/core";
-import { Dropzone, DropzoneProps, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { AspectRatio, Card, Group, Transition, useMantineColorScheme, useMantineTheme } from "@mantine/core";
+import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import Image from "next/image";
-import { useRef, useState } from "react";
-import { useSupabase } from "../../../../../Context/SupabaseWrapper/supabase-provider";
+import { useState } from "react";
 import { CardContainerColors } from "../../../../../Shared/colors";
 import style from "../../../../../Shared/css/style";
-import { olpntngStyleDATA_URL } from "../../../../../Shared/dataURLS/olpntng-style-dataURL";
 import { adminAddItem, adminRejectImageUpload, adminUploadImage } from "../../../../../Shared/icons";
-import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
+import { adminEditItemAtom } from "../../../../../Stores/adminEditItemStore";
 import { SingleItemData } from "../../../../../Stores/itemDataStore";
 
-interface Props { }
+interface Props {
+    SingleItemDataSecondaryImagesURLS: SingleItemData['secondaryImagesURLS']
 
-const AddSecondaryImages: NextComponentType<NextPageContext, {}, Props> = (
-    props: Props
+}
+
+const EditSecondaryImages: NextComponentType<NextPageContext, {}, Props> = (
+    props: Props,
 ) => {
     const { colorScheme, } = useMantineColorScheme();
+
+
 
     return (
         <Group position="center"
@@ -40,27 +43,43 @@ const AddSecondaryImages: NextComponentType<NextPageContext, {}, Props> = (
             p={"sm"}
             mb={"lg"}
         >
-            <SecondaryImagesUploaders index={0} />
-            <SecondaryImagesUploaders index={1} />
-            <SecondaryImagesUploaders index={2} />
+            <SecondaryImagesUploaders index={0}
+                SingleItemDataSecondaryImage={props.SingleItemDataSecondaryImagesURLS[0] !== undefined
+                    ? props.SingleItemDataSecondaryImagesURLS[0]
+                    : ""
+                }
+            />
+            <SecondaryImagesUploaders index={1}
+                SingleItemDataSecondaryImage={props.SingleItemDataSecondaryImagesURLS[1] !== undefined
+                    ? props.SingleItemDataSecondaryImagesURLS[1]
+                    : ""
+                }
+            />
+            <SecondaryImagesUploaders index={2}
+                SingleItemDataSecondaryImage={props.SingleItemDataSecondaryImagesURLS[2] !== undefined
+                    ? props.SingleItemDataSecondaryImagesURLS[2]
+                    : ""
+                }
+            />
         </Group>
 
     )
 }
 
-
-export default AddSecondaryImages
+export default EditSecondaryImages
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 interface SecondaryImagesUploadersProps extends Partial<DropzoneProps> {
     index: number,
     // adminAddItemAtomValue: SingleItemData,
+    SingleItemDataSecondaryImage: string
 }
 
 const SecondaryImagesUploaders = (props: SecondaryImagesUploadersProps) => {
 
-    const [adminAddItemAtomValue, adminAddItemAtomSetter] = useAtom(adminAddItemAtom)
+    const [adminEditItemAtomValue, adminEditItemAtomSetter] = useAtom(adminEditItemAtom)
+
 
     const [Loading, setLoading] = useState(false)
 
@@ -69,12 +88,14 @@ const SecondaryImagesUploaders = (props: SecondaryImagesUploadersProps) => {
 
 
     const [imageUploaderOverlayVisibility, imageUploaderOverlayVisibilityHandlers] = useDisclosure(
-        adminAddItemAtomValue.secondaryImagesURLS[props.index] != null
+        props.SingleItemDataSecondaryImage.length > 1
             ? false
             : true
     )
+    const [selectedAnImage, selectedAnImageHandlers] = useDisclosure(false)
 
-    const [ImageURL, setImageURL] = useState('')
+
+    const [ImageURL, setImageURL] = useState(props.SingleItemDataSecondaryImage)
 
     return (
         <Card shadow="md"
@@ -94,7 +115,7 @@ const SecondaryImagesUploaders = (props: SecondaryImagesUploadersProps) => {
 
                 <AspectRatio ratio={10 / 16} pos={"relative"}
                     onMouseOver={() => { imageUploaderOverlayVisibilityHandlers.open() }}
-                    onMouseOut={() => { if (adminAddItemAtomValue.secondaryImagesURLS[props.index] != null) imageUploaderOverlayVisibilityHandlers.close() }}
+                    onMouseOut={() => { if (ImageURL.length > 1) imageUploaderOverlayVisibilityHandlers.close() }}
                 >
                     <Transition mounted={imageUploaderOverlayVisibility} transition="slide-down" duration={500} timingFunction="ease">
                         {(styles) =>
@@ -110,11 +131,17 @@ const SecondaryImagesUploaders = (props: SecondaryImagesUploadersProps) => {
                                 maxFiles={1}
                                 onDrop={(file) => {
                                     setLoading(true)
-                                    const adminTempItem = adminAddItemAtomValue;
+                                    const adminTempItem = adminEditItemAtomValue;
                                     // adminTempItem['secondaryImagesURLS'][props.index] = URL.createObjectURL(file[0])
-                                    adminTempItem['secondaryImagesURLS'][props.index] = file[0]
-                                    adminAddItemAtomSetter(adminTempItem)
+                                    adminTempItem['secondaryImagesURLS'][props.index] = {
+                                        newData: file[0],
+                                        oldData: props.SingleItemDataSecondaryImage,
+                                        modified: true
+                                    }
 
+                                    adminEditItemAtomSetter(adminTempItem)
+
+                                    selectedAnImageHandlers.open()
                                     setImageURL(URL.createObjectURL(file[0]))
 
                                     imageUploaderOverlayVisibilityHandlers.close()
@@ -219,14 +246,13 @@ const SecondaryImagesUploaders = (props: SecondaryImagesUploadersProps) => {
                     <Image
                         fill
 
-                        src={ImageURL}
-                        alt={ImageURL}
+                        src={selectedAnImage ? ImageURL : props.SingleItemDataSecondaryImage}
+                        alt={selectedAnImage ? ImageURL : props.SingleItemDataSecondaryImage}
 
                         onLoadingComplete={() => {
-                            if (ImageURL.length > 1) {
+                            if (selectedAnImage) {
                                 URL.revokeObjectURL(ImageURL)
                             }
-
                             setLoading(false);
                         }}
 

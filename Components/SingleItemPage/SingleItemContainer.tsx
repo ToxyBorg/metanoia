@@ -1,6 +1,6 @@
 "use client"
 
-import { ActionIcon, Container, Stack, Transition, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, Center, Container, Stack, Transition, useMantineColorScheme } from "@mantine/core";
 import { useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import Link from "next/link";
@@ -59,9 +59,11 @@ const SingleItemContainer: NextComponentType<NextPageContext, {}, Props> = (
           >
             <Stack>
 
-              <h1>
-                This item does not exist. Please try something else or head back home.
-              </h1>
+              <Center>
+                <h1>
+                  This item does not exist. Please try something else or head back home.
+                </h1>
+              </Center>
 
               <ActionIcon variant="transparent" component={Link} href={"/"}
                 onClick={() => {
@@ -77,6 +79,10 @@ const SingleItemContainer: NextComponentType<NextPageContext, {}, Props> = (
                   // borderRadius: 15,
                   WebkitBackdropFilter: "blur(2px)",
                   boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+
+                  border: `2px solid ${colorScheme === "dark"
+                    ? CardContainerColors.borderColorDark
+                    : CardContainerColors.borderColorLight}`,
                 }}
 
               >

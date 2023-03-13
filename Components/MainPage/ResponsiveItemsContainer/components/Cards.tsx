@@ -13,6 +13,7 @@ import { cart, cartAdd, cartRemove, itemDescription, itemDescriptionShowLess, it
 import CardModal from "./CardModal";
 import style from "../../../../Shared/css/style";
 import Link from "next/link";
+import AdminCardOptionsButton from "../../../buttons/adminButtons/AdminCardOptionsButton";
 
 interface Props {
     SingleItemData: SingleItemData,
@@ -127,7 +128,13 @@ const Cards = (props: Props) => {
                         }}
 
                     >
-                        <Group position="apart" p={"1rem"} h={"fit-content"} spacing={"xs"}>
+                        <Group position="apart" p={"1rem"} h={"fit-content"}
+                        // spacing={"xs"}
+                        // grow
+                        // sx={{
+                        //     border: "2px solid black"
+                        // }}
+                        >
 
                             <Badge variant="gradient"
                                 sx={{
@@ -145,6 +152,9 @@ const Cards = (props: Props) => {
                             >
                                 {props.SingleItemData.title}
                             </Badge>
+
+
+                            <AdminCardOptionsButton SingleItemData={props.SingleItemData} />
                         </Group>
 
 

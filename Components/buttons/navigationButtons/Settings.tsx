@@ -12,7 +12,7 @@ import style from "../../../Shared/css/styles.module.css";
 import NavBarLock from "../extraButtons/NavBarLock";
 import { navBarLockedAtom } from "../../../Stores/navBarLockStore";
 import ResponsiveModalContext from "../../UI/ResponsiveModalContext";
-import AdminLogin from "../adminButtons/AdminConfirmation/AdminLogin";
+import AdminLogin from "../adminButtons/AdminLogin/AdminLogin";
 
 
 export const Settings = () => {

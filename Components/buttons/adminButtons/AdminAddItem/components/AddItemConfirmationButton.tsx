@@ -38,13 +38,13 @@ const AddItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> =
 
             const item_id = uuidv4()
             const storageURL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/items`
-            const folderURL = `${adminAddItemAtomValue.category}/${item_id}`
+            // const folderURL = `${item_id}`
 
             const mainImageName = 'main'
-            const fullMainImagePath = `${storageURL}/${folderURL}/${mainImageName}`
+            const fullMainImagePath = `${storageURL}/${item_id}/${mainImageName}`
 
             const all_image_paths: { imagePath: string, file: File }[] = []
-            all_image_paths.push({ imagePath: `${folderURL}/${mainImageName}`, file: adminAddItemAtomValue.mainImageURL! })
+            all_image_paths.push({ imagePath: `${item_id}/${mainImageName}`, file: adminAddItemAtomValue.mainImageURL! })
             const secondaryImagesPaths: string[] = []
 
             for (const image of adminAddItemAtomValue.secondaryImagesURLS) {
@@ -52,8 +52,8 @@ const AddItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> =
                 if (image != null) {
                     const index = adminAddItemAtomValue.secondaryImagesURLS.indexOf(image)
 
-                    secondaryImagesPaths.push(`${storageURL}/${folderURL}/${index}`)
-                    all_image_paths.push({ imagePath: `${folderURL}/${index}`, file: image })
+                    secondaryImagesPaths.push(`${storageURL}/${item_id}/${index}`)
+                    all_image_paths.push({ imagePath: `${item_id}/${index}`, file: image })
                 }
             }
 
@@ -233,21 +233,6 @@ const AddItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> =
                         .from('items')
                         .remove([image_uploaded_URL])
                 }
-
-                // const newArr: adminAddItemType = {
-                //     category: "earrings", // required
-                //     description: '', // required
-                //     created_at: null,
-                //     item_id: '',
-                //     mainImageURL: null, // required
-                //     price: 0, // required
-                //     secondaryImagesURLS: [null, null, null], // required
-                //     stock: 1, // required
-                //     tags: [], // required
-                //     title: '', // required
-                // }
-
-
 
                 props.loadingOverlayVisibleHandlers.close()
                 props.handlers.close()

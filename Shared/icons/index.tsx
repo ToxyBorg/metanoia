@@ -4,14 +4,14 @@
  */
 
 import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail, BiImageAdd } from "react-icons/bi"
-import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing, GiPayMoney } from 'react-icons/gi';
+import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing, GiPayMoney, GiExitDoor } from 'react-icons/gi';
 import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsArrowDown, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox, BsCreditCard2Back, BsPaypal } from 'react-icons/bs';
 import { FiInstagram, FiMail } from 'react-icons/fi';
-import { GrAddCircle, GrCircleAlert, GrLinkNext, GrLinkPrevious, GrUserAdmin } from 'react-icons/gr';
+import { GrAddCircle, GrCircleAlert, GrDocumentUpdate, GrLinkNext, GrLinkPrevious, GrUserAdmin } from 'react-icons/gr';
 import { TfiRulerAlt } from 'react-icons/tfi'
 import { FaEquals, FaPlus, FaRuler, FaTimes, FaUserAstronaut } from 'react-icons/fa'
-import { VscError } from 'react-icons/vsc';
-import { MdEmojiPeople, MdMarkEmailRead, MdOutlineMarkEmailRead } from 'react-icons/md';
+import { VscEdit, VscError } from 'react-icons/vsc';
+import { MdEmojiPeople, MdMarkEmailRead, MdOutlineMarkEmailRead, MdUpdate } from 'react-icons/md';
 import { IoCashOutline, IoCash } from 'react-icons/io5'
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai'
 import { HiOutlineAtSymbol } from 'react-icons/hi'
@@ -96,8 +96,8 @@ export const contactInfo: IconInfo = { icon: BiMessageAltDetail, name: "Contact 
 
 // export const user: IconInfo = { icon: BiUser, name: "Account" }
 
+// ADMIN
 
-export const admin: IconInfo = { icon: FaUserAstronaut, name: "Admin" }
 
 // NAVBAR CATEGORIES
 export const earrings: IconInfo = { icon: GiEarrings, name: "earrings" }
@@ -175,7 +175,11 @@ export const errorIcon: IconInfo = { icon: VscError, name: "Error" }
 
 
 // ADMIN ICONS
+export const admin: IconInfo = { icon: FaUserAstronaut, name: "Admin" }
+export const adminLogout: IconInfo = { icon: GiExitDoor, name: "Admin Logout" }
 export const adminOptions: IconInfo = { icon: SlOptions, name: "Admin options" }
 export const adminAddItem: IconInfo = { icon: BiImageAdd, name: "Add an item" }
 export const adminUploadImage: IconInfo = { icon: TbUpload, name: "Upload an image" }
 export const adminRejectImageUpload: IconInfo = { icon: CiSquareRemove, name: "Rejected image upload" }
+export const adminEditButton: IconInfo = { icon: VscEdit, name: "Edit Item" }
+export const adminUpdateButton: IconInfo = { icon: MdUpdate, name: "Update Item" }
