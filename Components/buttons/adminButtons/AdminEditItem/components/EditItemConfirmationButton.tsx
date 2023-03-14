@@ -31,8 +31,6 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
     props: Props,
 ) => {
 
-    const { classes, cx } = useStyles();
-
     const { colorScheme, } = useMantineColorScheme();
     const adminEditItemAtomValue = useAtomValue(adminEditItemAtom)
 
@@ -182,16 +180,27 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
             }
 
 
+
+            const secondaryImagesToStoreInTable: string[] = []
+            let secondaryImageToStoreIndex = 0
             for (const imageData of adminEditItemAtomValue.secondaryImagesURLS) {
 
+                if (imageData.oldData.length > 0) {
+                    secondaryImagesToStoreInTable.push(imageData.oldData)
+                }
+
+                // console.log("secondaryImagesToStoreInTable: ", secondaryImagesToStoreInTable)
                 if (imageData.modified) {
                     // console.log("SECONDARY IMAGE MODIFIED: ", imageData.newData)
                     noItemModified = false
 
-                    const oldImageIndex = imageData.oldData[imageData.oldData.length - 1]
+                    let oldImageIndex = ''
+                    if (imageData.oldData.length > 0) {
+                        oldImageIndex = imageData.oldData[imageData.oldData.length - 1]
+                    }
                     // console.log("index => ", oldImageIndex)
 
-                    if (oldImageIndex !== undefined) {
+                    if (oldImageIndex.length > 0) {
                         const { data, error } = await supabase
                             .storage
                             .from('items')
@@ -262,6 +271,8 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
                             })
                         }
                         else {
+                            secondaryImagesToStoreInTable[secondaryImageToStoreIndex] = `${folderURL}/${oldImageIndex}`
+                            secondaryImageToStoreIndex++
                             showNotification({
 
                                 color: "green",
@@ -320,6 +331,7 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
                                 }),
 
                             })
+
                         }
                     }
                     else {
@@ -343,7 +355,7 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
                                 color: "red",
                                 radius: "md",
                                 title: "Item insert Error",
-                                message: <p>Secondary image {oldImageIndex} update error</p>,
+                                message: <p>Secondary image {newIndex} update error</p>,
                                 // icon: <errorIcon.icon />,
 
                                 styles: (theme) => ({
@@ -398,12 +410,15 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
                             })
                         }
                         else {
+                            secondaryImagesToStoreInTable[secondaryImageToStoreIndex] = `${folderURL}/${newIndex}`
+                            secondaryImageToStoreIndex++
+
                             showNotification({
 
                                 color: "green",
                                 radius: "md",
                                 title: 'Item update confirmed',
-                                message: <p>The item secondary image N{oldImageIndex} you updated has been accepted. Try checking the main page to see it!</p>,
+                                message: <p>The item secondary image N{newIndex} you updated has been accepted. Try checking the main page to see it!</p>,
                                 // icon: <errorIcon.icon />,
 
                                 styles: (theme) => ({
@@ -458,6 +473,134 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
                             })
                         }
                     }
+
+                    const { data, error } = await supabase
+                        .from('all_items')
+                        .update({ 'secondaryImagesURLS': secondaryImagesToStoreInTable })
+                        .eq('item_id', item_id)
+
+                    if (error) {
+                        showNotification({
+
+                            color: "red",
+                            radius: "md",
+                            title: "Item insert Error",
+                            message: <p>Secondary images could not be added to the items table</p>,
+                            // icon: <errorIcon.icon />,
+
+                            styles: (theme) => ({
+
+
+                                root: {
+                                    background: colorScheme === "dark"
+                                        ? CardContainerColors.backgroundColorDark
+                                        : CardContainerColors.backgroundColorLight,
+                                    backgroundSize: "300% 300%",
+                                    animation: `${style.AnimateBG} 7s ease infinite`,
+
+                                    border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                },
+
+                                title: {
+
+                                    background: colorScheme === "dark"
+                                        ? CardContainerColors.backgroundColorDark
+                                        : CardContainerColors.backgroundColorLight,
+                                    backgroundSize: "300% 300%",
+                                    animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                                    // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                    padding: "0.5rem",
+                                    borderRadius: 5,
+
+                                    fontWeight: "bolder",
+                                    color: colorScheme === "dark"
+                                        ? CardContainerColors.textColorDark
+                                        : CardContainerColors.textColorLight
+                                },
+                                description: {
+                                    fontStyle: "italic",
+
+                                    color: colorScheme === "dark"
+                                        ? CardContainerColors.textColorDark
+                                        : CardContainerColors.textColorLight
+                                },
+                                closeButton: {
+                                    color: colorScheme === "dark"
+                                        ? CardContainerColors.textColorDark
+                                        : CardContainerColors.textColorLight,
+
+                                    '&:hover': {
+                                        backgroundColor: "red"
+                                    },
+                                },
+                            }),
+
+                        })
+                    }
+                    else {
+                        showNotification({
+
+                            color: "green",
+                            radius: "md",
+                            title: 'Item update confirmed',
+                            message: <p>Secondary images added to the items table successfully</p>,
+                            // icon: <errorIcon.icon />,
+
+                            styles: (theme) => ({
+
+
+                                root: {
+                                    background: colorScheme === "dark"
+                                        ? CardContainerColors.backgroundColorDark
+                                        : CardContainerColors.backgroundColorLight,
+                                    backgroundSize: "300% 300%",
+                                    animation: `${style.AnimateBG} 7s ease infinite`,
+
+                                    border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                },
+
+                                title: {
+
+                                    background: colorScheme === "dark"
+                                        ? CardContainerColors.backgroundColorDark
+                                        : CardContainerColors.backgroundColorLight,
+                                    backgroundSize: "300% 300%",
+                                    animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                                    // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                    padding: "0.5rem",
+                                    borderRadius: 5,
+
+                                    fontWeight: "bolder",
+                                    color: colorScheme === "dark"
+                                        ? CardContainerColors.textColorDark
+                                        : CardContainerColors.textColorLight
+                                },
+                                description: {
+                                    fontStyle: "italic",
+
+                                    color: colorScheme === "dark"
+                                        ? CardContainerColors.textColorDark
+                                        : CardContainerColors.textColorLight
+                                },
+                                closeButton: {
+                                    color: colorScheme === "dark"
+                                        ? CardContainerColors.textColorDark
+                                        : CardContainerColors.textColorLight,
+
+                                    '&:hover': {
+                                        backgroundColor: "green"
+                                    },
+                                },
+                            }),
+
+                        })
+                    }
+
+
                 }
 
 

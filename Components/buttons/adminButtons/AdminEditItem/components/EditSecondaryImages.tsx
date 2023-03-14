@@ -22,6 +22,26 @@ const EditSecondaryImages: NextComponentType<NextPageContext, {}, Props> = (
 ) => {
     const { colorScheme, } = useMantineColorScheme();
 
+    let firstSecondaryImage = ''
+    let secondSecondaryImage = ''
+    let thirdSecondaryImage = ''
+
+    for (const image of props.SingleItemDataSecondaryImagesURLS) {
+
+        if (image.length > 0) {
+            const oldImageIndex = image[image.length - 1]
+
+            if (oldImageIndex == '0') {
+                firstSecondaryImage = image
+            }
+            else if (oldImageIndex == '1') {
+                secondSecondaryImage = image
+            }
+            else if (oldImageIndex == '2') {
+                thirdSecondaryImage = image
+            }
+        }
+    }
 
 
     return (
@@ -44,22 +64,13 @@ const EditSecondaryImages: NextComponentType<NextPageContext, {}, Props> = (
             mb={"lg"}
         >
             <SecondaryImagesUploaders index={0}
-                SingleItemDataSecondaryImage={props.SingleItemDataSecondaryImagesURLS[0] !== undefined
-                    ? props.SingleItemDataSecondaryImagesURLS[0]
-                    : ""
-                }
+                SingleItemDataSecondaryImage={firstSecondaryImage}
             />
             <SecondaryImagesUploaders index={1}
-                SingleItemDataSecondaryImage={props.SingleItemDataSecondaryImagesURLS[1] !== undefined
-                    ? props.SingleItemDataSecondaryImagesURLS[1]
-                    : ""
-                }
+                SingleItemDataSecondaryImage={secondSecondaryImage}
             />
             <SecondaryImagesUploaders index={2}
-                SingleItemDataSecondaryImage={props.SingleItemDataSecondaryImagesURLS[2] !== undefined
-                    ? props.SingleItemDataSecondaryImagesURLS[2]
-                    : ""
-                }
+                SingleItemDataSecondaryImage={thirdSecondaryImage}
             />
         </Group>
 
@@ -80,6 +91,14 @@ const SecondaryImagesUploaders = (props: SecondaryImagesUploadersProps) => {
 
     const [adminEditItemAtomValue, adminEditItemAtomSetter] = useAtom(adminEditItemAtom)
 
+    const adminTempItem = adminEditItemAtomValue;
+    // adminTempItem['secondaryImagesURLS'][props.index] = URL.createObjectURL(file[0])
+    adminTempItem['secondaryImagesURLS'][props.index] = {
+        newData: adminTempItem.secondaryImagesURLS[props.index].newData,
+        oldData: props.SingleItemDataSecondaryImage,
+        modified: adminTempItem.secondaryImagesURLS[props.index].modified
+    }
+    adminEditItemAtomSetter(adminTempItem)
 
     const [Loading, setLoading] = useState(false)
 
@@ -135,7 +154,7 @@ const SecondaryImagesUploaders = (props: SecondaryImagesUploadersProps) => {
                                     // adminTempItem['secondaryImagesURLS'][props.index] = URL.createObjectURL(file[0])
                                     adminTempItem['secondaryImagesURLS'][props.index] = {
                                         newData: file[0],
-                                        oldData: props.SingleItemDataSecondaryImage,
+                                        oldData: adminTempItem.secondaryImagesURLS[props.index].oldData,
                                         modified: true
                                     }
 

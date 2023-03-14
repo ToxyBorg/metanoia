@@ -47,13 +47,15 @@ const AddItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> =
             all_image_paths.push({ imagePath: `${item_id}/${mainImageName}`, file: adminAddItemAtomValue.mainImageURL! })
             const secondaryImagesPaths: string[] = []
 
+            let index = 0
             for (const image of adminAddItemAtomValue.secondaryImagesURLS) {
 
                 if (image != null) {
-                    const index = adminAddItemAtomValue.secondaryImagesURLS.indexOf(image)
+                    // const index = adminAddItemAtomValue.secondaryImagesURLS.indexOf(image)
 
                     secondaryImagesPaths.push(`${storageURL}/${item_id}/${index}`)
                     all_image_paths.push({ imagePath: `${item_id}/${index}`, file: image })
+                    index++
                 }
             }
 
@@ -226,13 +228,18 @@ const AddItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> =
                     .delete()
                     .eq('item_id', item_id)
 
-                for (const image_uploaded_URL of images_uploaded_URLS) {
+                // for (const image_uploaded_URL of images_uploaded_URLS) {
 
-                    const { data: mainImageDeleteData, error: mainImageDeleteError } = await supabase
-                        .storage
-                        .from('items')
-                        .remove([image_uploaded_URL])
-                }
+                //     const { data: mainImageDeleteData, error: mainImageDeleteError } = await supabase
+                //         .storage
+                //         .from('items')
+                //         .remove([image_uploaded_URL])
+                // }
+
+                const { data: mainImageDeleteData, error: mainImageDeleteError } = await supabase
+                    .storage
+                    .from('items')
+                    .remove(images_uploaded_URLS)
 
                 props.loadingOverlayVisibleHandlers.close()
                 props.handlers.close()
