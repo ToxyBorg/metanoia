@@ -12,6 +12,7 @@ import { adminEditItemAtom } from "../../../Stores/adminEditItemStore";
 import { currentSessionUserIsAdmin } from "../../../Stores/adminSpecialButtonsStore";
 import { SingleItemData } from "../../../Stores/itemDataStore";
 import AdminAddItem from "./AdminAddItem/AdminAddItem";
+import AdminDeleteItem from "./AdminDeleteItem/AdminDeleteItem";
 import AdminEditItem from "./AdminEditItem/AdminEditItem";
 
 interface Props {
@@ -141,21 +142,22 @@ const AdminCardOptionsButton: NextComponentType<NextPageContext, {}, Props> = (
                         }}>
 
                         <Menu.Dropdown>
-                            <Menu.Label>Admin Menu</Menu.Label>
+                            <Menu.Label>Edit Menu</Menu.Label>
 
-                            <Menu.Item >
+                            <Menu.Item>
                                 <AdminEditItem SingleItemData={props.SingleItemData} />
-                            </Menu.Item>
-
-                            <Menu.Item >
-                                <AdminAddItem />
                             </Menu.Item>
 
                             <Menu.Divider />
 
                             <Menu.Label>Danger zone</Menu.Label>
-                            <Menu.Item>Transfer my data</Menu.Item>
-                            <Menu.Item color="red">Delete my account</Menu.Item>
+                            <Menu.Item sx={{
+                                ":hover": {
+                                    background: "red"
+                                }
+                            }}>
+                                <AdminDeleteItem SingleItemData={props.SingleItemData} />
+                            </Menu.Item>
                         </Menu.Dropdown>
 
                     </IconContext.Provider>
