@@ -1,10 +1,11 @@
-import { createStyles, MultiSelect, rem, useMantineColorScheme } from "@mantine/core";
-import { useAtom } from "jotai";
+import { createStyles, LoadingOverlay, MultiSelect, rem, Text, useMantineColorScheme } from "@mantine/core";
+import { useAtom, useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { useState } from "react";
 import { CardContainerColors } from "../../../../../Shared/colors";
 import style from "../../../../../Shared/css/style";
 import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
+import { tagsEditLoading } from "../../../../../Stores/adminEditItemLoadingsStore";
 import { adminEditItemAtom } from "../../../../../Stores/adminEditItemStore";
 import { SingleItemData } from "../../../../../Stores/itemDataStore";
 
@@ -16,6 +17,7 @@ const EditItemTags: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
 ) => {
     const [adminEditItemAtomValue, adminEditItemAtomSetter] = useAtom(adminEditItemAtom)
+    const tagsEditLoadingValue = useAtomValue(tagsEditLoading)
 
     const { colorScheme, } = useMantineColorScheme();
 
@@ -27,86 +29,116 @@ const EditItemTags: NextComponentType<NextPageContext, {}, Props> = (
 
 
     return (
-        <MultiSelect
-            classNames={classes}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
+        <div style={{ position: "relative" }}>
+            <LoadingOverlay visible={tagsEditLoadingValue} overlayBlur={2} zIndex={2} />
 
-            dropdownPosition={"flip"}
-            required
-            label="Tags"
-            // placeholder="Create some tags"
-            searchable
-            onChange={(event) => {
-                const newArr = adminEditItemAtomValue
+            <MultiSelect
 
-                newArr['tags'] = {
-                    newData: event,
-                    modified: event == props.SingleItemDataTags ? false : true
-                }
+                classNames={classes}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
 
-                adminEditItemAtomSetter(newArr)
+                dropdownPosition={"flip"}
+                required
+                label="Tags"
+                // placeholder="Create some tags"
+                searchable
+                onChange={(event) => {
+                    const newArr = adminEditItemAtomValue
 
-                onSearchChange(event)
-            }}
-            creatable
-            getCreateLabel={(query) => `+ Create ${query} tag`}
-            onCreate={(query) => {
+                    newArr['tags'] = {
+                        newData: event,
+                        modified: event == props.SingleItemDataTags ? false : true
+                    }
 
-                onSearchChange((current) => [...current, query]);
-                return query;
-            }}
+                    adminEditItemAtomSetter(newArr)
 
-            data={searchValue}
-            value={searchValue}
-            nothingFound="No options"
+                    onSearchChange(event)
+                }}
+                creatable
+                getCreateLabel={(query) => `+ Create ${query} tag`}
+                onCreate={(query) => {
 
-            transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
-            withinPortal
-            clearButtonProps={{ 'aria-label': 'Clear selection' }}
-            clearable
+                    onSearchChange((current) => [...current, query]);
+                    return query;
+                }}
 
-            sx={{
+                data={searchValue}
+                value={searchValue}
+                nothingFound="No options"
 
-                WebkitBackdropFilter: "blur(2px)",
-                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-            }}
-            styles={{
-                // input: {
-                //     border: `2px solid ${colorScheme === "dark"
-                //         ? CardContainerColors.borderColorDark
-                //         : CardContainerColors.borderColorLight}`,
-                // },
+                transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+                withinPortal
+                clearButtonProps={{ 'aria-label': 'Clear selection' }}
+                // clearable
+                rightSection={<></>}
 
-                dropdown: {
-                    border: `2px solid ${colorScheme === "dark"
-                        ? CardContainerColors.borderColorDark
-                        : CardContainerColors.borderColorLight}`,
-                    // borderRadius: 15,
+                sx={{
+
                     WebkitBackdropFilter: "blur(2px)",
                     boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                }}
+                styles={{
 
-                    backgroundImage: colorScheme === "dark"
-                        ? CardContainerColors.backgroundColorDark
-                        : CardContainerColors.backgroundColorLight,
+                    input: {
+                        padding: 0,
+                        // paddingLeft: "1rem"
+                    },
 
-                    backgroundSize: "300% 300%",
-                    animation: `${style.AnimateBG} 7s ease infinite`
+                    dropdown: {
 
-                },
+                        border: `2px solid ${colorScheme === "dark"
+                            ? CardContainerColors.borderColorDark
+                            : CardContainerColors.borderColorLight}`,
+                        WebkitBackdropFilter: "blur(2px)",
+                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
 
-                // label: {
-                //     color: colorScheme === "dark"
-                //         ? CardContainerColors.textColorDark
-                //         : CardContainerColors.textColorLight
-                // },
+                        backgroundImage: colorScheme === "dark"
+                            ? CardContainerColors.backgroundColorDark
+                            : CardContainerColors.backgroundColorLight,
 
-                // separatorLabel: {
-                //     background: "red"
-                // }
-            }}
+                        backgroundSize: "300% 300%",
+                        animation: `${style.AnimateBG} 7s ease infinite`
 
-        />
+                    },
+                    value: {
+
+                        WebkitBackdropFilter: "blur(2px)",
+                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+
+                        backgroundImage: colorScheme === "dark"
+                            ? CardContainerColors.backgroundColorDark
+                            : CardContainerColors.backgroundColorLight,
+
+                        backgroundSize: "300% 300%",
+                        animation: `${style.AnimateBG} 7s ease infinite`,
+
+                        color: colorScheme === "dark"
+                            ? CardContainerColors.textColorDark
+                            : CardContainerColors.textColorLight,
+
+                        marginInline: "1rem",
+                        marginTop: "0.5rem"
+
+
+                    },
+                    values: {
+
+                        width: "clamp(35vw,200px,36vw)",
+                        marginBottom: "2rem",
+
+                    },
+
+                    rightSection: {
+                        width: 0
+
+                    },
+
+
+                }}
+
+            />
+        </div>
     );
 }
 

@@ -11,7 +11,7 @@ import { GrAddCircle, GrCircleAlert, GrDocumentUpdate, GrLinkNext, GrLinkPreviou
 import { TfiRulerAlt } from 'react-icons/tfi'
 import { FaEquals, FaPlus, FaRuler, FaTimes, FaUserAstronaut } from 'react-icons/fa'
 import { VscEdit, VscError } from 'react-icons/vsc';
-import { MdEmojiPeople, MdMarkEmailRead, MdOutlineMarkEmailRead, MdUpdate } from 'react-icons/md';
+import { MdDeleteForever, MdEmojiPeople, MdMarkEmailRead, MdOutlineMarkEmailRead, MdUpdate } from 'react-icons/md';
 import { IoCashOutline, IoCash } from 'react-icons/io5'
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai'
 import { HiOutlineAtSymbol } from 'react-icons/hi'
@@ -183,3 +183,4 @@ export const adminUploadImage: IconInfo = { icon: TbUpload, name: "Upload an ima
 export const adminRejectImageUpload: IconInfo = { icon: CiSquareRemove, name: "Rejected image upload" }
 export const adminEditButton: IconInfo = { icon: VscEdit, name: "Edit Item" }
 export const adminUpdateButton: IconInfo = { icon: MdUpdate, name: "Update Item" }
+export const adminDeleteImage: IconInfo = { icon: MdDeleteForever, name: "Delete image" }

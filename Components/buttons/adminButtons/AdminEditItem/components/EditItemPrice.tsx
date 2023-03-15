@@ -1,9 +1,10 @@
-import { createStyles, NumberInput, rem, useMantineColorScheme } from "@mantine/core";
-import { useAtom } from "jotai";
+import { createStyles, LoadingOverlay, NumberInput, rem, useMantineColorScheme } from "@mantine/core";
+import { useAtom, useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { ReactNode, useState } from "react";
 import { CardContainerColors } from "../../../../../Shared/colors";
 import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
+import { priceEditLoading } from "../../../../../Stores/adminEditItemLoadingsStore";
 import { adminEditItemAtom } from "../../../../../Stores/adminEditItemStore";
 import { SingleItemData } from "../../../../../Stores/itemDataStore";
 
@@ -76,6 +77,7 @@ interface InputProps {
 export function FloatingLabelInput(inputProps: InputProps) {
 
     const [adminEditItemAtomValue, adminEditItemAtomSetter] = useAtom(adminEditItemAtom)
+    const priceEditLoadingValue = useAtomValue(priceEditLoading)
 
     const { colorScheme, } = useMantineColorScheme();
 
@@ -84,55 +86,59 @@ export function FloatingLabelInput(inputProps: InputProps) {
     const { classes } = useStyles({ floating: value !== 0 || value !== null || focused });
 
     return (
-        <NumberInput
-            hideControls
-            type="number"
-            // w={"100%"}
-            label={inputProps.label}
-            placeholder={inputProps.placeholder}
-            required={inputProps.required}
-            classNames={classes}
-            value={value}
-            onChange={
-                (event) => {
+        <div style={{ position: "relative" }}>
+            <LoadingOverlay visible={priceEditLoadingValue} overlayBlur={2} zIndex={2} />
 
-                    const newArr = adminEditItemAtomValue
+            <NumberInput
+                hideControls
+                type="number"
+                // w={"100%"}
+                label={inputProps.label}
+                placeholder={inputProps.placeholder}
+                required={inputProps.required}
+                classNames={classes}
+                value={value}
+                onChange={
+                    (event) => {
 
-                    if (typeof event == 'number') {
-                        newArr['price'] = {
-                            newData: event,
-                            modified: event == inputProps.SingleItemDataPrice ? false : true
+                        const newArr = adminEditItemAtomValue
+
+                        if (typeof event == 'number') {
+                            newArr['price'] = {
+                                newData: event,
+                                modified: event == inputProps.SingleItemDataPrice ? false : true
+                            }
+                            setValue(event)
+                        } else {
+                            newArr['price'] = {
+                                newData: 0,
+                                modified: event == inputProps.SingleItemDataPrice.toString() ? false : true
+                            }
+                            setValue(0)
                         }
-                        setValue(event)
-                    } else {
-                        newArr['price'] = {
-                            newData: 0,
-                            modified: event == inputProps.SingleItemDataPrice.toString() ? false : true
-                        }
-                        setValue(0)
+
+                        adminEditItemAtomSetter(newArr)
+
                     }
-
-                    adminEditItemAtomSetter(newArr)
-
                 }
-            }
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            // mt="1rem"
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
+                // mt="1rem"
 
-            sx={{
+                sx={{
 
-                WebkitBackdropFilter: "blur(2px)",
-                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-            }}
-        // styles={{
-        //     input: {
-        //         border: `2px solid ${colorScheme === "dark"
-        //             ? CardContainerColors.borderColorDark
-        //             : CardContainerColors.borderColorLight}`,
-        //     },
-        // }}
+                    WebkitBackdropFilter: "blur(2px)",
+                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                }}
+            // styles={{
+            //     input: {
+            //         border: `2px solid ${colorScheme === "dark"
+            //             ? CardContainerColors.borderColorDark
+            //             : CardContainerColors.borderColorLight}`,
+            //     },
+            // }}
 
-        />
+            />
+        </div>
     );
 }

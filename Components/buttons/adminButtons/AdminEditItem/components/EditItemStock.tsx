@@ -1,9 +1,10 @@
-import { ActionIcon, createStyles, Group, NumberInput, NumberInputHandlers, rem, useMantineColorScheme } from "@mantine/core";
-import { useAtom } from "jotai";
+import { ActionIcon, createStyles, Group, LoadingOverlay, NumberInput, NumberInputHandlers, rem, useMantineColorScheme } from "@mantine/core";
+import { useAtom, useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { MutableRefObject, ReactNode, useRef, useState } from "react";
 import { CardContainerColors } from "../../../../../Shared/colors";
 import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
+import { stockEditLoading } from "../../../../../Stores/adminEditItemLoadingsStore";
 import { adminEditItemAtom } from "../../../../../Stores/adminEditItemStore";
 import { SingleItemData } from "../../../../../Stores/itemDataStore";
 
@@ -75,6 +76,7 @@ interface InputProps {
 export function FloatingLabelInput(inputProps: InputProps) {
 
     const [adminEditItemAtomValue, adminEditItemAtomSetter] = useAtom(adminEditItemAtom)
+    const stockEditLoadingValue = useAtomValue(stockEditLoading)
 
     const { colorScheme, } = useMantineColorScheme();
 
@@ -85,56 +87,58 @@ export function FloatingLabelInput(inputProps: InputProps) {
     const { classes } = useStyles({ floating: value !== 0 || value !== null || focused });
 
     return (
+        <div style={{ position: "relative" }}>
+            <LoadingOverlay visible={stockEditLoadingValue} overlayBlur={2} zIndex={2} />
+            <NumberInput
+                type="number"
+                hideControls
+                label={inputProps.label}
+                placeholder={inputProps.placeholder}
+                required={inputProps.required}
+                classNames={classes}
+                value={value}
 
-        <NumberInput
-            type="number"
-            hideControls
-            label={inputProps.label}
-            placeholder={inputProps.placeholder}
-            required={inputProps.required}
-            classNames={classes}
-            value={value}
+                onChange={
+                    (event) => {
+                        const newArr = adminEditItemAtomValue
 
-            onChange={
-                (event) => {
-                    const newArr = adminEditItemAtomValue
-
-                    if (typeof event == 'number') {
-                        newArr['stock'] = {
-                            newData: event,
-                            modified: event == inputProps.SingleItemDataStock ? false : true
+                        if (typeof event == 'number') {
+                            newArr['stock'] = {
+                                newData: event,
+                                modified: event == inputProps.SingleItemDataStock ? false : true
+                            }
+                            setValue(event)
+                        } else {
+                            newArr['stock'] = {
+                                newData: 0,
+                                modified: event == inputProps.SingleItemDataStock.toString() ? false : true
+                            }
+                            setValue(0)
                         }
-                        setValue(event)
-                    } else {
-                        newArr['stock'] = {
-                            newData: 0,
-                            modified: event == inputProps.SingleItemDataStock.toString() ? false : true
-                        }
-                        setValue(0)
+
+                        adminEditItemAtomSetter(newArr)
+
                     }
-
-                    adminEditItemAtomSetter(newArr)
-
                 }
-            }
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
 
-            // handlersRef={inputProps.handlers}
+                // handlersRef={inputProps.handlers}
 
-            sx={{
+                sx={{
 
-                WebkitBackdropFilter: "blur(2px)",
-                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-            }}
-        // styles={{
-        //     input: {
-        //         border: `2px solid ${colorScheme === "dark"
-        //             ? CardContainerColors.borderColorDark
-        //             : CardContainerColors.borderColorLight}`,
-        //     },
-        // }}
+                    WebkitBackdropFilter: "blur(2px)",
+                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                }}
+            // styles={{
+            //     input: {
+            //         border: `2px solid ${colorScheme === "dark"
+            //             ? CardContainerColors.borderColorDark
+            //             : CardContainerColors.borderColorLight}`,
+            //     },
+            // }}
 
-        />
+            />
+        </div>
     );
 }

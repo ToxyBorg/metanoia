@@ -1,14 +1,15 @@
-import { AspectRatio, Card, Center, Group, Text, Transition, useMantineColorScheme, useMantineTheme } from "@mantine/core";
+import { AspectRatio, Card, Center, Group, LoadingOverlay, Text, Transition, useMantineColorScheme, useMantineTheme } from "@mantine/core";
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import Image from "next/image";
 import { useState } from "react";
 import { CardContainerColors } from "../../../../../Shared/colors";
 import style from "../../../../../Shared/css/style";
 import { adminAddItem, adminRejectImageUpload, adminUploadImage } from "../../../../../Shared/icons";
+import { mainImageEditLoading } from "../../../../../Stores/adminEditItemLoadingsStore";
 import { adminEditItemAtom } from "../../../../../Stores/adminEditItemStore";
 import { SingleItemData } from "../../../../../Stores/itemDataStore";
 
@@ -22,6 +23,8 @@ const EditMainImage: NextComponentType<NextPageContext, {}, Props> = (
     // const [adminAddItemAtomValue, adminAddItemAtomSetter] = useAtom(adminAddItemAtom)
     const [adminEditItemAtomValue, adminEditItemAtomSetter] = useAtom(adminEditItemAtom)
     // const adminEditItemAtomSetter = useSetAtom(adminEditItemAtom)
+    const mainImageEditLoadingValue = useAtomValue(mainImageEditLoading)
+
 
 
     const [Loading, setLoading] = useState(false)
@@ -49,10 +52,13 @@ const EditMainImage: NextComponentType<NextPageContext, {}, Props> = (
                     boxShadow: "0 7px 15px rgba(0, 0, 0, 0.5)",
                 }}
                 radius={"md"}
+                pos={"relative"}
 
             >
 
                 <Card.Section>
+
+                    <LoadingOverlay radius={"md"} visible={mainImageEditLoadingValue} overlayBlur={2} zIndex={2} />
 
                     <AspectRatio ratio={10 / 16} pos={"relative"}
                         onMouseOver={() => { imageUploaderOverlayVisibilityHandlers.open() }}
@@ -62,6 +68,7 @@ const EditMainImage: NextComponentType<NextPageContext, {}, Props> = (
                         <Transition mounted={imageUploaderOverlayVisibility} transition="slide-down" duration={500} timingFunction="ease">
                             {(styles) =>
                                 <Dropzone
+                                    disabled={mainImageEditLoadingValue}
                                     style={{ ...styles, zIndex: 1 }}
                                     bg={colorScheme === "dark"
                                         ? CardContainerColors.backgroundColorDark

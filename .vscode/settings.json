@@ -38,6 +38,6 @@
     "plaintext",
     "typescriptreact"
   ],
-  "dotenv.enableAutocloaking": false
+  "dotenv.enableAutocloaking": true
   // "color-picker.languages": ["python", "javascript", "typescript"]
 }
