@@ -32,7 +32,8 @@ export type adminEditItemType = {
     secondaryImagesURLS: {
         newData: File | null,
         oldData: string,
-        modified: boolean
+        modified: boolean,
+        removed: boolean
     }[],
     // secondaryImagesURLS: [File | null, File | null, File | null]
     stock: {
@@ -80,17 +81,20 @@ export const defaultEditDataAtom: adminEditItemType = {
         {
             newData: null,
             oldData: '',
-            modified: false
+            modified: false,
+            removed: false
         },
         {
             newData: null,
             oldData: '',
-            modified: false
+            modified: false,
+            removed: false
         },
         {
             newData: null,
             oldData: '',
-            modified: false
+            modified: false,
+            removed: false
         }
     ],
     stock: {

@@ -1,8 +1,9 @@
-import { createStyles, rem, Textarea, TextInput, useMantineColorScheme } from "@mantine/core";
-import { useAtom } from "jotai";
+import { createStyles, LoadingOverlay, rem, Textarea, TextInput, useMantineColorScheme } from "@mantine/core";
+import { useAtom, useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { ReactNode, useState } from "react";
 import { CardContainerColors } from "../../../../../Shared/colors";
+import { descriptionEditLoading } from "../../../../../Stores/adminEditItemLoadingsStore";
 import { adminEditItemAtom } from "../../../../../Stores/adminEditItemStore";
 import { SingleItemData } from "../../../../../Stores/itemDataStore";
 
@@ -80,6 +81,7 @@ export function FloatingLabelInput(inputProps: InputProps) {
     const { colorScheme, } = useMantineColorScheme();
 
     const [adminEditItemAtomValue, adminEditItemAtomSetter] = useAtom(adminEditItemAtom)
+    const descriptionEditLoadingValue = useAtomValue(descriptionEditLoading)
 
 
 
@@ -88,47 +90,54 @@ export function FloatingLabelInput(inputProps: InputProps) {
     const { classes } = useStyles({ floating: value.trim().length !== 0 || focused });
 
     return (
-        <Textarea
-            autosize
-            minRows={5}
-            // w={"100%"}
-            label={inputProps.label}
-            placeholder={inputProps.placeholder}
-            required={inputProps.required}
-            classNames={classes}
-            // className={cx(classes.input, classes.label, classes.required, classes.root, style.HiddenScrollBar)}
-            value={value}
-            onChange={
-                (event) => {
-                    const newArr = adminEditItemAtomValue
+        <div style={{ position: "relative" }}>
+            <LoadingOverlay visible={descriptionEditLoadingValue} overlayBlur={2} zIndex={2} />
 
-                    newArr['description'] = {
-                        newData: event.currentTarget.value,
-                        modified: event.currentTarget.value == inputProps.SingleItemDataDescription ? false : true
+            <Textarea
+                disabled={descriptionEditLoadingValue}
+                autosize
+                minRows={5}
+                maxRows={10}
+                // w={"100%"}
+                label={inputProps.label}
+                placeholder={inputProps.placeholder}
+                required={inputProps.required}
+                classNames={classes}
+                // className={cx(classes.input, classes.label, classes.required, classes.root, style.HiddenScrollBar)}
+                value={value}
+                onChange={
+                    (event) => {
+                        const newArr = adminEditItemAtomValue
+
+                        newArr['description'] = {
+                            newData: event.currentTarget.value,
+                            modified: event.currentTarget.value == inputProps.SingleItemDataDescription ? false : true
+                        }
+
+                        adminEditItemAtomSetter(newArr)
+
+                        setValue(event.currentTarget.value)
                     }
-
-                    adminEditItemAtomSetter(newArr)
-
-                    setValue(event.currentTarget.value)
                 }
-            }
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            // mt="1rem"
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
+                // mt="1rem"
 
-            sx={{
+                sx={{
 
-                WebkitBackdropFilter: "blur(2px)",
-                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-            }}
-        // styles={{
-        //     input: {
-        //         border: `2px solid ${colorScheme === "dark"
-        //             ? CardContainerColors.borderColorDark
-        //             : CardContainerColors.borderColorLight}`,
-        //     },
-        // }}
+                    WebkitBackdropFilter: "blur(2px)",
+                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                }}
+            // styles={{
+            //     input: {
+            //         border: `2px solid ${colorScheme === "dark"
+            //             ? CardContainerColors.borderColorDark
+            //             : CardContainerColors.borderColorLight}`,
+            //     },
+            // }}
 
-        />
+            />
+        </div>
+
     );
 }

@@ -1,13 +1,14 @@
 import type { NextComponentType, NextPageContext } from "next";
 import { forwardRef, useState } from 'react';
-import { Group, Avatar, Text, Select, useMantineColorScheme, createStyles, rem } from '@mantine/core';
+import { Group, Avatar, Text, Select, useMantineColorScheme, createStyles, rem, LoadingOverlay } from '@mantine/core';
 import { bracelets, earrings, IconInfo, necklaces, rings } from "../../../../../Shared/icons";
 import { CategoriesType, SingleItemData } from "../../../../../Stores/itemDataStore";
 import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { CardContainerColors } from "../../../../../Shared/colors";
 import style from "../../../../../Shared/css/style";
 import { adminEditItemAtom } from "../../../../../Stores/adminEditItemStore";
+import { categoryEditLoading } from "../../../../../Stores/adminEditItemLoadingsStore";
 
 interface Props {
     SingleItemDataCategory: SingleItemData['category']
@@ -18,6 +19,7 @@ const EditItemCategory: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
 ) => {
     const [adminEditItemAtomValue, adminEditItemAtomSetter] = useAtom(adminEditItemAtom)
+    const categoryEditLoadingValue = useAtomValue(categoryEditLoading)
 
     const { colorScheme, } = useMantineColorScheme();
 
@@ -31,68 +33,73 @@ const EditItemCategory: NextComponentType<NextPageContext, {}, Props> = (
 
 
     return (
-        <Select
-            classNames={classes}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
+        <div style={{ position: "relative" }}>
+            <LoadingOverlay visible={categoryEditLoadingValue} overlayBlur={2} zIndex={2} />
 
-            dropdownPosition={"flip"}
-            required
-            label="Category"
-            placeholder="Pick one"
-            onChange={(event: CategoriesType) => {
-                const newArr = adminEditItemAtomValue
+            <Select
+                disabled={categoryEditLoadingValue}
+                classNames={classes}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
 
-                newArr['category'] = {
-                    newData: event,
-                    modified: event == props.SingleItemDataCategory ? false : true
-                }
+                dropdownPosition={"flip"}
+                required
+                label="Category"
+                placeholder="Pick one"
+                onChange={(event: CategoriesType) => {
+                    const newArr = adminEditItemAtomValue
 
-                adminEditItemAtomSetter(newArr)
+                    newArr['category'] = {
+                        newData: event,
+                        modified: event == props.SingleItemDataCategory ? false : true
+                    }
 
-                onSearchChange(event)
-            }}
-            value={searchValue}
-            nothingFound="No options"
-            data={testData}
+                    adminEditItemAtomSetter(newArr)
 
-            transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
-            withinPortal
+                    onSearchChange(event)
+                }}
+                value={searchValue}
+                nothingFound="No options"
+                data={testData}
 
-            sx={{
+                transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+                withinPortal
 
-                WebkitBackdropFilter: "blur(2px)",
-                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-            }}
+                sx={{
 
-            styles={{
-                // input: {
-                //     border: `2px solid ${colorScheme === "dark"
-                //         ? CardContainerColors.borderColorDark
-                //         : CardContainerColors.borderColorLight}`,
-
-
-                // },
-                dropdown: {
-                    border: `2px solid ${colorScheme === "dark"
-                        ? CardContainerColors.borderColorDark
-                        : CardContainerColors.borderColorLight}`,
-                    // borderRadius: 15,
                     WebkitBackdropFilter: "blur(2px)",
                     boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                }}
 
-                    backgroundImage: colorScheme === "dark"
-                        ? CardContainerColors.backgroundColorDark
-                        : CardContainerColors.backgroundColorLight,
+                styles={{
+                    // input: {
+                    //     border: `2px solid ${colorScheme === "dark"
+                    //         ? CardContainerColors.borderColorDark
+                    //         : CardContainerColors.borderColorLight}`,
 
-                    backgroundSize: "300% 300%",
-                    animation: `${style.AnimateBG} 7s ease infinite`
 
-                },
+                    // },
+                    dropdown: {
+                        border: `2px solid ${colorScheme === "dark"
+                            ? CardContainerColors.borderColorDark
+                            : CardContainerColors.borderColorLight}`,
+                        // borderRadius: 15,
+                        WebkitBackdropFilter: "blur(2px)",
+                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
 
-            }}
+                        backgroundImage: colorScheme === "dark"
+                            ? CardContainerColors.backgroundColorDark
+                            : CardContainerColors.backgroundColorLight,
 
-        />
+                        backgroundSize: "300% 300%",
+                        animation: `${style.AnimateBG} 7s ease infinite`
+
+                    },
+
+                }}
+
+            />
+        </div>
     );
 }
 

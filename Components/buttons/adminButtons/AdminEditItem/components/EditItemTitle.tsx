@@ -1,8 +1,9 @@
-import { createStyles, rem, TextInput, useMantineColorScheme } from "@mantine/core";
-import { useAtom } from "jotai";
+import { createStyles, LoadingOverlay, rem, TextInput, useMantineColorScheme } from "@mantine/core";
+import { useAtom, useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { ReactNode, useState } from "react";
 import { CardContainerColors } from "../../../../../Shared/colors";
+import { titleEditLoading } from "../../../../../Stores/adminEditItemLoadingsStore";
 import { adminEditItemAtom } from "../../../../../Stores/adminEditItemStore";
 import { SingleItemData } from "../../../../../Stores/itemDataStore";
 
@@ -68,7 +69,8 @@ interface InputProps {
     required: boolean,
     // requiredName?: keyof in_person_delivery['required'],
     // notRequiredName?: keyof in_person_delivery['not_required']
-    SingleItemDataTitle: SingleItemData['title']
+    SingleItemDataTitle: SingleItemData['title'],
+    // disabled: boolean
 }
 
 export function FloatingLabelInput(inputProps: InputProps) {
@@ -77,6 +79,7 @@ export function FloatingLabelInput(inputProps: InputProps) {
 
 
     const [adminEditItemAtomValue, adminEditItemAtomSetter] = useAtom(adminEditItemAtom)
+    const titleEditLoadingValue = useAtomValue(titleEditLoading)
 
 
 
@@ -85,44 +88,49 @@ export function FloatingLabelInput(inputProps: InputProps) {
     const { classes } = useStyles({ floating: value.trim().length !== 0 || focused });
 
     return (
-        <TextInput
-            // w={"100%"}
-            label={inputProps.label}
-            placeholder={inputProps.placeholder}
-            required={inputProps.required}
-            classNames={classes}
-            value={value}
-            onChange={
-                (event) => {
-                    const newArr = adminEditItemAtomValue
+        <div style={{ position: "relative" }}>
+            <LoadingOverlay visible={titleEditLoadingValue} overlayBlur={2} zIndex={2} />
 
-                    newArr['title'] = {
-                        newData: event.currentTarget.value,
-                        modified: event.currentTarget.value == inputProps.SingleItemDataTitle ? false : true
+            <TextInput
+                disabled={titleEditLoadingValue}
+                // w={"100%"}
+                label={inputProps.label}
+                placeholder={inputProps.placeholder}
+                required={inputProps.required}
+                classNames={classes}
+                value={value}
+                onChange={
+                    (event) => {
+                        const newArr = adminEditItemAtomValue
+
+                        newArr['title'] = {
+                            newData: event.currentTarget.value,
+                            modified: event.currentTarget.value == inputProps.SingleItemDataTitle ? false : true
+                        }
+
+                        adminEditItemAtomSetter(newArr)
+
+                        setValue(event.currentTarget.value)
                     }
-
-                    adminEditItemAtomSetter(newArr)
-
-                    setValue(event.currentTarget.value)
                 }
-            }
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            // mt="1rem"
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
+                // mt="1rem"
 
-            // styles={{
-            //     input: {
-            //         border: `2px solid ${colorScheme === "dark"
-            //             ? CardContainerColors.borderColorDark
-            //             : CardContainerColors.borderColorLight}`,
-            //     }
-            // }}
-            sx={{
+                // styles={{
+                //     input: {
+                //         border: `2px solid ${colorScheme === "dark"
+                //             ? CardContainerColors.borderColorDark
+                //             : CardContainerColors.borderColorLight}`,
+                //     }
+                // }}
+                sx={{
 
-                WebkitBackdropFilter: "blur(2px)",
-                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-            }}
+                    WebkitBackdropFilter: "blur(2px)",
+                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                }}
 
-        />
+            />
+        </div>
     );
 }
