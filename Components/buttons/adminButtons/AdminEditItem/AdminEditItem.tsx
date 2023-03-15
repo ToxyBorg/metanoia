@@ -77,7 +77,7 @@ const AdminEditItem: NextComponentType<NextPageContext, {}, Props> = (
                             <Center>
                                 <Stack >
                                     <EditMainImage SingleItemDataMainImageURL={props.SingleItemData.mainImageURL} />
-                                    <EditSecondaryImages SingleItemDataSecondaryImagesURLS={props.SingleItemData.secondaryImagesURLS} />
+                                    <EditSecondaryImages SingleItemDataSecondaryImagesURLS={props.SingleItemData.secondaryImagesURLS} SingleItemDataID={props.SingleItemData.item_id} />
                                 </Stack>
                             </Center>
                         </Container>
