@@ -179,434 +179,730 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
                 }
             }
 
+            ///////////////////////////////////////////////////////////////////////
+
+            const ifSecondaryImgesHaveBeenModified = adminEditItemAtomValue.secondaryImagesURLS.map((image) => {
+                if (image.modified) {
+                    return true
+                }
+                return false
+            })
+
+            if (ifSecondaryImgesHaveBeenModified.includes(true)) {
+                noItemModified = false;
+
+                const UnfilteredSecondaryImages: string[] = []
+
+                let index = 0
+                for (const image of adminEditItemAtomValue.secondaryImagesURLS) {
+
+                    UnfilteredSecondaryImages.push('')
+
+                    if (image.modified) {
+                        // if (adminEditItemAtomValue.secondaryImagesURLS[0].oldData.length > 0) {
+                        const { data, error } = await supabase
+                            .storage
+                            .from('items')
+                            .upload(`${item_id}/0`, image.newData!, {
+                                cacheControl: '0',
+                                upsert: true
+                            })
 
 
-            const secondaryImagesToStoreInTable: string[] = []
-            let secondaryImageToStoreIndex = 0
-            for (const imageData of adminEditItemAtomValue.secondaryImagesURLS) {
+                        if (error) {
+                            showNotification({
 
-                if (imageData.oldData.length > 0) {
-                    secondaryImagesToStoreInTable.push(imageData.oldData)
+                                color: "red",
+                                radius: "md",
+                                title: "Item insert Error",
+                                message: <p>Secondary image {index} update error</p>,
+                                // icon: <errorIcon.icon />,
+
+                                styles: (theme) => ({
+
+
+                                    root: {
+                                        background: colorScheme === "dark"
+                                            ? CardContainerColors.backgroundColorDark
+                                            : CardContainerColors.backgroundColorLight,
+                                        backgroundSize: "300% 300%",
+                                        animation: `${style.AnimateBG} 7s ease infinite`,
+
+                                        border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                    },
+
+                                    title: {
+
+                                        background: colorScheme === "dark"
+                                            ? CardContainerColors.backgroundColorDark
+                                            : CardContainerColors.backgroundColorLight,
+                                        backgroundSize: "300% 300%",
+                                        animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                                        // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                        padding: "0.5rem",
+                                        borderRadius: 5,
+
+                                        fontWeight: "bolder",
+                                        color: colorScheme === "dark"
+                                            ? CardContainerColors.textColorDark
+                                            : CardContainerColors.textColorLight
+                                    },
+                                    description: {
+                                        fontStyle: "italic",
+
+                                        color: colorScheme === "dark"
+                                            ? CardContainerColors.textColorDark
+                                            : CardContainerColors.textColorLight
+                                    },
+                                    closeButton: {
+                                        color: colorScheme === "dark"
+                                            ? CardContainerColors.textColorDark
+                                            : CardContainerColors.textColorLight,
+
+                                        '&:hover': {
+                                            backgroundColor: "red"
+                                        },
+                                    },
+                                }),
+
+                            })
+                        }
+                        else {
+                            showNotification({
+
+                                color: "green",
+                                radius: "md",
+                                title: 'Item update confirmed',
+                                message: <p>The item secondary image N{index} you updated has been accepted. Try checking the main page to see it!</p>,
+                                // icon: <errorIcon.icon />,
+
+                                styles: (theme) => ({
+
+
+                                    root: {
+                                        background: colorScheme === "dark"
+                                            ? CardContainerColors.backgroundColorDark
+                                            : CardContainerColors.backgroundColorLight,
+                                        backgroundSize: "300% 300%",
+                                        animation: `${style.AnimateBG} 7s ease infinite`,
+
+                                        border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                    },
+
+                                    title: {
+
+                                        background: colorScheme === "dark"
+                                            ? CardContainerColors.backgroundColorDark
+                                            : CardContainerColors.backgroundColorLight,
+                                        backgroundSize: "300% 300%",
+                                        animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                                        // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                        padding: "0.5rem",
+                                        borderRadius: 5,
+
+                                        fontWeight: "bolder",
+                                        color: colorScheme === "dark"
+                                            ? CardContainerColors.textColorDark
+                                            : CardContainerColors.textColorLight
+                                    },
+                                    description: {
+                                        fontStyle: "italic",
+
+                                        color: colorScheme === "dark"
+                                            ? CardContainerColors.textColorDark
+                                            : CardContainerColors.textColorLight
+                                    },
+                                    closeButton: {
+                                        color: colorScheme === "dark"
+                                            ? CardContainerColors.textColorDark
+                                            : CardContainerColors.textColorLight,
+
+                                        '&:hover': {
+                                            backgroundColor: "green"
+                                        },
+                                    },
+                                }),
+
+                            })
+                        }
+
+                        UnfilteredSecondaryImages[index] = `${folderURL}/${index}`
+                    }
+
+                    else if (image.oldData.length > 0) {
+                        UnfilteredSecondaryImages[index] = `${folderURL}/${index}`
+                    }
+
+                    index++
                 }
 
-                // console.log("secondaryImagesToStoreInTable: ", secondaryImagesToStoreInTable)
-                if (imageData.modified) {
-                    // console.log("SECONDARY IMAGE MODIFIED: ", imageData.newData)
-                    noItemModified = false
-
-                    let oldImageIndex = ''
-                    if (imageData.oldData.length > 0) {
-                        oldImageIndex = imageData.oldData[imageData.oldData.length - 1]
-                    }
-                    // console.log("index => ", oldImageIndex)
-
-                    if (oldImageIndex.length > 0) {
-                        const { data, error } = await supabase
-                            .storage
-                            .from('items')
-                            .update(`${item_id}/${oldImageIndex}`, imageData.newData!, {
-                                cacheControl: '0',
-                                // Overwrite file if it exis
-                                upsert: true
-                            })
-
-                        if (error) {
-                            showNotification({
-
-                                color: "red",
-                                radius: "md",
-                                title: "Item insert Error",
-                                message: <p>Secondary image {oldImageIndex} update error</p>,
-                                // icon: <errorIcon.icon />,
-
-                                styles: (theme) => ({
-
-
-                                    root: {
-                                        background: colorScheme === "dark"
-                                            ? CardContainerColors.backgroundColorDark
-                                            : CardContainerColors.backgroundColorLight,
-                                        backgroundSize: "300% 300%",
-                                        animation: `${style.AnimateBG} 7s ease infinite`,
-
-                                        border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                    },
-
-                                    title: {
-
-                                        background: colorScheme === "dark"
-                                            ? CardContainerColors.backgroundColorDark
-                                            : CardContainerColors.backgroundColorLight,
-                                        backgroundSize: "300% 300%",
-                                        animation: `${style.AnimateBG} 7s ease infinite`,
-
-
-                                        // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                        padding: "0.5rem",
-                                        borderRadius: 5,
-
-                                        fontWeight: "bolder",
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight
-                                    },
-                                    description: {
-                                        fontStyle: "italic",
-
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight
-                                    },
-                                    closeButton: {
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight,
-
-                                        '&:hover': {
-                                            backgroundColor: "red"
-                                        },
-                                    },
-                                }),
-
-                            })
-                        }
-                        else {
-                            secondaryImagesToStoreInTable[secondaryImageToStoreIndex] = `${folderURL}/${oldImageIndex}`
-                            secondaryImageToStoreIndex++
-                            showNotification({
-
-                                color: "green",
-                                radius: "md",
-                                title: 'Item update confirmed',
-                                message: <p>The item secondary image N{oldImageIndex} you updated has been accepted. Try checking the main page to see it!</p>,
-                                // icon: <errorIcon.icon />,
-
-                                styles: (theme) => ({
-
-
-                                    root: {
-                                        background: colorScheme === "dark"
-                                            ? CardContainerColors.backgroundColorDark
-                                            : CardContainerColors.backgroundColorLight,
-                                        backgroundSize: "300% 300%",
-                                        animation: `${style.AnimateBG} 7s ease infinite`,
-
-                                        border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                    },
-
-                                    title: {
-
-                                        background: colorScheme === "dark"
-                                            ? CardContainerColors.backgroundColorDark
-                                            : CardContainerColors.backgroundColorLight,
-                                        backgroundSize: "300% 300%",
-                                        animation: `${style.AnimateBG} 7s ease infinite`,
-
-
-                                        // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                        padding: "0.5rem",
-                                        borderRadius: 5,
-
-                                        fontWeight: "bolder",
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight
-                                    },
-                                    description: {
-                                        fontStyle: "italic",
-
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight
-                                    },
-                                    closeButton: {
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight,
-
-                                        '&:hover': {
-                                            backgroundColor: "green"
-                                        },
-                                    },
-                                }),
-
-                            })
-
-                        }
-                    }
-                    else {
-
-                        const newIndex = adminEditItemAtomValue.secondaryImagesURLS.findIndex(object => {
-                            return object.newData === imageData.newData;
-                        });
-                        // console.log("UNDIFINED SO index => ", newIndex)
-
-                        const { data, error } = await supabase
-                            .storage
-                            .from('items')
-                            .upload(`${item_id}/${newIndex}`, imageData.newData!, {
-                                cacheControl: '0',
-                                upsert: true
-                            })
-
-                        if (error) {
-                            showNotification({
-
-                                color: "red",
-                                radius: "md",
-                                title: "Item insert Error",
-                                message: <p>Secondary image {newIndex} update error</p>,
-                                // icon: <errorIcon.icon />,
-
-                                styles: (theme) => ({
-
-
-                                    root: {
-                                        background: colorScheme === "dark"
-                                            ? CardContainerColors.backgroundColorDark
-                                            : CardContainerColors.backgroundColorLight,
-                                        backgroundSize: "300% 300%",
-                                        animation: `${style.AnimateBG} 7s ease infinite`,
-
-                                        border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                    },
-
-                                    title: {
-
-                                        background: colorScheme === "dark"
-                                            ? CardContainerColors.backgroundColorDark
-                                            : CardContainerColors.backgroundColorLight,
-                                        backgroundSize: "300% 300%",
-                                        animation: `${style.AnimateBG} 7s ease infinite`,
-
-
-                                        // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                        padding: "0.5rem",
-                                        borderRadius: 5,
-
-                                        fontWeight: "bolder",
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight
-                                    },
-                                    description: {
-                                        fontStyle: "italic",
-
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight
-                                    },
-                                    closeButton: {
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight,
-
-                                        '&:hover': {
-                                            backgroundColor: "red"
-                                        },
-                                    },
-                                }),
-
-                            })
-                        }
-                        else {
-                            secondaryImagesToStoreInTable[secondaryImageToStoreIndex] = `${folderURL}/${newIndex}`
-                            secondaryImageToStoreIndex++
-
-                            showNotification({
-
-                                color: "green",
-                                radius: "md",
-                                title: 'Item update confirmed',
-                                message: <p>The item secondary image N{newIndex} you updated has been accepted. Try checking the main page to see it!</p>,
-                                // icon: <errorIcon.icon />,
-
-                                styles: (theme) => ({
-
-
-                                    root: {
-                                        background: colorScheme === "dark"
-                                            ? CardContainerColors.backgroundColorDark
-                                            : CardContainerColors.backgroundColorLight,
-                                        backgroundSize: "300% 300%",
-                                        animation: `${style.AnimateBG} 7s ease infinite`,
-
-                                        border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                    },
-
-                                    title: {
-
-                                        background: colorScheme === "dark"
-                                            ? CardContainerColors.backgroundColorDark
-                                            : CardContainerColors.backgroundColorLight,
-                                        backgroundSize: "300% 300%",
-                                        animation: `${style.AnimateBG} 7s ease infinite`,
-
-
-                                        // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                        padding: "0.5rem",
-                                        borderRadius: 5,
-
-                                        fontWeight: "bolder",
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight
-                                    },
-                                    description: {
-                                        fontStyle: "italic",
-
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight
-                                    },
-                                    closeButton: {
-                                        color: colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight,
-
-                                        '&:hover': {
-                                            backgroundColor: "green"
-                                        },
-                                    },
-                                }),
-
-                            })
-                        }
-                    }
-
-                    const { data, error } = await supabase
-                        .from('all_items')
-                        .update({ 'secondaryImagesURLS': secondaryImagesToStoreInTable })
-                        .eq('item_id', item_id)
-
-                    if (error) {
-                        showNotification({
-
-                            color: "red",
-                            radius: "md",
-                            title: "Item insert Error",
-                            message: <p>Secondary images could not be added to the items table</p>,
-                            // icon: <errorIcon.icon />,
-
-                            styles: (theme) => ({
-
-
-                                root: {
-                                    background: colorScheme === "dark"
-                                        ? CardContainerColors.backgroundColorDark
-                                        : CardContainerColors.backgroundColorLight,
-                                    backgroundSize: "300% 300%",
-                                    animation: `${style.AnimateBG} 7s ease infinite`,
-
-                                    border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                const FilteredSecondaryImages = UnfilteredSecondaryImages.filter((str) => str !== '');
+
+                const { data, error } = await supabase
+                    .from('all_items')
+                    .update({ 'secondaryImagesURLS': FilteredSecondaryImages },
+
+                    )
+                    .eq('item_id', item_id)
+
+                if (error) {
+                    showNotification({
+
+                        color: "red",
+                        radius: "md",
+                        title: "Item insert Error",
+                        message: <p>Secondary images could not be added to the items table</p>,
+                        // icon: <errorIcon.icon />,
+
+                        styles: (theme) => ({
+
+
+                            root: {
+                                background: colorScheme === "dark"
+                                    ? CardContainerColors.backgroundColorDark
+                                    : CardContainerColors.backgroundColorLight,
+                                backgroundSize: "300% 300%",
+                                animation: `${style.AnimateBG} 7s ease infinite`,
+
+                                border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                            },
+
+                            title: {
+
+                                background: colorScheme === "dark"
+                                    ? CardContainerColors.backgroundColorDark
+                                    : CardContainerColors.backgroundColorLight,
+                                backgroundSize: "300% 300%",
+                                animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                                // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                padding: "0.5rem",
+                                borderRadius: 5,
+
+                                fontWeight: "bolder",
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight
+                            },
+                            description: {
+                                fontStyle: "italic",
+
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight
+                            },
+                            closeButton: {
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight,
+
+                                '&:hover': {
+                                    backgroundColor: "red"
                                 },
+                            },
+                        }),
 
-                                title: {
+                    })
+                }
+                else {
+                    showNotification({
 
-                                    background: colorScheme === "dark"
-                                        ? CardContainerColors.backgroundColorDark
-                                        : CardContainerColors.backgroundColorLight,
-                                    backgroundSize: "300% 300%",
-                                    animation: `${style.AnimateBG} 7s ease infinite`,
+                        color: "green",
+                        radius: "md",
+                        title: 'Item update confirmed',
+                        message: <p>Secondary images added to the items table successfully</p>,
+                        // icon: <errorIcon.icon />,
+
+                        styles: (theme) => ({
 
 
-                                    // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                    padding: "0.5rem",
-                                    borderRadius: 5,
+                            root: {
+                                background: colorScheme === "dark"
+                                    ? CardContainerColors.backgroundColorDark
+                                    : CardContainerColors.backgroundColorLight,
+                                backgroundSize: "300% 300%",
+                                animation: `${style.AnimateBG} 7s ease infinite`,
 
-                                    fontWeight: "bolder",
-                                    color: colorScheme === "dark"
-                                        ? CardContainerColors.textColorDark
-                                        : CardContainerColors.textColorLight
+                                border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                            },
+
+                            title: {
+
+                                background: colorScheme === "dark"
+                                    ? CardContainerColors.backgroundColorDark
+                                    : CardContainerColors.backgroundColorLight,
+                                backgroundSize: "300% 300%",
+                                animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                                // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                padding: "0.5rem",
+                                borderRadius: 5,
+
+                                fontWeight: "bolder",
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight
+                            },
+                            description: {
+                                fontStyle: "italic",
+
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight
+                            },
+                            closeButton: {
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight,
+
+                                '&:hover': {
+                                    backgroundColor: "green"
                                 },
-                                description: {
-                                    fontStyle: "italic",
+                            },
+                        }),
 
-                                    color: colorScheme === "dark"
-                                        ? CardContainerColors.textColorDark
-                                        : CardContainerColors.textColorLight
-                                },
-                                closeButton: {
-                                    color: colorScheme === "dark"
-                                        ? CardContainerColors.textColorDark
-                                        : CardContainerColors.textColorLight,
-
-                                    '&:hover': {
-                                        backgroundColor: "red"
-                                    },
-                                },
-                            }),
-
-                        })
-                    }
-                    else {
-                        showNotification({
-
-                            color: "green",
-                            radius: "md",
-                            title: 'Item update confirmed',
-                            message: <p>Secondary images added to the items table successfully</p>,
-                            // icon: <errorIcon.icon />,
-
-                            styles: (theme) => ({
-
-
-                                root: {
-                                    background: colorScheme === "dark"
-                                        ? CardContainerColors.backgroundColorDark
-                                        : CardContainerColors.backgroundColorLight,
-                                    backgroundSize: "300% 300%",
-                                    animation: `${style.AnimateBG} 7s ease infinite`,
-
-                                    border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                },
-
-                                title: {
-
-                                    background: colorScheme === "dark"
-                                        ? CardContainerColors.backgroundColorDark
-                                        : CardContainerColors.backgroundColorLight,
-                                    backgroundSize: "300% 300%",
-                                    animation: `${style.AnimateBG} 7s ease infinite`,
-
-
-                                    // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                    padding: "0.5rem",
-                                    borderRadius: 5,
-
-                                    fontWeight: "bolder",
-                                    color: colorScheme === "dark"
-                                        ? CardContainerColors.textColorDark
-                                        : CardContainerColors.textColorLight
-                                },
-                                description: {
-                                    fontStyle: "italic",
-
-                                    color: colorScheme === "dark"
-                                        ? CardContainerColors.textColorDark
-                                        : CardContainerColors.textColorLight
-                                },
-                                closeButton: {
-                                    color: colorScheme === "dark"
-                                        ? CardContainerColors.textColorDark
-                                        : CardContainerColors.textColorLight,
-
-                                    '&:hover': {
-                                        backgroundColor: "green"
-                                    },
-                                },
-                            }),
-
-                        })
-                    }
-
-
+                    })
                 }
 
 
 
             }
+            ///////////////////////////////////////////////////////////////////////
 
+
+            // const secondaryImagesToStoreInTable: string[] = []
+            // let secondaryImageToStoreIndex = 0
+            // for (const imageData of adminEditItemAtomValue.secondaryImagesURLS) {
+
+            //     if (imageData.oldData.length > 0) {
+            //         secondaryImagesToStoreInTable.push(imageData.oldData)
+            //     }
+
+            //     // console.log("secondaryImagesToStoreInTable: ", secondaryImagesToStoreInTable)
+            //     if (imageData.modified) {
+            //         // console.log("SECONDARY IMAGE MODIFIED: ", imageData.newData)
+            //         noItemModified = false
+
+            //         let oldImageIndex = ''
+            //         if (imageData.oldData.length > 0) {
+            //             oldImageIndex = imageData.oldData[imageData.oldData.length - 1]
+            //         }
+            //         // console.log("index => ", oldImageIndex)
+
+            //         if (oldImageIndex.length > 0) {
+            //             const { data, error } = await supabase
+            //                 .storage
+            //                 .from('items')
+            //                 .update(`${item_id}/${oldImageIndex}`, imageData.newData!, {
+            //                     cacheControl: '0',
+            //                     // Overwrite file if it exis
+            //                     upsert: true
+            //                 })
+
+            //             if (error) {
+            //                 showNotification({
+
+            //                     color: "red",
+            //                     radius: "md",
+            //                     title: "Item insert Error",
+            //                     message: <p>Secondary image {oldImageIndex} update error</p>,
+            //                     // icon: <errorIcon.icon />,
+
+            //                     styles: (theme) => ({
+
+
+            //                         root: {
+            //                             background: colorScheme === "dark"
+            //                                 ? CardContainerColors.backgroundColorDark
+            //                                 : CardContainerColors.backgroundColorLight,
+            //                             backgroundSize: "300% 300%",
+            //                             animation: `${style.AnimateBG} 7s ease infinite`,
+
+            //                             border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                         },
+
+            //                         title: {
+
+            //                             background: colorScheme === "dark"
+            //                                 ? CardContainerColors.backgroundColorDark
+            //                                 : CardContainerColors.backgroundColorLight,
+            //                             backgroundSize: "300% 300%",
+            //                             animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+            //                             // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                             padding: "0.5rem",
+            //                             borderRadius: 5,
+
+            //                             fontWeight: "bolder",
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight
+            //                         },
+            //                         description: {
+            //                             fontStyle: "italic",
+
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight
+            //                         },
+            //                         closeButton: {
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight,
+
+            //                             '&:hover': {
+            //                                 backgroundColor: "red"
+            //                             },
+            //                         },
+            //                     }),
+
+            //                 })
+            //             }
+            //             else {
+            //                 secondaryImagesToStoreInTable[secondaryImageToStoreIndex] = `${folderURL}/${oldImageIndex}`
+            //                 secondaryImageToStoreIndex++
+            //                 showNotification({
+
+            //                     color: "green",
+            //                     radius: "md",
+            //                     title: 'Item update confirmed',
+            //                     message: <p>The item secondary image N{oldImageIndex} you updated has been accepted. Try checking the main page to see it!</p>,
+            //                     // icon: <errorIcon.icon />,
+
+            //                     styles: (theme) => ({
+
+
+            //                         root: {
+            //                             background: colorScheme === "dark"
+            //                                 ? CardContainerColors.backgroundColorDark
+            //                                 : CardContainerColors.backgroundColorLight,
+            //                             backgroundSize: "300% 300%",
+            //                             animation: `${style.AnimateBG} 7s ease infinite`,
+
+            //                             border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                         },
+
+            //                         title: {
+
+            //                             background: colorScheme === "dark"
+            //                                 ? CardContainerColors.backgroundColorDark
+            //                                 : CardContainerColors.backgroundColorLight,
+            //                             backgroundSize: "300% 300%",
+            //                             animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+            //                             // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                             padding: "0.5rem",
+            //                             borderRadius: 5,
+
+            //                             fontWeight: "bolder",
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight
+            //                         },
+            //                         description: {
+            //                             fontStyle: "italic",
+
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight
+            //                         },
+            //                         closeButton: {
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight,
+
+            //                             '&:hover': {
+            //                                 backgroundColor: "green"
+            //                             },
+            //                         },
+            //                     }),
+
+            //                 })
+
+            //             }
+            //         }
+            //         else {
+
+            //             const newIndex = adminEditItemAtomValue.secondaryImagesURLS.findIndex(object => {
+            //                 return object.newData === imageData.newData;
+            //             });
+            //             // console.log("UNDIFINED SO index => ", newIndex)
+
+            //             const { data, error } = await supabase
+            //                 .storage
+            //                 .from('items')
+            //                 .upload(`${item_id}/${newIndex}`, imageData.newData!, {
+            //                     cacheControl: '0',
+            //                     upsert: true
+            //                 })
+
+            //             if (error) {
+            //                 showNotification({
+
+            //                     color: "red",
+            //                     radius: "md",
+            //                     title: "Item insert Error",
+            //                     message: <p>Secondary image {newIndex} update error</p>,
+            //                     // icon: <errorIcon.icon />,
+
+            //                     styles: (theme) => ({
+
+
+            //                         root: {
+            //                             background: colorScheme === "dark"
+            //                                 ? CardContainerColors.backgroundColorDark
+            //                                 : CardContainerColors.backgroundColorLight,
+            //                             backgroundSize: "300% 300%",
+            //                             animation: `${style.AnimateBG} 7s ease infinite`,
+
+            //                             border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                         },
+
+            //                         title: {
+
+            //                             background: colorScheme === "dark"
+            //                                 ? CardContainerColors.backgroundColorDark
+            //                                 : CardContainerColors.backgroundColorLight,
+            //                             backgroundSize: "300% 300%",
+            //                             animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+            //                             // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                             padding: "0.5rem",
+            //                             borderRadius: 5,
+
+            //                             fontWeight: "bolder",
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight
+            //                         },
+            //                         description: {
+            //                             fontStyle: "italic",
+
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight
+            //                         },
+            //                         closeButton: {
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight,
+
+            //                             '&:hover': {
+            //                                 backgroundColor: "red"
+            //                             },
+            //                         },
+            //                     }),
+
+            //                 })
+            //             }
+            //             else {
+            //                 secondaryImagesToStoreInTable[secondaryImageToStoreIndex] = `${folderURL}/${newIndex}`
+            //                 secondaryImageToStoreIndex++
+
+            //                 showNotification({
+
+            //                     color: "green",
+            //                     radius: "md",
+            //                     title: 'Item update confirmed',
+            //                     message: <p>The item secondary image N{newIndex} you updated has been accepted. Try checking the main page to see it!</p>,
+            //                     // icon: <errorIcon.icon />,
+
+            //                     styles: (theme) => ({
+
+
+            //                         root: {
+            //                             background: colorScheme === "dark"
+            //                                 ? CardContainerColors.backgroundColorDark
+            //                                 : CardContainerColors.backgroundColorLight,
+            //                             backgroundSize: "300% 300%",
+            //                             animation: `${style.AnimateBG} 7s ease infinite`,
+
+            //                             border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                         },
+
+            //                         title: {
+
+            //                             background: colorScheme === "dark"
+            //                                 ? CardContainerColors.backgroundColorDark
+            //                                 : CardContainerColors.backgroundColorLight,
+            //                             backgroundSize: "300% 300%",
+            //                             animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+            //                             // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                             padding: "0.5rem",
+            //                             borderRadius: 5,
+
+            //                             fontWeight: "bolder",
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight
+            //                         },
+            //                         description: {
+            //                             fontStyle: "italic",
+
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight
+            //                         },
+            //                         closeButton: {
+            //                             color: colorScheme === "dark"
+            //                                 ? CardContainerColors.textColorDark
+            //                                 : CardContainerColors.textColorLight,
+
+            //                             '&:hover': {
+            //                                 backgroundColor: "green"
+            //                             },
+            //                         },
+            //                     }),
+
+            //                 })
+            //             }
+            //         }
+
+            //         const { data, error } = await supabase
+            //             .from('all_items')
+            //             .update({ 'secondaryImagesURLS': secondaryImagesToStoreInTable })
+            //             .eq('item_id', item_id)
+
+            //         if (error) {
+            //             showNotification({
+
+            //                 color: "red",
+            //                 radius: "md",
+            //                 title: "Item insert Error",
+            //                 message: <p>Secondary images could not be added to the items table</p>,
+            //                 // icon: <errorIcon.icon />,
+
+            //                 styles: (theme) => ({
+
+
+            //                     root: {
+            //                         background: colorScheme === "dark"
+            //                             ? CardContainerColors.backgroundColorDark
+            //                             : CardContainerColors.backgroundColorLight,
+            //                         backgroundSize: "300% 300%",
+            //                         animation: `${style.AnimateBG} 7s ease infinite`,
+
+            //                         border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                     },
+
+            //                     title: {
+
+            //                         background: colorScheme === "dark"
+            //                             ? CardContainerColors.backgroundColorDark
+            //                             : CardContainerColors.backgroundColorLight,
+            //                         backgroundSize: "300% 300%",
+            //                         animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+            //                         // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                         padding: "0.5rem",
+            //                         borderRadius: 5,
+
+            //                         fontWeight: "bolder",
+            //                         color: colorScheme === "dark"
+            //                             ? CardContainerColors.textColorDark
+            //                             : CardContainerColors.textColorLight
+            //                     },
+            //                     description: {
+            //                         fontStyle: "italic",
+
+            //                         color: colorScheme === "dark"
+            //                             ? CardContainerColors.textColorDark
+            //                             : CardContainerColors.textColorLight
+            //                     },
+            //                     closeButton: {
+            //                         color: colorScheme === "dark"
+            //                             ? CardContainerColors.textColorDark
+            //                             : CardContainerColors.textColorLight,
+
+            //                         '&:hover': {
+            //                             backgroundColor: "red"
+            //                         },
+            //                     },
+            //                 }),
+
+            //             })
+            //         }
+            //         else {
+            //             showNotification({
+
+            //                 color: "green",
+            //                 radius: "md",
+            //                 title: 'Item update confirmed',
+            //                 message: <p>Secondary images added to the items table successfully</p>,
+            //                 // icon: <errorIcon.icon />,
+
+            //                 styles: (theme) => ({
+
+
+            //                     root: {
+            //                         background: colorScheme === "dark"
+            //                             ? CardContainerColors.backgroundColorDark
+            //                             : CardContainerColors.backgroundColorLight,
+            //                         backgroundSize: "300% 300%",
+            //                         animation: `${style.AnimateBG} 7s ease infinite`,
+
+            //                         border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                     },
+
+            //                     title: {
+
+            //                         background: colorScheme === "dark"
+            //                             ? CardContainerColors.backgroundColorDark
+            //                             : CardContainerColors.backgroundColorLight,
+            //                         backgroundSize: "300% 300%",
+            //                         animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+            //                         // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                         padding: "0.5rem",
+            //                         borderRadius: 5,
+
+            //                         fontWeight: "bolder",
+            //                         color: colorScheme === "dark"
+            //                             ? CardContainerColors.textColorDark
+            //                             : CardContainerColors.textColorLight
+            //                     },
+            //                     description: {
+            //                         fontStyle: "italic",
+
+            //                         color: colorScheme === "dark"
+            //                             ? CardContainerColors.textColorDark
+            //                             : CardContainerColors.textColorLight
+            //                     },
+            //                     closeButton: {
+            //                         color: colorScheme === "dark"
+            //                             ? CardContainerColors.textColorDark
+            //                             : CardContainerColors.textColorLight,
+
+            //                         '&:hover': {
+            //                             backgroundColor: "green"
+            //                         },
+            //                     },
+            //                 }),
+
+            //             })
+            //         }
+
+
+            //     }
+
+
+
+            // }
+
+            ///////////////////////////////////////////////////////////////////////
 
             if (adminEditItemAtomValue.title.modified) {
                 noItemModified = false
@@ -738,6 +1034,7 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
                 }
             }
 
+            ///////////////////////////////////////////////////////////////////////
             if (adminEditItemAtomValue.description.modified) {
                 noItemModified = false
 

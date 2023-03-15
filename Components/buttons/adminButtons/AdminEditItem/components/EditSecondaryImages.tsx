@@ -6,6 +6,7 @@ import { useAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import Image from "next/image";
 import { useState } from "react";
+import { useSupabase } from "../../../../../Context/SupabaseWrapper/supabase-provider";
 import { CardContainerColors } from "../../../../../Shared/colors";
 import style from "../../../../../Shared/css/style";
 import { adminAddItem, adminRejectImageUpload, adminUploadImage } from "../../../../../Shared/icons";
@@ -13,7 +14,8 @@ import { adminEditItemAtom } from "../../../../../Stores/adminEditItemStore";
 import { SingleItemData } from "../../../../../Stores/itemDataStore";
 
 interface Props {
-    SingleItemDataSecondaryImagesURLS: SingleItemData['secondaryImagesURLS']
+    SingleItemDataSecondaryImagesURLS: SingleItemData['secondaryImagesURLS'],
+    SingleItemDataID: SingleItemData['item_id'],
 
 }
 
@@ -42,6 +44,28 @@ const EditSecondaryImages: NextComponentType<NextPageContext, {}, Props> = (
             }
         }
     }
+
+    // const { supabase, } = useSupabase()
+
+    // const handleImagesFromFolder = async () => {
+    //     const { data, error } = await supabase
+    //         .storage
+    //         .from('items')
+    //         .list(props.SingleItemDataID, {
+    //             limit: 5,
+    //             offset: 0,
+    //             sortBy: { column: 'name', order: 'asc' },
+    //         })
+
+    //     if (error) {
+    //         return null
+    //     }
+    //     else {
+
+    //     }
+    // }
+
+
 
 
     return (

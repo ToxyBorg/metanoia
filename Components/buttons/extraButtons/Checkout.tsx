@@ -21,7 +21,7 @@ const Checkout: NextComponentType<NextPageContext, {}, Props> = (
     const cartItemsDataAtomValue = useAtomValue(cartItemsDataAtom)
 
     if (cartItemsDataAtomValue.length < 1) return <></>
-    return (
+    else return (
         <ActionIcon variant="transparent"
 
             w={"100%"} h={"100%"}
@@ -34,7 +34,6 @@ const Checkout: NextComponentType<NextPageContext, {}, Props> = (
             onClick={
                 () => {
                     props.handlers?.toggle();
-
                 }
             }
         >

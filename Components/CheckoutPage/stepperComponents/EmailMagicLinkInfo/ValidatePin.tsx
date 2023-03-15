@@ -197,6 +197,7 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
                     ])
 
                 if (insertError) {
+                    // console.log('signUpTokenError insertError : ', insertError)
                     showNotification({
 
                         color: "red",
@@ -341,6 +342,8 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
                 ])
 
             if (insertError) {
+                // console.log('magicLinkTokenError insertError : ', insertError)
+
                 showNotification({
 
                     color: "red",

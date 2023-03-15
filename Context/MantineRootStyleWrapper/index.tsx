@@ -149,7 +149,7 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
                         // },
                     }}>
 
-                    <Notifications limit={2} />
+                    <Notifications limit={3} autoClose={false} position={"top-right"} />
                     {children}
                 </MantineProvider>
             </ColorSchemeProvider>
