@@ -200,10 +200,11 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
 
                     if (image.modified) {
                         // if (adminEditItemAtomValue.secondaryImagesURLS[0].oldData.length > 0) {
+                        // const tempIndex = image.oldData[image.oldData.length - 1]
                         const { data, error } = await supabase
                             .storage
                             .from('items')
-                            .upload(`${item_id}/0`, image.newData!, {
+                            .upload(`${item_id}/${index}`, image.newData!, {
                                 cacheControl: '0',
                                 upsert: true
                             })
