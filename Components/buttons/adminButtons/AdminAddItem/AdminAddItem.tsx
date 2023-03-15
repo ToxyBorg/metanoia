@@ -68,17 +68,17 @@ const AdminAddItem: NextComponentType<NextPageContext, {}, Props> = (
 
                 size={"auto"} contentMargin={"auto"}
             >
-                <LoadingOverlay visible={loadingOverlayVisible} overlayBlur={2} />
 
-                <Stack spacing={"xl"} >
+                <Stack spacing={"xl"} pos={"relative"} >
+                    <LoadingOverlay visible={loadingOverlayVisible} overlayBlur={2} zIndex={2} />
 
                     <Group my={"xl"}>
 
                         <Container >
                             <Center>
                                 <Stack >
-                                    <AddMainImage />
-                                    <AddSecondaryImages />
+                                    <AddMainImage loadingOverlayVisible={loadingOverlayVisible} />
+                                    <AddSecondaryImages loadingOverlayVisible={loadingOverlayVisible} />
                                 </Stack>
                             </Center>
                         </Container>
@@ -103,12 +103,12 @@ const AdminAddItem: NextComponentType<NextPageContext, {}, Props> = (
 
                             >
                                 <Stack spacing={"2rem"} p={"2rem"} >
-                                    <AddItemTitle />
-                                    <AddItemDescription />
-                                    <AddItemCategory />
-                                    <AddItemPrice />
-                                    <AddItemStock />
-                                    <AddItemTags />
+                                    <AddItemTitle loadingOverlayVisible={loadingOverlayVisible} />
+                                    <AddItemDescription loadingOverlayVisible={loadingOverlayVisible} />
+                                    <AddItemCategory loadingOverlayVisible={loadingOverlayVisible} />
+                                    <AddItemPrice loadingOverlayVisible={loadingOverlayVisible} />
+                                    <AddItemStock loadingOverlayVisible={loadingOverlayVisible} />
+                                    <AddItemTags loadingOverlayVisible={loadingOverlayVisible} />
                                 </Stack>
 
                             </Center>

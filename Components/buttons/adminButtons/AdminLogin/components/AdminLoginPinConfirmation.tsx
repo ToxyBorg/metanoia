@@ -294,7 +294,7 @@ const AdminLoginPinConfirmation: NextComponentType<NextPageContext, {}, Props> =
                         }
 
                         className={style.Animated_Background_Gradient}
-                        p={"xl"}
+                        // p={"xl"}
                         pos={"relative"}
 
                     >
@@ -302,11 +302,23 @@ const AdminLoginPinConfirmation: NextComponentType<NextPageContext, {}, Props> =
 
 
                         <PinInput
+                            styles={{
+                                input: {
+                                    // margin: "0.5rem"
+                                    height: "2rem"
+                                }
+                            }}
+                            size={"fit"}
+                            maw={"20rem"}
+
                             length={6}
                             oneTimeCode
                             type="number"
-                            mt="md"
+                            // m={0}
+                            m={"md"}
+                            // mt="md"
                             required
+                            spacing={"0.1rem"}
                             onChange={(value) => { setTokenValue(value) }}
                         // sx={{
                         //     WebkitBackdropFilter: "blur(2px)",
@@ -345,18 +357,6 @@ const AdminLoginPinConfirmation: NextComponentType<NextPageContext, {}, Props> =
                                         </Text>
                                     </Group>
                                 </ActionIcon>
-
-                                // <Button
-                                //     style={styles}
-
-                                //     onClick={() => {
-                                //         loadingOverlayVisibleHandlers.open()
-                                //         handleEmailPin()
-                                //     }}
-                                // >
-                                //     Verify Pin
-                                // </Button>
-
                             }
                         </Transition>
 

@@ -5,7 +5,10 @@ import { MutableRefObject, ReactNode, useRef, useState } from "react";
 import { CardContainerColors } from "../../../../../Shared/colors";
 import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
 
-interface Props { }
+interface Props {
+    loadingOverlayVisible: boolean
+
+}
 
 const AddItemStock: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
@@ -25,7 +28,7 @@ const AddItemStock: NextComponentType<NextPageContext, {}, Props> = (
         //         –
         //     </ActionIcon>
 
-        <FloatingLabelInput label={"Item stock"} placeholder={"Enter item stock"} required />
+        <FloatingLabelInput label={"Item stock"} placeholder={"Enter item stock"} loadingOverlayVisible={props.loadingOverlayVisible} required />
 
 
         //     <ActionIcon size={42} variant="default" onClick={() => handlers.current?.increment()}
@@ -88,6 +91,8 @@ interface InputProps {
     label: ReactNode,
     placeholder: string | undefined,
     required: boolean,
+    loadingOverlayVisible: boolean
+
     // handlers: MutableRefObject<NumberInputHandlers | undefined>
     // requiredName?: keyof in_person_delivery['required'],
     // notRequiredName?: keyof in_person_delivery['not_required']
@@ -107,6 +112,7 @@ export function FloatingLabelInput(inputProps: InputProps) {
     return (
 
         <NumberInput
+            disabled={inputProps.loadingOverlayVisible}
             type="number"
             hideControls
             label={inputProps.label}

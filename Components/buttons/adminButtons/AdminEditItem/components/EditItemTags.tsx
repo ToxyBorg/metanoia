@@ -34,6 +34,7 @@ const EditItemTags: NextComponentType<NextPageContext, {}, Props> = (
 
             <MultiSelect
 
+                disabled={tagsEditLoadingValue}
                 classNames={classes}
                 onFocus={() => setFocused(true)}
                 onBlur={() => setFocused(false)}

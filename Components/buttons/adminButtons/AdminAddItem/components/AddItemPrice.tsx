@@ -5,13 +5,16 @@ import { ReactNode, useState } from "react";
 import { CardContainerColors } from "../../../../../Shared/colors";
 import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
 
-interface Props { }
+interface Props {
+    loadingOverlayVisible: boolean
+
+}
 
 const AddItemPrice: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
 ) => {
     return (
-        <FloatingLabelInput label={"Item price"} placeholder={"Enter item price"} required />
+        <FloatingLabelInput label={"Item price"} placeholder={"Enter item price"} loadingOverlayVisible={props.loadingOverlayVisible} required />
     )
 }
 
@@ -62,6 +65,8 @@ interface InputProps {
     label: ReactNode,
     placeholder: string | undefined,
     required: boolean,
+    loadingOverlayVisible: boolean
+
     // requiredName?: keyof in_person_delivery['required'],
     // notRequiredName?: keyof in_person_delivery['not_required']
 }
@@ -77,6 +82,7 @@ export function FloatingLabelInput(inputProps: InputProps) {
 
     return (
         <NumberInput
+            disabled={inputProps.loadingOverlayVisible}
             hideControls
             type="number"
             // w={"100%"}

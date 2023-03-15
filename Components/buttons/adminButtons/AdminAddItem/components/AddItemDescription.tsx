@@ -6,14 +6,17 @@ import { CardContainerColors } from "../../../../../Shared/colors";
 import style from "../../../../../Shared/css/style";
 import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
 
-interface Props { }
+interface Props {
+    loadingOverlayVisible: boolean
+
+}
 
 const AddItemDescription: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
 ) => {
     return (
 
-        <FloatingLabelInput label={"Item description"} placeholder={"Enter item description"} required />
+        <FloatingLabelInput label={"Item description"} placeholder={"Enter item description"} loadingOverlayVisible={props.loadingOverlayVisible} required />
 
     )
 }
@@ -66,6 +69,8 @@ interface InputProps {
     label: ReactNode,
     placeholder: string | undefined,
     required: boolean,
+    loadingOverlayVisible: boolean
+
     // requiredName?: keyof in_person_delivery['required'],
     // notRequiredName?: keyof in_person_delivery['not_required']
 }
@@ -87,8 +92,10 @@ export function FloatingLabelInput(inputProps: InputProps) {
 
     return (
         <Textarea
+            disabled={inputProps.loadingOverlayVisible}
             autosize
             minRows={5}
+            maxRows={10}
             // w={"100%"}
             label={inputProps.label}
             placeholder={inputProps.placeholder}

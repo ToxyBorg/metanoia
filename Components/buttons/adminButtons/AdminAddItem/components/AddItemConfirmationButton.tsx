@@ -334,35 +334,54 @@ const AddItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> =
 
 
                 let fieldsHaveBeenFilled: boolean = true
+                let fieldsAreWithinTheCharacterLimit = true;
+                let tooManyCharactersMessage: string = 'Too many characters!';
 
                 if (adminAddItemAtomValue.title.length <= 1) {
                     fieldsHaveBeenFilled = false
                 }
+                else if (adminAddItemAtomValue.title.length > 100) {
+                    fieldsAreWithinTheCharacterLimit = false
+                    tooManyCharactersMessage = "This is a title... not a description. Try something less than 100 characters."
+                }
                 else if (adminAddItemAtomValue.description.length <= 1) {
                     fieldsHaveBeenFilled = false
                 }
-                // else if (adminAddItemAtomValue.mainImageURL.length <= 1) {
-                //     fieldsHaveBeenFilled = false
-                // }
+                else if (adminAddItemAtomValue.description.length > 750) {
+                    fieldsAreWithinTheCharacterLimit = false
+                    tooManyCharactersMessage = "Description is too long! 750 characters max."
+                }
                 else if (adminAddItemAtomValue.mainImageURL == null) {
                     fieldsHaveBeenFilled = false
                 }
                 else if (adminAddItemAtomValue.price <= 0) {
                     fieldsHaveBeenFilled = false
                 }
-                // else if (adminAddItemAtomValue.secondaryImagesURLS.every((word) => word.trim().length == 0)) {
-                //     fieldsHaveBeenFilled = false
-                // }
-                else if (adminAddItemAtomValue.secondaryImagesURLS.every((word) => word == null)) {
+                else if (adminAddItemAtomValue.price > 99999) {
+                    fieldsAreWithinTheCharacterLimit = false
+                    tooManyCharactersMessage = "Too expensive! Try something less than 99999."
+                }
+                else if (adminAddItemAtomValue.secondaryImagesURLS.every((image) => image == null)) {
                     fieldsHaveBeenFilled = false
                 }
                 else if (adminAddItemAtomValue.stock == 0) {
                     fieldsHaveBeenFilled = false
                 }
+                else if (adminAddItemAtomValue.stock > 999) {
+                    fieldsAreWithinTheCharacterLimit = false
+                    tooManyCharactersMessage = "That much stock? Really?!!!"
+                }
                 else if (adminAddItemAtomValue.tags.length == 0) {
                     fieldsHaveBeenFilled = false
                 }
 
+                for (const tag of adminAddItemAtomValue.tags) {
+                    if (tag.length > 25) {
+                        fieldsAreWithinTheCharacterLimit = false
+                        tooManyCharactersMessage = "Each tag should be less than 25 characters"
+                        break
+                    }
+                }
 
                 if (fieldsHaveBeenFilled == false) {
 
@@ -372,6 +391,66 @@ const AddItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> =
                         radius: "md",
                         title: "Item insert Error",
                         message: <p>One or More fields have been left blank!</p>,
+                        // icon: <errorIcon.icon />,
+
+                        styles: (theme) => ({
+
+
+                            root: {
+                                background: colorScheme === "dark"
+                                    ? CardContainerColors.backgroundColorDark
+                                    : CardContainerColors.backgroundColorLight,
+                                backgroundSize: "300% 300%",
+                                animation: `${style.AnimateBG} 7s ease infinite`,
+
+                                border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                            },
+
+                            title: {
+
+                                background: colorScheme === "dark"
+                                    ? CardContainerColors.backgroundColorDark
+                                    : CardContainerColors.backgroundColorLight,
+                                backgroundSize: "300% 300%",
+                                animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                                // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                padding: "0.5rem",
+                                borderRadius: 5,
+
+                                fontWeight: "bolder",
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight
+                            },
+                            description: {
+                                fontStyle: "italic",
+
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight
+                            },
+                            closeButton: {
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight,
+
+                                '&:hover': {
+                                    backgroundColor: "red"
+                                },
+                            },
+                        }),
+
+                    })
+                }
+                else if (fieldsAreWithinTheCharacterLimit == false) {
+                    showNotification({
+
+                        color: "red",
+                        radius: "md",
+                        title: "Too many characters Error",
+                        message: <p>{tooManyCharactersMessage}</p>,
                         // icon: <errorIcon.icon />,
 
                         styles: (theme) => ({

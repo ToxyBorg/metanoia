@@ -11,10 +11,12 @@ import style from "../../../../../Shared/css/style";
 import { adminAddItem, adminRejectImageUpload, adminUploadImage } from "../../../../../Shared/icons";
 import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
 
-interface Props { }
+interface Props extends Partial<DropzoneProps> {
+    loadingOverlayVisible: boolean
+}
 
 const AddMainImage: NextComponentType<NextPageContext, {}, Props> = (
-    props: Partial<DropzoneProps>,
+    props: Props,
 ) => {
 
     const [adminAddItemAtomValue, adminAddItemAtomSetter] = useAtom(adminAddItemAtom)
@@ -64,6 +66,7 @@ const AddMainImage: NextComponentType<NextPageContext, {}, Props> = (
                         <Transition mounted={imageUploaderOverlayVisibility} transition="slide-down" duration={500} timingFunction="ease">
                             {(styles) =>
                                 <Dropzone
+                                    disabled={props.loadingOverlayVisible}
                                     style={{ ...styles, zIndex: 1 }}
                                     bg={colorScheme === "dark"
                                         ? CardContainerColors.backgroundColorDark
