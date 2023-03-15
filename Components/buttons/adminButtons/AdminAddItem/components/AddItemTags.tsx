@@ -6,7 +6,10 @@ import { CardContainerColors } from "../../../../../Shared/colors";
 import style from "../../../../../Shared/css/style";
 import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
 
-interface Props { }
+interface Props {
+    loadingOverlayVisible: boolean
+
+}
 
 const AddItemTags: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
@@ -23,6 +26,7 @@ const AddItemTags: NextComponentType<NextPageContext, {}, Props> = (
 
     return (
         <MultiSelect
+            disabled={props.loadingOverlayVisible}
             classNames={classes}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
@@ -56,7 +60,7 @@ const AddItemTags: NextComponentType<NextPageContext, {}, Props> = (
             transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
             withinPortal
             clearButtonProps={{ 'aria-label': 'Clear selection' }}
-            clearable
+            // clearable
 
             sx={{
 
@@ -64,17 +68,17 @@ const AddItemTags: NextComponentType<NextPageContext, {}, Props> = (
                 boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
             }}
             styles={{
-                // input: {
-                //     border: `2px solid ${colorScheme === "dark"
-                //         ? CardContainerColors.borderColorDark
-                //         : CardContainerColors.borderColorLight}`,
-                // },
+
+                input: {
+                    padding: 0,
+                    // paddingLeft: "1rem"
+                },
 
                 dropdown: {
+
                     border: `2px solid ${colorScheme === "dark"
                         ? CardContainerColors.borderColorDark
                         : CardContainerColors.borderColorLight}`,
-                    // borderRadius: 15,
                     WebkitBackdropFilter: "blur(2px)",
                     boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
 
@@ -86,16 +90,40 @@ const AddItemTags: NextComponentType<NextPageContext, {}, Props> = (
                     animation: `${style.AnimateBG} 7s ease infinite`
 
                 },
+                value: {
 
-                // label: {
-                //     color: colorScheme === "dark"
-                //         ? CardContainerColors.textColorDark
-                //         : CardContainerColors.textColorLight
-                // },
+                    WebkitBackdropFilter: "blur(2px)",
+                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
 
-                // separatorLabel: {
-                //     background: "red"
-                // }
+                    backgroundImage: colorScheme === "dark"
+                        ? CardContainerColors.backgroundColorDark
+                        : CardContainerColors.backgroundColorLight,
+
+                    backgroundSize: "300% 300%",
+                    animation: `${style.AnimateBG} 7s ease infinite`,
+
+                    color: colorScheme === "dark"
+                        ? CardContainerColors.textColorDark
+                        : CardContainerColors.textColorLight,
+
+                    marginInline: "1rem",
+                    marginTop: "0.5rem"
+
+
+                },
+                values: {
+
+                    width: "clamp(35vw,200px,36vw)",
+                    marginBottom: "2rem",
+
+                },
+
+                rightSection: {
+                    width: 0
+
+                },
+
+
             }}
 
         />

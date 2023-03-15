@@ -694,7 +694,7 @@ export function FloatingLabelInput(inputProps: InputProps) {
                     }
                 />
             }
-            label={"Confirm your order"}
+            label={"Admin Login"}
             placeholder={"Enter your email"}
             required
             classNames={classes}

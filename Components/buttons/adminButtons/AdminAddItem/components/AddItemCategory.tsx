@@ -8,7 +8,10 @@ import { useAtom } from "jotai";
 import { CardContainerColors } from "../../../../../Shared/colors";
 import style from "../../../../../Shared/css/style";
 
-interface Props { }
+interface Props {
+    loadingOverlayVisible: boolean
+
+}
 
 const AddItemCategory: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
@@ -28,6 +31,7 @@ const AddItemCategory: NextComponentType<NextPageContext, {}, Props> = (
 
     return (
         <Select
+            disabled={props.loadingOverlayVisible}
             classNames={classes}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
