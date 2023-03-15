@@ -15,7 +15,6 @@ import { SingleItemData } from "../../../../../Stores/itemDataStore";
 
 interface Props {
     SingleItemDataSecondaryImagesURLS: SingleItemData['secondaryImagesURLS'],
-    SingleItemDataID: SingleItemData['item_id'],
 
 }
 
