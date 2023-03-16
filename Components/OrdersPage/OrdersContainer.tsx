@@ -102,11 +102,11 @@ const OrdersContainer: NextComponentType<NextPageContext, {}, Props> = (
     return (
 
 
-        <Transition mounted={screenSizes != "OUT_OF_RANGE"} transition="slide-left" duration={1500} timingFunction="ease">
+        <Transition mounted={screenSizes != "OUT_OF_RANGE"} transition="slide-right" duration={1500} timingFunction="ease">
             {(styles) =>
-                <Container my={"xl"} style={styles}>
+                <div style={styles}>
                     <OrdersTableContainer />
-                </Container>}
+                </div>}
         </Transition>
 
 
