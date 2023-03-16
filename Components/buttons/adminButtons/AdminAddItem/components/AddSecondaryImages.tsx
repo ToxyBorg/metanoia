@@ -300,7 +300,7 @@ const SecondaryImagesUploaders = (props: SecondaryImagesUploadersProps) => {
                         <Button color="red" radius="md" uppercase sx={{ alignContent: "center" }}
                             onClick={() => {
 
-                                setLoading(true)
+                                // setLoading(true)
                                 const adminTempItem = adminAddItemAtomValue;
 
 

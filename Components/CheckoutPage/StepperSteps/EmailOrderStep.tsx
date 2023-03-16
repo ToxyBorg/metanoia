@@ -1,4 +1,4 @@
-import { ActionIcon, Container, Group, Stack, Text, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, Container, Group, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
 import { useAtom, useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { NavBarColors, StepperColors } from "../../../Shared/colors";
@@ -15,6 +15,7 @@ const EmailOrderStep: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
 ) => {
     const { colorScheme, } = useMantineColorScheme();
+
 
     const cartItemsDataAtomValue = useAtomValue(cartItemsDataAtom)
     const [orderItemsDataAtomValue, orderItemsDataAtomSetter] = useAtom(orderItemsDataAtom)
@@ -46,35 +47,50 @@ const EmailOrderStep: NextComponentType<NextPageContext, {}, Props> = (
     //     props.nextStep()
     // }
 
+
+
     return (
-        <Container>
-            <EmailMagicLinkAuth nextStep={props.nextStep} />
+        // <Stack>
+        <EmailMagicLinkAuth nextStep={props.nextStep} />
+
+        // <Container>
+        // {/* <EmailMagicLinkAuth nextStep={props.nextStep} /> */}
+        // {/* <Transition mounted={orderVerifiedAtomValue} transition="slide-down" duration={400} timingFunction="ease">
+        //     {(styles) =>
+
+        //         <ActionIcon
+        //             style={styles}
+        //             variant="outline" title={arrowNext.name} w={"fit-content"} h={"100%"}
+        //             mx={"auto"} py={"xs"} radius={"md"} px={"lg"}
+        //             bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
+        //             className={style.Animated_Background_Gradient}
+        //             onClick={props.nextStep}
+        //             sx={{
+        //                 border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
+        //                 WebkitBackdropFilter: "blur(2px)",
+        //                 boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+        //             }}
+        //         >
+        //             <Group>
+        //                 <arrowNext.icon />
+        //                 <Text size={"md"}
+        //                     color={colorScheme === "dark"
+        //                         ? StepperColors.iconsLineColorDark
+        //                         : StepperColors.iconsLineColorLight
+        //                     }
+        //                 >
+        //                     Confirm Order
+        //                 </Text>
+        //             </Group>
+        //         </ActionIcon>
+
+        //     }
+        // </Transition> */}
 
 
-            {/* <ActionIcon variant="outline" title={arrowNext.name} w={"fit-content"} h={"100%"}
-                mx={"auto"} py={"xs"} radius={"md"} px={"lg"}
-                bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
-                className={style.Animated_Background_Gradient}
-                onClick={props.nextStep}
-                sx={{
-                    border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`
-                }}
-            >
-                <Group>
-                    <arrowNext.icon />
-                    <Text size={"md"}
-                        color={colorScheme === "dark"
-                            ? StepperColors.iconsLineColorDark
-                            : StepperColors.iconsLineColorLight
-                        }
-                    >
-                        SKIP
-                    </Text>
-                </Group>
-            </ActionIcon> */}
+        // </Container>
+        // </Stack>
 
-
-        </Container>
     )
 }
 

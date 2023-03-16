@@ -8,10 +8,11 @@ import { useState } from "react";
 import { useSupabase } from "../../../../Context/SupabaseWrapper/supabase-provider";
 import { CardContainerColors, NavBarColors, StepperColors } from "../../../../Shared/colors";
 import style from "../../../../Shared/css/style";
-import { arrowNext } from "../../../../Shared/icons";
+import { arrowDown, arrowNext } from "../../../../Shared/icons";
 import { cartItemsDataAtom } from "../../../../Stores/cartStore";
 import { deliveryAtom, in_person_deliveryAtom, shipping_deliveryAtom } from "../../../../Stores/deliveryInfoStore";
 import { orderItemsDataAtom } from "../../../../Stores/orderStore";
+import { orderVerifiedAtom } from "../../../../Stores/orderVerifiedStore";
 import { paymentMethodAtom } from "../../../../Stores/paymentMethodStore";
 
 interface Props {
@@ -30,6 +31,8 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
     const shipping_deliveryAtomValue = useAtomValue(shipping_deliveryAtom)
     const paymentMethodAtomValue = useAtomValue(paymentMethodAtom)
 
+    const [orderVerifiedAtomValue, orderVerifiedAtomSetter] = useAtom(orderVerifiedAtom)
+
     const { colorScheme, } = useMantineColorScheme();
 
     const [loadingOverlayVisible, loadingOverlayVisibleHandlers] = useDisclosure(false);
@@ -42,6 +45,7 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
     const { supabase, } = useSupabase()
 
     const handleEmailPin = async () => {
+        loadingOverlayVisibleHandlers.open()
 
 
         const { data: magicLinkTokenData, error: magicLinkTokenError } = await supabase.auth.verifyOtp({
@@ -182,87 +186,87 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
 
                 })
                 loadingOverlayVisibleHandlers.close()
+                orderVerifiedAtomSetter(true)
 
-                const { data, error: insertError } = await supabase
-                    .from('orders')
-                    .insert([
-                        {
-                            items: orderItemsDataAtomValue,
-                            email: props.email,
-                            delivery: deliveryAtomValue,
-                            payment: paymentMethodAtomValue,
-                            in_person_delivery_info: in_person_deliveryAtomValue,
-                            shipping_delivery_info: shipping_deliveryAtomValue
-                        },
-                    ])
+                // const { data, error: insertError } = await supabase
+                //     .from('orders')
+                //     .insert([
+                //         {
+                //             items: orderItemsDataAtomValue,
+                //             email: props.email,
+                //             delivery: deliveryAtomValue,
+                //             payment: paymentMethodAtomValue,
+                //             in_person_delivery_info: in_person_deliveryAtomValue,
+                //             shipping_delivery_info: shipping_deliveryAtomValue
+                //         },
+                //     ])
 
-                if (insertError) {
-                    // console.log('signUpTokenError insertError : ', insertError)
-                    showNotification({
+                // if (insertError) {
+                //     // console.log('signUpTokenError insertError : ', insertError)
+                //     showNotification({
 
-                        color: "red",
-                        radius: "md",
-                        title: 'Order Confirmation Error',
-                        message: <p>Your order could not be uploaded to our servers. Please try again!</p>,
-                        // icon: <errorIcon.icon />,
+                //         color: "red",
+                //         radius: "md",
+                //         title: 'Order Confirmation Error',
+                //         message: <p>Your order could not be uploaded to our servers. Please try again!</p>,
+                //         // icon: <errorIcon.icon />,
 
-                        styles: (theme) => ({
-
-
-                            root: {
-                                background: colorScheme === "dark"
-                                    ? CardContainerColors.backgroundColorDark
-                                    : CardContainerColors.backgroundColorLight,
-                                backgroundSize: "300% 300%",
-                                animation: `${style.AnimateBG} 7s ease infinite`,
-
-                                border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                            },
-
-                            title: {
-
-                                background: colorScheme === "dark"
-                                    ? CardContainerColors.backgroundColorDark
-                                    : CardContainerColors.backgroundColorLight,
-                                backgroundSize: "300% 300%",
-                                animation: `${style.AnimateBG} 7s ease infinite`,
+                //         styles: (theme) => ({
 
 
-                                // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                padding: "0.5rem",
-                                borderRadius: 5,
+                //             root: {
+                //                 background: colorScheme === "dark"
+                //                     ? CardContainerColors.backgroundColorDark
+                //                     : CardContainerColors.backgroundColorLight,
+                //                 backgroundSize: "300% 300%",
+                //                 animation: `${style.AnimateBG} 7s ease infinite`,
 
-                                fontWeight: "bolder",
-                                color: colorScheme === "dark"
-                                    ? CardContainerColors.textColorDark
-                                    : CardContainerColors.textColorLight
-                            },
-                            description: {
-                                fontStyle: "italic",
+                //                 border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                //             },
 
-                                color: colorScheme === "dark"
-                                    ? CardContainerColors.textColorDark
-                                    : CardContainerColors.textColorLight
-                            },
-                            closeButton: {
-                                color: colorScheme === "dark"
-                                    ? CardContainerColors.textColorDark
-                                    : CardContainerColors.textColorLight,
+                //             title: {
 
-                                '&:hover': {
-                                    backgroundColor: "red"
-                                },
-                            },
-                        }),
+                //                 background: colorScheme === "dark"
+                //                     ? CardContainerColors.backgroundColorDark
+                //                     : CardContainerColors.backgroundColorLight,
+                //                 backgroundSize: "300% 300%",
+                //                 animation: `${style.AnimateBG} 7s ease infinite`,
 
-                    })
 
-                } else {
+                //                 // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                //                 padding: "0.5rem",
+                //                 borderRadius: 5,
 
-                    const { error } = await supabase.auth.signOut()
+                //                 fontWeight: "bolder",
+                //                 color: colorScheme === "dark"
+                //                     ? CardContainerColors.textColorDark
+                //                     : CardContainerColors.textColorLight
+                //             },
+                //             description: {
+                //                 fontStyle: "italic",
 
-                    props.nextStep()
-                }
+                //                 color: colorScheme === "dark"
+                //                     ? CardContainerColors.textColorDark
+                //                     : CardContainerColors.textColorLight
+                //             },
+                //             closeButton: {
+                //                 color: colorScheme === "dark"
+                //                     ? CardContainerColors.textColorDark
+                //                     : CardContainerColors.textColorLight,
+
+                //                 '&:hover': {
+                //                     backgroundColor: "red"
+                //                 },
+                //             },
+                //         }),
+
+                //     })
+
+                // } else {
+
+                //     const { error } = await supabase.auth.signOut()
+
+                // }
             }
 
 
@@ -327,88 +331,231 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
 
             })
             loadingOverlayVisibleHandlers.close()
+            orderVerifiedAtomSetter(true)
 
-            const { data, error: insertError } = await supabase
-                .from('orders')
-                .insert([
-                    {
-                        items: orderItemsDataAtomValue,
-                        email: props.email,
-                        delivery: deliveryAtomValue,
-                        payment: paymentMethodAtomValue,
-                        in_person_delivery_info: in_person_deliveryAtomValue,
-                        shipping_delivery_info: shipping_deliveryAtomValue
+            // const { data, error: insertError } = await supabase
+            //     .from('orders')
+            //     .insert([
+            //         {
+            //             items: orderItemsDataAtomValue,
+            //             email: props.email,
+            //             delivery: deliveryAtomValue,
+            //             payment: paymentMethodAtomValue,
+            //             in_person_delivery_info: in_person_deliveryAtomValue,
+            //             shipping_delivery_info: shipping_deliveryAtomValue
+            //         },
+            //     ])
+
+            // if (insertError) {
+            //     // console.log('magicLinkTokenError insertError : ', insertError)
+
+            //     showNotification({
+
+            //         color: "red",
+            //         radius: "md",
+            //         title: 'Order Confirmation Error',
+            //         message: <p>Your order could not be uploaded to our servers. Please try again!</p>,
+            //         // icon: <errorIcon.icon />,
+
+            //         styles: (theme) => ({
+
+
+            //             root: {
+            //                 background: colorScheme === "dark"
+            //                     ? CardContainerColors.backgroundColorDark
+            //                     : CardContainerColors.backgroundColorLight,
+            //                 backgroundSize: "300% 300%",
+            //                 animation: `${style.AnimateBG} 7s ease infinite`,
+
+            //                 border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //             },
+
+            //             title: {
+
+            //                 background: colorScheme === "dark"
+            //                     ? CardContainerColors.backgroundColorDark
+            //                     : CardContainerColors.backgroundColorLight,
+            //                 backgroundSize: "300% 300%",
+            //                 animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+            //                 // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+            //                 padding: "0.5rem",
+            //                 borderRadius: 5,
+
+            //                 fontWeight: "bolder",
+            //                 color: colorScheme === "dark"
+            //                     ? CardContainerColors.textColorDark
+            //                     : CardContainerColors.textColorLight
+            //             },
+            //             description: {
+            //                 fontStyle: "italic",
+
+            //                 color: colorScheme === "dark"
+            //                     ? CardContainerColors.textColorDark
+            //                     : CardContainerColors.textColorLight
+            //             },
+            //             closeButton: {
+            //                 color: colorScheme === "dark"
+            //                     ? CardContainerColors.textColorDark
+            //                     : CardContainerColors.textColorLight,
+
+            //                 '&:hover': {
+            //                     backgroundColor: "red"
+            //                 },
+            //             },
+            //         }),
+
+            //     })
+
+            // } else {
+
+            //     const { error } = await supabase.auth.signOut()
+
+            // }
+
+        }
+    }
+
+    const handleOrderInsert = async () => {
+        loadingOverlayVisibleHandlers.open()
+        const { data, error: insertError } = await supabase
+            .from('orders')
+            .insert([
+                {
+                    items: orderItemsDataAtomValue,
+                    email: props.email,
+                    delivery: deliveryAtomValue,
+                    payment: paymentMethodAtomValue,
+                    in_person_delivery_info: in_person_deliveryAtomValue,
+                    shipping_delivery_info: shipping_deliveryAtomValue
+                },
+            ])
+
+        if (insertError) {
+            loadingOverlayVisibleHandlers.close()
+            // console.log('signUpTokenError insertError : ', insertError)
+            showNotification({
+
+                color: "red",
+                radius: "md",
+                title: 'Order Confirmation Error',
+                message: <p>Your order could not be uploaded to our servers. Please try again!</p>,
+                // icon: <errorIcon.icon />,
+
+                styles: (theme) => ({
+
+
+                    root: {
+                        background: colorScheme === "dark"
+                            ? CardContainerColors.backgroundColorDark
+                            : CardContainerColors.backgroundColorLight,
+                        backgroundSize: "300% 300%",
+                        animation: `${style.AnimateBG} 7s ease infinite`,
+
+                        border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
                     },
-                ])
 
-            if (insertError) {
-                // console.log('magicLinkTokenError insertError : ', insertError)
+                    title: {
 
-                showNotification({
-
-                    color: "red",
-                    radius: "md",
-                    title: 'Order Confirmation Error',
-                    message: <p>Your order could not be uploaded to our servers. Please try again!</p>,
-                    // icon: <errorIcon.icon />,
-
-                    styles: (theme) => ({
+                        background: colorScheme === "dark"
+                            ? CardContainerColors.backgroundColorDark
+                            : CardContainerColors.backgroundColorLight,
+                        backgroundSize: "300% 300%",
+                        animation: `${style.AnimateBG} 7s ease infinite`,
 
 
-                        root: {
-                            background: colorScheme === "dark"
-                                ? CardContainerColors.backgroundColorDark
-                                : CardContainerColors.backgroundColorLight,
-                            backgroundSize: "300% 300%",
-                            animation: `${style.AnimateBG} 7s ease infinite`,
+                        // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                        padding: "0.5rem",
+                        borderRadius: 5,
 
-                            border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                        fontWeight: "bolder",
+                        color: colorScheme === "dark"
+                            ? CardContainerColors.textColorDark
+                            : CardContainerColors.textColorLight
+                    },
+                    description: {
+                        fontStyle: "italic",
+
+                        color: colorScheme === "dark"
+                            ? CardContainerColors.textColorDark
+                            : CardContainerColors.textColorLight
+                    },
+                    closeButton: {
+                        color: colorScheme === "dark"
+                            ? CardContainerColors.textColorDark
+                            : CardContainerColors.textColorLight,
+
+                        '&:hover': {
+                            backgroundColor: "red"
                         },
+                    },
+                }),
 
-                        title: {
+            })
 
-                            background: colorScheme === "dark"
-                                ? CardContainerColors.backgroundColorDark
-                                : CardContainerColors.backgroundColorLight,
-                            backgroundSize: "300% 300%",
-                            animation: `${style.AnimateBG} 7s ease infinite`,
+        } else {
+            showNotification({
+
+                color: "green",
+                radius: "md",
+                title: 'Order Confirmation Accepted',
+                message: <p>Your order has been added to our servers. Thank you!</p>,
+                // icon: <errorIcon.icon />,
+
+                styles: (theme) => ({
 
 
-                            // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                            padding: "0.5rem",
-                            borderRadius: 5,
+                    root: {
+                        background: colorScheme === "dark"
+                            ? CardContainerColors.backgroundColorDark
+                            : CardContainerColors.backgroundColorLight,
+                        backgroundSize: "300% 300%",
+                        animation: `${style.AnimateBG} 7s ease infinite`,
 
-                            fontWeight: "bolder",
-                            color: colorScheme === "dark"
-                                ? CardContainerColors.textColorDark
-                                : CardContainerColors.textColorLight
+                        border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                    },
+
+                    title: {
+
+                        background: colorScheme === "dark"
+                            ? CardContainerColors.backgroundColorDark
+                            : CardContainerColors.backgroundColorLight,
+                        backgroundSize: "300% 300%",
+                        animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                        // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                        padding: "0.5rem",
+                        borderRadius: 5,
+
+                        fontWeight: "bolder",
+                        color: colorScheme === "dark"
+                            ? CardContainerColors.textColorDark
+                            : CardContainerColors.textColorLight
+                    },
+                    description: {
+                        fontStyle: "italic",
+
+                        color: colorScheme === "dark"
+                            ? CardContainerColors.textColorDark
+                            : CardContainerColors.textColorLight
+                    },
+                    closeButton: {
+                        color: colorScheme === "dark"
+                            ? CardContainerColors.textColorDark
+                            : CardContainerColors.textColorLight,
+
+                        '&:hover': {
+                            backgroundColor: "green"
                         },
-                        description: {
-                            fontStyle: "italic",
+                    },
+                }),
 
-                            color: colorScheme === "dark"
-                                ? CardContainerColors.textColorDark
-                                : CardContainerColors.textColorLight
-                        },
-                        closeButton: {
-                            color: colorScheme === "dark"
-                                ? CardContainerColors.textColorDark
-                                : CardContainerColors.textColorLight,
-
-                            '&:hover': {
-                                backgroundColor: "red"
-                            },
-                        },
-                    }),
-
-                })
-
-            } else {
-
-                const { error } = await supabase.auth.signOut()
-
-                props.nextStep()
-            }
+            })
+            loadingOverlayVisibleHandlers.close()
+            const { error } = await supabase.auth.signOut()
+            props.nextStep()
 
         }
     }
@@ -438,7 +585,7 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
                         }
 
                         className={style.Animated_Background_Gradient}
-                        p={"xl"}
+                        // p={"xl"}
                         pos={"relative"}
 
                     >
@@ -446,10 +593,25 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
 
 
                         <PinInput
+                            disabled={loadingOverlayVisible}
+                            styles={{
+                                input: {
+                                    // margin: "0.5rem"
+                                    height: "2rem",
+                                    WebkitBackdropFilter: "blur(2px)",
+                                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                                },
+
+                            }}
+                            size={"fit"}
+                            maw={"20rem"}
+
                             length={6}
                             oneTimeCode
                             type="number"
-                            mt="md"
+                            m={"md"}
+                            spacing={"0.1rem"}
+
                             required
                             onChange={(value) => { setTokenValue(value) }}
                         // sx={{
@@ -463,14 +625,48 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
 
                                 <ActionIcon
                                     style={styles}
-                                    variant="outline" title={arrowNext.name} w={"fit-content"} h={"100%"}
-                                    mx={"auto"} py={"xs"} radius={"md"} px={"lg"}
+                                    variant="outline"
+                                    title={"Verify your pin"}
+                                    w={"fit-content"} h={"100%"}
+                                    mx={"auto"} mb={"xl"}
+                                    py={"xs"} radius={"md"} px={"lg"}
                                     bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
                                     className={style.Animated_Background_Gradient}
                                     onClick={() => {
-                                        loadingOverlayVisibleHandlers.open()
                                         handleEmailPin()
                                     }}
+                                    sx={{
+                                        border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
+                                        WebkitBackdropFilter: "blur(2px)",
+                                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                                    }}
+                                >
+                                    <Group>
+                                        <arrowDown.icon />
+                                        <Text size={"md"}
+                                            color={colorScheme === "dark"
+                                                ? StepperColors.iconsLineColorDark
+                                                : StepperColors.iconsLineColorLight
+                                            }
+                                        >
+                                            Verify Pin
+                                        </Text>
+                                    </Group>
+                                </ActionIcon>
+                            }
+                        </Transition>
+
+                        <Transition mounted={orderVerifiedAtomValue} transition="slide-down" duration={400} timingFunction="ease">
+                            {(styles) =>
+
+                                <ActionIcon
+                                    style={styles}
+                                    variant="outline" title={arrowNext.name} w={"fit-content"} h={"100%"}
+                                    mx={"auto"} mb={"xl"}
+                                    py={"xs"} radius={"md"} px={"lg"}
+                                    bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
+                                    className={style.Animated_Background_Gradient}
+                                    onClick={() => handleOrderInsert()}
                                     sx={{
                                         border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
                                         WebkitBackdropFilter: "blur(2px)",
@@ -485,21 +681,10 @@ const ValidatePin: NextComponentType<NextPageContext, {}, Props> = (
                                                 : StepperColors.iconsLineColorLight
                                             }
                                         >
-                                            Verify Pin
+                                            Confirm Order
                                         </Text>
                                     </Group>
                                 </ActionIcon>
-
-                                // <Button
-                                //     style={styles}
-
-                                //     onClick={() => {
-                                //         loadingOverlayVisibleHandlers.open()
-                                //         handleEmailPin()
-                                //     }}
-                                // >
-                                //     Verify Pin
-                                // </Button>
 
                             }
                         </Transition>

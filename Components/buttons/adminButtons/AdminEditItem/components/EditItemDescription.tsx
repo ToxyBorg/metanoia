@@ -1,4 +1,4 @@
-import { createStyles, LoadingOverlay, rem, Textarea, TextInput, useMantineColorScheme } from "@mantine/core";
+import { createStyles, Loader, LoadingOverlay, rem, Textarea, TextInput, useMantineColorScheme } from "@mantine/core";
 import { useAtom, useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { ReactNode, useState } from "react";
@@ -91,7 +91,7 @@ export function FloatingLabelInput(inputProps: InputProps) {
 
     return (
         <div style={{ position: "relative" }}>
-            <LoadingOverlay visible={descriptionEditLoadingValue} overlayBlur={2} zIndex={2} />
+            <LoadingOverlay visible={descriptionEditLoadingValue} overlayBlur={2} zIndex={2} loader={<Loader color="pink" size="xs" />} />
 
             <Textarea
                 disabled={descriptionEditLoadingValue}

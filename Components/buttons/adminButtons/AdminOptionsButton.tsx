@@ -10,6 +10,7 @@ import { adminAddItem, adminOptions, plusIcon } from "../../../Shared/icons";
 import { desktopNavIconSizes, desktopNavRadius } from "../../../Shared/sizes";
 import { currentSessionUserIsAdmin } from "../../../Stores/adminSpecialButtonsStore";
 import AdminAddItem from "./AdminAddItem/AdminAddItem";
+import AdminViewOrders from "./AdminViewOrders/AdminViewOrders";
 
 interface Props { }
 
@@ -132,15 +133,12 @@ const AdminOptionsButton: NextComponentType<NextPageContext, {}, Props> = (
                                 <AdminAddItem />
                             </Menu.Item>
 
-                            <Menu.Item >
-                                <AdminAddItem />
-                            </Menu.Item>
-
                             <Menu.Divider />
 
-                            <Menu.Label>Danger zone</Menu.Label>
-                            <Menu.Item>Transfer my data</Menu.Item>
-                            <Menu.Item color="red">Delete my account</Menu.Item>
+                            <Menu.Item >
+                                <AdminViewOrders />
+                            </Menu.Item>
+
                         </Menu.Dropdown>
 
                     </IconContext.Provider>

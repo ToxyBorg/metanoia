@@ -1,4 +1,4 @@
-import { createStyles, LoadingOverlay, MultiSelect, rem, Text, useMantineColorScheme } from "@mantine/core";
+import { createStyles, Loader, LoadingOverlay, MultiSelect, rem, Text, useMantineColorScheme } from "@mantine/core";
 import { useAtom, useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { useState } from "react";
@@ -30,7 +30,7 @@ const EditItemTags: NextComponentType<NextPageContext, {}, Props> = (
 
     return (
         <div style={{ position: "relative" }}>
-            <LoadingOverlay visible={tagsEditLoadingValue} overlayBlur={2} zIndex={2} />
+            <LoadingOverlay visible={tagsEditLoadingValue} overlayBlur={2} zIndex={2} loader={<Loader color="pink" size="xs" />} />
 
             <MultiSelect
 

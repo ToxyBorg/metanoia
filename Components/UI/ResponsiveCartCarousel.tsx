@@ -1,5 +1,5 @@
 import { Carousel } from "@mantine/carousel";
-import { AspectRatio, Badge, Card, Center, Group, Stack, useMantineColorScheme } from "@mantine/core";
+import { AspectRatio, Badge, Card, Center, Group, Loader, LoadingOverlay, Stack, useMantineColorScheme } from "@mantine/core";
 import type { NextComponentType, NextPageContext } from "next";
 import { CardContainerColors } from "../../Shared/colors";
 import { cartType, SingleCartItemType } from "../../Stores/cartStore";
@@ -8,6 +8,7 @@ import AddToCart from "../buttons/extraButtons/AddToCart";
 import RemoveFromCart from "../buttons/extraButtons/RemoveFromCart";
 import style from "../../Shared/css/styles.module.css";
 import { IconContext } from "react-icons";
+import { useState } from "react";
 
 interface Props {
   cartItemsDataAtomValue: cartType,
@@ -19,6 +20,7 @@ const ResponsiveCartCarousel: NextComponentType<NextPageContext, {}, Props> = (
 ) => {
 
   const { colorScheme, } = useMantineColorScheme();
+  const [mainImageLoading, setMainImageLoading] = useState(true);
 
 
   return (
@@ -52,8 +54,13 @@ const ResponsiveCartCarousel: NextComponentType<NextPageContext, {}, Props> = (
                 <Card.Section>
 
                   <AspectRatio ratio={10 / 16}>
-                    {/* <Image fill={true} src={info.item.mainImageURL} alt={info.item.title} loading='lazy' /> */}
-                    <Image fill src={info.item.mainImageURL} alt={info.item.title} loading='lazy' />
+                    <LoadingOverlay visible={mainImageLoading} overlayBlur={5} radius={"xs"}
+                      loader={<Loader color="pink" size="xl" />}
+                    />
+                    <Image fill src={info.item.mainImageURL} alt={info.item.title} loading='lazy'
+                      onLoadingComplete={() => setMainImageLoading(false)}
+
+                    />
                   </AspectRatio>
                   <Stack
                     pos={"absolute"}

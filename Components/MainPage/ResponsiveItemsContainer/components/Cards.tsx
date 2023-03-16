@@ -1,6 +1,6 @@
 "use client"
 
-import { ActionIcon, AspectRatio, Badge, Card, Group, Indicator, Popover, Space, Spoiler, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, AspectRatio, Badge, Card, Group, Indicator, Loader, LoadingOverlay, Popover, Skeleton, Space, Spoiler, Stack, Text, Transition, useMantineColorScheme } from "@mantine/core";
 import { useCounter, useDisclosure } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
 import { useAtom } from "jotai";
@@ -14,6 +14,7 @@ import style from "../../../../Shared/css/style";
 import Link from "next/link";
 import AdminCardOptionsButton from "../../../buttons/adminButtons/AdminCardOptionsButton";
 import Image from "next/image";
+import { useState } from "react";
 
 interface Props {
     SingleItemData: SingleItemData,
@@ -24,6 +25,8 @@ const Cards = (props: Props) => {
 
     const [cartItemsDataAtomValue, cartItemsDataAtomSetter] = useAtom(cartItemsDataAtom)
 
+    const [mainImageLoading, setMainImageLoading] = useState(true);
+    const [secondaryImageLoading, setSecondaryImageLoading] = useState(true);
 
 
     let searched_obj: SingleCartItemType | undefined = cartItemsDataAtomValue.find(callback_func);
@@ -82,38 +85,80 @@ const Cards = (props: Props) => {
                             <AspectRatio ratio={10 / 16} pos={"relative"}
                                 onMouseOver={cardOverlayVisibilityHandlers.open}
                                 onMouseOut={cardOverlayVisibilityHandlers.close}
+
                             >
                                 <Transition mounted={cardOverlayVisibility} transition="slide-down" duration={400} timingFunction="ease">
                                     {(styles) =>
+                                        <>
+                                            <LoadingOverlay visible={secondaryImageLoading} overlayBlur={5}
+                                                zIndex={3}
+                                                loader={<Loader color="pink" size="xl" />}
+                                                style={styles} />
 
-                                        <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
-                                            style={{ ...styles, zIndex: 1 }}
-                                        />
+                                            <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
+                                                style={{ ...styles, zIndex: 2 }}
+
+                                                onLoadingComplete={() => setSecondaryImageLoading(false)}
+                                            />
+
+
+                                        </>
+
+
+
                                     }
 
                                 </Transition>
 
-                                <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' />
+
+                                <LoadingOverlay visible={mainImageLoading} overlayBlur={5} zIndex={1}
+                                    loader={<Loader color="pink" size="xl" />}
+                                />
+
+                                <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy'
+                                    onLoadingComplete={() => setMainImageLoading(false)}
+                                />
                             </AspectRatio>
                         </Link>
 
                         :
+                        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         <AspectRatio ratio={10 / 16} pos={"relative"}
                             onMouseOver={cardOverlayVisibilityHandlers.open}
                             onMouseOut={cardOverlayVisibilityHandlers.close}
                         >
                             <Transition mounted={cardOverlayVisibility} transition="slide-down" duration={400} timingFunction="ease">
                                 {(styles) =>
+                                    <>
+                                        <LoadingOverlay visible={secondaryImageLoading} overlayBlur={5}
+                                            zIndex={3}
+                                            loader={<Loader color="pink" size="xl" />}
+                                            style={styles} />
 
-                                    <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
-                                        style={{ ...styles, zIndex: 1 }}
-                                    />
+
+                                        <Image fill={true} src={props.SingleItemData.secondaryImagesURLS[0]} alt={props.SingleItemData.title} priority
+                                            // style={{ ...styles, zIndex: 1 }}
+                                            style={{ ...styles, zIndex: 2 }}
+
+                                            onLoadingComplete={() => setSecondaryImageLoading(false)}
+
+                                        />
+                                    </>
+
+
                                 }
 
 
                             </Transition>
 
-                            <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy' />
+                            <LoadingOverlay visible={mainImageLoading} overlayBlur={5} zIndex={1}
+                                loader={<Loader color="pink" size="xl" />}
+                            />
+
+                            <Image fill={true} src={props.SingleItemData.mainImageURL} alt={props.SingleItemData.title} loading='lazy'
+                                onLoadingComplete={() => setMainImageLoading(false)}
+                            />
+
                         </AspectRatio>
                     }
 
@@ -129,7 +174,7 @@ const Cards = (props: Props) => {
                         // }
 
                         sx={{
-                            zIndex: 2
+                            zIndex: 3
                         }}
 
                     >
@@ -177,7 +222,7 @@ const Cards = (props: Props) => {
                         }
 
                         sx={{
-                            zIndex: 2
+                            zIndex: 3
                         }}
 
                     >

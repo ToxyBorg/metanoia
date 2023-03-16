@@ -5,7 +5,7 @@
 
 import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail, BiImageAdd } from "react-icons/bi"
 import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing, GiPayMoney, GiExitDoor } from 'react-icons/gi';
-import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsArrowDown, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox, BsCreditCard2Back, BsPaypal } from 'react-icons/bs';
+import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsArrowDown, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox, BsCreditCard2Back, BsPaypal, BsTable } from 'react-icons/bs';
 import { FiInstagram, FiMail } from 'react-icons/fi';
 import { GrAddCircle, GrCircleAlert, GrDocumentUpdate, GrLinkNext, GrLinkPrevious, GrUserAdmin } from 'react-icons/gr';
 import { TfiRulerAlt } from 'react-icons/tfi'
@@ -184,3 +184,4 @@ export const adminRejectImageUpload: IconInfo = { icon: CiSquareRemove, name: "R
 export const adminEditButton: IconInfo = { icon: VscEdit, name: "Edit Item" }
 export const adminUpdateButton: IconInfo = { icon: MdUpdate, name: "Update Item" }
 export const adminDeleteImage: IconInfo = { icon: MdDeleteForever, name: "Delete image" }
+export const adminViewOrdersButton: IconInfo = { icon: BsTable, name: "See orders" }

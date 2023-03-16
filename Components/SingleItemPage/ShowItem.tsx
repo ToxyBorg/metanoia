@@ -1,5 +1,6 @@
-import { Badge, Center, Container, Grid, Stack, Text, useMantineColorScheme } from "@mantine/core";
+import { Badge, Center, Container, Grid, Group, Stack, Text, Title, useMantineColorScheme } from "@mantine/core";
 import type { NextComponentType, NextPageContext } from "next";
+import Link from "next/link";
 import { IconContext } from "react-icons";
 import { CardContainerColors } from "../../Shared/colors";
 import style from "../../Shared/css/style";
@@ -70,20 +71,55 @@ const ShowItem: NextComponentType<NextPageContext, {}, Props> = (
 
                         >
                             <Stack>
-                                <Text
-                                    sx={{
-                                        textShadow: "0 4px 30px rgba(0, 0, 0, 0.5)"
-                                    }}
-                                    color={
-                                        colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight
-                                    }
-                                >
-                                    <h1>
-                                        {props.item.title}
-                                    </h1>
-                                </Text>
+                                <Group position="apart" spacing={"1rem"}>
+
+
+                                    <Text
+                                        sx={{
+                                            textShadow: "0 4px 30px rgba(0, 0, 0, 0.5)"
+                                        }}
+                                        color={
+                                            colorScheme === "dark"
+                                                ? CardContainerColors.textColorDark
+                                                : CardContainerColors.textColorLight
+                                        }
+                                    >
+                                        <Title order={1}>
+                                            {props.item.title}
+                                        </Title>
+                                    </Text>
+
+                                    <Badge
+
+                                        component={Link}
+                                        href={`/${props.item.category}`}
+                                        size={"xl"}
+                                        radius={"md"}
+                                        variant={"gradient"}
+                                        sx={{
+                                            border: `2px solid ${colorScheme === "dark"
+                                                ? CardContainerColors.borderColorDark
+                                                : CardContainerColors.borderColorLight}`,
+                                            // borderRadius: 15,
+                                            WebkitBackdropFilter: "blur(2px)",
+                                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+
+                                            ":hover": {
+                                                cursor: "pointer"
+                                            }
+                                        }}
+                                        bg={colorScheme === "dark"
+                                            ? CardContainerColors.backgroundColorDark
+                                            : CardContainerColors.backgroundColorLight
+                                        }
+
+                                        className={style.Animated_Background_Gradient}
+                                    >
+                                        {props.item.category}
+                                    </Badge>
+
+                                </Group>
+
 
                                 <Text
                                     color={
@@ -103,12 +139,14 @@ const ShowItem: NextComponentType<NextPageContext, {}, Props> = (
                                     {props.item.tags.map(tag => (
                                         <Grid.Col key={tag} span={"content"}>
                                             <Badge
+                                                radius={"lg"}
+
                                                 variant={"gradient"}
                                                 sx={{
                                                     border: `2px solid ${colorScheme === "dark"
                                                         ? CardContainerColors.borderColorDark
                                                         : CardContainerColors.borderColorLight}`,
-                                                    borderRadius: 15,
+                                                    // borderRadius: 15,
                                                     WebkitBackdropFilter: "blur(2px)",
                                                     boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                                                 }}
