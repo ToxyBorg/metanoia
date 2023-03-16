@@ -297,6 +297,7 @@ const AdminLoginPinConfirmation: NextComponentType<NextPageContext, {}, Props> =
                         // p={"xl"}
                         pos={"relative"}
 
+
                     >
                         <LoadingOverlay visible={loadingOverlayVisible} overlayBlur={2} />
 
@@ -332,7 +333,7 @@ const AdminLoginPinConfirmation: NextComponentType<NextPageContext, {}, Props> =
                                 <ActionIcon
                                     style={styles}
                                     variant="outline" title={arrowNext.name} w={"fit-content"} h={"100%"}
-                                    mx={"auto"} py={"xs"} radius={"md"} px={"lg"}
+                                    mx={"auto"} mb={"xl"} py={"xs"} radius={"md"} px={"lg"}
                                     bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
                                     className={style.Animated_Background_Gradient}
                                     onClick={() => {
@@ -360,7 +361,8 @@ const AdminLoginPinConfirmation: NextComponentType<NextPageContext, {}, Props> =
                             }
                         </Transition>
 
-                    </Stack>}
+                    </Stack>
+                }
             </Transition>
         </Center>
 

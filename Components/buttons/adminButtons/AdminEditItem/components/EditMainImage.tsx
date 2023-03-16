@@ -1,4 +1,4 @@
-import { AspectRatio, Card, Center, Group, LoadingOverlay, Text, Transition, useMantineColorScheme, useMantineTheme } from "@mantine/core";
+import { AspectRatio, Card, Center, Group, Loader, LoadingOverlay, Text, Transition, useMantineColorScheme, useMantineTheme } from "@mantine/core";
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
@@ -58,7 +58,7 @@ const EditMainImage: NextComponentType<NextPageContext, {}, Props> = (
 
                 <Card.Section>
 
-                    <LoadingOverlay radius={"md"} visible={mainImageEditLoadingValue} overlayBlur={2} zIndex={2} />
+                    <LoadingOverlay radius={"md"} visible={mainImageEditLoadingValue} overlayBlur={5} zIndex={2} loader={<Loader color="pink" size="xl" />} />
 
                     <AspectRatio ratio={10 / 16} pos={"relative"}
                         onMouseOver={() => { imageUploaderOverlayVisibilityHandlers.open() }}

@@ -1,11 +1,11 @@
 import { ActionIcon, Container, createStyles, Divider, Overlay, rem, Stack, Text, TextInput, useMantineColorScheme } from "@mantine/core";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { CardContainerColors, NavBarColors, StepperColors } from "../../../../Shared/colors";
 import style from "../../../../Shared/css/style";
 import { inPersonDelivery } from "../../../../Shared/icons";
-import { delivery, in_person_delivery, in_person_deliveryAtom } from "../../../../Stores/deliveryInfoStore";
+import { delivery, in_person_delivery, in_person_deliveryAtom, shipping_deliveryAtom } from "../../../../Stores/deliveryInfoStore";
 
 interface Props {
 
@@ -44,17 +44,17 @@ const In_person_delivery: NextComponentType<NextPageContext, {}, Props> = (
 
             <Stack>
                 <Divider my="xs" label="Required Fields" labelPosition="center" />
-                <FloatingLabelInput label={"Recipient's name"} placeholder={"Enter the name of the person receiving the package"} required={true} requiredName={"name"} />
-                <FloatingLabelInput label={"Recipient's Wilaya"} placeholder={"Enter the Wilaya of the person receiving the package"} required={true} requiredName={"wilaya"} />
-                <FloatingLabelInput label={"Recipient's  street address"} placeholder={"Enter the address where we should deliver"} required={true} requiredName={"street_address"} />
-                <FloatingLabelInput label={"Recipient's  phone number"} placeholder={"Enter the recipient's phone number"} required={true} requiredName={"phone"} />
+                <FloatingLabelInput disabled={props.visible != 'in-person'} label={"Recipient's name"} placeholder={"Enter the name of the person receiving the package"} required={true} requiredName={"name"} />
+                <FloatingLabelInput disabled={props.visible != 'in-person'} label={"Recipient's Wilaya"} placeholder={"Enter the Wilaya of the person receiving the package"} required={true} requiredName={"wilaya"} />
+                <FloatingLabelInput disabled={props.visible != 'in-person'} label={"Recipient's  street address"} placeholder={"Enter the address where we should deliver"} required={true} requiredName={"street_address"} />
+                <FloatingLabelInput disabled={props.visible != 'in-person'} label={"Recipient's  phone number"} placeholder={"Enter the recipient's phone number"} required={true} requiredName={"phone"} />
 
                 {/* <Space h="md" /> */}
 
                 <Divider my="xs" label="Not Required Fields" labelPosition="center" />
-                <FloatingLabelInput label={"Google Maps link"} placeholder={"Enter the address copied from Google Maps"} required={false} notRequiredName={"google_maps_link"} />
-                <FloatingLabelInput label={"Recipient's  message"} placeholder={"Enter a message to be written for the recipient"} required={false} notRequiredName={"message"} />
-                <FloatingLabelInput label={"Recipient's  Instagram"} placeholder={"Enter the recipient's instagram username"} required={false} notRequiredName={"instagram_link"} />
+                <FloatingLabelInput disabled={props.visible != 'in-person'} label={"Google Maps link"} placeholder={"Enter the address copied from Google Maps"} required={false} notRequiredName={"google_maps_link"} />
+                <FloatingLabelInput disabled={props.visible != 'in-person'} label={"Recipient's  message"} placeholder={"Enter a message to be written for the recipient"} required={false} notRequiredName={"message"} />
+                <FloatingLabelInput disabled={props.visible != 'in-person'} label={"Recipient's  Instagram"} placeholder={"Enter the recipient's instagram username"} required={false} notRequiredName={"instagram_link"} />
 
                 {props.visible != "in-person" && (
                     <Overlay blur={15} center radius={15}>
@@ -137,7 +137,8 @@ interface InputProps {
     placeholder: string | undefined,
     required: boolean,
     requiredName?: keyof in_person_delivery['required'],
-    notRequiredName?: keyof in_person_delivery['not_required']
+    notRequiredName?: keyof in_person_delivery['not_required'],
+    disabled: boolean
 }
 
 export function FloatingLabelInput(inputProps: InputProps) {
@@ -155,6 +156,7 @@ export function FloatingLabelInput(inputProps: InputProps) {
 
     return (
         <TextInput
+            disabled={inputProps.disabled}
             label={inputProps.label}
             placeholder={inputProps.placeholder}
             required={inputProps.required}

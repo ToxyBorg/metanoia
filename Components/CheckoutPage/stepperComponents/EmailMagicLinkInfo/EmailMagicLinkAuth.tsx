@@ -7,11 +7,12 @@ import { ReactNode, useState } from "react";
 import { CardContainerColors, NavBarColors, StepperColors } from "../../../../Shared/colors";
 import { arrowDown, emailAtSymbol } from "../../../../Shared/icons";
 import { emailAtom, emailSchema } from "../../../../Stores/orderEmailStore";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import ValidatePin from "./ValidatePin";
 import style from "../../../../Shared/css/style";
 import { useDisclosure, useTimeout } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
+import { orderVerifiedAtom } from "../../../../Stores/orderVerifiedStore";
 
 interface Props {
     nextStep: () => void
@@ -167,180 +168,180 @@ const EmailMagicLinkAuth: NextComponentType<NextPageContext, {}, Props> = (
 
 
     return (
-        <Container
-            sx={(theme) => ({
-                maxWidth: "1500px",
-                border: `2px solid ${theme.colorScheme === "dark"
-                    ? CardContainerColors.borderColorDark
-                    : CardContainerColors.borderColorLight}`,
-                borderRadius: 15,
-                WebkitBackdropFilter: "blur(2px)",
-                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-            })}
+        // <Container
+        //     sx={(theme) => ({
+        //         maxWidth: "1500px",
+        //         border: `2px solid ${theme.colorScheme === "dark"
+        //             ? CardContainerColors.borderColorDark
+        //             : CardContainerColors.borderColorLight}`,
+        //         borderRadius: 15,
+        //         WebkitBackdropFilter: "blur(2px)",
+        //         boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+        //     })}
 
-            bg={colorScheme === "dark"
-                ? CardContainerColors.backgroundColorDark
-                : CardContainerColors.backgroundColorLight
-            }
+        //     bg={colorScheme === "dark"
+        //         ? CardContainerColors.backgroundColorDark
+        //         : CardContainerColors.backgroundColorLight
+        //     }
 
-            className={style.Animated_Background_Gradient}
+        //     className={style.Animated_Background_Gradient}
 
-            p={"xl"}
-        >
+        //     p={"xl"}
+        // >
 
-            <Stack>
+        <Stack p={"xs"}>
 
-                <Stack
-                    sx={(theme) => ({
-                        maxWidth: "1500px",
-                        border: `2px solid ${theme.colorScheme === "dark"
-                            ? CardContainerColors.borderColorDark
-                            : CardContainerColors.borderColorLight}`,
-                        borderRadius: 15,
-                        overflow: "hidden",
+            <Stack
+                sx={(theme) => ({
+                    maxWidth: "1500px",
+                    border: `2px solid ${theme.colorScheme === "dark"
+                        ? CardContainerColors.borderColorDark
+                        : CardContainerColors.borderColorLight}`,
+                    borderRadius: 15,
+                    overflow: "hidden",
+                    WebkitBackdropFilter: "blur(2px)",
+                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+
+                    // textAlign: "center"
+
+                })}
+
+                bg={colorScheme === "dark"
+                    ? CardContainerColors.backgroundColorDark
+                    : CardContainerColors.backgroundColorLight
+                }
+
+                className={style.Animated_Background_Gradient}
+                p={"xl"}
+                pos={"relative"}
+
+            >
+                <LoadingOverlay visible={loadingOverlayVisible} overlayBlur={2} zIndex={3} />
+
+                <FloatingLabelInput pinHandlers={pinHandlers} loadingOverlayVisible={loadingOverlayVisible} />
+
+                <ActionIcon
+                    disabled={loadingOverlayVisible}
+                    variant="outline" title={arrowDown.name} w={"fit-content"} h={"100%"}
+                    mx={"auto"} py={"xs"} radius={"md"} px={"lg"}
+                    bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
+                    className={style.Animated_Background_Gradient}
+                    onClick={() => {
+                        if (emailAtomValue.isValid && emailAtomValue.value.length > 0) {
+                            // loadingOverlayVisibleHandlers.open()
+                            // emailResendAtomSetter(60)
+                            signInWithEmail()
+                        }
+                        else {
+                            showNotification({
+
+                                color: "red",
+                                radius: "md",
+                                title: 'Email Error',
+                                message: <p>The email entered is not a valid one. Try again!</p>,
+                                // icon: <errorIcon.icon />,
+
+                                styles: (theme) => ({
+
+
+                                    root: {
+                                        background: colorScheme === "dark"
+                                            ? CardContainerColors.backgroundColorDark
+                                            : CardContainerColors.backgroundColorLight,
+                                        backgroundSize: "300% 300%",
+                                        animation: `${style.AnimateBG} 7s ease infinite`,
+
+                                        border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                    },
+
+                                    title: {
+
+                                        background: colorScheme === "dark"
+                                            ? CardContainerColors.backgroundColorDark
+                                            : CardContainerColors.backgroundColorLight,
+                                        backgroundSize: "300% 300%",
+                                        animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                                        // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                        padding: "0.5rem",
+                                        borderRadius: 5,
+
+                                        fontWeight: "bolder",
+                                        color: colorScheme === "dark"
+                                            ? CardContainerColors.textColorDark
+                                            : CardContainerColors.textColorLight
+                                    },
+                                    description: {
+                                        fontStyle: "italic",
+
+                                        color: colorScheme === "dark"
+                                            ? CardContainerColors.textColorDark
+                                            : CardContainerColors.textColorLight
+                                    },
+                                    closeButton: {
+                                        color: colorScheme === "dark"
+                                            ? CardContainerColors.textColorDark
+                                            : CardContainerColors.textColorLight,
+
+                                        '&:hover': {
+                                            backgroundColor: "red"
+                                        },
+                                    },
+                                }),
+
+                            })
+                        }
+                    }}
+                    sx={{
+                        border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
                         WebkitBackdropFilter: "blur(2px)",
                         boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-
-                        // textAlign: "center"
-
-                    })}
-
-                    bg={colorScheme === "dark"
-                        ? CardContainerColors.backgroundColorDark
-                        : CardContainerColors.backgroundColorLight
-                    }
-
-                    className={style.Animated_Background_Gradient}
-                    p={"xl"}
-                    pos={"relative"}
-
+                    }}
                 >
-                    <LoadingOverlay visible={loadingOverlayVisible} overlayBlur={2} zIndex={3} />
-
-                    <FloatingLabelInput pinHandlers={pinHandlers} loadingOverlayVisible={loadingOverlayVisible} />
-
-                    <ActionIcon
-                        disabled={loadingOverlayVisible}
-                        variant="outline" title={arrowDown.name} w={"fit-content"} h={"100%"}
-                        mx={"auto"} py={"xs"} radius={"md"} px={"lg"}
-                        bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
-                        className={style.Animated_Background_Gradient}
-                        onClick={() => {
-                            if (emailAtomValue.isValid && emailAtomValue.value.length > 0) {
-                                // loadingOverlayVisibleHandlers.open()
-                                // emailResendAtomSetter(60)
-                                signInWithEmail()
+                    <Group>
+                        <arrowDown.icon />
+                        <Text size={"md"}
+                            color={colorScheme === "dark"
+                                ? StepperColors.iconsLineColorDark
+                                : StepperColors.iconsLineColorLight
                             }
-                            else {
-                                showNotification({
+                        >
+                            Send a pin to your email
+                        </Text>
+                    </Group>
+                </ActionIcon>
 
-                                    color: "red",
-                                    radius: "md",
-                                    title: 'Email Error',
-                                    message: <p>The email entered is not a valid one. Try again!</p>,
-                                    // icon: <errorIcon.icon />,
+                {loadingOverlayVisible &&
+                    <Center>
 
-                                    styles: (theme) => ({
-
-
-                                        root: {
-                                            background: colorScheme === "dark"
-                                                ? CardContainerColors.backgroundColorDark
-                                                : CardContainerColors.backgroundColorLight,
-                                            backgroundSize: "300% 300%",
-                                            animation: `${style.AnimateBG} 7s ease infinite`,
-
-                                            border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                        },
-
-                                        title: {
-
-                                            background: colorScheme === "dark"
-                                                ? CardContainerColors.backgroundColorDark
-                                                : CardContainerColors.backgroundColorLight,
-                                            backgroundSize: "300% 300%",
-                                            animation: `${style.AnimateBG} 7s ease infinite`,
-
-
-                                            // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                            padding: "0.5rem",
-                                            borderRadius: 5,
-
-                                            fontWeight: "bolder",
-                                            color: colorScheme === "dark"
-                                                ? CardContainerColors.textColorDark
-                                                : CardContainerColors.textColorLight
-                                        },
-                                        description: {
-                                            fontStyle: "italic",
-
-                                            color: colorScheme === "dark"
-                                                ? CardContainerColors.textColorDark
-                                                : CardContainerColors.textColorLight
-                                        },
-                                        closeButton: {
-                                            color: colorScheme === "dark"
-                                                ? CardContainerColors.textColorDark
-                                                : CardContainerColors.textColorLight,
-
-                                            '&:hover': {
-                                                backgroundColor: "red"
-                                            },
-                                        },
-                                    }),
-
-                                })
+                        <Text fw={"bolder"} pos={"absolute"}
+                            color={colorScheme === "dark"
+                                ? StepperColors.iconsLineColorDark
+                                : "black"
                             }
-                        }}
-                        sx={{
-                            border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
-                            WebkitBackdropFilter: "blur(2px)",
-                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-                        }}
-                    >
-                        <Group>
-                            <arrowDown.icon />
-                            <Text size={"md"}
-                                color={colorScheme === "dark"
-                                    ? StepperColors.iconsLineColorDark
-                                    : StepperColors.iconsLineColorLight
-                                }
-                            >
-                                Send a pin to your email
-                            </Text>
-                        </Group>
-                    </ActionIcon>
-
-                    {loadingOverlayVisible &&
-                        <Center>
-
-                            <Text fw={"bolder"} pos={"absolute"}
-                                color={colorScheme === "dark"
-                                    ? StepperColors.iconsLineColorDark
-                                    : "black"
-                                }
-                                sx={{
-                                    zIndex: 3,
-                                    overflowWrap: "break-word",
-                                }}
-                            >
-                                You can resend a Pin in 60 seconds. Please wait.
-                            </Text>
-                        </Center>
-                    }
-                </Stack>
-
-
-
-                <ValidatePin
-                    email={emailAtomValue.value}
-                    pinOpened={pinOpened && emailAtomValue.isValid && emailAtomValue.value.length > 1}
-                    nextStep={props.nextStep}
-                />
-
+                            sx={{
+                                zIndex: 3,
+                                overflowWrap: "break-word",
+                            }}
+                        >
+                            You can resend a Pin in 60 seconds. Please wait.
+                        </Text>
+                    </Center>
+                }
             </Stack>
 
-        </Container>
+
+
+            <ValidatePin
+                email={emailAtomValue.value}
+                pinOpened={pinOpened && emailAtomValue.isValid && emailAtomValue.value.length > 1}
+                nextStep={props.nextStep}
+            />
+
+        </Stack>
+
+        // </Container>
 
     )
 }
@@ -400,6 +401,7 @@ interface InputProps {
 export function FloatingLabelInput(inputProps: InputProps) {
     const [focused, setFocused] = useState(false);
     const [emailAtomValue, emailAtomSetter] = useAtom(emailAtom)
+    const orderVerifiedAtomSetter = useSetAtom(orderVerifiedAtom)
 
     const { classes } = useStyles({ floating: emailAtomValue.value.trim().length !== 0 || focused });
     const { colorScheme, } = useMantineColorScheme();
@@ -425,6 +427,8 @@ export function FloatingLabelInput(inputProps: InputProps) {
 
             onChange={(e) => {
                 emailAtomSetter(e.target.value)
+                orderVerifiedAtomSetter(false)
+
                 inputProps.pinHandlers.close()
             }}
             onFocus={() => setFocused(true)}

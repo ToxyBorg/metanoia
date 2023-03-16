@@ -1,4 +1,4 @@
-import { ActionIcon, createStyles, Group, LoadingOverlay, NumberInput, NumberInputHandlers, rem, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, createStyles, Group, Loader, LoadingOverlay, NumberInput, NumberInputHandlers, rem, useMantineColorScheme } from "@mantine/core";
 import { useAtom, useAtomValue } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import { MutableRefObject, ReactNode, useRef, useState } from "react";
@@ -88,7 +88,7 @@ export function FloatingLabelInput(inputProps: InputProps) {
 
     return (
         <div style={{ position: "relative" }}>
-            <LoadingOverlay visible={stockEditLoadingValue} overlayBlur={2} zIndex={2} />
+            <LoadingOverlay visible={stockEditLoadingValue} overlayBlur={2} zIndex={2} loader={<Loader color="pink" size="xs" />} />
             <NumberInput
                 type="number"
                 hideControls

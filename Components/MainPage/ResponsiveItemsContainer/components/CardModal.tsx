@@ -1,10 +1,11 @@
-import { AspectRatio, Card, Center, Grid, Modal, ScrollArea, SimpleGrid, Stack, Text, useMantineColorScheme } from "@mantine/core";
+import { AspectRatio, Card, Center, Grid, Loader, LoadingOverlay, Modal, ScrollArea, SimpleGrid, Skeleton, Stack, Text, useMantineColorScheme } from "@mantine/core";
 import type { NextComponentType, NextPageContext } from "next";
 import { IconContext } from "react-icons";
 import Image from 'next/image';
 import { Carousel } from "@mantine/carousel";
 import { CardContainerColors, ModalColors } from "../../../../Shared/colors";
 import style from "../../../../Shared/css/style";
+import { useState } from "react";
 
 
 interface Props {
@@ -27,6 +28,7 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
 
     const { colorScheme, } = useMantineColorScheme();
 
+    const [mainImageLoading, setMainImageLoading] = useState(true);
 
     return (
 
@@ -78,7 +80,13 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
                                     >
                                         <Card.Section>
                                             <AspectRatio ratio={10 / 16}>
-                                                <Image fill={true} src={props.imageURL} alt={props.imageName} loading='lazy' />
+                                                <LoadingOverlay visible={mainImageLoading} overlayBlur={5} radius={"xs"}
+                                                    loader={<Loader color="pink" size="xl" />}
+                                                />
+                                                <Image fill={true} src={props.imageURL} alt={props.imageName} loading='lazy'
+                                                    onLoadingComplete={() => setMainImageLoading(false)}
+                                                />
+
                                             </AspectRatio>
                                         </Card.Section>
 
@@ -87,7 +95,7 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
                                 </Center>
                             </Carousel.Slide>
 
-                            {props.secondaryImages.map((info) => (
+                            {props.secondaryImages.map((info) =>
 
                                 <Carousel.Slide key={info} >
                                     <Center>
@@ -100,18 +108,18 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
                                             radius={"md"}
 
                                         >
-                                            <Card.Section>
-                                                <AspectRatio ratio={10 / 16}>
+                                            <Card.Section pos={"relative"}>
+                                                {/* <AspectRatio ratio={10 / 16}>
                                                     <Image fill={true} src={info} alt={info} loading='lazy' />
-                                                </AspectRatio>
+                                                </AspectRatio> */}
+                                                <SecondaryImagesAspectRatio imageURL={info} />
                                             </Card.Section>
 
                                         </Card>
 
                                     </Center>
                                 </Carousel.Slide>
-
-                            ))}
+                            )}
                         </Carousel>
 
                     </Modal.Body>
@@ -124,3 +132,27 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
 }
 
 export default CardModal
+
+
+///////////////////////////////////////////////////////
+
+
+const SecondaryImagesAspectRatio = ({ imageURL }: { imageURL: string }) => {
+    const [secondaryImageLoading, setSecondaryImageLoading] = useState(true);
+
+
+    return (
+        <AspectRatio ratio={10 / 16}>
+            <LoadingOverlay visible={secondaryImageLoading} overlayBlur={5} radius={"xs"}
+                loader={<Loader color="pink" size="xl" />}
+            />
+
+            <Image fill={true} src={imageURL} alt={imageURL} loading='lazy'
+                onLoadingComplete={() => setSecondaryImageLoading(false)}
+            />
+
+        </AspectRatio>
+    )
+
+
+}

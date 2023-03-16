@@ -1,5 +1,5 @@
 "use client"
-import { ActionIcon, AspectRatio, Badge, Card, Center, createStyles, Group, rem, ScrollArea, Spoiler, Stack, Text, UnstyledButton, useMantineColorScheme } from "@mantine/core"
+import { ActionIcon, AspectRatio, Badge, Card, Center, createStyles, Group, Loader, LoadingOverlay, rem, ScrollArea, Skeleton, Spoiler, Stack, Text, UnstyledButton, useMantineColorScheme } from "@mantine/core"
 
 import { search } from "../../../Shared/icons"
 import { CardContainerColors, SpotlightColors } from "../../../Shared/colors";
@@ -13,6 +13,7 @@ import { screenSizesAtom } from "../../../Stores/screenSizesStore";
 import { SpotlightContext } from "@mantine/spotlight/lib/Spotlight.context";
 import { allItemsDataAtom, categorizedItemsDataAtom } from "../../../Stores/itemDataStore";
 import Link from "next/link";
+import { useState } from "react";
 
 
 const useStyles = createStyles((theme) => ({
@@ -56,6 +57,7 @@ function CustomAction({
     const router = useRouter();
 
     const { colorScheme, } = useMantineColorScheme();
+    const [mainImageLoading, setMainImageLoading] = useState(true);
 
 
     return (
@@ -87,10 +89,16 @@ function CustomAction({
                                 width: "5rem",
                             }}
                             radius={"md"}
+
                         >
                             <Card.Section >
-                                <AspectRatio ratio={10 / 16}>
-                                    <Image fill={true} src={action.image} alt={action.title} loading='lazy' />
+                                <AspectRatio ratio={10 / 16} >
+                                    <LoadingOverlay visible={mainImageLoading} overlayBlur={5} radius={"xs"}
+                                        loader={<Loader color="pink" size="xl" />}
+                                    />
+                                    <Image fill={true} src={action.image} alt={action.title} loading='lazy'
+                                        onLoadingComplete={() => setMainImageLoading(false)}
+                                    />
                                 </AspectRatio>
                             </Card.Section>
                         </Card>
@@ -105,7 +113,7 @@ function CustomAction({
 
                     <Group>
                         {action.description && (
-                            <Spoiler maxHeight={50} showLabel="" hideLabel="">
+                            <Spoiler maxHeight={50} showLabel={undefined} hideLabel={undefined}>
                                 <Text size="xs">
                                     {action.description}
                                 </Text>

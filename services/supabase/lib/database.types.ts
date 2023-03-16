@@ -82,6 +82,7 @@ export interface Database {
           order_id: string
           payment: Database["public"]["Enums"]["payment_method"]
           shipping_delivery_info: Database["public"]["CompositeTypes"]["shipping_delivery_info"]
+          status: Database["public"]["Enums"]["order_type"] | null
         }
         Insert: {
           created_at?: string | null
@@ -92,6 +93,7 @@ export interface Database {
           order_id?: string
           payment: Database["public"]["Enums"]["payment_method"]
           shipping_delivery_info: Database["public"]["CompositeTypes"]["shipping_delivery_info"]
+          status?: Database["public"]["Enums"]["order_type"] | null
         }
         Update: {
           created_at?: string | null
@@ -102,6 +104,7 @@ export interface Database {
           order_id?: string
           payment?: Database["public"]["Enums"]["payment_method"]
           shipping_delivery_info?: Database["public"]["CompositeTypes"]["shipping_delivery_info"]
+          status?: Database["public"]["Enums"]["order_type"] | null
         }
       }
     }
@@ -114,6 +117,13 @@ export interface Database {
     Enums: {
       categories: "earrings" | "rings" | "necklaces" | "bracelets"
       delivery: "in-person" | "shipping"
+      order_type:
+        | "pending"
+        | "confirmed"
+        | "done"
+        | "cancelled"
+        | "refund"
+        | "refunded"
       payment_method: "cash" | "bank-transfer"
     }
     CompositeTypes: {

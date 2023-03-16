@@ -1,6 +1,6 @@
 import type { NextComponentType, NextPageContext } from "next";
 import { forwardRef, useState } from 'react';
-import { Group, Avatar, Text, Select, useMantineColorScheme, createStyles, rem, LoadingOverlay } from '@mantine/core';
+import { Group, Avatar, Text, Select, useMantineColorScheme, createStyles, rem, LoadingOverlay, Loader } from '@mantine/core';
 import { bracelets, earrings, IconInfo, necklaces, rings } from "../../../../../Shared/icons";
 import { CategoriesType, SingleItemData } from "../../../../../Stores/itemDataStore";
 import { adminAddItemAtom } from "../../../../../Stores/adminAddItemStore";
@@ -34,7 +34,7 @@ const EditItemCategory: NextComponentType<NextPageContext, {}, Props> = (
 
     return (
         <div style={{ position: "relative" }}>
-            <LoadingOverlay visible={categoryEditLoadingValue} overlayBlur={2} zIndex={2} />
+            <LoadingOverlay visible={categoryEditLoadingValue} overlayBlur={2} zIndex={2} loader={<Loader color="pink" size="xs" />} />
 
             <Select
                 disabled={categoryEditLoadingValue}

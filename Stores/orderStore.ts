@@ -15,6 +15,15 @@ export const orderItemsDataAtom = atom<OrderItems, [data: OrderItems], OrderItem
     }
 )
 
+const ordersDataInitAtom = atom<OrderData>([])
+
+export const ordersDataAtom = atom<OrderData, [data: OrderData], OrderData | void>(
+    (get) => get(ordersDataInitAtom),
+    (_get, set, data) => {
+        set(ordersDataInitAtom, data)
+    }
+)
+
 /*
 type OrderItems = {
     id: string;

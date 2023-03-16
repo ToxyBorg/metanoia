@@ -19,6 +19,7 @@ import { adminAddItemAtom, adminAddItemType } from '../../Stores/adminAddItemSto
 import { useSupabase } from '../SupabaseWrapper/supabase-provider';
 import { currentSessionUserIsAdmin } from '../../Stores/adminSpecialButtonsStore';
 import { routerPushToMainPageAtom } from '../../Stores/lastStepStore';
+import { allItemsDataAtom } from '../../Stores/itemDataStore';
 
 
 
@@ -114,12 +115,40 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
 
     const cartItemsDataAtomSetter = useSetAtom(cartItemsDataAtom)
     const adminAddItemAtomSetter = useSetAtom(adminAddItemAtom)
+    const allItemsDataAtomValue = useAtomValue(allItemsDataAtom)
 
     if (typeof window !== "undefined") {
 
         const cart_data = window.localStorage.getItem('cart')
+
+
         if (cart_data != null) {
-            cartItemsDataAtomSetter(JSON.parse(cart_data))
+            const tempData: cartType = JSON.parse(cart_data)
+
+            for (const cart_item of tempData) {
+
+                const isFound = allItemsDataAtomValue.some(element => {
+                    if (element.item_id === cart_item.id) {
+                        return true;
+                    }
+                    return false;
+                });
+
+                if (!isFound) {
+                    const indexInCartTemp = tempData.map(object => object.id).indexOf(cart_item.id);
+                    tempData.splice(indexInCartTemp, 1);
+                }
+                else {
+                    const indexInAllItems = allItemsDataAtomValue.map(object => object.item_id).indexOf(cart_item.id);
+                    cart_item['item'] = allItemsDataAtomValue[indexInAllItems]
+
+                    if (cart_item.itemNumber >= allItemsDataAtomValue[indexInAllItems].stock) {
+                        cart_item['itemNumber'] = allItemsDataAtomValue[indexInAllItems].stock
+                    }
+                }
+            }
+
+            cartItemsDataAtomSetter(tempData)
         }
         const admin_item_data = window.localStorage.getItem('admin_item_added')
         if (admin_item_data != null) {
