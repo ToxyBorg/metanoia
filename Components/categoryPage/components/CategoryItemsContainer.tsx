@@ -11,7 +11,7 @@ import style from "../../../Shared/css/style";
 import { arrowNext, MetanoiaSVG } from "../../../Shared/icons";
 import { CategoriesType, categorizedItemsDataAtom } from "../../../Stores/itemDataStore";
 import { screenSizesAtom } from "../../../Stores/screenSizesStore";
-import Cards from "../../MainPage/ResponsiveItemsContainer/components/Cards";
+import Cards from "../../UI/Cards";
 
 interface Props {
     category: CategoriesType

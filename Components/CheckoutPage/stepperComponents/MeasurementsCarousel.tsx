@@ -1,5 +1,5 @@
 import { Carousel } from "@mantine/carousel";
-import { AspectRatio, Card, Center, Container, createStyles, Group, rem, Stack, TextInput, useMantineColorScheme } from "@mantine/core";
+import { AspectRatio, Card, Center, Container, createStyles, Group, Loader, LoadingOverlay, rem, Stack, TextInput, useMantineColorScheme } from "@mantine/core";
 import { useAtom, useSetAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import Image from "next/image";
@@ -20,6 +20,7 @@ const MeasurementsCarousel: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
 ) => {
     const { colorScheme, } = useMantineColorScheme();
+    const [mainImageLoading, setMainImageLoading] = useState(true);
 
     return (
 
@@ -56,7 +57,13 @@ const MeasurementsCarousel: NextComponentType<NextPageContext, {}, Props> = (
                             >
                                 <Card.Section>
                                     <AspectRatio ratio={10 / 16}>
-                                        <Image fill src={info.item.mainImageURL} alt={info.item.title} loading='lazy' />
+                                        <LoadingOverlay visible={mainImageLoading} overlayBlur={5} radius={"xs"}
+                                            loader={<Loader color="pink" size="xl" />}
+                                        />
+                                        <Image fill src={info.item.mainImageURL} alt={info.item.title} loading='lazy'
+                                            onLoadingComplete={() => setMainImageLoading(false)}
+
+                                        />
                                     </AspectRatio>
 
                                     <Container

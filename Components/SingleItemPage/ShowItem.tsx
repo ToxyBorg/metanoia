@@ -5,7 +5,7 @@ import { IconContext } from "react-icons";
 import { CardContainerColors } from "../../Shared/colors";
 import style from "../../Shared/css/style";
 import { SingleItemData } from "../../Stores/itemDataStore";
-import Cards from "../MainPage/ResponsiveItemsContainer/components/Cards";
+import Cards from "../UI/Cards";
 
 interface Props {
     item: SingleItemData

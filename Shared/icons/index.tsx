@@ -16,7 +16,7 @@ import { IoCashOutline, IoCash } from 'react-icons/io5'
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai'
 import { HiOutlineAtSymbol } from 'react-icons/hi'
 import { SlOptionsVertical, SlOptions } from 'react-icons/sl'
-import { TbUpload } from 'react-icons/tb'
+import { TbInfoSquareRounded, TbUpload } from 'react-icons/tb'
 import { CiSquareRemove } from 'react-icons/ci'
 
 
@@ -170,8 +170,8 @@ export const emailAtSymbol: IconInfo = { icon: HiOutlineAtSymbol, name: "Enter y
 export const checkoutStepChecked: IconInfo = { icon: BsCheckLg, name: "Step checked" }
 
 
-// 
 export const errorIcon: IconInfo = { icon: VscError, name: "Error" }
+export const moreInfoIcon: IconInfo = { icon: TbInfoSquareRounded, name: "Info" }
 
 
 // ADMIN ICONS
