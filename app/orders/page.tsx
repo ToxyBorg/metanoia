@@ -28,7 +28,7 @@ const Page = async () => {
 
 
                 if (LIST.includes(user.email)) {
-                    const { data: allOrders_data, error } = await supabase.from('orders').select("*")
+                    const { data: allOrders_data, error } = await supabase.from('orders').select("*").order('created_at', { ascending: false });
 
                     return (
                         <OrdersContainer OrderData={error ? [] : allOrders_data} />

@@ -33,7 +33,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const supabase = createClient()
-  const { data: allItems_data, error } = await supabase.from('all_items').select("*")
+  const { data: allItems_data, error } = await supabase.from('all_items').select("*").order('created_at', { ascending: false })
   const {
     data: { session },
   } = await supabase.auth.getSession()

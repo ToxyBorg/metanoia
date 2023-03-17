@@ -107,9 +107,47 @@ function CustomAction({
 
                 <Stack style={{ flex: 1 }}>
 
-                    <Text >
-                        {action.title}
-                    </Text>
+                    {/* <Group position="apart" p={"1rem"} h={"fit-content"}
+                    // spacing={"xs"}
+                    // grow
+                    // sx={{
+                    //     border: "2px solid black"
+                    // }}
+                    > */}
+
+                    {/* <Center> */}
+
+                    <Badge variant="gradient"
+                        sx={{
+                            border: `2px solid ${colorScheme === "dark"
+                                ? CardContainerColors.borderColorDark
+                                : CardContainerColors.borderColorLight}`,
+                            boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
+
+                            // fontSize: 
+                        }}
+                        bg={colorScheme === "dark"
+                            ? CardContainerColors.backgroundColorDark
+                            : CardContainerColors.backgroundColorLight
+                        }
+                        className={style.Animated_Background_Gradient}
+                        // size={"xl"}
+                        p={"xs"}
+
+                    >
+                        <Text
+                            fw={"bolder"}
+                            fs={"italic"}
+                            color={colorScheme === "dark" ? CardContainerColors.textColorDark : CardContainerColors.textColorLight}
+                        >
+                            {/* <Text > */}
+                            {action.title}
+                            {/* </Text> */}
+                        </Text>
+                    </Badge>
+                    {/* </Center> */}
+
+                    {/* </Group> */}
 
                     <Group>
                         {action.description && (
