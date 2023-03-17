@@ -118,6 +118,8 @@ function CustomAction({
                                 : CardContainerColors.borderColorLight}`,
                             // fontSize: 
                             boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
+                            // overflow: "scroll"
+
 
                         }}
                         bg={colorScheme === "dark"
@@ -130,7 +132,7 @@ function CustomAction({
 
 
                         <Text
-
+                            truncate
                             fw={"bolder"}
                             fs={"italic"}
                             color={colorScheme === "dark"
@@ -139,6 +141,7 @@ function CustomAction({
                         >
 
                             {action.title}
+
                         </Text>
 
                     </Badge>

@@ -1,6 +1,6 @@
 import type { NextComponentType, NextPageContext } from "next";
 import { SingleOrderData } from "../../../../../Stores/orderStore";
-import { AspectRatio, Badge, Card, Center, Group, Loader, LoadingOverlay, ScrollArea, Stack, Text, UnstyledButton, useMantineColorScheme } from "@mantine/core";
+import { AspectRatio, Badge, Card, Center, Group, Loader, LoadingOverlay, ScrollArea, Stack, Text, Title, UnstyledButton, useMantineColorScheme } from "@mantine/core";
 import { useAtomValue } from "jotai";
 import { allItemsDataAtom, categorizedItemsDataAtom } from "../../../../../Stores/itemDataStore";
 import MoreInfoContainer from "./Shared/MoreInfoContainer";
@@ -62,18 +62,14 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
                         border: `2px solid ${colorScheme === "dark"
                             ? CardContainerColors.borderColorDark
                             : CardContainerColors.borderColorLight}`,
-                        // color: colorScheme === "dark"
-                        //     ? CardContainerColors.iconsLineColorDark
-                        //     : CardContainerColors.iconsLineColorLight,
-                        // background: colorScheme === "dark"
-                        //     ? CardContainerColors.backgroundColorDark
-                        //     : CardContainerColors.backgroundColorLight,
-                        // backgroundSize: "300% 300%",
-                        // animation: `${style.AnimateBG} 7s ease infinite`,
+                        // boxShadow: "0px 0px 7px rgba(0, 0, 0, 0.5)",
                         borderRadius: 15,
 
                     }}
                 >
+
+                    {/* <Stack> */}
+
 
                     <Group >
 
@@ -119,6 +115,7 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
                                             : CardContainerColors.borderColorLight}`,
                                         // fontSize: 
                                         boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
+                                        // overflow: "scroll"
 
                                     }}
                                     bg={colorScheme === "dark"
@@ -126,12 +123,12 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
                                         : CardContainerColors.backgroundColorLight
                                     }
                                     className={style.Animated_Background_Gradient}
-
                                 >
-
-
                                     <Text
-
+                                        sx={{
+                                            overflow: "scroll",
+                                        }}
+                                        // truncate
                                         fw={"bolder"}
                                         fs={"italic"}
                                         color={colorScheme === "dark"
@@ -174,51 +171,124 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
                             </Group>
 
 
-                            <Group position="apart">
 
-                                <Group>
-                                    <Badge variant="gradient"
-                                        sx={{
-                                            border: `2px solid ${colorScheme === "dark"
-                                                ? CardContainerColors.borderColorDark
-                                                : CardContainerColors.borderColorLight}`,
-                                            WebkitBackdropFilter: "blur(2px)",
-                                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-                                            // fontSize: 
-                                        }}
-                                        bg={colorScheme === "dark"
-                                            ? CardContainerColors.backgroundColorDark
-                                            : CardContainerColors.backgroundColorLight
-                                        }
-                                        className={style.Animated_Background_Gradient}
-                                        size={"lg"}
+
+                            <Group>
+                                <Badge variant="gradient"
+                                    sx={{
+                                        border: `2px solid ${colorScheme === "dark"
+                                            ? CardContainerColors.borderColorDark
+                                            : CardContainerColors.borderColorLight}`,
+                                        WebkitBackdropFilter: "blur(2px)",
+                                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                                        // fontSize: 
+                                    }}
+                                    bg={colorScheme === "dark"
+                                        ? CardContainerColors.backgroundColorDark
+                                        : CardContainerColors.backgroundColorLight
+                                    }
+                                    className={style.Animated_Background_Gradient}
+                                    size={"lg"}
+                                >
+                                    {found.price} DA
+                                </Badge>
+
+                                <multiplicationIcon.icon title={multiplicationIcon.name} />
+
+                                <Badge variant="gradient"
+                                    sx={{
+                                        border: `2px solid ${colorScheme === "dark"
+                                            ? CardContainerColors.borderColorDark
+                                            : CardContainerColors.borderColorLight}`,
+                                        WebkitBackdropFilter: "blur(2px)",
+                                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                                        // fontSize: 
+                                    }}
+                                    bg={colorScheme === "dark"
+                                        ? CardContainerColors.backgroundColorDark
+                                        : CardContainerColors.backgroundColorLight
+                                    }
+                                    className={style.Animated_Background_Gradient}
+                                    size={"lg"}
+                                >
+                                    {item.number}
+                                </Badge>
+
+                            </Group>
+
+                            <Group >
+                                <Badge
+                                    p={"xs"}
+                                    // maw={"35vw"}
+                                    // h={"fit-content"}
+                                    variant="gradient"
+                                    sx={{
+                                        border: `2px solid ${colorScheme === "dark"
+                                            ? CardContainerColors.borderColorDark
+                                            : CardContainerColors.borderColorLight}`,
+                                        // fontSize: 
+                                        boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
+                                        // overflow: "scroll"
+
+                                    }}
+                                    bg={colorScheme === "dark"
+                                        ? CardContainerColors.backgroundColorDark
+                                        : CardContainerColors.backgroundColorLight
+                                    }
+                                    className={style.Animated_Background_Gradient}
+                                >
+
+                                    <Text
+                                        // truncate
+                                        fw={"bolder"}
+                                        fs={"italic"}
+                                        color={colorScheme === "dark"
+                                            ? CardContainerColors.textColorDark
+                                            : CardContainerColors.textColorLight}
                                     >
-                                        {found.price} DA
-                                    </Badge>
+                                        Measurements
+                                    </Text>
 
-                                    <multiplicationIcon.icon title={multiplicationIcon.name} />
+                                </Badge>
 
-                                    <Badge variant="gradient"
+
+                                <Badge
+                                    p={"xs"}
+                                    maw={"35vw"}
+                                    // h={"fit-content"}
+                                    variant="gradient"
+                                    sx={{
+                                        border: `2px solid ${colorScheme === "dark"
+                                            ? CardContainerColors.borderColorDark
+                                            : CardContainerColors.borderColorLight}`,
+                                        // fontSize: 
+                                        boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
+                                        // overflow: "scroll"
+
+                                    }}
+                                    bg={colorScheme === "dark"
+                                        ? CardContainerColors.backgroundColorDark
+                                        : CardContainerColors.backgroundColorLight
+                                    }
+                                    className={style.Animated_Background_Gradient}
+                                >
+
+                                    <Text
                                         sx={{
-                                            border: `2px solid ${colorScheme === "dark"
-                                                ? CardContainerColors.borderColorDark
-                                                : CardContainerColors.borderColorLight}`,
-                                            WebkitBackdropFilter: "blur(2px)",
-                                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-                                            // fontSize: 
+                                            overflow: "scroll",
                                         }}
-                                        bg={colorScheme === "dark"
-                                            ? CardContainerColors.backgroundColorDark
-                                            : CardContainerColors.backgroundColorLight
-                                        }
-                                        className={style.Animated_Background_Gradient}
-                                        size={"lg"}
+                                        // truncate
+                                        // fw={"bolder"}
+                                        // fs={"italic"}
+                                        color={colorScheme === "dark"
+                                            ? CardContainerColors.textColorDark
+                                            : CardContainerColors.textColorLight}
                                     >
-                                        {item.number}
-                                    </Badge>
 
-                                </Group>
+                                        {item.measurements}
+                                    </Text>
 
+                                </Badge>
                             </Group>
 
                         </Stack>
@@ -231,9 +301,29 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
         }
 
         return (
-            <Text key={item.id}>
-                Item does not exist
-            </Text>
+            <UnstyledButton
+                p={"xs"}
+                key={item.id}
+                className={style.Animated_Background_Gradient}
+                bg={colorScheme === "dark"
+                    ? CardContainerColors.backgroundColorDark
+                    : CardContainerColors.backgroundColorLight
+                }
+                sx={{
+                    border: `2px solid ${colorScheme === "dark"
+                        ? CardContainerColors.borderColorDark
+                        : CardContainerColors.borderColorLight}`,
+                    // boxShadow: "0px 0px 7px rgba(0, 0, 0, 0.5)",
+                    borderRadius: 15,
+
+                }}
+            >
+                <Center>
+                    <Text >
+                        Item does not exist
+                    </Text>
+                </Center>
+            </UnstyledButton>
         )
     })
 
