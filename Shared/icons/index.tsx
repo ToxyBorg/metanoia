@@ -184,4 +184,5 @@ export const adminRejectImageUpload: IconInfo = { icon: CiSquareRemove, name: "R
 export const adminEditButton: IconInfo = { icon: VscEdit, name: "Edit Item" }
 export const adminUpdateButton: IconInfo = { icon: MdUpdate, name: "Update Item" }
 export const adminDeleteImage: IconInfo = { icon: MdDeleteForever, name: "Delete image" }
+export const adminDeleteOrder: IconInfo = { icon: MdDeleteForever, name: "Delete order" }
 export const adminViewOrdersButton: IconInfo = { icon: BsTable, name: "See orders" }

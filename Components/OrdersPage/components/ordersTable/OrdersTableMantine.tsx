@@ -7,6 +7,8 @@ import style from "../../../../Shared/css/style";
 import { ordersDataAtom } from "../../../../Stores/orderStore";
 import DeliveryInfo from "./components/DeliveryInfo";
 import ItemsInfo from "./components/ItemsInfo";
+import StatusInfo from "./components/StatusInfo";
+import DeleteOrder from "./components/Shared/DeleteOrder";
 
 interface Props { }
 
@@ -17,7 +19,6 @@ const OrdersTableMantine: NextComponentType<NextPageContext, {}, Props> = (
     const ordersDataAtomValue = useAtomValue(ordersDataAtom)
     const { colorScheme, } = useMantineColorScheme();
 
-    let rowIndex = 1
     const rows = ordersDataAtomValue.map((order) => (
 
         <tr key={order.order_id}
@@ -57,10 +58,11 @@ const OrdersTableMantine: NextComponentType<NextPageContext, {}, Props> = (
                 </Group>
             </td>
             <td>{order.payment}</td>
-            <td>{order.status}</td>
+            <td><StatusInfo SingleOrderData={order} /> </td>
+            <td><DeleteOrder SingleOrderData={order} /> </td>
         </tr>
     ));
-    const rowNames = ["Date", "Items", "Email", "Delivery Type", "Payment", "Status"]
+    const rowNames = ["Date", "Items", "Email", "Delivery Type", "Payment", "Status", "Delete"]
 
 
     return (
@@ -75,9 +77,7 @@ const OrdersTableMantine: NextComponentType<NextPageContext, {}, Props> = (
                         borderBottom: `2px solid ${colorScheme === "dark"
                             ? CardContainerColors.borderColorDark
                             : CardContainerColors.borderColorLight}`,
-                        // color: colorScheme === "dark"
-                        //     ? CardContainerColors.iconsLineColorDark
-                        //     : CardContainerColors.iconsLineColorLight,
+
                         background: colorScheme === "dark"
                             ? CardContainerColors.backgroundColorDark
                             : CardContainerColors.backgroundColorLight,
@@ -92,11 +92,7 @@ const OrdersTableMantine: NextComponentType<NextPageContext, {}, Props> = (
                                 color: colorScheme === "dark"
                                     ? CardContainerColors.iconsLineColorDark
                                     : CardContainerColors.iconsLineColorLight,
-                                // background: colorScheme === "dark"
-                                //     ? CardContainerColors.backgroundColorDark
-                                //     : CardContainerColors.backgroundColorLight,
-                                // backgroundSize: "300% 300%",
-                                // animation: `${style.AnimateBG} 7s ease infinite`
+
                                 textShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
                             }}
                         >

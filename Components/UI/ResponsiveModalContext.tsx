@@ -80,7 +80,7 @@ const ResponsiveModalContext: NextComponentType<NextPageContext, {}, Props> = (
                         backgroundSize: "300% 300%",
                         animation: `${style.AnimateBG} 7s ease infinite`,
 
-                        zIndex: 3,
+                        zIndex: 4,
                         WebkitBackdropFilter: "blur(2px)",
                         boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
 

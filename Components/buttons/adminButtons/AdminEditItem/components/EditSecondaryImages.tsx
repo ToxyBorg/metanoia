@@ -371,7 +371,6 @@ const SecondaryImagesUploaders = (props: SecondaryImagesUploadersProps) => {
                                     || adminTempItem.secondaryImagesURLS[props.index].oldData.length > 1) {
 
                                     const adminTempItem = adminEditItemAtomValue;
-                                    // adminTempItem['secondaryImagesURLS'][props.index] = URL.createObjectURL(file[0])
                                     adminTempItem['secondaryImagesURLS'][props.index] = {
                                         newData: null,
                                         oldData: adminTempItem.secondaryImagesURLS[props.index].oldData,

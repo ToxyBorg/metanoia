@@ -63,13 +63,7 @@ const AddItemCategory: NextComponentType<NextPageContext, {}, Props> = (
             }}
 
             styles={{
-                // input: {
-                //     border: `2px solid ${colorScheme === "dark"
-                //         ? CardContainerColors.borderColorDark
-                //         : CardContainerColors.borderColorLight}`,
 
-
-                // },
                 dropdown: {
                     border: `2px solid ${colorScheme === "dark"
                         ? CardContainerColors.borderColorDark

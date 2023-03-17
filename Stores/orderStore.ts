@@ -6,7 +6,7 @@ export type OrderData = Database['public']["Tables"]['orders']['Row'][]
 export type SingleOrderData = Database['public']["Tables"]['orders']['Row']
 
 export type OrderItems = Database['public']["Tables"]['orders']['Row']['items']
-
+export type OrderStatus = Database['public']["Tables"]['orders']['Row']['status']
 
 const orderItemsDataInitAtom = atom<OrderItems>([])
 
