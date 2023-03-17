@@ -1,5 +1,5 @@
 "use client"
-import { ActionIcon, AspectRatio, Badge, Card, Center, createStyles, Group, Loader, LoadingOverlay, rem, ScrollArea, Skeleton, Spoiler, Stack, Text, UnstyledButton, useMantineColorScheme } from "@mantine/core"
+import { ActionIcon, AspectRatio, Badge, Card, Center, Container, createStyles, Group, Loader, LoadingOverlay, rem, ScrollArea, Skeleton, Spoiler, Stack, Text, UnstyledButton, useMantineColorScheme } from "@mantine/core"
 
 import { search } from "../../../Shared/icons"
 import { CardContainerColors, SpotlightColors } from "../../../Shared/colors";
@@ -77,7 +77,7 @@ function CustomAction({
             {...others}
         >
 
-            <Group noWrap>
+            <Group noWrap >
                 {action.image && (
                     <Center>
 
@@ -107,47 +107,42 @@ function CustomAction({
 
                 <Stack style={{ flex: 1 }}>
 
-                    {/* <Group position="apart" p={"1rem"} h={"fit-content"}
-                    // spacing={"xs"}
-                    // grow
-                    // sx={{
-                    //     border: "2px solid black"
-                    // }}
-                    > */}
+                    <Badge
+                        p={"xs"}
+                        maw={"35vw"}
 
-                    {/* <Center> */}
-
-                    <Badge variant="gradient"
+                        variant="gradient"
                         sx={{
                             border: `2px solid ${colorScheme === "dark"
                                 ? CardContainerColors.borderColorDark
                                 : CardContainerColors.borderColorLight}`,
+                            // fontSize: 
                             boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
 
-                            // fontSize: 
                         }}
                         bg={colorScheme === "dark"
                             ? CardContainerColors.backgroundColorDark
                             : CardContainerColors.backgroundColorLight
                         }
                         className={style.Animated_Background_Gradient}
-                        // size={"xl"}
-                        p={"xs"}
 
                     >
+
+
                         <Text
+
                             fw={"bolder"}
                             fs={"italic"}
-                            color={colorScheme === "dark" ? CardContainerColors.textColorDark : CardContainerColors.textColorLight}
+                            color={colorScheme === "dark"
+                                ? CardContainerColors.textColorDark
+                                : CardContainerColors.textColorLight}
                         >
-                            {/* <Text > */}
-                            {action.title}
-                            {/* </Text> */}
-                        </Text>
-                    </Badge>
-                    {/* </Center> */}
 
-                    {/* </Group> */}
+                            {action.title}
+                        </Text>
+
+                    </Badge>
+
 
                     <Group>
                         {action.description && (
@@ -238,13 +233,19 @@ export const Search = () => {
 
             styles={(theme) => ({
 
+                // action: {
+                //     width: 300,
+                //     overflow: "scroll"
+                // },
                 content: {
                     backgroundImage: theme.colorScheme === "dark" ? SpotlightColors.spotlightBackgroundColorDark : SpotlightColors.spotlightBackgroundColorLight,
                     border: `2px solid ${theme.colorScheme === "dark" ? SpotlightColors.spotlightBorderColorDark : SpotlightColors.spotlightBorderColorLight}`,
                     backgroundSize: "300% 300%",
                     animation: `${style.AnimateBG} 7s ease infinite`,
+                    // width: "100%",
                     // WebkitBackdropFilter: "blur(2px)",
                     // boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
+
 
                 },
                 searchInput: {
