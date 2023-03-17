@@ -124,11 +124,12 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
                                     }
                                     className={style.Animated_Background_Gradient}
                                 >
+                                    {/* <ScrollArea> */}
                                     <Text
-                                        sx={{
-                                            overflow: "scroll",
-                                        }}
-                                        // truncate
+                                        // sx={{
+                                        //     overflow: "scroll",
+                                        // }}
+                                        truncate
                                         fw={"bolder"}
                                         fs={"italic"}
                                         color={colorScheme === "dark"
@@ -137,6 +138,8 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
                                     >
                                         {found.title}
                                     </Text>
+                                    {/* </ScrollArea> */}
+
                                 </Badge>
 
                                 {icon &&
@@ -272,21 +275,23 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
                                     }
                                     className={style.Animated_Background_Gradient}
                                 >
+                                    <ScrollArea>
 
-                                    <Text
-                                        sx={{
-                                            overflow: "scroll",
-                                        }}
-                                        // truncate
-                                        // fw={"bolder"}
-                                        // fs={"italic"}
-                                        color={colorScheme === "dark"
-                                            ? CardContainerColors.textColorDark
-                                            : CardContainerColors.textColorLight}
-                                    >
+                                        <Text
+                                            // sx={{
+                                            //     overflow: "scroll",
+                                            // }}
+                                            // truncate
+                                            // fw={"bolder"}
+                                            // fs={"italic"}
+                                            color={colorScheme === "dark"
+                                                ? CardContainerColors.textColorDark
+                                                : CardContainerColors.textColorLight}
+                                        >
 
-                                        {item.measurements}
-                                    </Text>
+                                            {item.measurements}
+                                        </Text>
+                                    </ScrollArea>
 
                                 </Badge>
                             </Group>
