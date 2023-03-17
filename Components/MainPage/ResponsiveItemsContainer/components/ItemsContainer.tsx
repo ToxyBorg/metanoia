@@ -5,7 +5,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { Carousel } from '@mantine/carousel';
 import { ActionIcon, Center, Group, Stack, Text, useMantineColorScheme } from "@mantine/core";
 import { IconContext } from "react-icons";
-import Cards from "./Cards";
+import Cards from "../../../UI/Cards";
 import { CardContainerColors } from '../../../../Shared/colors';
 import Link from 'next/link';
 import { useAtom, useAtomValue } from 'jotai';
