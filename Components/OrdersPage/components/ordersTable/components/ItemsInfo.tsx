@@ -107,14 +107,34 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
 
                         <Stack style={{ flex: 1 }}>
 
-                            <Group position="apart">
-                                <Text
-                                    fw={"bolder"}
-                                    fs={"italic"}
-                                    color={colorScheme === "dark" ? CardContainerColors.textColorDark : CardContainerColors.textColorLight}
+                            <Group position="apart" noWrap>
+                                <Badge variant="gradient"
+                                    sx={{
+                                        border: `2px solid ${colorScheme === "dark"
+                                            ? CardContainerColors.borderColorDark
+                                            : CardContainerColors.borderColorLight}`,
+                                        boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
+
+                                        // fontSize: 
+                                    }}
+                                    bg={colorScheme === "dark"
+                                        ? CardContainerColors.backgroundColorDark
+                                        : CardContainerColors.backgroundColorLight
+                                    }
+                                    className={style.Animated_Background_Gradient}
+                                    // size={"xl"}
+                                    p={"xs"}
+                                    maw={300}
                                 >
-                                    {found.title}
-                                </Text>
+
+                                    <Text
+                                        fw={"bolder"}
+                                        fs={"italic"}
+                                        color={colorScheme === "dark" ? CardContainerColors.textColorDark : CardContainerColors.textColorLight}
+                                    >
+                                        {found.title}
+                                    </Text>
+                                </Badge>
 
                                 {icon &&
                                     <Badge

@@ -1,4 +1,4 @@
-import { ActionIcon, Center, Container, Grid, Group, LoadingOverlay, Stack, Text, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, Center, Container, Grid, Group, Loader, LoadingOverlay, Stack, Text, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
@@ -70,7 +70,7 @@ const AdminAddItem: NextComponentType<NextPageContext, {}, Props> = (
             >
 
                 <Stack spacing={"xl"} pos={"relative"} >
-                    <LoadingOverlay visible={loadingOverlayVisible} overlayBlur={2} zIndex={2} />
+                    <LoadingOverlay visible={loadingOverlayVisible} overlayBlur={2} zIndex={3} loader={<Loader color="pink" size="xl" />} />
 
                     <Group my={"xl"}>
 
