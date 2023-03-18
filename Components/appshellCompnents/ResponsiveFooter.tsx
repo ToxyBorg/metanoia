@@ -47,7 +47,7 @@ const ResponsiveFooter = () => {
                 <Group position="apart" >
 
                     <Group>
-                        <DevInfo />
+                        <DevInfo version={"Default"} />
                         {/* <ThemeIcon variant="outline" radius="xl" size="lg"> */}
                         <copyright.icon size={"1.5rem"} />
                         {/* </ThemeIcon> */}

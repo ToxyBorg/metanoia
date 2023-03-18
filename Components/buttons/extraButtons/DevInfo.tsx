@@ -1,13 +1,16 @@
 import { ActionIcon, Grid, Group, Stack, Text, useMantineColorScheme } from "@mantine/core";
 import type { NextComponentType, NextPageContext } from "next";
-import { MetanoiaSVG, devDiscord, devGithub, devInstagram, devMail } from "../../../Shared/icons";
+import { MetanoiaSVG, devDiscord, devGithub, devInstagram, devMail, developerInfo } from "../../../Shared/icons";
 import { ModalColors, NavBarColors } from "../../../Shared/colors";
 import ResponsiveModalContext from "../../UI/ResponsiveModalContext";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import style from "../../../Shared/css/style";
 
-interface Props { }
+interface Props {
+    version: "Default" | "Settings"
+}
+
 
 const DevInfo: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
@@ -22,21 +25,75 @@ const DevInfo: NextComponentType<NextPageContext, {}, Props> = (
 
         <>
 
-            <ActionIcon variant="transparent"
-                size={"3.5rem"}
-                title={"Dev Contact Info"}
-                onClick={() => handlers.toggle()}
-            >
+            {props.version == "Default" &&
+                <ActionIcon variant="transparent"
+                    size={"3.5rem"}
+                    title={"Dev Contact Info"}
+                    onClick={() => {
+                        handlers.toggle()
 
-                <MetanoiaSVG
-                    lineColor={colorScheme === "dark" ? NavBarColors.iconsLineColorDark : NavBarColors.iconsLineColorLight}
-                    strokeColor={colorScheme === "dark" ? NavBarColors.iconsLineColorDark : NavBarColors.iconsLineColorLight}
-                    name={"Developer Contact Info"}
-                    strokeWidth={20}
+                    }}
+                >
 
-                />
+                    <MetanoiaSVG
+                        lineColor={colorScheme === "dark" ? NavBarColors.iconsLineColorDark : NavBarColors.iconsLineColorLight}
+                        strokeColor={colorScheme === "dark" ? NavBarColors.iconsLineColorDark : NavBarColors.iconsLineColorLight}
+                        name={"Developer Contact Info"}
+                        strokeWidth={20}
 
-            </ ActionIcon>
+                    />
+
+                </ ActionIcon>
+
+
+            }
+
+            {props.version == "Settings" &&
+                <ActionIcon
+                    bg={colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight}
+                    w={"100%"} h={"100%"}
+
+                    onClick={() => {
+                        handlers.toggle()
+                        // if (props.parent_modal_handlers) {
+                        // props.parent_modal_handlers?.toggle()
+                        // }
+                    }}
+
+                    // mx={"auto"}
+                    title={developerInfo.name}
+
+                    variant="outline"
+                    radius={"md"}
+                    p={"xs"}
+
+                    sx={(theme) => ({
+                        // backgroundImage: colorScheme === "dark" ? ModalColors.iconsBackgroundColorDark : ModalColors.iconsBackgroundColorLight,
+                        border: `2px solid ${colorScheme === "dark" ? ModalColors.iconsBorderColorDark : ModalColors.iconsBorderColorLight}`,
+                        WebkitBackdropFilter: "blur(2px)",
+                        boxShadow: "0px 0px 17px rgba(0, 0, 0, 0.5)",
+
+                    })}
+
+                    className={style.Animated_Background_Gradient}
+
+                >
+
+                    <Stack align="center" spacing={"xs"} >
+                        <developerInfo.icon title={developerInfo.name} style={{ alignSelf: "center", }} />
+
+
+                        <Text
+                            color={colorScheme === "dark" ? ModalColors.iconsLineColorDark : ModalColors.iconsLineColorLight}
+                            fz={"clamp(0.85rem, 2vw , 5rem)"}
+
+                        >
+                            {developerInfo.name}
+                        </Text>
+
+                    </Stack>
+                </ActionIcon>
+            }
 
             <ResponsiveModalContext size={"xl"} responsiveModalOpened={opened} responsiveModalHandlers={handlers} modalTitle={"DEV CONTACT INFO"}>
 
