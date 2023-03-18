@@ -14,7 +14,12 @@ const AddItemPrice: NextComponentType<NextPageContext, {}, Props> = (
     props: Props,
 ) => {
     return (
-        <FloatingLabelInput label={"Item price"} placeholder={"Enter item price"} loadingOverlayVisible={props.loadingOverlayVisible} required />
+        <FloatingLabelInput
+            label={"Item price"}
+            placeholder={"Enter item price"}
+            loadingOverlayVisible={props.loadingOverlayVisible}
+            required
+        />
     )
 }
 

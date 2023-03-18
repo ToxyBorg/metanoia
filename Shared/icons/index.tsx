@@ -5,15 +5,15 @@
 
 import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail, BiImageAdd } from "react-icons/bi"
 import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing, GiPayMoney, GiExitDoor } from 'react-icons/gi';
-import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsArrowDown, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox, BsCreditCard2Back, BsPaypal, BsTable } from 'react-icons/bs';
+import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsArrowDown, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox, BsCreditCard2Back, BsPaypal, BsTable, BsDiscord } from 'react-icons/bs';
 import { FiInstagram, FiMail } from 'react-icons/fi';
 import { GrAddCircle, GrCircleAlert, GrDocumentUpdate, GrLinkNext, GrLinkPrevious, GrUserAdmin } from 'react-icons/gr';
 import { TfiRulerAlt } from 'react-icons/tfi'
-import { FaEquals, FaPlus, FaRuler, FaTimes, FaUserAstronaut } from 'react-icons/fa'
+import { FaEquals, FaGithub, FaPlus, FaRuler, FaTimes, FaUserAstronaut } from 'react-icons/fa'
 import { VscEdit, VscError } from 'react-icons/vsc';
 import { MdDeleteForever, MdEmojiPeople, MdMarkEmailRead, MdOutlineMarkEmailRead, MdUpdate } from 'react-icons/md';
 import { IoCashOutline, IoCash } from 'react-icons/io5'
-import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai'
+import { AiOutlineCopyright, AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai'
 import { HiOutlineAtSymbol } from 'react-icons/hi'
 import { SlOptionsVertical, SlOptions } from 'react-icons/sl'
 import { TbInfoSquareRounded, TbUpload } from 'react-icons/tb'
@@ -34,7 +34,12 @@ export interface IconInfo {
 }
 
 // Metanoia Brand SVG
-type localSVGType = { strokeColor: string | undefined, strokeWidth: string | number | undefined, lineColor: string | undefined }
+type localSVGType = {
+  strokeColor: string | undefined,
+  strokeWidth: string | number | undefined,
+  lineColor: string | undefined,
+  name?: string
+}
 export const MetanoiaSVG = (props: localSVGType) => {
 
   return (
@@ -48,7 +53,7 @@ export const MetanoiaSVG = (props: localSVGType) => {
       strokeWidth={props.strokeWidth}
       stroke={props.strokeColor}
     >
-      <title>Home</title>
+      <title>{props.name ? props.name : "Home"}</title>
       <path
         d="M1797 3796c-173-64-252-262-168-423 71-138 251-197 393-129 224 106 223 429-1 538-57 28-168 35-224 14zm183-201c57-54 62-127 14-185-98-115-279 2-221 143 34 79 144 102 207 42zM1435 2936c-92-42-165-146-326-462-83-162-279-508-322-565-29-41-98-71-148-65-70 8-132 86-146 181l-6 45h-53c-50 0-54-2-54-24 0-42 38-150 70-198 53-80 144-126 226-113 85 12 154 54 204 122 48 65 230 382 298 518 142 285 234 430 292 460 61 32 146 10 174-44 34-65 39-154 33-589-7-473-3-544 43-637 36-72 82-110 157-126 151-34 273 58 302 227 7 37 11 248 11 546 0 538 2 563 61 612 40 34 118 37 149 6 11-11 24-20 28-20 22 0 145-207 260-435 91-182 284-511 325-554 37-39 114-78 173-87 138-20 269 109 298 294l6 42h-107l-12-52c-23-105-88-178-155-178-46 1-110 33-139 71-43 58-226 377-302 529-90 179-194 360-241 417-49 60-111 94-184 100-79 7-136-14-189-72-76-82-76-83-77-660-2-519-5-577-41-631-22-35-64-54-117-54-36 0-52 6-79 29-61 54-61 54-64 626-2 490-4 523-23 586-25 82-54 119-122 153-67 34-135 34-203 2z"
         transform="matrix(.1 0 0 -.1 0 385)"
@@ -124,6 +129,12 @@ export const darkThemeIcon: IconInfo = { icon: BsMoonFill, name: "Dark Theme" }
 export const mail: IconInfo = { icon: FiMail, name: "Mail", link: "mailto:metanoia.js@gmail.com" }
 export const instagram: IconInfo = { icon: FiInstagram, name: "Instagram", link: "https://www.instagram.com/metanoia_.co/" }
 
+// DEV SOCIAL ICONS
+export const devMail: IconInfo = { icon: FiMail, name: "Mail", link: "mailto:sehabiamir1@gmail.com" }
+export const devInstagram: IconInfo = { icon: FiInstagram, name: "Instagram", link: "https://www.instagram.com/_amir_shb/" }
+export const devDiscord: IconInfo = { icon: BsDiscord, name: "Discord", link: "https://discord.com/users/270635271563902976" }
+export const devGithub: IconInfo = { icon: FaGithub, name: "Github", link: "https://github.com/ToxyBorg" }
+
 // ITEM CARDS ICONS
 export const itemDescription: IconInfo = { icon: BsCardText, name: "Item Description" }
 export const itemDescriptionShowMore: IconInfo = { icon: BsArrowDownCircle, name: "Show more" }
@@ -186,3 +197,7 @@ export const adminUpdateButton: IconInfo = { icon: MdUpdate, name: "Update Item"
 export const adminDeleteImage: IconInfo = { icon: MdDeleteForever, name: "Delete image" }
 export const adminDeleteOrder: IconInfo = { icon: MdDeleteForever, name: "Delete order" }
 export const adminViewOrdersButton: IconInfo = { icon: BsTable, name: "See orders" }
+
+
+// FOOTER
+export const copyright: IconInfo = { icon: AiOutlineCopyright, name: "Copyright" }

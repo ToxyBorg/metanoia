@@ -10,44 +10,49 @@ export type adminEditItemType = {
     created_at: string | null,
 
     category: {
-        newData: "earrings" | "rings" | "necklaces" | "bracelets",
+        newData: Database['public']["Tables"]['all_items']['Row']['category']
         // oldData: string,
         modified: boolean
     },
     description: {
-        newData: string,
+        newData: Database['public']["Tables"]['all_items']['Row']['description'],
         // oldData: string,
         modified: boolean
     },
     mainImageURL: {
         newData: File | null,
-        oldData: string,
+        oldData: Database['public']["Tables"]['all_items']['Row']['mainImageURL'],
         modified: boolean
     },
     price: {
-        newData: number,
+        newData: Database['public']["Tables"]['all_items']['Row']['price'],
         // oldData: number,
         modified: boolean
     },
     secondaryImagesURLS: {
         newData: File | null,
-        oldData: string,
+        oldData: Database['public']["Tables"]['all_items']['Row']['secondaryImagesURLS'][0],
         modified: boolean,
         removed: boolean
     }[],
     // secondaryImagesURLS: [File | null, File | null, File | null]
     stock: {
-        newData: number,
+        newData: Database['public']["Tables"]['all_items']['Row']['stock'],
         // oldData: number,
         modified: boolean
     },
     tags: {
-        newData: string[],
+        newData: Database['public']["Tables"]['all_items']['Row']['tags'],
         // oldData: string[],
         modified: boolean
     },
     title: {
-        newData: string,
+        newData: Database['public']["Tables"]['all_items']['Row']['title'],
+        // oldData: string,
+        modified: boolean
+    },
+    allow_measurements: {
+        newData: Database['public']["Tables"]['all_items']['Row']['allow_measurements'],
         // oldData: string,
         modified: boolean
     }
@@ -110,6 +115,10 @@ export const defaultEditDataAtom: adminEditItemType = {
     title: {
         newData: '',
         // oldData: '',
+        modified: false
+    },
+    allow_measurements: {
+        newData: "DEFAULT",
         modified: false
     }
 }

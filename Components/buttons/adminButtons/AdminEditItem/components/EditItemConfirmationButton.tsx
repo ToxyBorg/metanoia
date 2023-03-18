@@ -6,7 +6,7 @@ import { useSupabase } from "../../../../../Context/SupabaseWrapper/supabase-pro
 import { CardContainerColors, NavBarColors, StepperColors } from "../../../../../Shared/colors";
 import style from "../../../../../Shared/css/style";
 import { adminUpdateButton, errorIcon } from "../../../../../Shared/icons";
-import { categoryEditLoading, descriptionEditLoading, mainImageEditLoading, priceEditLoading, secondaryImagesEditLoading, stockEditLoading, tagsEditLoading, titleEditLoading } from "../../../../../Stores/adminEditItemLoadingsStore";
+import { allow_measurementsEditLoading, categoryEditLoading, descriptionEditLoading, mainImageEditLoading, priceEditLoading, secondaryImagesEditLoading, stockEditLoading, tagsEditLoading, titleEditLoading } from "../../../../../Stores/adminEditItemLoadingsStore";
 import { adminEditItemAtom } from "../../../../../Stores/adminEditItemStore";
 import { SingleItemData } from "../../../../../Stores/itemDataStore";
 
@@ -43,6 +43,7 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
     const priceEditLoadingValueSetter = useSetAtom(priceEditLoading)
     const stockEditLoadingSetter = useSetAtom(stockEditLoading)
     const tagsEditLoadingValueSetter = useSetAtom(tagsEditLoading)
+    const allow_measurementsEditLoadingSetter = useSetAtom(allow_measurementsEditLoading)
 
 
     const { supabase, } = useSupabase()
@@ -1449,6 +1450,141 @@ const EditItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> 
 
                     })
                     tagsEditLoadingValueSetter(false)
+                }
+            }
+
+            ///////////////////////////////////////////////////////////////////////
+
+            if (adminEditItemAtomValue.allow_measurements.modified) {
+                allow_measurementsEditLoadingSetter(true)
+                noItemModified = false
+
+                const { data, error } = await supabase
+                    .from('all_items')
+                    .update({ 'allow_measurements': adminEditItemAtomValue.allow_measurements.newData })
+                    .eq('item_id', item_id)
+
+                if (error) {
+                    showNotification({
+
+                        color: "red",
+                        radius: "md",
+                        title: "Item insert Error",
+                        message: <p>Item measurements update error</p>,
+                        // icon: <errorIcon.icon />,
+
+                        styles: (theme) => ({
+
+
+                            root: {
+                                background: colorScheme === "dark"
+                                    ? CardContainerColors.backgroundColorDark
+                                    : CardContainerColors.backgroundColorLight,
+                                backgroundSize: "300% 300%",
+                                animation: `${style.AnimateBG} 7s ease infinite`,
+
+                                border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                            },
+
+                            title: {
+
+                                background: colorScheme === "dark"
+                                    ? CardContainerColors.backgroundColorDark
+                                    : CardContainerColors.backgroundColorLight,
+                                backgroundSize: "300% 300%",
+                                animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                                // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                padding: "0.5rem",
+                                borderRadius: 5,
+
+                                fontWeight: "bolder",
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight
+                            },
+                            description: {
+                                fontStyle: "italic",
+
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight
+                            },
+                            closeButton: {
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight,
+
+                                '&:hover': {
+                                    backgroundColor: "red"
+                                },
+                            },
+                        }),
+
+                    })
+                    allow_measurementsEditLoadingSetter(false)
+                }
+                else {
+                    showNotification({
+
+                        color: "green",
+                        radius: "md",
+                        title: 'Item update confirmed',
+                        message: <p>The item measurement input you updated has been accepted. Try checking the main page to see it!</p>,
+                        // icon: <errorIcon.icon />,
+
+                        styles: (theme) => ({
+
+
+                            root: {
+                                background: colorScheme === "dark"
+                                    ? CardContainerColors.backgroundColorDark
+                                    : CardContainerColors.backgroundColorLight,
+                                backgroundSize: "300% 300%",
+                                animation: `${style.AnimateBG} 7s ease infinite`,
+
+                                border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                            },
+
+                            title: {
+
+                                background: colorScheme === "dark"
+                                    ? CardContainerColors.backgroundColorDark
+                                    : CardContainerColors.backgroundColorLight,
+                                backgroundSize: "300% 300%",
+                                animation: `${style.AnimateBG} 7s ease infinite`,
+
+
+                                // border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                padding: "0.5rem",
+                                borderRadius: 5,
+
+                                fontWeight: "bolder",
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight
+                            },
+                            description: {
+                                fontStyle: "italic",
+
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight
+                            },
+                            closeButton: {
+                                color: colorScheme === "dark"
+                                    ? CardContainerColors.textColorDark
+                                    : CardContainerColors.textColorLight,
+
+                                '&:hover': {
+                                    backgroundColor: "green"
+                                },
+                            },
+                        }),
+
+                    })
+                    allow_measurementsEditLoadingSetter(false)
                 }
             }
 

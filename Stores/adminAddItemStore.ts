@@ -1,20 +1,31 @@
-import { FileWithPath } from "@mantine/dropzone";
 import { atom } from "jotai";
 import { Database } from "../services/supabase/lib/database.types";
-import { SingleItemData } from "./itemDataStore";
 
 
+// export type adminAddItemType = {
+//     category: "earrings" | "rings" | "necklaces" | "bracelets",
+//     created_at: string | null,
+//     description: string,
+//     item_id: string,
+//     mainImageURL: File | null,
+//     price: number,
+//     secondaryImagesURLS: [File | null, File | null, File | null],
+//     stock: number,
+//     tags: string[],
+//     title: string
+// }
 export type adminAddItemType = {
-    category: "earrings" | "rings" | "necklaces" | "bracelets",
-    created_at: string | null,
-    description: string,
-    item_id: string,
+    category: Database['public']["Tables"]['all_items']['Row']['category'],
+    created_at: Database['public']["Tables"]['all_items']['Row']['created_at'],
+    description: Database['public']["Tables"]['all_items']['Row']['description'],
+    item_id: Database['public']["Tables"]['all_items']['Row']['item_id'],
     mainImageURL: File | null,
-    price: number,
+    price: Database['public']["Tables"]['all_items']['Row']['price'],
     secondaryImagesURLS: [File | null, File | null, File | null],
-    stock: number,
-    tags: string[],
-    title: string
+    stock: Database['public']["Tables"]['all_items']['Row']['stock'],
+    tags: Database['public']["Tables"]['all_items']['Row']['tags'],
+    title: Database['public']["Tables"]['all_items']['Row']['title'],
+    allow_measurements: Database['public']["Tables"]['all_items']['Row']['allow_measurements']
 }
 
 const adminAddItemInitAtom = atom<adminAddItemType>({
@@ -27,7 +38,8 @@ const adminAddItemInitAtom = atom<adminAddItemType>({
     secondaryImagesURLS: [null, null, null], // required
     stock: 1, // required
     tags: [], // required
-    title: '', // required
+    title: '', // required,
+    allow_measurements: 'DEFAULT',
 })
 
 export const adminAddItemAtom = atom<adminAddItemType, [data: adminAddItemType], adminAddItemType | void>(
