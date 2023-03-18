@@ -17,6 +17,7 @@ import EditItemTags from "./components/EditItemTags";
 import EditItemTitle from "./components/EditItemTitle";
 import EditMainImage from "./components/EditMainImage";
 import EditSecondaryImages from "./components/EditSecondaryImages";
+import EditItemMeasurements from "./components/EditItemMeasurements";
 
 interface Props {
     SingleItemData: SingleItemData
@@ -108,6 +109,8 @@ const AdminEditItem: NextComponentType<NextPageContext, {}, Props> = (
                                     <EditItemPrice SingleItemDataPrice={props.SingleItemData.price} />
                                     <EditItemStock SingleItemDataStock={props.SingleItemData.stock} />
                                     <EditItemTags SingleItemDataTags={props.SingleItemData.tags} />
+                                    <EditItemMeasurements SingleItemDataAllowMeasurements={props.SingleItemData.allow_measurements} />
+
                                 </Stack>
 
                             </Center>

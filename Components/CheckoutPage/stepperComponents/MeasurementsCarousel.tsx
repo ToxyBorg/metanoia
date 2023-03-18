@@ -1,5 +1,5 @@
 import { Carousel } from "@mantine/carousel";
-import { AspectRatio, Card, Center, Container, createStyles, Group, Loader, LoadingOverlay, rem, Stack, TextInput, useMantineColorScheme } from "@mantine/core";
+import { AspectRatio, Card, Center, Container, createStyles, Group, Loader, LoadingOverlay, rem, Stack, Text, TextInput, useMantineColorScheme } from "@mantine/core";
 import { useAtom, useSetAtom } from "jotai";
 import type { NextComponentType, NextPageContext } from "next";
 import Image from "next/image";
@@ -21,6 +21,7 @@ const MeasurementsCarousel: NextComponentType<NextPageContext, {}, Props> = (
 ) => {
     const { colorScheme, } = useMantineColorScheme();
     const [mainImageLoading, setMainImageLoading] = useState(true);
+    const cartItemsDataAtomSetter = useSetAtom(cartItemsDataAtom)
 
     return (
 
@@ -40,61 +41,86 @@ const MeasurementsCarousel: NextComponentType<NextPageContext, {}, Props> = (
                     }
                 }}
             >
-                {props.cartItemsDataAtomValue.map((info) => (
+                {props.cartItemsDataAtomValue.map((info) => {
 
-                    <Carousel.Slide key={info.item.item_id} >
-                        <Center>
+                    if (info.item.allow_measurements == "DEFAULT") {
+                        const newArr = props.cartItemsDataAtomValue.map(obj => {
 
-                            <Card pos={"relative"} shadow="md"
-                                sx={{
-                                    border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                    width: "clamp(20%, 250px, 100%)",
-                                    WebkitBackdropFilter: "blur(2px)",
-                                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
-                                }}
-                                radius={"md"}
+                            if (obj.item.item_id === info.id) {
 
-                            >
-                                <Card.Section>
-                                    <AspectRatio ratio={10 / 16}>
-                                        <LoadingOverlay visible={mainImageLoading} overlayBlur={5} radius={"xs"}
-                                            loader={<Loader color="pink" size="xl" />}
-                                        />
-                                        <Image fill src={info.item.mainImageURL} alt={info.item.title} loading='lazy'
-                                            onLoadingComplete={() => setMainImageLoading(false)}
+                                return {
+                                    ...obj,
+                                    measurements: "DEFAULT"
+                                };
+                            }
+                            return obj;
+                        });
+                        cartItemsDataAtomSetter(newArr)
 
-                                        />
-                                    </AspectRatio>
+                        return <></>
+                    }
 
-                                    <Container
-                                        pos={"absolute"}
-                                        bottom={0}
-                                        w={"100%"}
+                    else {
+                        return (
+                            <Carousel.Slide key={info.item.item_id} >
+                                <Center>
 
-                                        p={"1rem"}
-                                        bg={colorScheme === "dark"
-                                            ? CardContainerColors.backgroundColorDarkTranslucid
-                                            : CardContainerColors.backgroundColorLightTranslucid
-                                        }
+                                    <Card pos={"relative"} shadow="md"
+                                        sx={{
+                                            border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
+                                            width: "clamp(20%, 250px, 100%)",
+                                            WebkitBackdropFilter: "blur(2px)",
+                                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                                        }}
+                                        radius={"md"}
+
                                     >
-                                        <FloatingLabelInput
-                                            label={"Measurements"}
-                                            placeholder={"In centimeters"}
-                                            required={true}
-                                            info={info}
-                                            cartItemsDataAtomValue={props.cartItemsDataAtomValue}
-                                        />
-                                    </Container>
+                                        <Card.Section>
+                                            <AspectRatio ratio={10 / 16}>
+                                                <LoadingOverlay visible={mainImageLoading} overlayBlur={5} radius={"xs"}
+                                                    loader={<Loader color="pink" size="xl" />}
+                                                />
+                                                <Image fill src={info.item.mainImageURL} alt={info.item.title} loading='lazy'
+                                                    onLoadingComplete={() => setMainImageLoading(false)}
 
-                                </Card.Section>
+                                                />
+                                            </AspectRatio>
 
-                            </Card>
+                                            <Container
+                                                pos={"absolute"}
+                                                bottom={0}
+                                                w={"100%"}
 
-                        </Center>
-                    </Carousel.Slide>
+                                                p={"1rem"}
+                                                bg={colorScheme === "dark"
+                                                    ? CardContainerColors.backgroundColorDarkTranslucid
+                                                    : CardContainerColors.backgroundColorLightTranslucid
+                                                }
+                                            >
+                                                {/* {info.item.allow_measurements == "ALLOW" && */}
+                                                <FloatingLabelInput
+                                                    label={"Measurements"}
+                                                    placeholder={"In centimeters"}
+                                                    required={true}
+                                                    info={info}
+                                                    cartItemsDataAtomValue={props.cartItemsDataAtomValue}
+                                                />
+                                                {/* } */}
+                                            </Container>
+
+                                        </Card.Section>
+
+                                    </Card>
+
+                                </Center>
+                            </Carousel.Slide>
+                        )
+                    }
+                }
+                )
 
 
-                ))}
+                }
             </Carousel>
 
         </IconContext.Provider>
@@ -163,9 +189,21 @@ export function FloatingLabelInput(inputProps: InputProps) {
     // const { colorScheme, } = useMantineColorScheme();
 
     const cartItemsDataAtomSetter = useSetAtom(cartItemsDataAtom)
+    const RightSection = () => {
+        return (
+            <Text
+                sx={{
+                    marginRight: "0.5rem"
+                }}
+            >
+                Cm
+            </Text>
+        )
+    }
 
     return (
         <TextInput
+            rightSection={<RightSection />}
             label={inputProps.label}
             placeholder={inputProps.placeholder}
             required={inputProps.required}
@@ -204,5 +242,6 @@ export function FloatingLabelInput(inputProps: InputProps) {
             mt="md"
 
         />
-    );
+    )
+
 }

@@ -16,6 +16,7 @@ import AddItemTags from "./components/AddItemTags";
 import AddItemTitle from "./components/AddItemTitle";
 import AddMainImage from "./components/AddMainImage";
 import AddSecondaryImages from "./components/AddSecondaryImages";
+import AddItemMeasurements from "./components/AddItemMeasurements";
 
 interface Props { }
 
@@ -109,6 +110,7 @@ const AdminAddItem: NextComponentType<NextPageContext, {}, Props> = (
                                     <AddItemPrice loadingOverlayVisible={loadingOverlayVisible} />
                                     <AddItemStock loadingOverlayVisible={loadingOverlayVisible} />
                                     <AddItemTags loadingOverlayVisible={loadingOverlayVisible} />
+                                    <AddItemMeasurements loadingOverlayVisible={loadingOverlayVisible} />
                                 </Stack>
 
                             </Center>

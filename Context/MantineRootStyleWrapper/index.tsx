@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-dynamic";
 
 import { CacheProvider } from '@emotion/react';
 import { useEmotionCache, MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core';
@@ -20,6 +21,7 @@ import { useSupabase } from '../SupabaseWrapper/supabase-provider';
 import { currentSessionUserIsAdmin } from '../../Stores/adminSpecialButtonsStore';
 import { routerPushToMainPageAtom } from '../../Stores/lastStepStore';
 import { allItemsDataAtom } from '../../Stores/itemDataStore';
+import { cart_items_measurements_allowed } from '../../Stores/checkoutMeasurementsStepStore';
 
 
 
@@ -114,6 +116,7 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
 
 
     const cartItemsDataAtomSetter = useSetAtom(cartItemsDataAtom)
+    const cart_items_measurements_allowedSetter = useSetAtom(cart_items_measurements_allowed)
     const adminAddItemAtomSetter = useSetAtom(adminAddItemAtom)
     const allItemsDataAtomValue = useAtomValue(allItemsDataAtom)
 
@@ -125,6 +128,7 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
         if (cart_data != null) {
             const tempData: cartType = JSON.parse(cart_data)
 
+            const temp_cart_items_measurements_allowed: boolean[] = []
             for (const cart_item of tempData) {
 
                 const isFound = allItemsDataAtomValue.some(element => {
@@ -141,13 +145,21 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
                 else {
                     const indexInAllItems = allItemsDataAtomValue.map(object => object.item_id).indexOf(cart_item.id);
                     cart_item['item'] = allItemsDataAtomValue[indexInAllItems]
+                    temp_cart_items_measurements_allowed.push(
+                        allItemsDataAtomValue[indexInAllItems].allow_measurements == "ALLOW"
+                            ? true
+                            : false
+                    )
 
                     if (cart_item.itemNumber >= allItemsDataAtomValue[indexInAllItems].stock) {
                         cart_item['itemNumber'] = allItemsDataAtomValue[indexInAllItems].stock
                     }
+
+
                 }
             }
 
+            cart_items_measurements_allowedSetter(temp_cart_items_measurements_allowed)
             cartItemsDataAtomSetter(tempData)
         }
         const admin_item_data = window.localStorage.getItem('admin_item_added')

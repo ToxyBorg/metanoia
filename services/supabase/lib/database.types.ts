@@ -36,6 +36,7 @@ export interface Database {
     Tables: {
       all_items: {
         Row: {
+          allow_measurements: Database["public"]["Enums"]["allow_measurements"]
           category: Database["public"]["Enums"]["categories"]
           created_at: string | null
           description: string
@@ -48,6 +49,7 @@ export interface Database {
           title: string
         }
         Insert: {
+          allow_measurements?: Database["public"]["Enums"]["allow_measurements"]
           category: Database["public"]["Enums"]["categories"]
           created_at?: string | null
           description: string
@@ -60,6 +62,7 @@ export interface Database {
           title: string
         }
         Update: {
+          allow_measurements?: Database["public"]["Enums"]["allow_measurements"]
           category?: Database["public"]["Enums"]["categories"]
           created_at?: string | null
           description?: string
@@ -115,6 +118,7 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
+      allow_measurements: "ALLOW" | "DEFAULT"
       categories: "earrings" | "rings" | "necklaces" | "bracelets"
       delivery: "in-person" | "shipping"
       order_type:

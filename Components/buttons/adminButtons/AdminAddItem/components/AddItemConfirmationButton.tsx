@@ -71,7 +71,8 @@ const AddItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> =
                         price: adminAddItemAtomValue.price,
                         stock: adminAddItemAtomValue.stock,
                         title: adminAddItemAtomValue.title,
-                        tags: adminAddItemAtomValue.tags
+                        tags: adminAddItemAtomValue.tags,
+                        allow_measurements: adminAddItemAtomValue.allow_measurements,
                     },
                 ])
 
@@ -247,8 +248,6 @@ const AddItemConfirmationButton: NextComponentType<NextPageContext, {}, Props> =
                 // window.location.reload()
 
             }
-
-
 
         }
         else {
