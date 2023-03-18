@@ -3,7 +3,7 @@ import { ActionIcon, Box, Group, Indicator, ScrollArea, Stack, Text, useMantineC
 
 import { cart, categories } from "../../../Shared/icons"
 import { useDisclosure } from "@mantine/hooks";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { cartItemsDataAtom } from "../../../Stores/cartStore";
 import ResponsiveModalContext from "../../UI/ResponsiveModalContext";
 import ResponsiveCartCarousel from "../../UI/ResponsiveCartCarousel";
@@ -27,12 +27,28 @@ export const Cart = () => {
     const [opened, handlers] = useDisclosure(false);
 
     const cartItemsDataAtomValue = useAtomValue(cartItemsDataAtom)
+    // const [cart_items_measurements_allowedValue, cart_items_measurements_allowedSetter] = useAtom(cart_items_measurements_allowed)
 
     let itemsCount = 0
+    // const temp_cart_items_measurements_allowed: boolean[] = []
+
+
 
     cartItemsDataAtomValue.map((item) => {
         itemsCount += item.itemNumber
+
+        // temp_cart_items_measurements_allowed.push(
+        //     item.item.allow_measurements == "ALLOW"
+        //         ? true
+        //         : false
+        // )
+
+        // cart_items_measurements_allowedSetter(temp_cart_items_measurements_allowed)
     })
+
+    // console.log(temp_cart_items_measurements_allowed)
+    // cart_items_measurements_allowedSetter(temp_cart_items_measurements_allowed)
+
 
     return (
         <>

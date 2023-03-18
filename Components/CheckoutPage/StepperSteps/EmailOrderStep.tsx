@@ -22,7 +22,7 @@ const EmailOrderStep: NextComponentType<NextPageContext, {}, Props> = (
 
     const newArr = orderItemsDataAtomValue;
     cartItemsDataAtomValue.map((info) => {
-        const isInArray = newArr.some(animal => animal.id === info.id)
+        const isInArray = newArr.some(item => item.id === info.id)
 
         if (isInArray) {
             const index = newArr.findIndex(item => item.id === info.id);

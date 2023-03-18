@@ -106,7 +106,8 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
                             <Group position="apart">
                                 <Badge
                                     p={"xs"}
-                                    maw={"35vw"}
+                                    maw={"clamp(20vw, 200px, 35vw)"}
+
 
                                     variant="gradient"
                                     sx={{
@@ -257,7 +258,8 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
 
                                 <Badge
                                     p={"xs"}
-                                    maw={"35vw"}
+                                    maw={"clamp(20vw, 200px, 35vw)"}
+
                                     // h={"fit-content"}
                                     variant="gradient"
                                     sx={{
@@ -289,7 +291,7 @@ const ItemsInfo: NextComponentType<NextPageContext, {}, Props> = (
                                                 : CardContainerColors.textColorLight}
                                         >
 
-                                            {item.measurements}
+                                            {item.measurements.length > 0 ? item.measurements : "DEFAULT"}
                                         </Text>
                                     </ScrollArea>
 

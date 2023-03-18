@@ -3,8 +3,8 @@ import type { NextComponentType, NextPageContext } from "next";
 import { IconContext } from "react-icons";
 import Image from 'next/image';
 import { Carousel } from "@mantine/carousel";
-import { CardContainerColors, ModalColors } from "../../../../Shared/colors";
-import style from "../../../../Shared/css/style";
+import { CardContainerColors, ModalColors } from "../../Shared/colors";
+import style from "../../Shared/css/style";
 import { useState } from "react";
 
 
@@ -52,7 +52,7 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
                 <Modal.Content sx={{
 
 
-                    padding: "1rem",
+                    // padding: "1rem",
                     margin: "auto",
                     backgroundImage: colorScheme === "dark" ? ModalColors.modalBackgroundColorDark : ModalColors.modalBackgroundColorLight,
                     border: `2px solid ${colorScheme === "dark" ? ModalColors.modalBorderColorDark : ModalColors.modalBorderColorLight}`,
@@ -102,7 +102,9 @@ const CardModal: NextComponentType<NextPageContext, {}, Props> = (
                                         <Card pos={"relative"} shadow="md"
                                             sx={{
                                                 border: `2px solid ${colorScheme === "dark" ? CardContainerColors.borderColorDark : CardContainerColors.borderColorLight}`,
-                                                width: "clamp(60%, 400px, 100%)",
+                                                // width: "clamp(60%, 400px, 100%)",
+                                                width: "100%"
+
 
                                             }}
                                             radius={"md"}

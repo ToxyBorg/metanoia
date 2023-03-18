@@ -21,7 +21,6 @@ import { useSupabase } from '../SupabaseWrapper/supabase-provider';
 import { currentSessionUserIsAdmin } from '../../Stores/adminSpecialButtonsStore';
 import { routerPushToMainPageAtom } from '../../Stores/lastStepStore';
 import { allItemsDataAtom } from '../../Stores/itemDataStore';
-import { cart_items_measurements_allowed } from '../../Stores/checkoutMeasurementsStepStore';
 
 
 
@@ -116,7 +115,7 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
 
 
     const cartItemsDataAtomSetter = useSetAtom(cartItemsDataAtom)
-    const cart_items_measurements_allowedSetter = useSetAtom(cart_items_measurements_allowed)
+    // const cart_items_measurements_allowedSetter = useSetAtom(cart_items_measurements_allowed)
     const adminAddItemAtomSetter = useSetAtom(adminAddItemAtom)
     const allItemsDataAtomValue = useAtomValue(allItemsDataAtom)
 
@@ -145,11 +144,12 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
                 else {
                     const indexInAllItems = allItemsDataAtomValue.map(object => object.item_id).indexOf(cart_item.id);
                     cart_item['item'] = allItemsDataAtomValue[indexInAllItems]
-                    temp_cart_items_measurements_allowed.push(
-                        allItemsDataAtomValue[indexInAllItems].allow_measurements == "ALLOW"
-                            ? true
-                            : false
-                    )
+
+                    // temp_cart_items_measurements_allowed.push(
+                    //     allItemsDataAtomValue[indexInAllItems].allow_measurements == "ALLOW"
+                    //         ? true
+                    //         : false
+                    // )
 
                     if (cart_item.itemNumber >= allItemsDataAtomValue[indexInAllItems].stock) {
                         cart_item['itemNumber'] = allItemsDataAtomValue[indexInAllItems].stock
@@ -159,7 +159,8 @@ export default function MantineRootStyleWrapper({ children }: { children: React.
                 }
             }
 
-            cart_items_measurements_allowedSetter(temp_cart_items_measurements_allowed)
+            // console.log("FROM ROOT: ", temp_cart_items_measurements_allowed)
+            // cart_items_measurements_allowedSetter(temp_cart_items_measurements_allowed)
             cartItemsDataAtomSetter(tempData)
         }
         const admin_item_data = window.localStorage.getItem('admin_item_added')

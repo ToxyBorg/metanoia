@@ -5,9 +5,10 @@ import type { NextComponentType, NextPageContext } from "next";
 import Image from "next/image";
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { IconContext } from "react-icons";
-import { CardContainerColors } from "../../../Shared/colors";
-import { cartItemsDataAtom, cartType, SingleCartItemType } from "../../../Stores/cartStore";
-import { orderItemsDataAtom } from "../../../Stores/orderStore";
+import { CardContainerColors } from "../../../../Shared/colors";
+import { cartItemsDataAtom, cartType, SingleCartItemType } from "../../../../Stores/cartStore";
+import { orderItemsDataAtom } from "../../../../Stores/orderStore";
+import MeasurementsChartInfo from "./MeasurementsChartInfo";
 
 interface Props {
     cartItemsDataAtomValue: cartType,
@@ -43,26 +44,28 @@ const MeasurementsCarousel: NextComponentType<NextPageContext, {}, Props> = (
             >
                 {props.cartItemsDataAtomValue.map((info) => {
 
-                    if (info.item.allow_measurements == "DEFAULT") {
-                        const newArr = props.cartItemsDataAtomValue.map(obj => {
+                    // if (info.item.allow_measurements == "DEFAULT") {
+                    //     const newArr = props.cartItemsDataAtomValue.map(obj => {
 
-                            if (obj.item.item_id === info.id) {
+                    //         if (obj.item.item_id === info.id) {
 
-                                return {
-                                    ...obj,
-                                    measurements: "DEFAULT"
-                                };
-                            }
-                            return obj;
-                        });
-                        cartItemsDataAtomSetter(newArr)
+                    //             return {
+                    //                 ...obj,
+                    //                 measurements: "DEFAULT"
+                    //             };
+                    //         }
+                    //         return obj;
+                    //     });
+                    //     cartItemsDataAtomSetter(newArr)
 
-                        return <></>
-                    }
+                    //     return <></>
+                    // }
 
-                    else {
+                    if (info.item.allow_measurements == "ALLOW") {
                         return (
+
                             <Carousel.Slide key={info.item.item_id} >
+
                                 <Center>
 
                                     <Card pos={"relative"} shadow="md"
@@ -115,8 +118,12 @@ const MeasurementsCarousel: NextComponentType<NextPageContext, {}, Props> = (
                                 </Center>
                             </Carousel.Slide>
                         )
+
                     }
+
                 }
+
+
                 )
 
 
@@ -189,21 +196,21 @@ export function FloatingLabelInput(inputProps: InputProps) {
     // const { colorScheme, } = useMantineColorScheme();
 
     const cartItemsDataAtomSetter = useSetAtom(cartItemsDataAtom)
-    const RightSection = () => {
-        return (
-            <Text
-                sx={{
-                    marginRight: "0.5rem"
-                }}
-            >
-                Cm
-            </Text>
-        )
-    }
+    // const RightSection = () => {
+    //     return (
+    //         <Text
+    //             sx={{
+    //                 marginRight: "0.5rem"
+    //             }}
+    //         >
+    //             Cm
+    //         </Text>
+    //     )
+    // }
 
     return (
         <TextInput
-            rightSection={<RightSection />}
+            rightSection={<MeasurementsChartInfo CategoriesType={inputProps.info.item.category} />}
             label={inputProps.label}
             placeholder={inputProps.placeholder}
             required={inputProps.required}
