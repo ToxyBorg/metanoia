@@ -109,7 +109,8 @@ function CustomAction({
 
                     <Badge
                         p={"xs"}
-                        maw={"35vw"}
+                        // maw={"35vw"}
+                        maw={"clamp(20vw, 200px, 35vw)"}
 
                         variant="gradient"
                         sx={{
