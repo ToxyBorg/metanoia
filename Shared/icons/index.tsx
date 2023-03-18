@@ -3,13 +3,13 @@
  * Changing here, will change it everywhere.
  */
 
-import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail, BiImageAdd } from "react-icons/bi"
+import { BiSearchAlt, BiHomeCircle, BiCategoryAlt, BiCart, BiUser, BiLockOpen, BiLock, BiCog, BiMessageAltDetail, BiImageAdd, BiCodeAlt } from "react-icons/bi"
 import { GiEarrings, GiDiamondRing, GiPearlNecklace, GiRing, GiPayMoney, GiExitDoor } from 'react-icons/gi';
-import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsArrowDown, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox, BsCreditCard2Back, BsPaypal, BsTable, BsDiscord } from 'react-icons/bs';
+import { BsSunFill, BsMoonFill, BsCardText, BsCart, BsCartDash, BsCartPlus, BsArrowDownCircle, BsArrowUpCircle, BsImages, BsCartCheck, BsCartX, BsArrowRight, BsArrowLeft, BsArrowDown, BsCheckLg, BsCartCheckFill, BsBoxSeam, BsBoxSeamFill, BsMailbox, BsCreditCard2Back, BsPaypal, BsTable, BsDiscord, BsCodeSlash } from 'react-icons/bs';
 import { FiInstagram, FiMail } from 'react-icons/fi';
 import { GrAddCircle, GrCircleAlert, GrDocumentUpdate, GrLinkNext, GrLinkPrevious, GrUserAdmin } from 'react-icons/gr';
 import { TfiRulerAlt } from 'react-icons/tfi'
-import { FaEquals, FaGithub, FaPlus, FaRuler, FaTimes, FaUserAstronaut } from 'react-icons/fa'
+import { FaCode, FaEquals, FaGithub, FaLaptopCode, FaPlus, FaRuler, FaTimes, FaUserAstronaut } from 'react-icons/fa'
 import { VscEdit, VscError } from 'react-icons/vsc';
 import { MdDeleteForever, MdEmojiPeople, MdMarkEmailRead, MdOutlineMarkEmailRead, MdUpdate } from 'react-icons/md';
 import { IoCashOutline, IoCash } from 'react-icons/io5'
@@ -134,6 +134,7 @@ export const devMail: IconInfo = { icon: FiMail, name: "Mail", link: "mailto:seh
 export const devInstagram: IconInfo = { icon: FiInstagram, name: "Instagram", link: "https://www.instagram.com/_amir_shb/" }
 export const devDiscord: IconInfo = { icon: BsDiscord, name: "Discord", link: "https://discord.com/users/270635271563902976" }
 export const devGithub: IconInfo = { icon: FaGithub, name: "Github", link: "https://github.com/ToxyBorg" }
+export const developerInfo: IconInfo = { icon: FaLaptopCode, name: "Developer" }
 
 // ITEM CARDS ICONS
 export const itemDescription: IconInfo = { icon: BsCardText, name: "Item Description" }

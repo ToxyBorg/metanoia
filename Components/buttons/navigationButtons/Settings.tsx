@@ -13,6 +13,7 @@ import NavBarLock from "../extraButtons/NavBarLock";
 import { navBarLockedAtom } from "../../../Stores/navBarLockStore";
 import ResponsiveModalContext from "../../UI/ResponsiveModalContext";
 import AdminLogin from "../adminButtons/AdminLogin/AdminLogin";
+import DevInfo from "../extraButtons/DevInfo";
 
 
 export const Settings = () => {
@@ -166,6 +167,10 @@ export const Settings = () => {
                         )
                     })}
 
+
+                    <Grid.Col span={6}>
+                        <DevInfo version={"Settings"} />
+                    </Grid.Col>
 
                     <Grid.Col span={6}>
                         <AdminLogin />
