@@ -1,7 +1,7 @@
 // import "server-only"
 "use client"
 
-import { ActionIcon, Footer, Group, Text, ThemeIcon, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, Center, Footer, Group, Text, ThemeIcon, useMantineColorScheme } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { useAtom } from "jotai";
 import Link from "next/link";
@@ -44,22 +44,30 @@ const ResponsiveFooter = () => {
                     size: "2rem"
                 }}>
 
-                <Group position="apart" >
+                <Group position="apart" noWrap>
 
                     <Group>
+                        {/* <Center mx={"auto"}> */}
+
                         <DevInfo version={"Default"} />
-                        {/* <ThemeIcon variant="outline" radius="xl" size="lg"> */}
-                        <copyright.icon size={"1.5rem"} />
-                        {/* </ThemeIcon> */}
-                        <Text
-                            size={"1.5rem"}
-                            fs={"italic"}
-                            sx={{
-                                color: colorScheme === "dark" ? FooterColors.iconsLineColorDark : FooterColors.iconsLineColorLight,
-                            }}
-                        >
-                            Metanoia 2023
-                        </Text>
+                        {/* </Center> */}
+
+                        <Group noWrap>
+
+                            <copyright.icon size={"clamp(0.85rem, 2vw , 1.5rem)"} />
+
+                            <Text
+                                // size={"1.5rem"}
+                                fz={"clamp(0.85rem, 2vw , 1.5rem)"}
+                                fs={"italic"}
+                                sx={{
+                                    color: colorScheme === "dark" ? FooterColors.iconsLineColorDark : FooterColors.iconsLineColorLight,
+                                }}
+                            >
+                                Metanoia 2023
+                            </Text>
+                        </Group>
+
                     </Group>
 
                     <Group >

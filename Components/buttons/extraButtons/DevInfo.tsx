@@ -95,7 +95,7 @@ const DevInfo: NextComponentType<NextPageContext, {}, Props> = (
                 </ActionIcon>
             }
 
-            <ResponsiveModalContext size={"xl"} responsiveModalOpened={opened} responsiveModalHandlers={handlers} modalTitle={"DEV CONTACT INFO"}>
+            <ResponsiveModalContext zIndex={250} size={"xl"} responsiveModalOpened={opened} responsiveModalHandlers={handlers} modalTitle={"DEV CONTACT INFO"}>
 
                 <Grid justify={"space-evenly"}>
 
