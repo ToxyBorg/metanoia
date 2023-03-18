@@ -39,5 +39,4 @@
     "typescriptreact"
   ],
   "dotenv.enableAutocloaking": false
-  // "color-picker.languages": ["python", "javascript", "typescript"]
 }
