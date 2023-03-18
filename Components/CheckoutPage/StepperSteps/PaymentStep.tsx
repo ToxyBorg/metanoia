@@ -40,7 +40,7 @@ const PaymentStep: NextComponentType<NextPageContext, {}, Props> = (
 
             <ActionIcon
                 variant="outline" title={arrowNext.name} w={"fit-content"} h={"100%"}
-                mx={"auto"} py={"xs"} radius={"md"} px={"lg"}
+                mx={"auto"} mb={"sm"} py={"xs"} radius={"md"} px={"lg"}
                 bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
                 className={style.Animated_Background_Gradient}
                 onClick={() => {

@@ -30,10 +30,6 @@ const MoreInfoContainer: NextComponentType<NextPageContext, {}, Props> = (
                 }
                 className={style.Animated_Background_Gradient}
 
-            // sx={{
-            //     zIndex: 5555
-            // }}
-
             >
 
                 {props.children}

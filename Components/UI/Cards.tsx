@@ -9,7 +9,7 @@ import { CardContainerColors, NavBarColors } from "../../Shared/colors";
 import { cartItemsDataAtom, cartType, SingleCartItemType } from "../../Stores/cartStore";
 import { SingleItemData } from "../../Stores/itemDataStore";
 import { cart, cartAdd, cartRemove, itemDescription, itemDescriptionShowLess, itemDescriptionShowMore, showAllImages } from "../../Shared/icons";
-import CardModal from "../MainPage/ResponsiveItemsContainer/components/CardModal";
+import CardModal from "./CardModal";
 import style from "../../Shared/css/style";
 import Link from "next/link";
 import AdminCardOptionsButton from "../buttons/adminButtons/AdminCardOptionsButton";

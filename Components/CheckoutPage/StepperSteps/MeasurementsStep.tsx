@@ -6,7 +6,7 @@ import { CardContainerColors, NavBarColors, StepperColors } from "../../../Share
 import style from "../../../Shared/css/style";
 import { arrowNext, errorIcon } from "../../../Shared/icons";
 import { cartType } from "../../../Stores/cartStore";
-import MeasurementsCarousel from "../stepperComponents/MeasurementsCarousel";
+import MeasurementsCarousel from "../stepperComponents/MeasurementsCarousel/MeasurementsCarousel";
 
 interface Props {
   cartItemsDataAtomValue: cartType,
@@ -18,6 +18,24 @@ const MeasurementsStep: NextComponentType<NextPageContext, {}, Props> = (
 ) => {
   const { colorScheme, } = useMantineColorScheme();
 
+
+  const temp_cart_items_measurements_allowed: boolean[] = []
+
+  props.cartItemsDataAtomValue.map((item) => {
+
+
+    temp_cart_items_measurements_allowed.push(
+      item.item.allow_measurements == "ALLOW"
+        ? true
+        : false
+    )
+
+  })
+
+  if (!temp_cart_items_measurements_allowed.includes(true)) {
+    props.nextStep()
+  }
+
   return (
     <Stack>
       <MeasurementsCarousel cartItemsDataAtomValue={props.cartItemsDataAtomValue} />
@@ -25,7 +43,8 @@ const MeasurementsStep: NextComponentType<NextPageContext, {}, Props> = (
       {/* <Notifications position="top-center" limit={1} /> */}
 
       <ActionIcon variant="outline" title={arrowNext.name} w={"fit-content"} h={"100%"}
-        mx={"auto"} py={"xs"} radius={"md"} px={"lg"}
+        mx={"auto"} mb={"sm"}
+        py={"xs"} radius={"md"} px={"lg"}
         bg={colorScheme === "dark" ? NavBarColors.backgroundColorDark : NavBarColors.backgroundColorLight}
         className={style.Animated_Background_Gradient}
         onClick={() => {

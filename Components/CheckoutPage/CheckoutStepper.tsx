@@ -15,7 +15,7 @@ import EmailOrderStep from "./StepperSteps/EmailOrderStep";
 import FinalStep from "./StepperSteps/FinalStep";
 import { useAtomValue } from "jotai";
 import { allItemsDataAtom } from "../../Stores/itemDataStore";
-import { cart_items_measurements_allowed } from "../../Stores/checkoutMeasurementsStepStore";
+
 
 export type StepStateType = "stepInactive" | "stepProgress" | "stepCompleted" | undefined
 
@@ -36,8 +36,8 @@ const ResponsiveCheckoutStepper: NextComponentType<NextPageContext, {}, Props> =
     const nextStep = () => setActive((current) => (current < 5 ? current + 1 : current));
     // const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
-    const cart_items_measurements_allowedValue = useAtomValue(cart_items_measurements_allowed)
 
+    // console.log(cart_items_measurements_allowedValue)
     return (
 
         <IconContext.Provider
@@ -110,16 +110,16 @@ const ResponsiveCheckoutStepper: NextComponentType<NextPageContext, {}, Props> =
 
                 </Stepper.Step>
 
-                {(cart_items_measurements_allowedValue.includes(true) && cart_items_measurements_allowedValue.length > 0) &&
-                    <Stepper.Step
-                        icon={<measurementsStep.icon title={"measurements have not been entered yet."} color={"#ab9d9d"} />}
-                        label="Second step"
-                        description="Your measurements"
-                        completedIcon={<measurementsStepChecked.icon title={"enter different measurements?"} />}
-                    >
-                        <MeasurementsStep cartItemsDataAtomValue={props.cartItemsDataAtomValue} nextStep={nextStep} />
-                    </Stepper.Step>
-                }
+                {/* {(cart_items_measurements_allowedValue.includes(true) && cart_items_measurements_allowedValue.length > 0) && */}
+                <Stepper.Step
+                    icon={<measurementsStep.icon title={"measurements have not been entered yet."} color={"#ab9d9d"} />}
+                    label="Second step"
+                    description="Your measurements"
+                    completedIcon={<measurementsStepChecked.icon title={"enter different measurements?"} />}
+                >
+                    <MeasurementsStep cartItemsDataAtomValue={props.cartItemsDataAtomValue} nextStep={nextStep} />
+                </Stepper.Step>
+                {/* } */}
 
                 <Stepper.Step
                     icon={<deliveryStep.icon title={"delivery option hasn't been selected yet."} color={"#ab9d9d"} />}
