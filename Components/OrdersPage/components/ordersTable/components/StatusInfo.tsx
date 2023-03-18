@@ -18,12 +18,13 @@ const StatusInfo: NextComponentType<NextPageContext, {}, Props> = (
     const { supabase, } = useSupabase()
 
 
-    const handleStatusChange = async () => {
+    const handleStatusChange = async (handle_status_props: { status: OrderStatus }) => {
 
+        // console.log(handle_status_props.status)
         setLoadingOverlayVisible(true)
         const { data, error } = await supabase
             .from('orders')
-            .update({ 'status': searchValue })
+            .update({ 'status': handle_status_props.status })
             .eq('order_id', props.SingleOrderData.order_id)
 
         if (error) {
@@ -185,7 +186,7 @@ const StatusInfo: NextComponentType<NextPageContext, {}, Props> = (
                     //   adminAddItemAtomSetter(newArr)
 
                     onSearchChange(event)
-                    handleStatusChange()
+                    handleStatusChange({ status: event })
 
                 }}
                 value={searchValue}
