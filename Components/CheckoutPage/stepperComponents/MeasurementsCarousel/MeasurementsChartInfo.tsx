@@ -1,4 +1,4 @@
-import { ActionIcon, AspectRatio, Card, Center, Modal, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, AspectRatio, Card, Center, Loader, LoadingOverlay, Modal, useMantineColorScheme } from "@mantine/core";
 import type { NextComponentType, NextPageContext } from "next";
 import { moreInfoIcon } from "../../../../Shared/icons";
 import { CategoriesType } from "../../../../Stores/itemDataStore";
@@ -11,6 +11,7 @@ import ringMeasurementsGuide from '../../../../public/ring_measurements_guide.we
 import braceletMeasurementsGuide from '../../../../public/bracelet_measurements_guide.webp'
 import necklaceMeasurementsGuide from '../../../../public/necklace_measurements_guide.jpg'
 import earringMeasurementsGuide from '../../../../public/earring_measurements_guide.webp'
+import { useState } from "react";
 
 interface Props {
     CategoriesType: CategoriesType
@@ -22,6 +23,7 @@ const MeasurementsChartInfo: NextComponentType<NextPageContext, {}, Props> = (
     const { colorScheme, } = useMantineColorScheme();
     const [opened, handlers] = useDisclosure(false);
 
+    const [mainImageLoading, setMainImageLoading] = useState(true);
 
     return (
 
@@ -77,23 +79,32 @@ const MeasurementsChartInfo: NextComponentType<NextPageContext, {}, Props> = (
                                 <Card.Section>
                                     <AspectRatio ratio={10 / 18}>
 
-                                        {props.CategoriesType == "rings" &&
+                                        <LoadingOverlay visible={mainImageLoading} overlayBlur={5} radius={"xs"}
+                                            loader={<Loader color="pink" size="xl" />}
+                                        />
 
-                                            <Image fill={true} src={ringMeasurementsGuide} alt={"Ring measurements guide"} loading='lazy' />
+                                        {props.CategoriesType == "rings" &&
+                                            <Image fill={true} src={ringMeasurementsGuide} alt={"Ring measurements guide"} loading='lazy'
+                                                onLoadingComplete={() => setMainImageLoading(false)}
+                                            />
                                         }
                                         {props.CategoriesType == "bracelets" &&
-
-                                            <Image fill={true} src={braceletMeasurementsGuide} alt={"Bracelet measurements guide"} loading='lazy' />
+                                            <Image fill={true} src={braceletMeasurementsGuide} alt={"Bracelet measurements guide"} loading='lazy'
+                                                onLoadingComplete={() => setMainImageLoading(false)}
+                                            />
                                         }
 
                                         {props.CategoriesType == "necklaces" &&
-
-                                            <Image fill={true} src={necklaceMeasurementsGuide} alt={"Necklace measurements guide"} loading='lazy' />
+                                            <Image fill={true} src={necklaceMeasurementsGuide} alt={"Necklace measurements guide"} loading='lazy'
+                                                onLoadingComplete={() => setMainImageLoading(false)}
+                                            />
                                         }
 
                                         {props.CategoriesType == "earrings" &&
 
-                                            <Image fill={true} src={earringMeasurementsGuide} alt={"Earring measurements guide"} loading='lazy' />
+                                            <Image fill={true} src={earringMeasurementsGuide} alt={"Earring measurements guide"} loading='lazy'
+                                                onLoadingComplete={() => setMainImageLoading(false)}
+                                            />
                                         }
 
                                     </AspectRatio>
