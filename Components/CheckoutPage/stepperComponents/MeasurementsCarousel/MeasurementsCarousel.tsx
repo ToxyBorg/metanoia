@@ -45,20 +45,22 @@ const MeasurementsCarousel: NextComponentType<NextPageContext, {}, Props> = (
                 {props.cartItemsDataAtomValue.map((info) => {
 
                     // if (info.item.allow_measurements == "DEFAULT") {
-                    //     const newArr = props.cartItemsDataAtomValue.map(obj => {
+                    //     // const newArr = props.cartItemsDataAtomValue.map(obj => {
 
-                    //         if (obj.item.item_id === info.id) {
+                    //     //     if (obj.item.item_id === info.id) {
 
-                    //             return {
-                    //                 ...obj,
-                    //                 measurements: "DEFAULT"
-                    //             };
-                    //         }
-                    //         return obj;
-                    //     });
-                    //     cartItemsDataAtomSetter(newArr)
+                    //     //         return {
+                    //     //             ...obj,
+                    //     //             measurements: "DEFAULT"
+                    //     //         };
+                    //     //     }
+                    //     //     return obj;
+                    //     // });
+                    //     // cartItemsDataAtomSetter(newArr)
 
-                    //     return <></>
+                    //     // DEFAULT_measurements_setter({ info: info, cartItemsDataAtomValue: props.cartItemsDataAtomValue })
+
+                    //     // return <></>
                     // }
 
                     if (info.item.allow_measurements == "ALLOW") {
@@ -138,6 +140,31 @@ const MeasurementsCarousel: NextComponentType<NextPageContext, {}, Props> = (
 export default MeasurementsCarousel
 
 
+//////////////////////////////////////////////////////////////////////////
+
+// interface DEFAULT_measurements_props {
+//     info: SingleCartItemType,
+//     cartItemsDataAtomValue: cartType,
+// }
+
+// const DEFAULT_measurements_setter = (props: DEFAULT_measurements_props) => {
+//     const cartItemsDataAtomSetter = useSetAtom(cartItemsDataAtom)
+
+
+//     const newArr = props.cartItemsDataAtomValue.map(obj => {
+
+//         if (obj.item.item_id === props.info.id) {
+
+//             return {
+//                 ...obj,
+//                 measurements: "DEFAULT"
+//             };
+//         }
+//         return obj;
+//     });
+//     cartItemsDataAtomSetter(newArr)
+
+// }
 //////////////////////////////////////////////////////////////////////////
 
 

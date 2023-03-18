@@ -49,7 +49,7 @@ const MeasurementsStep: NextComponentType<NextPageContext, {}, Props> = (
         className={style.Animated_Background_Gradient}
         onClick={() => {
           const fieldsHaveBeenFilled = props.cartItemsDataAtomValue.map(info => {
-            if (info.measurements == null || info.measurements == undefined || info.measurements?.length <= 0) {
+            if ((info.measurements == null || info.measurements == undefined || info.measurements?.length <= 0) && info.item.allow_measurements == "ALLOW") {
               return false
             }
             return true
