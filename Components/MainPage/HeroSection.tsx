@@ -5,8 +5,13 @@ import Image from 'next/image';
 import { IconContext } from 'react-icons';
 import { NavBarColors } from '../../Shared/colors';
 import { screenSizesAtom } from '../../Stores/screenSizesStore';
-import heroImage from '../../public/olpntng-style-a-woman-in-a-sundress-is-floating-in-space-right-next-to-floating-gemstones.png';
+
+import olpntngStyleImage from '../../public/olpntng-style-a-woman-in-a-sundress-is-floating-in-space-right-next-to-floating-gemstones.png';
 import { olpntngStyleDATA_URL } from '../../Shared/dataURLS/olpntng-style-dataURL';
+
+import priceless_crystals_on_a_tableImage from '../../public/priceless-crystals-on-a-table.png';
+import { priceless_crystals_on_a_tableDATA_URL } from '../../Shared/dataURLS/priceless-crystals-on-a-table-dataURL';
+
 
 const HeroSection = () => {
 
@@ -86,11 +91,20 @@ const HeroSection = () => {
                                             <Image
 
                                                 fill={true}
-                                                src={heroImage}
+                                                src={olpntngStyleImage}
                                                 placeholder={"blur"}
                                                 blurDataURL={olpntngStyleDATA_URL}
                                                 alt="olpntng-style-a-woman-in-a-sundress-is-floating-in-space-right-next-to-floating-gemstones"
                                             />
+
+                                            {/* <Image
+
+                                                fill={true}
+                                                src={priceless_crystals_on_a_tableImage}
+                                                placeholder={"blur"}
+                                                blurDataURL={priceless_crystals_on_a_tableDATA_URL}
+                                                alt="olpntng-style-a-woman-in-a-sundress-is-floating-in-space-right-next-to-floating-gemstones"
+                                            /> */}
                                         </AspectRatio>
 
                                     </Card.Section>
@@ -116,7 +130,16 @@ const HeroSection = () => {
 
                                     <Spoiler maxHeight={170} showLabel="Show more" hideLabel="Hide">
                                         <Text size="xl" mt="xl" sx={{ overflowWrap: "break-word", textShadow: "0 10px 30px rgba(0, 0, 0, 0.5)", }}>
-                                            Welcome to our world of exquisite handmade jewelry! Each piece of our jewelry is crafted with utmost precision and care, making it a unique and special addition to your collection. Our designs are inspired by nature, art, and the beauty of the world around us. From delicate earrings to statement necklaces, every piece of our jewelry is a work of art that tells a story. We use only the finest materials, from gleaming gemstones to precious metals, to create jewelry that you will treasure for years to come. Browse our collection today and find the perfect piece to reflect your style and personality!
+                                            Welcome to our world of exquisite handmade jewelry!
+                                            Each piece is crafted with utmost precision and care,
+                                            making it a unique and special addition to your collection.
+                                            Our designs are inspired by nature, art, and the beauty of the world around us.
+                                            From delicate earrings to statement necklaces, every piece
+                                            is a work of art that tells a story.
+                                            We use only the finest materials, from gleaming gemstones to precious metals,
+                                            to create jewelry that you will treasure for years to come.
+                                            Browse our collection today and find the perfect piece to reflect your
+                                            style and personality!
                                         </Text>
                                     </Spoiler>
 
