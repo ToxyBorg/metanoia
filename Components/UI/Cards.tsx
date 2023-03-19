@@ -174,7 +174,7 @@ const Cards = (props: Props) => {
                         // }
 
                         sx={{
-                            zIndex: 3
+                            zIndex: 4
                         }}
 
                     >
