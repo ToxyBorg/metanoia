@@ -92,7 +92,7 @@ const AdminCardOptionsButton: NextComponentType<NextPageContext, {}, Props> = (
                         }
 
                     }}
-                    zIndex={2}
+                // zIndex={2}
 
                 >
                     <Menu.Target>
@@ -114,7 +114,7 @@ const AdminCardOptionsButton: NextComponentType<NextPageContext, {}, Props> = (
                                 border: `2px solid ${colorScheme === "dark" ? NavBarColors.borderColorDark : NavBarColors.borderColorLight}`,
                                 backgroundImage: colorScheme === "dark" ? NavBarColors.backgroundColorDarkVertical : NavBarColors.backgroundColorLightVertical,
 
-                                zIndex: 2,
+                                // zIndex: 500,
 
                             }}
 
