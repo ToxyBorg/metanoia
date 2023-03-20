@@ -140,7 +140,10 @@ const ItemCardsCarousel = (props: ItemCardsCarouselProps) => {
     const autoplay = useRef(Autoplay({ delay: 5000 }));
     return (
 
-        <Carousel slideGap={0}
+        <Carousel
+            withIndicators
+            loop
+            slideGap={0}
             plugins={[autoplay.current]}
             onMouseEnter={autoplay.current.stop}
             onMouseLeave={autoplay.current.reset}
