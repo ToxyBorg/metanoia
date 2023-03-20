@@ -7,7 +7,7 @@ import { createClient } from "../../services/supabase/utils/supabase-server";
 import OrdersContainer from "../../Components/OrdersPage/OrdersContainer";
 
 // do not cache this page
-// export const revalidate = 0
+// export const revalidate = 60
 
 const Page = async () => {
 
