@@ -64,8 +64,6 @@ const AppShellWrapper = (props: Props) => {
                     <Confetti style={{ ...styles, width: "100vw", height: "100%" }} />
                 }
             </Transition>
-
-            {/* <BackgroundParticles /> */}
             <AdminOptionsButton />
 
             {props.children}

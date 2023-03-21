@@ -10,6 +10,7 @@ import OrdersContainer from "../../Components/OrdersPage/OrdersContainer";
 export const revalidate = 60
 export const dynamic = 'force-dynamic'
 
+
 const Page = async () => {
 
     const supabase = createClient()
