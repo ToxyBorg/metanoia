@@ -12,7 +12,8 @@ import { AllItemsData } from "../Stores/itemDataStore";
 import style from "../Shared/css/style";
 
 // do not cache this layout
-export const revalidate = 0
+export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 // Static metadata
 export const metadata = {
