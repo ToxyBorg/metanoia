@@ -65,7 +65,7 @@ const AppShellWrapper = (props: Props) => {
                 }
             </Transition>
 
-            <BackgroundParticles />
+            {/* <BackgroundParticles /> */}
             <AdminOptionsButton />
 
             {props.children}

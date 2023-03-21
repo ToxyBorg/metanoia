@@ -10,24 +10,22 @@
     "**/.project": true,
     "**/.settings": true,
     "**/.factorypath": true,
-    "node_modules": true,
     "package-lock.json": true,
     ".eslintrc.json": true,
     "next-env.d.ts": true,
     "README.md": true,
     ".vscode": true,
-    ".next": true,
-    ".gitignore": true
+    ".gitignore": true,
+    "node_modules": true
   },
   "hide-files.files": [
-    "node_modules",
     "package-lock.json",
     ".eslintrc.json",
     "next-env.d.ts",
     "README.md",
     ".vscode",
-    ".next",
-    ".gitignore"
+    ".gitignore",
+    "node_modules"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
