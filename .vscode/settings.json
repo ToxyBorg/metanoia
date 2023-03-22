@@ -15,9 +15,7 @@
     ".eslintrc.json": true,
     "next-env.d.ts": true,
     "README.md": true,
-    ".vscode": true,
-    ".next": true,
-    ".gitignore": true
+    ".vscode": true
   },
   "hide-files.files": [
     "node_modules",
@@ -25,9 +23,7 @@
     ".eslintrc.json",
     "next-env.d.ts",
     "README.md",
-    ".vscode",
-    ".next",
-    ".gitignore"
+    ".vscode"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
@@ -38,5 +34,5 @@
     "plaintext",
     "typescriptreact"
   ],
-  "dotenv.enableAutocloaking": false
+  "dotenv.enableAutocloaking": true
 }
