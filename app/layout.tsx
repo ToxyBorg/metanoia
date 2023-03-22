@@ -13,8 +13,8 @@ import style from "../Shared/css/style";
 
 // do not cache this layout
 export const revalidate = 60
-// export const dynamic = 'force-dynamic'
-export const dynamic = 'auto'
+export const dynamic = 'force-dynamic'
+// export const dynamic = 'auto'
 
 // Static metadata
 export const metadata = {
